@@ -1,52 +1,28 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const passportLocal = require('passport-local');
-const passportLocalMongoose = require('passport-local-mongoose');
+const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema(
-    {
-        email: {
-            type: String,
-            lowercase: true,
-            unique: true,
-            required: true,
-        },
-        role: {
-            type: String,
-            enum: ["salesperson", "admin", "manager"]
-        },
-        password: {
-            type: String,
-            required: true
-        }
-    },
-    { timestamps: true }
+const Schema = mongoose.Schema;
+
+const userSchema= new Schema(
+  {
+    idNumber: {type: String,required: true, trim: true,minlengthe: 5,},
+    firstName: {type: String,required: true, trim: true,minlengthe: 5,},
+    lastName: {type: String,required: true, trim: true,minlengthe: 5,},
+    image: {type: String,required: true},
+    password: {type: String,required: true, trim: true,minlengthe: 5,},
+    address:{
+      line1:{type: String,required: true, trim: true},
+      line2:{type: String,required: true, trim: true},
+      city:{type: String,required: true, trim: true},
+      district:{type: String,required: true, trim: true},
+    }, 
+    phoneNumber: {type: Number,required: true, trim: true,minlengthe: 10,},
+    email: {type: String,required: true, unique: true,trim: true,minlengthe: 5,},
+    joinedDate: {type: Date,required: true, trim: true}
+
+  },
+  { timestamps: true }
 );
 
+const User = mongoose.model('User',userSchema);
 
-
-UserSchema.pre('save', function (next) {
-    const user = this;
-    const saltRounds = 10;
-    bcrypt.hash(user.password, saltRounds, function (err, hash) {
-        if (err) {
-            return next(err);
-        }
-        user.password = hash;
-        next();
-    });
-
-});
-
-UserSchema.methods.comparePassword = function (passwordAttempt, cb) {
-    bcrypt.compare(passwordAttempt, this.password, function (err, isMatch) {
-        if (err) {
-            return cb(err);
-        } else {
-            return cb(err, isMatch);
-        }
-    });
-};
-
-UserSchema.plugin(passportLocalMongoose);
-module.exports = mongoose.model('User', UserSchema);
+module.exports=User;
