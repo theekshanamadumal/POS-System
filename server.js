@@ -22,8 +22,8 @@ const itAdminRouter = require('./routes/itAdminRoute');
 const managementRouter = require('./routes/managementRoute');
 
 app.use('/users', usersRouter);
-app.use('/itAdmin', itAdminRouter);
-app.use('/management', managementRouter);
+//app.use('/itAdmin', itAdminRouter);
+//app.use('/management', managementRouter);
 
 
 const port=process.env.port||3001;
