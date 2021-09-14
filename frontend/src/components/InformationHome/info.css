@@ -1,0 +1,90 @@
+.featured{
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-between;
+}
+.featuredItem{
+    flex:1;
+    margin: 0px 20px;
+    padding: 10px;
+    background-color: rgb(252, 252, 252);
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -webkit-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -moz-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+}
+.featuredTitle{
+    padding:10px 10px;
+    color: rgb(7, 8, 8);
+    font-weight: bolder;
+    font-size: large;
+}
+.featuredContainer{
+    padding: 15px 20px;
+    align-items: center;
+    
+}
+.featuredDetail{
+   color: rgb(5, 5, 5);
+}
+.featuredAmount{
+    color: rgb(8, 8, 8);   
+    font-weight: bold; 
+    float: right;
+    font-size: 20px;
+}
+.OutDetail{
+    color: rgb(255, 0, 0);
+    font-weight: bold; 
+}
+.OutAmount{
+    color: rgb(255, 0, 0);
+    font-weight: bold; 
+    float: right;
+    font-size: 20px;
+    
+}
+.LowDetail{
+    color:rgb(224, 22, 22);
+    font-weight: bold; 
+}
+.LowAmount{
+    color:rgb(224, 22, 22);
+    font-weight: bold; 
+    float: right;
+    font-size: 20px;
+}
+hr {
+    border-top: 2px solid rgb(68, 66, 66);
+}
+.featuredUser{
+    display: flex;
+    align-content: space-evenly;
+}
+.featuredUs{
+    margin: 10px;
+    box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -webkit-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -moz-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    border-radius: 10px;
+    flex: 1;
+}
+.descript{
+    padding: 7px;
+    align-content: center;
+    text-align: center;
+}
+.count{
+    padding: 7px;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 30px;
+}
+.Icon{
+    padding: 7px 40px;
+    align-items: center;
+}
+.shop{
+    text-align: center;
+}

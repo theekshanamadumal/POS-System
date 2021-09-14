@@ -1,6 +1,0 @@
-PORT=5000
-
-
-DB=mongodb+srv://user:userPassword@cluster0.guviv.mongodb.net/noteDB
-
-SECRET=eypZAZy0CY^g9%KreypZAZy0CY^g9%Kr

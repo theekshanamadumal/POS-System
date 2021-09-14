@@ -1,0 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+form {
+  flex: 4;
+  margin: 5% 25%;
+}
