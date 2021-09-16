@@ -1,16 +1,60 @@
 import React, { Component } from "react";
-//import axios from "axios";
+import axios from "axios";
 
 import "./addProduct.css";
 
 class AddProduct extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeItemName = this.onChangeItemName.bind(this);
+    this.onChangeStock = this.onChangeStock.bind(this);
+    this.onChangeActive = this.onChangeActive.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.state = {
+      itemName: "",
+      description: " ",
+      stock: "0",
+      active: "no",
+    };
   }
+
+  onChangeItemName(e) {
+    this.setState({ itemName: e.target.value });
+  }
+  onChangeDescription(e) {
+    this.setState({ description: e.target.value });
+  }
+  onChangeStock(e) {
+    this.setState({ stock: e.target.value });
+  }
+  onChangeActive(e) {
+    this.setState({ active: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const product = {
+      itemName: this.state.itemName,
+      description: this.state.description,
+      stock: this.state.stock,
+      active: this.state.active,
+    };
+
+    console.log(product);
+
+    axios
+      .post("http://localhost:3001/management/addProduct", product)
+      .then((res) => console.log(res.data));
+
+    window.location = "/management/products";
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.onSubmit}>
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
@@ -23,8 +67,11 @@ class AddProduct extends Component {
                   <div className="form-outline mb-4">
                     <input
                       type="text"
+                      required
                       id="form3Example1cg"
                       className="form-control form-control-lg"
+                      value={this.state.itemName}
+                      onChange={this.onChangeItemName}
                     />
                     <label className="form-label" for="form3Example1cg">
                       Name
@@ -33,7 +80,10 @@ class AddProduct extends Component {
 
                   <div className="form-outline mb-4">
                     <input
-                      type="email"
+                      required
+                      value={this.state.description}
+                      onChange={this.onChangeDescription}
+                      type="text"
                       id="form3Example3cg"
                       className="form-control form-control-lg"
                     />
@@ -44,6 +94,8 @@ class AddProduct extends Component {
 
                   <div className="form-outline mb-4">
                     <input
+                      value={this.state.stock}
+                      onChange={this.onChangeStock}
                       type="number"
                       id="form3Example4cg"
                       className="form-control form-control-lg"
@@ -55,6 +107,9 @@ class AddProduct extends Component {
 
                   <div className="form-outline mb-4">
                     <select
+                      required
+                      value={this.state.active}
+                      onChange={this.onChangeActive}
                       id="form3Example4cdg"
                       className="form-control form-control-lg"
                     >
