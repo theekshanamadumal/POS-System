@@ -20,10 +20,12 @@ connection.once('open',()=>{console.log('mongodb db connection established' )})
 const usersRouter = require('./routes/users');
 const itAdminRouter = require('./routes/itAdminRoute');
 const managementRouter = require('./routes/managementRoute');
+const productRouter = require('./routes/productRoute');
 
 app.use('/users', usersRouter);
 //app.use('/itAdmin', itAdminRouter);
 //app.use('/management', managementRouter);
+app.use('/management', productRouter);
 
 
 const port=process.env.port||3001;
