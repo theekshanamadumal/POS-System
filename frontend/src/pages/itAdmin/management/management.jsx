@@ -1,13 +1,13 @@
-import React from "react";
-import "./products.css";
 import { useState } from "react";
+import "./management.css";
 import { Link } from "react-router-dom";
+import React from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import { productRows } from "../../../dataCollection";
+import { rows } from "../../../dataCollection";
 import { Delete } from "@material-ui/icons";
 
-export default function Products() {
-  const [data, setData] = useState(productRows);
+export default function Management() {
+  const [data, setData] = useState(rows);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
@@ -17,35 +17,32 @@ export default function Products() {
     {
       field: "id",
       headerName: "ID",
-      width: 100,
+      width: 90,
     },
     {
-      field: "productName",
-      headerName: "pName",
-      width: 300,
-    },
-    {
-      field: "avatar",
-      headerName: "Image",
-      width: 100,
+      field: "fullName",
+      headerName: "Full Name",
+      width: 200,
+      editable: true,
       renderCell: (params) => {
-        return <img className="image" src={params.row.avatar} alt=""></img>;
+        return (
+          <div>
+            <span>{params.row.fullName}</span>
+          </div>
+        );
       },
     },
     {
-      field: "amount",
-      headerName: "Stock Amount",
-      width: 100,
-    },
-    {
-      field: "unitPrice",
+      field: "email",
       headerName: "Email",
-      width: 120,
+      width: 300,
+      editable: true,
     },
     {
-      field: "active",
-      headerName: "Active",
-      width: 120,
+      field: "phoneNo",
+      headerName: "Phone Number",
+      width: 200,
+      editable: true,
     },
     {
       field: "action",
@@ -54,8 +51,8 @@ export default function Products() {
       renderCell: (params) => {
         return (
           <div className="actionButton">
-            <Link to={"/management/products/" + params.row.productName}>
-              <button className="editButton">View</button>
+            <Link to={"/SalesPerson/" + params.row.id}>
+              <button className="editButton">Edit</button>
             </Link>
 
             <Delete
@@ -69,14 +66,13 @@ export default function Products() {
   ];
 
   return (
-    <div className="product">
-      <div className="container">
-        <h1 className="heading">Product Details</h1>
-        <Link to="/management/addProduct">
-          <button className="addProduct">Add New Product</button>
+    <div className="salesPerson">
+      <div className="container ">
+        <h1 className="heading">Management List</h1>
+        <Link to="/management/addSalesperson">
+          <button className="addUser">Add New Salesperson</button>
         </Link>
       </div>
-
       <DataGrid
         rows={data}
         columns={columns}

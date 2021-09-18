@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 import {
   LineStyle,
   Timeline,
-  TrendingUp,
+  //TrendingUp,
   PermIdentity,
   Storefront,
   AttachMoney,
   BarChart,
-  MailOutline,
+  /*MailOutline,
   DynamicFeed,
   ChatBubbleOutline,
   WorkOutline,
-  Report,
+  Report,*/
 } from "@material-ui/icons";
 
 export default function ItAdminSidebar() {
@@ -32,22 +32,22 @@ export default function ItAdminSidebar() {
         </div>
         <div className="sidebarMenu">
           <ul className="sidebarList">
-            <Link to="/itAdmin/users" className="link">
+            <Link to="/itAdmin/management" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
-                Users
+                Management
               </li>
             </Link>
-            <Link to="/itAdmin/addUser" className="link">
+            <Link to="/itAdmin/addManager" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
-                Add User
+                Add Manager
               </li>
             </Link>
-            <Link to="/itAdmin/editUser" className="link">
+            <Link to="/itAdmin/editManager" className="link">
               <li className="sidebarListItem">
                 <AttachMoney className="sidebarIcon" />
-                Edit User
+                Edit Manager
               </li>
             </Link>
           </ul>

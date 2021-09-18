@@ -1,0 +1,74 @@
+.newOrder{
+    flex:4;
+}
+
+.title{
+    padding:20px;
+}
+
+.newOrderItems{
+    padding: 10px 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.newOrderForm{
+    display: flex;
+    flex-wrap: wrap;
+}
+.newOrderItems label{
+    padding: 10px;
+    color: rgb(58, 66, 73);
+    padding-bottom: 30px;
+}
+.newOrderItems input{
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
+    box-shadow: teal;
+    border-block-color:rgb(85, 87, 90); ;
+    border-color: rgb(85, 87, 90);
+    
+}
+
+button{
+    height: 40px;
+    width: 200px;
+    background-color:rgb(16, 196, 46) ;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 40px;
+    font-size: 15px;
+    font-weight: bolder;
+    
+}
+.box{
+    margin-bottom: 10px;
+    display: flex;
+}
+.btn-box {
+margin-left: 10px;
+width: 200px;
+display: inline-block;
+display: flex;
+margin-top: -40px;
+}
+.box input{
+    margin-right: 20px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+.add{
+    margin-top: 50px;
+}
+.delete{
+    margin-top: 50px;
+}
+.finalAdd{
+    margin-right: 230px;
+}.mr10{
+    margin-top: 50px;
+}
+  
+  

@@ -3,8 +3,8 @@ import "./salesPerson.css";
 import { Link } from "react-router-dom";
 import React from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import { rows } from "../../../dummyData";
-import { Delete } from "@material-ui/icons";
+import { rows } from "../../../dataCollection";
+import { Delete, SportsMma } from "@material-ui/icons";
 
 export default function SalesPerson() {
   const [data, setData] = useState(rows);
@@ -17,32 +17,49 @@ export default function SalesPerson() {
     {
       field: "id",
       headerName: "ID",
-      width: 90,
+      width: 120,
     },
     {
       field: "fullName",
       headerName: "Full Name",
-      width: 200,
-      editable: true,
+      width: 150,
       renderCell: (params) => {
         return (
           <div>
-            <span>{params.row.fullName}</span>
+            {params.row.firstName}
+            <span> </span>
+            {params.row.lastName}
           </div>
         );
       },
     },
     {
+      field: "avatar",
+      headerName: "Profile",
+      width: 100,
+      renderCell: (params) => {
+        return <img className="image" src={params.row.avatar} alt=""></img>;
+      },
+    },
+    {
+      field: "city",
+      headerName: "City",
+      width: 130,
+    },
+    {
       field: "email",
       headerName: "Email",
-      width: 300,
-      editable: true,
+      width: 200,
+    },
+    {
+      field: "joinedDate",
+      headerName: "Joined Date",
+      width: 120,
     },
     {
       field: "phoneNo",
       headerName: "Phone Number",
-      width: 200,
-      editable: true,
+      width: 120,
     },
     {
       field: "action",
@@ -51,8 +68,8 @@ export default function SalesPerson() {
       renderCell: (params) => {
         return (
           <div className="actionButton">
-            <Link to={"/SalesPerson/" + params.row.id}>
-              <button className="editButton">Edit</button>
+            <Link to={"/management/salesPerson/" + params.row.id}>
+              <button className="editButton">View</button>
             </Link>
 
             <Delete
@@ -67,7 +84,12 @@ export default function SalesPerson() {
 
   return (
     <div className="salesPerson">
-      <h1 className="heading">Salespersons</h1>
+      <div className="container">
+        <h1 className="heading">Salespersons</h1>
+        <Link to="/management/salesperson/addSalesperson">
+          <button className="addUser">Add New Salesperson</button>
+        </Link>
+      </div>
       <DataGrid
         rows={data}
         columns={columns}
