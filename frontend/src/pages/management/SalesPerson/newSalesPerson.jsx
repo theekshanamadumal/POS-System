@@ -114,7 +114,7 @@ export default class NewSalesPerson extends Component {
     return (
       <div className="newUser">
         <h1 className="title">Add a New Salesperson</h1>
-        <form onSubmit={this.onSubmit}>
+        <form className="addSalespersonForm" onSubmit={this.onSubmit}>
           <section className="h-100 h-custom gradient-custom-2">
             <div className="container py-5 h-100">
               <div className="col-12">

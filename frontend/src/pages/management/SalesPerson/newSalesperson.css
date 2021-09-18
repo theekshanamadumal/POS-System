@@ -7,7 +7,7 @@
   padding: 0px 20px !important;
 }
 
-form {
+.addSalespersonForm {
   width: 80%;
   margin: 2% 10%;
   -webkit-box-shadow: 0px 0px 11px -1px #000000;

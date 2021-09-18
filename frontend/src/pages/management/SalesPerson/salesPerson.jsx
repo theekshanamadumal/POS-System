@@ -86,7 +86,7 @@ export default function SalesPerson() {
     <div className="salesPerson">
       <div className="container">
         <h1 className="heading">Salespersons</h1>
-        <Link to="/management/salesperson/addSalesperson">
+        <Link to="/management/addSalesperson">
           <button className="addUser">Add New Salesperson</button>
         </Link>
       </div>
