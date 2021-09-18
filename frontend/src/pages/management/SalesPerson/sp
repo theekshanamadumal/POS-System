@@ -6,47 +6,38 @@ import { DataGrid } from "@material-ui/data-grid";
 //import { rows } from "../../../dataCollection";
 import { Delete, SportsMma } from "@material-ui/icons";
 
-const columns = [
-  { field: "_id", hide: true },
-
+/*const columns = [
   {
-    field: "idNumber",
+    field: "id",
     headerName: "ID",
     width: 120,
   },
   {
     field: "fullName",
-    headerName: "Name",
+    headerName: "Full Name",
     width: 150,
     renderCell: (params) => {
       return (
         <div>
-          {params.salesperson.firstName}
+          {params.row.firstName}
           <span> </span>
-          {params.salesperson.lastName}
+          {params.row.lastName}
         </div>
       );
     },
   },
   {
-    field: "password",
-    headerName: "password",
+    field: "avatar",
+    headerName: "Profile",
     width: 100,
-  },
-  {
-    field: "address",
-    headerName: "address",
-    width: 130,
+    renderCell: (params) => {
+      return <img className="image" src={params.row.avatar} alt=""></img>;
+    },
   },
   {
     field: "city",
     headerName: "City",
     width: 130,
-  },
-  {
-    field: "phoneNo",
-    headerName: "Phone Number",
-    width: 120,
   },
   {
     field: "email",
@@ -59,25 +50,30 @@ const columns = [
     width: 120,
   },
   {
+    field: "phoneNo",
+    headerName: "Phone Number",
+    width: 120,
+  },
+  {
     field: "action",
     headerName: "Action",
     width: 160,
     renderCell: (params) => {
       return (
         <div className="actionButton">
-          <Link to={"/management/salesPerson/" + params.salesperson.id}>
+          <Link to={"/management/salesPerson/" + params.row.id}>
             <button className="editButton">View</button>
           </Link>
 
           <Delete
             className="deleteButton"
-            onClick={() => params.handleDelete(params.salesperson.idNumber)}
+            onClick={() => this.handleDelete(params.row.id)}
           />
         </div>
       );
     },
   },
-];
+];*/
 
 const Person = (props) => (
   <tr>
@@ -142,7 +138,6 @@ export default class SalesPerson extends Component {
   }
 
   salespersonsList() {
-    console.log(this.salespersonsList);
     return this.state.salespersons.map((currentsalesperson) => {
       return (
         <Person
@@ -176,7 +171,7 @@ export default class SalesPerson extends Component {
           </tr>
         </thead>
         <tbody>{this.salespersonsList()}</tbody>
-        {/*<DataGrid
+        {/* <DataGrid
           rows={this.state.salespersons}
           columns={columns}
           pageSize={10}

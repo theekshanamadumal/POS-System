@@ -2,12 +2,16 @@
   flex: 8;
   background-color: rgba(236, 234, 234, 0.699);
 }
+.userTitle {
+  margin-left: 60px;
+}
 .title {
   padding: 10px;
-  margin: -20px 0px;
+  margin: 10px 0px;
 }
 .Container {
   display: flex;
+  width: 95%;
 }
 .detailsContainer {
   background-color: rgb(255, 255, 255);
@@ -15,18 +19,18 @@
   margin-right: -5px;
   flex: 3;
   border-radius: 10px;
-  box-shadow: 1px 1px 3px 4px rgba(228, 232, 239, 0.5);
-  -webkit-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
-  -moz-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -webkit-box-shadow: 0px 0px 11px -1px #000000;
+  box-shadow: 0px 0px 11px -1px #000000;
+  -moz-box-shadow: 0px 0px 11px -1px #000000;
 }
 .editContainer {
   background-color: rgb(255, 255, 255);
   flex: 5;
   margin: 10px 20px;
   border-radius: 10px;
-  box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
-  -webkit-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
-  -moz-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -webkit-box-shadow: 0px 0px 11px -1px #000000;
+  box-shadow: 0px 0px 11px -1px #000000;
+  -moz-box-shadow: 0px 0px 11px -1px #000000;
 }
 .editTitle {
   padding-left: 10px;
@@ -69,17 +73,19 @@ li {
   flex: 2;
   align-items: center;
 }
-label {
-  margin-bottom: -25px;
-  padding: 10px;
+.labelClass {
+  margin-bottom: 0px;
+  padding: 5px;
   color: rgb(58, 66, 73);
 }
 input {
   width: 90%;
-  height: 30px;
+  height: 50px;
   padding-left: 10px;
   padding-right: 20px;
-  margin-bottom: -15px;
+  box-shadow: teal;
+  border-color: rgb(58, 66, 73);
+  margin-bottom: 15px !important;
   border-radius: 10px;
 }
 .upload {

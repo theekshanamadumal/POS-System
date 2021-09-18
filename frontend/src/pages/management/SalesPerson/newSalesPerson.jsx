@@ -107,14 +107,14 @@ export default class NewSalesPerson extends Component {
       .post("http://localhost:3001/management/addSalesperson", user)
       .then((res) => console.log(res.data));
 
-    //window.location = "/management/salesperson";
+    window.location = "/management/salesperson";
   }
 
   render() {
     return (
       <div className="newUser">
         <h1 className="title">Add a New Salesperson</h1>
-        <form onSubmit={this.onSubmit}>
+        <form className="addSalespersonForm" onSubmit={this.onSubmit}>
           <section className="h-100 h-custom gradient-custom-2">
             <div className="container py-5 h-100">
               <div className="col-12">
