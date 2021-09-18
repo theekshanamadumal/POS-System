@@ -4,6 +4,7 @@ import'./app.css'
 
 import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
 import ItAdminHome from "./pages/itAdmin/Home/itAdminHome";
+import Management from './pages/itAdmin/management/management';
 import AddManager from './pages/itAdmin/addManager/addManager';
 
 import ManagementSidebar from "./components/managementSidebar/Sidebar";
@@ -14,14 +15,19 @@ import Products from "./pages/management/Products/products";
 import AddProducts from "./pages/management/Products/addProduct";
 import Reports from "./pages/management/Reports/reports";
 import Routes from "./pages/management/Routes/routes";
-import Sales from "./pages/management/Sales/sales";
 import SalesPerson from"./pages/management/SalesPerson/salesPerson";
+import NewSalesPerson from"./pages/management/SalesPerson/newSalesPerson";
 import Shops from"./pages/management/Shops/shops";
+
+import ViewProducts from './pages/management/Products/viewProducts';
+import AddOrders from "./pages/management/Orders/addOrder";
+import ViewSalesPerson from './pages/management/SalesPerson/viewSalesPerson';
+import ViewOrders from './pages/management/Orders/viewOrder';
 
 
 
 function App() {
-  const logged = true;
+//const logged = true;
   return (
     <Router>
     <div className="App">
@@ -43,15 +49,15 @@ function App() {
             <ItAdminSidebar/>  
             <h1>reports page</h1> 
           </Route>
-          <Route path="/itAdmin/users">
+          <Route path="/itAdmin/management">
           <ItAdminSidebar/> 
-            <h1>users page</h1>
+          <Management/> 
           </Route>
-          <Route path="/itAdmin/addUser">
+          <Route path="/itAdmin/addManager">
           <ItAdminSidebar/> 
             <AddManager />  
           </Route>
-          <Route path="/itAdmin/editUser">
+          <Route path="/itAdmin/editManager">
           <ItAdminSidebar/> 
             <h1>edit user page</h1>
           </Route> 
@@ -74,11 +80,14 @@ function App() {
           </Route>  
           
           
-          <Route path="/management/products">
+          <Route exact path="/management/products">
           <ManagementSidebar/>
           <Products/>
-          <AddProducts/>
           </Route>  
+          <Route path="/management/products/:productName">
+          <ManagementSidebar/>
+              <ViewProducts/>
+            </Route>  
 
           <Route path="/management/addProduct">
           <ManagementSidebar/>
@@ -95,15 +104,33 @@ function App() {
           <Routes/>
           </Route>  
           
-          <Route path="/management/sales">
-          <ManagementSidebar/>
-          <Sales/>
-          </Route>  
-          
-          <Route path="/management/salesperson">
+          <Route exact path="/management/salesperson">
           <ManagementSidebar/>
           <SalesPerson/>
+          </Route> 
+
+          <Route path="/management/addSalesperson">
+          <ManagementSidebar/>
+          <NewSalesPerson/>
           </Route>  
+          
+          <Route exact path="/management/salesPerson/:id">
+            <ManagementSidebar/>
+              <ViewSalesPerson/>
+          </Route>
+
+          <Route path="/management/addOrders">
+          <ManagementSidebar/>
+
+              <AddOrders/>
+            </Route>  
+
+            <Route path="/management/Order/:id">
+            <ManagementSidebar/>
+
+              <ViewOrders/>
+            </Route>  
+
 
           <Route path="/management/shops">
           <ManagementSidebar/>

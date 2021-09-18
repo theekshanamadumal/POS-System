@@ -1,20 +1,44 @@
-.salesPerson{
-    flex: 4;
+.salesPerson {
+  flex: 4;
 }
-.actionButton{
-    display: flex;
+.actionButton {
+  display: flex;
 }
-.editButton{
-    padding: 5px 10px;
-    background-color: rgb(16, 196, 46);
-    border-radius: 10px;
-    margin-right: 20px;
-    cursor: pointer;
+.editButton {
+  padding: 0px 10px;
+  background-color: rgb(16, 196, 46);
+  border-radius: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+  width: 50px;
+  float: left;
+  height: 30px;
 }
-.deleteButton{
-    cursor: pointer;
-    margin-top: 15px;
+.deleteButton {
+  cursor: pointer;
+  margin-top: 43px;
 }
-.heading{
-    padding: 20px;
+.heading {
+  padding: 0px;
+  margin: 20px;
+}
+
+.container {
+  display: flex;
+}
+.addUser {
+  height: 40px;
+  width: 200px;
+  background-color: rgb(16, 196, 46);
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 20px;
+  flex: 1;
+  font-size: 15px;
+  font-weight: bolder;
+}
+.image {
+  height: 50px;
+  width: 50px;
+  border-radius: 30px;
 }

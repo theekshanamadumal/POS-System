@@ -35,16 +35,15 @@ export default function ManagementSidebar() {
               </li>
             </Link>
 
-            <Link to="/management/sales" className="link">
+            <Link to="/management/reports" className="link">
               <li className="sidebarListItem">
-                <TrendingUp className="sidebarIcon" />
-                Sales
+                <Assessment className="sidebarIcon" />
+                Reports
               </li>
             </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
             <Link to="/management/salesperson" className="link">
               <li className="sidebarListItem">
@@ -78,13 +77,6 @@ export default function ManagementSidebar() {
               <li className="sidebarListItem">
                 <LocationOn className="sidebarIcon" />
                 Routes
-              </li>
-            </Link>
-
-            <Link to="/management/reports" className="link">
-              <li className="sidebarListItem">
-                <Assessment className="sidebarIcon" />
-                Reports
               </li>
             </Link>
           </ul>

@@ -1,0 +1,129 @@
+.viewProduct {
+  flex: 8;
+  background-color: rgba(236, 234, 234, 0.699);
+}
+.realTime {
+  margin-top: -30px;
+}
+.title {
+  padding-bottom: 20px !important;
+  margin: 20px 10px;
+  padding-top: 80px;
+}
+.Container {
+  display: flex;
+}
+.detailsContainer {
+  background-color: rgba(255, 255, 255, 0.699);
+  margin: 10px 20px;
+  margin-right: -5px;
+  flex: 3;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 11px -1px #000000 !important;
+  box-shadow: 0px 0px 11px -1px #000000 !important;
+}
+.editContainer {
+  background-color: rgba(255, 255, 255, 0.699);
+  flex: 5;
+  margin: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -webkit-box-shadow: 0px 0px 11px -1px #000000 !important;
+  box-shadow: 0px 0px 11px -1px #000000 !important;
+}
+.editTitle {
+  padding-left: 10px;
+  padding-top: 10px;
+  margin-bottom: -20px;
+}
+.im {
+  height: 70px;
+  width: 70px;
+  border-radius: 70px;
+  padding: 20px;
+}
+.detailMain {
+  display: flex;
+}
+.idName {
+  padding: 30px;
+}
+.detail {
+  padding: 10px;
+}
+li {
+  padding: 5px;
+}
+.value {
+  color: black;
+  font-weight: bolder;
+}
+.detailSub {
+  padding-bottom: 30px;
+}
+.editItems {
+  display: flex;
+}
+.leftItemContainer {
+  flex: 2;
+}
+.rightItemContainer {
+  flex: 2;
+  align-items: center;
+}
+label {
+  margin-bottom: -20px;
+  padding: 10px;
+  color: rgb(58, 66, 73);
+}
+input {
+  width: 90%;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 20px;
+  box-shadow: teal;
+  border-color: rgb(58, 66, 73);
+  margin-bottom: -15px;
+}
+select {
+  margin-bottom: -20px;
+  width: 100%;
+  border-color: black;
+  border-width: 2px;
+  height: 35px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 20px;
+  box-shadow: teal;
+}
+.upload {
+  display: flex;
+  flex-direction: column;
+  margin-top: -70px;
+}
+
+.update {
+  height: 40px;
+  width: 150px;
+  background-color: rgb(16, 196, 46);
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 15px;
+  font-weight: bolder;
+}
+.rightItemContainer .prImg {
+  width: 150px;
+  height: 150px;
+  margin-bottom: -40px;
+}
+.upload label {
+  padding-left: 65px;
+}
+.update {
+  margin-left: 30px;
+  margin-top: 60px;
+}
+.area {
+  height: 100px;
+}
