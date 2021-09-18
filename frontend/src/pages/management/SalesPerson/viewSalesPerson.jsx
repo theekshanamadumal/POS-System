@@ -65,25 +65,25 @@ export default function viewSalesPerson() {
           <form action="" className="form">
             <div className="editItems">
               <div className="leftItemContainer">
-                <label>First Name</label>
+                <label className="labelClass">First Name</label>
                 <input placeholder="John" type="text"></input>
-                <label>Last Name</label>
+                <label className="labelClass">Last Name</label>
 
                 <input placeholder="Michel" type="text"></input>
 
-                <label>Email Address</label>
+                <label className="labelClass">Email Address</label>
 
                 <input placeholder="John@gmail.com" type="email"></input>
 
-                <label>Phone number </label>
+                <label className="labelClass">Phone number </label>
 
                 <input placeholder="0776378493" type="text"></input>
 
-                <label>City</label>
+                <label className="labelClass">City</label>
 
                 <input placeholder="Colombo" type="text"></input>
 
-                <label>Address</label>
+                <label className="labelClass">Address</label>
 
                 <input
                   placeholder="N0.07, 5th lane, Colombo 03, SriLanka"
@@ -99,7 +99,7 @@ export default function viewSalesPerson() {
                     alt=""
                   ></img>
 
-                  <label htmlFor="file">
+                  <label className="labelClass" htmlFor="file">
                     <Publish />
                     Upload
                   </label>

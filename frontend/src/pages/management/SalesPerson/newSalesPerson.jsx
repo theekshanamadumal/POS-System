@@ -107,7 +107,7 @@ export default class NewSalesPerson extends Component {
       .post("http://localhost:3001/management/addSalesperson", user)
       .then((res) => console.log(res.data));
 
-    //window.location = "/management/salesperson";
+    window.location = "/management/salesperson";
   }
 
   render() {

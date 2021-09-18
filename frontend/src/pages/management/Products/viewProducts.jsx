@@ -70,20 +70,20 @@ export default function viewProducts() {
           <form action="" className="form">
             <div className="editItems">
               <div className="leftItemContainer">
-                <label>Product Name</label>
+                <label className="labelClass">Product Name</label>
                 <input placeholder="huwavie nova 2i" type="text"></input>
-                <label>Catergory</label>
+                <label className="labelClass">Catergory</label>
                 <select name="cars" id="cars" className="select">
                   <option value="volvo">Phone</option>
                   <option value="saab">Charger</option>
                   <option value="mercedes">Earphone</option>
                   <option value="audi">HeadPhone</option>
                 </select>
-                <label>Unit Price </label>
+                <label className="labelClass">Unit Price </label>
                 <input placeholder="30000" type="number"></input>
-                <label>Stock Amount</label>
+                <label className="labelClass">Stock Amount</label>
                 <input placeholder="25" type="number"></input>
-                <label>Specifications</label>
+                <label className="labelClass">Specifications</label>
                 <input placeholder="huwavie nova 2i" type="text"></input>
               </div>
 
@@ -94,7 +94,7 @@ export default function viewProducts() {
                     src="https://c0.wallpaperflare.com/preview/507/68/44/iphone-headphone-technology-product.jpg"
                     alt=""
                   ></img>
-                  <label htmlFor="file">
+                  <label className="labelClass" htmlFor="file">
                     <PublishIcon />
                     Upload
                   </label>

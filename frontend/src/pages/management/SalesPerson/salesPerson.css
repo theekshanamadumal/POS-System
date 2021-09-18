@@ -1,5 +1,9 @@
+th {
+  padding: 30px;
+}
+
 .salesPerson {
-  flex: 4;
+  flex: 8;
 }
 .actionButton {
   display: flex;
@@ -23,7 +27,7 @@
   margin: 20px;
 }
 
-.container {
+.contain {
   display: flex;
 }
 .addUser {

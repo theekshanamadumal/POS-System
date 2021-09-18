@@ -73,7 +73,7 @@ li {
   flex: 2;
   align-items: center;
 }
-label {
+.labelClass {
   margin-bottom: 0px;
   padding: 5px;
   color: rgb(58, 66, 73);
