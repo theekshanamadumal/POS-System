@@ -4,9 +4,16 @@ th {
 
 .salesPerson {
   flex: 8;
+  background-color: rgba(236, 234, 234, 0.699);
 }
 .actionButton {
   display: flex;
+  border-radius: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+  width: 100px;
+  float: left;
+  height: 30px;
 }
 .editButton {
   padding: 0px 10px;

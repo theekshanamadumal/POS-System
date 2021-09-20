@@ -1,0 +1,12 @@
+.viewShop{
+    flex:4;
+    background-color: rgba(236, 234, 234, 0.699);
+}
+.headingView{
+    padding: 10px;
+    margin-bottom: -20px;
+    
+}
+.viewShopImg{
+    margin-top: -40px;
+}

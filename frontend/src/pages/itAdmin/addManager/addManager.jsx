@@ -124,7 +124,7 @@ export default class AddManager extends Component {
                 >
                   <div>
                     <div className="row g-0">
-                      <div className="col-lg-6">
+                      <div className="col-lg-6 bg-ash">
                         <div className="p-5">
                           <h3
                             className="fw-normal mb-5"
@@ -174,6 +174,8 @@ export default class AddManager extends Component {
 
                           <div className="mb-4 pb-2">
                             <div className="form-outline">
+                              <div value={this.state.firstName}>sdsdsd</div>
+
                               <input
                                 required
                                 value={this.state.idNumber}

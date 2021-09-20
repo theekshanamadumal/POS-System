@@ -1,0 +1,13 @@
+.spacingord {
+  margin: -10px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.containerSale {
+  margin-bottom: -20px;
+  margin-top: 20px;
+  display: flex;
+}
+.search {
+  height: 100px;
+}
