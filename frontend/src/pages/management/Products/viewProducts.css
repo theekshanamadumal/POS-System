@@ -1,129 +1,137 @@
-.viewProduct {
-  flex: 8;
-  background-color: rgba(236, 234, 234, 0.699);
+.viewProduct{
+    flex: 4;
+    background-color: rgba(236, 234, 234, 0.699);
 }
-.realTime {
-  margin-top: -30px;
+.realTime{
+    margin-top: -30px;
 }
-.title {
-  padding-bottom: 20px !important;
-  margin: 10px 10px;
-  padding-top: 0;
+.title{
+    padding: 20px;
+    margin: 20px 10px;
+    padding-top: 80px;
+    
 }
-.Container {
-  display: flex;
+.Container{
+    display: flex;
 }
-.detailsContainer {
-  background-color: rgba(255, 255, 255, 0.699);
-  margin: 10px 20px;
-  margin-right: -5px;
-  flex: 3;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 11px -1px #000000;
-  box-shadow: 0px 0px 11px -1px #000000;
+.detailsContainer{
+    background-color: rgba(255, 255, 255, 0.699);
+    margin: 10px 20px;
+    margin-right: -5px;
+    flex:3;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 4px rgba(228, 232, 239, 0.5);
+    -webkit-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -moz-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
 }
-.editContainer {
-  background-color: rgba(255, 255, 255, 0.699);
-  flex: 5;
-  margin: 10px 20px;
-  border-radius: 10px;
-  box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
-  -webkit-box-shadow: 0px 0px 11px -1px #000000;
-  box-shadow: 0px 0px 11px -1px #000000;
+.editContainer{
+    background-color: rgba(255, 255, 255, 0.699);
+    flex:5;
+    margin: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -webkit-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -moz-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
 }
-.editTitle {
-  padding-left: 10px;
-  padding-top: 10px !important;
-  margin-bottom: 20px !important;
+.editTitle{
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-bottom: -20px;
+}.im{
+    height: 70px;
+    width: 70px;
+    border-radius: 70px;
+    padding: 20px;
 }
-.im {
-  height: 100px;
-  width: 100px;
-  border-radius: 100px;
-  padding: 20px;
+.detailMain{
+    display: flex;
 }
-.detailMain {
-  display: flex;
+.idName{
+    padding: 30px;
 }
-.idName {
-  padding: 30px;
+.detail{
+    margin-bottom: 20px;
+    margin-left: 10px;
+}li{
+    padding: 5px;
 }
-.detail {
-  padding: 10px;
+.value{
+    color: black;
+    font-weight: bolder;
 }
-li {
-  padding: 5px;
+.detailSub{
+    padding-bottom: 30px;
 }
-.value {
-  color: black;
-  font-weight: bolder;
+.editItems{
+    display: flex;
+    
 }
-.detailSub {
-  padding-bottom: 30px;
+.leftItemContainer{
+    flex:2;
 }
-.editItems {
-  display: flex;
+.rightItemContainer{
+    flex:2;
+    align-items:center;
 }
-.leftItemContainer {
-  flex: 3;
+label{
+    margin-bottom: -20px;
+    padding: 10px;
+    color: rgb(58, 66, 73);
 }
-.rightItemContainer {
-  flex: 2;
-  align-items: center;
+input{
+    width: 90%;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 20px;
+    box-shadow: teal;
+    margin-bottom: -15px;
+    border: none;
+    border-bottom: solid 1px black;
+    border-radius: 0px;
+    
+    
 }
-.labelClass {
-  margin-bottom: 0px;
-  padding: 5px;
-  color: rgb(58, 66, 73);
+select{
+    margin-bottom: -20px;
+    width: 100%;
+    height: 35px;
+    padding-left: 10px;
+    padding-right: 20px;
+    box-shadow: teal;
+    border: none;
+    border-bottom: solid 1px black;
+    border-radius: 0px;
 }
-input {
-  width: 90%;
-  height: 50px;
-  padding-left: 10px;
-  padding-right: 20px;
-  box-shadow: teal;
-  border-color: rgb(58, 66, 73);
-  margin-bottom: 15px !important;
-  border-radius: 10px;
-}
-select {
-  width: 90%;
-  height: 50px;
-  padding-left: 10px;
-  padding-right: 20px;
-  box-shadow: teal;
-  border-color: rgb(58, 66, 73);
-  margin-bottom: 15px !important;
-  border-radius: 10px;
-}
-.upload {
-  display: flex;
-  flex-direction: column;
-  margin-top: -70px;
+.upload{
+    display: flex;
+    flex-direction: column;
+    margin-top: -70px;
 }
 
-.update {
-  height: 40px;
-  width: 150px;
-  background-color: rgb(16, 196, 46);
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 10px;
-  font-size: 15px;
-  font-weight: bolder;
+.update{
+    height: 40px;
+    width: 150px;
+    background-color:rgb(16, 196, 46) ;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    
 }
-.rightItemContainer .prImg {
-  width: 150px;
-  height: 150px;
-  margin-bottom: -40px;
+.rightItemContainer .prImg{
+    width: 150px;
+    height: 150px;
+    margin-bottom: -40px;
+    
 }
-.upload label {
-  padding-left: 65px;
+.upload label{
+    padding-left: 65px;
 }
-.update {
-  margin-left: 30px;
-  margin-top: 60px;
+.update{
+    margin-left: 30px;
+    margin-top: 60px;
 }
-.area {
-  height: 100px;
+.area{
+    height: 100px;
 }

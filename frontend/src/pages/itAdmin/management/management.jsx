@@ -5,7 +5,6 @@ import React from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { rows } from "../../../dataCollection";
 import { Delete } from "@material-ui/icons";
-
 export default function Management() {
   const [data, setData] = useState(rows);
 
@@ -51,7 +50,7 @@ export default function Management() {
       renderCell: (params) => {
         return (
           <div className="actionButton">
-            <Link to={"/SalesPerson/" + params.row.id}>
+            <Link to={"/itAdmin/management/" + params.row.id}>
               <button className="editButton">Edit</button>
             </Link>
 
@@ -69,7 +68,7 @@ export default function Management() {
     <div className="salesPerson">
       <div className="container ">
         <h1 className="heading">Management List</h1>
-        <Link to="/management/addSalesperson">
+        <Link to="/itAdmin/addManager">
           <button className="addUser">Add New Salesperson</button>
         </Link>
       </div>

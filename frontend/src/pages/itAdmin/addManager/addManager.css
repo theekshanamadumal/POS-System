@@ -32,6 +32,9 @@
 .bg-indigo {
   background-color: #313652;
 }
+.bg-ash {
+  background-color: darkgrey;
+}
 @media (min-width: 992px) {
   .card-registration-2 .bg-indigo {
     border-top-right-radius: 15px;

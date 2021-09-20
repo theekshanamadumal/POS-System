@@ -1,0 +1,40 @@
+.addRoute{
+    flex:4;
+    background-color: rgba(236, 234, 234, 0.699);
+}
+
+.addRoutehead{
+    padding: 30px;
+    
+}
+.addRouteContainer{
+    margin: 30px;
+    width: 35%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -webkit-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    -moz-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+    height: 400px;
+    margin-left: 120px;
+    margin-top: 50px;
+}
+.formAdd label{
+    margin: 20px 40px;
+    width: 70%;
+    
+    
+}
+.formAdd input{
+    margin: 20px 40px;
+    width: 70%;
+    background-color: rgb(227, 233, 233);
+    height: 40px;
+    border-bottom: none;
+    margin-top: 10px;
+}
+.addRouteBtn{
+    margin-right: 150px;
+    margin-top: 10px;
+    
+}

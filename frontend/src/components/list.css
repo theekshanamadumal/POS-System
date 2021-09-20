@@ -1,0 +1,28 @@
+.card {
+  padding: 10px;
+  box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -webkit-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -moz-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+}
+.editButt {
+  background-color: rgb(16, 196, 46);
+  margin: 0px;
+  width: 90px;
+  margin-right: 20px;
+  margin-left: -20px;
+}
+.deleteButt {
+  margin-top: 10px;
+  cursor: pointer;
+}
+.actions {
+  display: flex;
+}
+.tbHeader {
+  background-color: rgb(194, 189, 189);
+  font-weight: bolder;
+  font-size: 20px;
+}
+.tbBod {
+  height: -10px;
+}

@@ -1,0 +1,27 @@
+.invoicehead {
+  padding: 30px;
+}
+
+.invoiceContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.leftCont {
+  flex: 2;
+}
+.rightCont {
+  flex: 3;
+}
+
+.detailInv {
+  margin-bottom: 20px;
+  margin-left: 60px;
+}
+.invImg {
+  height: 150px;
+  width: 150px;
+  margin-top: -40px;
+  border-radius: 10px;
+  margin-right: 140px;
+  float: right;
+}

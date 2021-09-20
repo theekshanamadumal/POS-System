@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-//import axios from "axios";
-
+import React from 'react';
 import "./shops.css";
+import ShopList from '../../../components/shopComp/shopList';
+import ShopToolBar from "../../../components/shopComp/shopToolbar";
+import {shopRows} from "../../../dataCollection";
+import { Box } from '@material-ui/core';
 
-class Shops extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return <div> Shops page </div>;
-  }
+
+export default function Shops() {
+  return (
+    <div className="shops">
+        <ShopToolBar className="contain"/>
+        <Box sx={{ pt: 3 }} className="contain">
+            <ShopList shops={shopRows} />
+        </Box>
+    </div>
+  );
 }
-
-export default Shops;

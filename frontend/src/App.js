@@ -9,20 +9,31 @@ import AddManager from './pages/itAdmin/addManager/addManager';
 
 import ManagementSidebar from "./components/managementSidebar/Sidebar";
 import ManagementHome from "./pages/management/Home/managementHome";
-import Analytics from "./pages/management/Analytics/analytics";
-import Orders from "./pages/management/Orders/orders";
-import Products from "./pages/management/Products/products";
-import AddProducts from "./pages/management/Products/addProduct";
-import Reports from "./pages/management/Reports/reports";
-import Routes from "./pages/management/Routes/routes";
+
+
 import SalesPerson from"./pages/management/SalesPerson/salesPerson";
 import NewSalesPerson from"./pages/management/SalesPerson/newSalesPerson";
-import Shops from"./pages/management/Shops/shops";
-
-import ViewProducts from './pages/management/Products/viewProducts';
-import AddOrders from "./pages/management/Orders/addOrder";
 import ViewSalesPerson from './pages/management/SalesPerson/viewSalesPerson';
+
+import Products from "./pages/management/Products/products";
+import AddProducts from "./pages/management/Products/addProduct";
+import ViewProducts from './pages/management/Products/viewProducts';
+
+import Orders from "./pages/management/Orders/orders";
+import AddOrders from "./pages/management/Orders/addOrder";
 import ViewOrders from './pages/management/Orders/viewOrder';
+
+import Routes from "./pages/management/Routes/routes";
+import AddRoute from "./pages/management/Route/addRoute";
+import ViewRoute from "./pages/management/Route/viewRoute";
+
+import Shops from"./pages/management/Shops/shops";
+import AddShop from "./pages/management/Shops/addShop";
+import ViewShop from "./pages/management/Shops/viewShop";
+
+import Analytics from "./pages/management/Analytics/analytics";
+import Reports from "./pages/management/Reports/reports";
+
 
 
 
@@ -99,10 +110,18 @@ function App() {
           <Reports/>
           </Route>  
           
-          <Route path="/management/routes">
+          <Route exact path="/management/routes">
           <ManagementSidebar/>
           <Routes/>
           </Route>  
+
+          <Route path="/management/routes/addRoute">
+              <AddRoute/>
+            </Route> 
+
+            <Route path="/management/routes/:id">
+              <ViewRoute/>
+            </Route>  
           
           <Route exact path="/management/salesperson">
           <ManagementSidebar/>
@@ -136,6 +155,14 @@ function App() {
           <ManagementSidebar/>
           <Shops/>
           </Route> 
+
+          <Route path="/management/shops/addShop">
+              <AddShop/>
+            </Route> 
+
+            <Route path="/management/shops/:shopName">
+              <ViewShop/>
+            </Route> 
 
         </Switch>  
         </div>

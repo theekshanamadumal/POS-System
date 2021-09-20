@@ -1,91 +1,90 @@
-* {
-  box-sizing: border-box;
+.newProduct{
+    flex: 4;
+    background-color: rgba(236, 234, 234, 0.699);
 }
-.newProduct {
-  flex: 8;
-  /* margin: 5% 25%; */
+.title{
+    padding:20px;
+    margin: 20px;
 }
-
-.title {
-  padding: 20px;
+.newProductItems{
+    display: flex;
+    justify-content: space-evenly;
+    
 }
-.newProductItems {
-  display: flex;
-  justify-content: space-evenly;
+.leftItemContainer{
+    padding: 20px 20px;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
 }
-.leftItemContainer {
-  padding: 20px 20px;
-  width: 500px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+.rightItemContainer{
+    padding: 40px 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.rightItemContainer {
-  padding: 40px 10px;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.leftItems{
+    padding: 5px 5px;
+    display: flex;
+    flex-direction: column;
 }
-.leftItems {
-  padding: 5px 5px;
-  display: flex;
-  flex-direction: column;
+.leftItems label{
+    margin-bottom: -10px;
+    padding: 10px;
+    color: rgb(58, 66, 73);
+} 
+.leftItems input{
+    width: 90%;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 20px;
+    box-shadow: teal;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: solid 1px black;
+    border-radius: 0px;
 }
-.leftItems label {
-  margin-bottom: -10px;
-  padding: 10px;
-  color: rgb(58, 66, 73);
-}
-.leftItems input {
-  width: 90%;
-  height: 40px;
-  border-radius: 10px;
-  padding-left: 10px;
-  padding-right: 20px;
-  box-shadow: teal;
-  border-block-color: rgb(85, 87, 90);
-  border-color: rgb(85, 87, 90);
-  margin-bottom: 15px;
-}
-.leftItems select {
-  margin-bottom: 15px;
-  width: 97%;
-  border-color: black;
-  border-width: 2px;
-  height: 45px;
-  height: 40px;
-  border-radius: 10px;
-  padding-left: 10px;
-  padding-right: 20px;
-  box-shadow: teal;
-  border-block-color: rgb(85, 87, 90);
-  border-color: rgb(85, 87, 90);
+.leftItems select{
+    margin-bottom: 15px;
+    width: 97%;
+    height: 45px;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 20px;
+    border: none;
+    border-bottom: solid 1px black;
+    border-radius: 0px;
 }
 
-.rightItemContainer img {
-  width: 250px;
-  height: 250px;
-  padding: 30px;
-  border-radius: 40px;
+.rightItemContainer img{
+    width: 250px;
+    height: 250px;
+    padding: 30px;
+    border-radius: 40px;
+    
 }
-button {
-  height: 40px;
-  width: 200px;
-  background-color: rgb(16, 196, 46);
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 10px;
-  font-size: 15px;
-  font-weight: bolder;
-  float: left;
+.butt{
+    height: 40px;
+    width: 200px;
+    background-color:rgb(16, 196, 46) ;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    float: left;
+    margin-left: 55px;
+    margin-top: 300px;
 }
-.upload {
-  padding: 10px;
-  border-width: 2px;
-  cursor: pointer;
-  padding-top: 140px;
-}
-.image {
-  display: flex;
+.upload{
+    padding: 10px;
+    border-width: 2px;
+    cursor: pointer;
+    padding-top: 180px;
+    
+}.image{
+    display: flex;
 }
