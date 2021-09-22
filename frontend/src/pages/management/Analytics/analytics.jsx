@@ -9,7 +9,7 @@ class Analytics extends Component {
     this.state = {};
   }
   render() {
-    return <div> Analytics page </div>;
+    return <div className="analytics"> Analytics page </div>;
   }
 }
 

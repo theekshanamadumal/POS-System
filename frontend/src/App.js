@@ -76,38 +76,39 @@ function App() {
 
 
           <Route exact path="/management">
-          <ManagementSidebar/>
+            <ManagementSidebar/>
             <ManagementHome/>
           </Route>  
           
           <Route path="/management/analytics">
-          <ManagementSidebar/>
-          <Analytics/>
+            <ManagementSidebar/>
+            <Analytics/>
           </Route>  
           
           <Route path="/management/orders">
-          <ManagementSidebar/>
-          <Orders/>
+            <ManagementSidebar/>
+            <Orders/>
           </Route>  
           
           
           <Route exact path="/management/products">
-          <ManagementSidebar/>
-          <Products/>
+            <ManagementSidebar/>
+            <Products/>
           </Route>  
+          
           <Route path="/management/products/:productName">
-          <ManagementSidebar/>
+              <ManagementSidebar/>
               <ViewProducts/>
             </Route>  
 
           <Route path="/management/addProduct">
-          <ManagementSidebar/>
-          <AddProducts/>
+            <ManagementSidebar/>
+            <AddProducts/>
           </Route>  
           
           <Route path="/management/reports">
-          <ManagementSidebar/>
-          <Reports/>
+            <ManagementSidebar/>
+            <Reports/>
           </Route>  
           
           <Route exact path="/management/routes">
@@ -116,54 +117,54 @@ function App() {
           </Route>  
 
           <Route path="/management/routes/addRoute">
+              <ManagementSidebar/>
               <AddRoute/>
             </Route> 
 
             <Route path="/management/routes/:id">
+              <ManagementSidebar/>
               <ViewRoute/>
             </Route>  
           
           <Route exact path="/management/salesperson">
-          <ManagementSidebar/>
-          <SalesPerson/>
+            <ManagementSidebar/>
+            <SalesPerson/>
           </Route> 
 
           <Route path="/management/addSalesperson">
-          <ManagementSidebar/>
-          <NewSalesPerson/>
+            <ManagementSidebar/>
+            <NewSalesPerson/>
           </Route>  
           
           <Route exact path="/management/salesPerson/:id">
             <ManagementSidebar/>
-              <ViewSalesPerson/>
+            <ViewSalesPerson/>
           </Route>
 
           <Route path="/management/addOrders">
-          <ManagementSidebar/>
-
-              <AddOrders/>
-            </Route>  
-
-            <Route path="/management/Order/:id">
             <ManagementSidebar/>
+            <AddOrders/>
+          </Route>  
 
-              <ViewOrders/>
-            </Route>  
+          <Route path="/management/Order/:id">
+            <ManagementSidebar/>
+            <ViewOrders/>
+          </Route>  
 
-
-          <Route path="/management/shops">
-          <ManagementSidebar/>
-          <Shops/>
+          <Route exact path="/management/shops">
+            <ManagementSidebar/>
+            <Shops/>
           </Route> 
 
           <Route path="/management/shops/addShop">
-              <AddShop/>
-            </Route> 
+            <ManagementSidebar/>
+            <AddShop/>
+          </Route> 
 
-            <Route path="/management/shops/:shopName">
-              <ViewShop/>
-            </Route> 
-
+          <Route path="/management/shops/:shopName">
+            <ManagementSidebar/>
+            <ViewShop/>
+          </Route> 
         </Switch>  
         </div>
       

@@ -9,7 +9,7 @@ class Reports extends Component {
     this.state = {};
   }
   render() {
-    return <div> Reports page </div>;
+    return <div className="reports"> Reports page </div>;
   }
 }
 
