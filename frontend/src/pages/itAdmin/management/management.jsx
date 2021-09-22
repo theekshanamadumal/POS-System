@@ -5,8 +5,8 @@ import axios from "axios";
 import { Delete, SportsMma } from "@material-ui/icons";
 
 import { Box } from "@material-ui/core";
-import SalesPersonList from "../../../components/salesPersonComp/salesPesonListComp";
-import SalesPersonToolBar from "../../../components/salesPersonComp/salesPersonToolbar";
+import SalesPersonList from "../../../components/managerComp/salesPesonListComp";
+import SalesPersonToolBar from "../../../components/managerComp/salesPersonToolbar";
 
 const Person = (props) => (
   <tr>
@@ -23,12 +23,11 @@ const Person = (props) => (
     <td>{props.salesperson.email}</td>
     <td>{props.salesperson.joinedDate.substring(0, 10)}</td>
     <td>
-      <Link to={"/management/salesPerson/" + props.salesperson._id}>edit</Link>{" "}
-      |{" "}
+      <Link to={"/itAdmin/management/" + props.salesperson._id}>edit</Link>
       <a
         href="#"
         onClick={() => {
-          props.handleDelete(props.salesperson.idNumber);
+          props.handleDelete(props.salesperson._id);
         }}
       >
         delete
@@ -47,6 +46,7 @@ export default class SalesPerson extends Component {
       salespersons: [],
     };
   }
+  33;
   componentDidMount() {
     axios
       .get("http://localhost:3001/itAdmin/management")
@@ -61,8 +61,9 @@ export default class SalesPerson extends Component {
 
   handleDelete(id) {
     //setData(data.filter((item) => item.id !== id));
+
     axios
-      .delete("http://localhost:5000/itAdmin/management/" + id)
+      .delete("http://localhost:30001/itAdmin/management/" + id)
       .then((response) => {
         console.log(response.data);
       });

@@ -6,6 +6,8 @@ import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
 import ItAdminHome from "./pages/itAdmin/Home/itAdminHome";
 import Management from './pages/itAdmin/management/management';
 import AddManager from './pages/itAdmin/addManager/addManager';
+import ViewManager from './pages/itAdmin/management/viewManager';
+
 
 import ManagementSidebar from "./components/managementSidebar/Sidebar";
 import ManagementHome from "./pages/management/Home/managementHome";
@@ -13,7 +15,7 @@ import ManagementHome from "./pages/management/Home/managementHome";
 
 import SalesPerson from"./pages/management/SalesPerson/salesPerson";
 import NewSalesPerson from"./pages/management/SalesPerson/newSalesPerson";
-import ViewSalesPerson from './pages/management/SalesPerson/viewSalesPerson';
+import ViewSalesPerson from './pages/itAdmin/management/viewManager';
 
 import Products from "./pages/management/Products/products";
 import AddProducts from "./pages/management/Products/addProduct";
@@ -56,21 +58,25 @@ function App() {
             <ItAdminSidebar/>  
             <ItAdminHome />  
           </Route>
+
           <Route path="/itAdmin/reports">
             <ItAdminSidebar/>  
             <h1>reports page</h1> 
           </Route>
-          <Route path="/itAdmin/management">
-          <ItAdminSidebar/> 
-          <Management/> 
+
+          <Route exact path="/itAdmin/management">
+            <ItAdminSidebar/> 
+            <Management/> 
           </Route>
+
           <Route path="/itAdmin/addManager">
-          <ItAdminSidebar/> 
+            <ItAdminSidebar/> 
             <AddManager />  
           </Route>
-          <Route path="/itAdmin/editManager">
-          <ItAdminSidebar/> 
-            <h1>edit user page</h1>
+
+          <Route path="/itAdmin/management/:id">
+            <ItAdminSidebar/> 
+            <ViewSalesPerson/>
           </Route> 
 
 
