@@ -38,19 +38,21 @@ router.route("/addManager").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/:id").get((req, res) => {
+router.route("/management/:id").get((req, res) => {
    Manager.findById(req.params.id)
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/users/:id").delete((req, res) => {
+router.route("/management/:id").delete((req, res) => {
+  console.log('req.params.id')
+  console.log(req.params.id)
    Manager.findByIdAndDelete(req.params.id)
     .then(() => res.json("user deleted."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/userUpdate/:id").post((req, res) => {
+router.route("/managerUpdate/:id").post((req, res) => {
    Manager.findById(req.params.id)
     .then((manager) => {
      manager.firstName = req.body.firstName;

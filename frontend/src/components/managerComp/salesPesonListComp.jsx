@@ -3,6 +3,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { Link } from "react-router-dom";
+import { CompareArrowsOutlined, Delete } from "@material-ui/icons";
+import "../list.css";
+import axios from "axios";
 import {
   Avatar,
   Box,
@@ -14,10 +18,6 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { Delete } from "@material-ui/icons";
-import "../list.css";
-import axios from "axios";
 
 const SalesPersonList = ({ salesPerson, ...rest }) => {
   const limit = 10;
@@ -28,15 +28,16 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
   /*const handleDelete=(idNumber)=>{
     setData(data.filter((item)=>item.idNumber !== idNumber))
   };*/
-  const handleDelete = (id) => {
+  const handleDelete = (_id) => {
     //setData(data.filter((item) => item.id !== id));
     axios
-      .delete("http://localhost:3001/management/salesperson/" + id)
+      .delete("http://localhost:3001/itAdmin/management/" + _id)
       .then((response) => {
         console.log(response.data);
       });
 
-    setData(data.filter((el) => el._id !== id));
+    setData(data.filter((el) => el._id !== _id));
+    window.location = "/itAdmin/management";
   };
 
   return (
@@ -95,7 +96,7 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
 
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/management/salesPerson/" + d.idNumber}>
+                      <Link to={"/itAdmin/management/" + d.idNumber}>
                         <button className="editButt">View / Edit</button>
                       </Link>
                       <Delete
