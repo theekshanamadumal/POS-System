@@ -174,7 +174,7 @@ export default class NewSalesPerson extends Component {
 
                           <div className="mb-4 pb-2">
                             <div className="form-outline">
-                              <input
+                              <input 
                                 required
                                 value={this.state.idNumber}
                                 onChange={this.onChangeIdNumber}
@@ -193,7 +193,7 @@ export default class NewSalesPerson extends Component {
 
                           <div className="mb-4 pb-2">
                             <div className="form-outline">
-                              <input
+                              <input style={{height:"40px"}}
                                 onChange={this.onChangeImage}
                                 type="file"
                                 id="form3Examplev4"
@@ -214,7 +214,7 @@ export default class NewSalesPerson extends Component {
                                 <input
                                   required
                                   onChange={this.onChangePassword}
-                                  type="text"
+                                  type="password"
                                   id="form3Examplev2"
                                   className="form-control form-control-lg"
                                 />
@@ -231,7 +231,7 @@ export default class NewSalesPerson extends Component {
                                 <input
                                   required
                                   onChange={this.onChangePassword}
-                                  type="text"
+                                  type="password"
                                   id="form3Examplev3"
                                   className="form-control form-control-lg"
                                 />
@@ -260,7 +260,7 @@ export default class NewSalesPerson extends Component {
                                   className="form-control form-control-lg"
                                 />
                                 <label
-                                  className="form-label"
+                                  className="form-label text-white"
                                   for="form3Examplev2"
                                 >
                                   Address
@@ -281,7 +281,7 @@ export default class NewSalesPerson extends Component {
                                   className="form-control form-control-lg"
                                 />
                                 <label
-                                  className="form-label"
+                                  className="form-label text-white"
                                   for="form3Examplev2"
                                 >
                                   city
@@ -300,7 +300,7 @@ export default class NewSalesPerson extends Component {
                                 className="form-control form-control-lg"
                               />
                               <label
-                                className="form-label"
+                                className="form-label text-white"
                                 for="form3Examplev4"
                               >
                                 Phone Number
@@ -318,7 +318,7 @@ export default class NewSalesPerson extends Component {
                                 className="form-control form-control-lg"
                               />
                               <label
-                                className="form-label"
+                                className="form-label text-white"
                                 for="form3Examplev4"
                               >
                                 Email Address

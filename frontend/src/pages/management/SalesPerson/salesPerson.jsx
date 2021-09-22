@@ -2,11 +2,15 @@ import "./salesPerson.css";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import axios from "axios";
-import { DataGrid } from "@material-ui/data-grid";
+//import { DataGrid } from "@material-ui/data-grid";
 //import { rows } from "../../../dataCollection";
 import { Delete, SportsMma } from "@material-ui/icons";
 
-const columns = [
+import { Box } from '@material-ui/core';
+import SalesPersonList from "../../../components/salesPersonComp/salesPesonListComp";
+import SalesPersonToolBar from '../../../components/salesPersonComp/salesPersonToolbar';
+
+/*const columns = [
   { field: "_id", hide: true },
 
   {
@@ -77,7 +81,7 @@ const columns = [
       );
     },
   },
-];
+];*/
 
 const Person = (props) => (
   <tr>
@@ -114,7 +118,9 @@ export default class SalesPerson extends Component {
     super(props);
 
     this.handleDelete = this.handleDelete.bind(this);
-    this.state = { salespersons: [] };
+    this.state = {
+       salespersons: [] 
+    };
   }
   componentDidMount() {
     axios
@@ -153,10 +159,23 @@ export default class SalesPerson extends Component {
       );
     });
   }
+  
 
   render() {
     return (
-      <div className="salesPerson">
+      <div className="salesPerson" >
+        <SalesPersonToolBar className="contain"/>
+            <Box sx={{ pt: 3 }} className="contain">
+                <SalesPersonList salesPerson={this.state.salespersons} />
+            </Box>
+      </div>
+    )
+
+
+
+
+
+      /*<div className="salesPerson">
         <div className="contain">
           <h1 className="heading">Salespersons</h1>
           <Link to="/management/addSalesperson">
@@ -182,8 +201,8 @@ export default class SalesPerson extends Component {
           pageSize={10}
           checkboxSelection
           disableSelectionOnClick
-        />*/}
-      </div>
-    );
+        />}
+      </div> 
+    );*/
   }
 }

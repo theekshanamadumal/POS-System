@@ -100,3 +100,15 @@ export const rows = [
     { productName :"Huwavie Y7" , unitPrice : 15000.00 , quantity : "1" },
     {productName :"Acer aspire" , unitPrice : 130000.00 , quantity : "1" }
   ];
+
+  export const bestPerform=[
+    {id:5, name:"Sivangi Krish" ,income:22000},
+    {id:19, name:"Sivangi Krish" ,income:22000},
+    {id:3, name:"Sivangi Krish" ,income:22000},
+    {id:7, name:"Sivangi Krish" ,income:22000},
+    {id:11, name:"Sivangi Krish" ,income:22000},
+    {id:11, name:"Sivangi Krish" ,income:22000},
+    
+  
+  ]
+  export const salesRoute=[]

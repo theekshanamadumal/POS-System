@@ -1,6 +1,6 @@
 import "./home.css";
 import React from "react";
-import Info from "../../../components/InformationHome/info";
+import Info from "../../../components/managementDashboard/info";
 import Chart from "..//..//..//components/chart/chart";
 import { chartData } from "../../../dataCollection";
 

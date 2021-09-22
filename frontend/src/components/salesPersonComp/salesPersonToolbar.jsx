@@ -16,7 +16,7 @@ export default function salesPersonToolBar() {
         <div className="spacing">
             <div className="containerSale">
                 <h1 className="heading">Salespersons</h1>
-                <Link to="/management/salesperson/addSalesPerson">
+                <Link to="/management/addSalesPerson">
                     <button className="addUser">Add New SalesPerson</button>
                 </Link>
             </div>

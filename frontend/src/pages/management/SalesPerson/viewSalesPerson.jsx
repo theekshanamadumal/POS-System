@@ -13,9 +13,9 @@ export default function viewSalesPerson() {
             <div className="Container">
                 <div className="detailsContainer">
                     <div className="detailMain">
-                        <img className="im" src="https://media.istockphoto.com/photos/handsome-smiling-business-man-in-blue-shirt-standing-with-crossed-picture-id1098036052" alt=""></img>
+                        <img className="imNewSale" src="https://media.istockphoto.com/photos/handsome-smiling-business-man-in-blue-shirt-standing-with-crossed-picture-id1098036052" alt=""></img>
                         <div className="idName">
-                            <h1 className="name">John Michel</h1>
+                            <h2 className="name">John Michel</h2>
                         </div>
                     </div>
                     <div className="detailSub">
@@ -38,7 +38,7 @@ export default function viewSalesPerson() {
                     <h1 className="editTitle">Edit</h1>
                     <form action="" className="form">
                         <div className="editItems">
-                            <div className="leftItemContainer">
+                            <div className="leftItemContainer saleSLI">
                                 <label>First Name</label><br></br>
                                 <input placeholder="John" type="text" required></input><br></br>
                                 <label>Last Name</label><br></br>

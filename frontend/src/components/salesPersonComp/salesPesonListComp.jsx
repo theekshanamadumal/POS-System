@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -6,15 +7,29 @@ import {Avatar,Box,Card,Table,TableBody,TableCell,TableHead,TableRow,Typography}
 import { Link } from 'react-router-dom';
 import {Delete} from '@material-ui/icons';
 import "../list.css";
+import axios from "axios";
 
 const SalesPersonList = ({ salesPerson, ...rest }) => {
   const limit=10;
 
+  //const [data,setData]=useState(salesPerson);
   const [data,setData]=useState(salesPerson);
 
-  const handleDelete=(id)=>{
-    setData(data.filter((item)=>item.id !== id))
-  };
+  /*const handleDelete=(idNumber)=>{
+    setData(data.filter((item)=>item.idNumber !== idNumber))
+  };*/
+  const handleDelete=(id)=> {
+    //setData(data.filter((item) => item.id !== id));
+    axios
+      .delete("http://localhost:5000/management/salesperson/" + id)
+      .then((response) => {
+        console.log(response.data);
+      });
+
+    
+    setData(data.filter((el) => el._id !== id));
+    
+  }
  
   return (
     <Card {...rest} className="card">
@@ -46,15 +61,13 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody className="tbBody">
-              {data.slice(0, limit).map((d) => (
+              {salesPerson.map((d) => (
                 <TableRow
                   hover
-                  key={d.id}
-                  
+                  key={d.idNumber}
                 >
-                  
-                  <TableCell>
-                    {d.id}
+                 <TableCell>
+                    {d.idNumber}
                   </TableCell>
                   <TableCell>
                     <Box
@@ -93,10 +106,10 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
                   
                   <TableCell>
                     <div className="actions">
-                        <Link to={"/management/salesPerson/"+d.id}>
+                        <Link to={"/management/salesPerson/"+d.idNumber}>
                             <button className="editButt">View / Edit</button>
                         </Link>
-                        <Delete className="deleteButt" onClick={()=>handleDelete(d.id)} />
+                        <Delete className="deleteButt" onClick={()=>handleDelete(d.idNumber)} />
                         
                         
                     </div>
