@@ -21,6 +21,8 @@ export default function ItAdminSidebar() {
     <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
+          <h3 className="sidebarTitle">Dashboard</h3>
+
           <ul className="sidebarList">
             <Link to="/itAdmin" className="link">
               <li className="sidebarListItem active">
@@ -38,12 +40,7 @@ export default function ItAdminSidebar() {
                 Management
               </li>
             </Link>
-            <Link to="/itAdmin/addManager" className="link">
-              <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
-                Add Manager
-              </li>
-            </Link>
+
             <Link to="/itAdmin/editManager" className="link">
               <li className="sidebarListItem">
                 <AttachMoney className="sidebarIcon" />
