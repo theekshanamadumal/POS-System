@@ -23,9 +23,9 @@ import Orders from "./pages/management/Orders/orders";
 import AddOrders from "./pages/management/Orders/addOrder";
 import ViewOrders from './pages/management/Orders/viewOrder';
 
-import Routes from "./pages/management/Routes/routes";
-import AddRoute from "./pages/management/Route/addRoute";
-import ViewRoute from "./pages/management/Route/viewRoute";
+import Routes from "./pages/management/Routes/route";
+import AddRoute from "./pages/management/Routes/addRoute";
+import ViewRoute from "./pages/management/Routes/viewRoute";
 
 import Shops from"./pages/management/Shops/shops";
 import AddShop from "./pages/management/Shops/addShop";

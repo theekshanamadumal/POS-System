@@ -1,134 +1,131 @@
-.viewSalesPerson{
-    flex:4;
-    background-color: rgba(236, 234, 234, 0.699);
+.viewSalesPerson {
+  flex: 8;
+  background-color: rgba(236, 234, 234, 0.699);
 }
-.title{
-    padding: 10px;
-    margin: -20px 0px;
-    
+.title {
+  padding: 10px;
+  margin: -20px 0px;
 }
-.Container{
-    display: flex;
-    padding-top: 10px;
+.Container {
+  display: flex;
+  padding-top: 10px;
 }
-.detailsContainer{
-    background-color: rgb(255, 255, 255);
-    margin: 10px 20px;
-    margin-right: -5px;
-    flex:3;
-    border-radius: 10px;
-    box-shadow: 1px 1px 3px 4px rgba(228, 232, 239, 0.5);
-    -webkit-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
-    -moz-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+.detailsContainer {
+  background-color: rgb(255, 255, 255);
+  margin: 10px 20px;
+  margin-right: -5px;
+  flex: 3;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 4px rgba(228, 232, 239, 0.5);
+  -webkit-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -moz-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
 }
-.editContainer{
-    background-color: rgb(255, 255, 255);
-    flex:5;
-    margin: 10px 20px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
-    -webkit-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
-    -moz-box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+.editContainer {
+  background-color: rgb(255, 255, 255);
+  flex: 5;
+  margin: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -webkit-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -moz-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
 }
-.editTitle{
-    padding-left: 10px;
-    padding-top: 10px;
-    margin-bottom: -20px;
-}.im{
-    height: 100px;
-    width: 100px;
-    border-radius: 100px;
-    padding: 20px;
+.editTitle {
+  padding-left: 10px;
+  padding-top: 10px;
+  margin-bottom: -20px;
 }
-.detailMain{
-    display: flex;
+.im {
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  padding: 20px;
 }
-.idName{
-    padding: 30px;
+.detailMain {
+  display: flex;
 }
-.detail{
-    padding: 10px;
-}li{
-    padding: 5px;
+.idName {
+  padding: 30px;
 }
-.value{
-    color: black;
-    font-weight: bolder;
-    margin-left: 10px;
+.detail {
+  padding: 10px;
 }
-.detailSub{
-    padding-bottom: 30px;
+li {
+  padding: 5px;
 }
-.editItems{
-    display: flex;
-    
+.value {
+  color: black;
+  font-weight: bolder;
+  margin-left: 10px;
 }
-.leftItemContainer{
-    flex:2;
+.detailSub {
+  padding-bottom: 30px;
 }
-.rightItemContainer{
-    flex:2;
-    align-items:center;
+.editItems {
+  display: flex;
 }
-label{
-    margin-bottom: -25px;
-    padding: 10px;
-    color: rgb(58, 66, 73);
+.leftItemContainer {
+  flex: 2;
 }
-input{
-    width: 90%;
-    height: 30px;
-    padding-left: 10px;
-    padding-right: 20px;
-    margin-bottom: -15px;
-    
+.rightItemContainer {
+  flex: 2;
+  align-items: center;
 }
-.upload{
-    display: flex;
-    flex-direction: column;
-    margin-top: -70px;
+label {
+  margin-bottom: -25px;
+  padding: 10px;
+  color: rgb(58, 66, 73);
+}
+input {
+  width: 90%;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 20px;
+  margin-bottom: -15px;
+}
+.upload {
+  display: flex;
+  flex-direction: column;
+  margin-top: -70px;
 }
 
-.update{
-    height: 40px;
-    width: 150px;
-    background-color:rgb(16, 196, 46) ;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 10px;
-    font-size: 15px;
-    font-weight: bolder;
-    
+.update {
+  height: 40px;
+  width: 150px;
+  background-color: rgb(16, 196, 46);
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 15px;
+  font-weight: bolder;
 }
-.rightItemContainer .prImg{
-    width: 150px;
-    height: 150px;
-    margin-bottom: -40px;
-    
+.rightItemContainer .prImg {
+  width: 150px;
+  height: 150px;
+  margin-bottom: -40px;
 }
-.upload label{
-    padding-left: 65px;
+.upload label {
+  padding-left: 65px;
 }
-.update{
-    margin-left: 30px;
-    margin-top: 60px;
+.update {
+  margin-left: 30px;
+  margin-top: 60px;
 }
-.contact{
-    display: flex;
+.contact {
+  display: flex;
 }
-.name{
-    padding-top: 20px;
-    margin-left: -40px;
+.name {
+  padding-top: 20px;
+  margin-left: -40px;
 }
-.task{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: -40px;
-    margin-top: -20px;
+.task {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -40px;
+  margin-top: -20px;
 }
-.instructions{
-    margin-top: -20px;
+.instructions {
+  margin-top: -20px;
 }
-.detail{
-    margin-bottom: 20px;
+.detail {
+  margin-bottom: 20px;
 }

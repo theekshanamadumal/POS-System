@@ -66,7 +66,7 @@ export default function Management() {
 
   return (
     <div className="salesPerson">
-      <div className="container ">
+      <div className="contain ">
         <h1 className="heading">Management List</h1>
         <Link to="/itAdmin/addManager">
           <button className="addUser">Add New Salesperson</button>
@@ -78,6 +78,7 @@ export default function Management() {
         pageSize={10}
         checkboxSelection
         disableSelectionOnClick
+        className="container grid"
       />
     </div>
   );
