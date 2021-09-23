@@ -2,16 +2,16 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
+//it admin
 import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
 import ItAdminHome from "./pages/itAdmin/Home/itAdminHome";
 import Management from './pages/itAdmin/management/management';
 import AddManager from './pages/itAdmin/addManager/addManager';
 import ViewManager from './pages/itAdmin/management/viewManager';
 
-
+//management
 import ManagementSidebar from "./components/managementSidebar/Sidebar";
 import ManagementHome from "./pages/management/Home/managementHome";
-
 
 import SalesPerson from"./pages/management/SalesPerson/salesPerson";
 import NewSalesPerson from"./pages/management/SalesPerson/newSalesPerson";
@@ -74,9 +74,9 @@ function App() {
             <AddManager />  
           </Route>
         
-          <Route path="/itAdmin/management/:id">
+          <Route path="/itAdmin/editManager/:id">
             <ItAdminSidebar/> 
-            <ViewSalesPerson/>
+            <ViewManager />
           </Route> 
 
 

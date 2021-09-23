@@ -50,7 +50,9 @@ router.route("/addManager").post(upload.single("image"),(req, res) => {
 });
 
 router.route("/management/:id").get((req, res) => {
-   Manager.findById(req.params.id)
+  console.log('req.params.id')
+  console.log(req.params.id)
+  Manager.findById(req.params.id)
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -64,14 +66,24 @@ router.route("/management/:id").delete((req, res) => {
 });
 
 router.route("/managerUpdate/:id").post((req, res) => {
+  
    Manager.findById(req.params.id)
     .then((manager) => {
+
+      const selectedImage = req.body.image;
+      const imgData = selectedImage.buffer;
+      const imgcontentType = "image/jpg";
+      const image= {data: imgData, 
+                    contentType: imgcontentType};
+
+
      manager.firstName = req.body.firstName;
      manager.lastName = req.body.lastName;
      manager.idNumber = req.body.idNumber;
      manager.firstName = req.body.firstName;
      manager.lastName = req.body.lastName;
-     manager.image = req.body.image;
+     manager.image =image;
+     manager.password = req.body.password;
      manager.address = req.body.address;
      manager.city = req.body.city;
      manager.phoneNumber = Number(req.body.phoneNumber);
