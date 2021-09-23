@@ -189,7 +189,7 @@ export default class AddManager extends Component {
 
                           <div className="mb-4 pb-2">
                             <div className="form-outline">
-                              {/* <div value={this.state.firstName}>sdsdsd</div>*/ }
+                              {/* <div value={this.state.firstName}>sdsdsd</div>*/}
 
                               <input
                                 required

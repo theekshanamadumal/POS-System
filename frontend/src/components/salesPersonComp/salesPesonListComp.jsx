@@ -80,10 +80,9 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
                         display: "flex",
                       }}
                     >
-
                       <Avatar src={d.avatar} sx={{ mr: 2 }}></Avatar>
                       <Typography color="textPrimary" variant="body1">
-                      {`   ${d.firstName} ${d.lastName}`}
+                        {`   ${d.firstName} ${d.lastName}`}
                       </Typography>
                     </Box>
                   </TableCell>
@@ -96,7 +95,6 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
                   <TableCell>
                     {moment(d.joinedDate).format("DD/MM/YYYY")}
                   </TableCell>
-                  
                   <TableCell>
                     <div className="actions">
                       <Link to={"/management/salesPerson/" + d._id}>
