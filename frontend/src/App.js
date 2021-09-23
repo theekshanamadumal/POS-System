@@ -15,7 +15,7 @@ import ManagementHome from "./pages/management/Home/managementHome";
 
 import SalesPerson from"./pages/management/SalesPerson/salesPerson";
 import NewSalesPerson from"./pages/management/SalesPerson/newSalesPerson";
-import ViewSalesPerson from './pages/itAdmin/management/viewManager';
+import ViewSalesPerson from "./pages/management/SalesPerson/viewSalesPerson";
 
 import Products from "./pages/management/Products/products";
 import AddProducts from "./pages/management/Products/addProduct";

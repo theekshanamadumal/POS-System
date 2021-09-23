@@ -80,43 +80,25 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
                         display: "flex",
                       }}
                     >
-
-                      <Avatar 
-                        src={d.avatar}
-                        sx={{ mr: 2 }}
-                      >
-                        
-                        
-                      </Avatar>
-                      <Typography
-                        color="textPrimary"
-                        variant="body1"
-                      >
-
-                 
+                      <Avatar src={d.avatar} sx={{ mr: 2 }}></Avatar>
+                      <Typography color="textPrimary" variant="body1">
                         {`   ${d.firstName} ${d.lastName}`}
                       </Typography>
                     </Box>
                   </TableCell>
 
-                  <TableCell  color="textPrimary"
-                        variant="body1">
+                  <TableCell color="textPrimary" variant="body1">
                     {d.email}
                   </TableCell>
+                  <TableCell>{d.phoneNumber}</TableCell>
+                  <TableCell>{d.city}</TableCell>
                   <TableCell>
-                    {d.phoneNumber}
+                    {moment(d.joinedDate).format("DD/MM/YYYY")}
                   </TableCell>
-                  <TableCell>
-                    {d.city}
-                  </TableCell>
-                  <TableCell>
-                    {moment(d.joinedDate).format('DD/MM/YYYY')}
-                  </TableCell>
-                  
 
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/management/salesPerson/" + d.idNumber}>
+                      <Link to={"/management/salesPerson/" + d._id}>
                         <button className="editButt">View / Edit</button>
                       </Link>
                       <Delete

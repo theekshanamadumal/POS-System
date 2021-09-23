@@ -38,7 +38,7 @@ router.route("/addSalesperson").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/salesperson:id").get((req, res) => {
+router.route("/salesperson/:id").get((req, res) => {
   Salesperson.findById(req.params.id)
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json("Error: " + err));
@@ -51,23 +51,26 @@ router.route("/salesperson/:id").delete((req, res) => {
 });
 
 router.route("/updateSalesperson/:id").post((req, res) => {
+  console.log("postedid",req.params.id)
   Salesperson.findById(req.params.id)
     .then((salesperson) => {
+      console.log(salesperson)
+      console.log(req.body)
+
     salesperson.firstName = req.body.firstName;
     salesperson.lastName = req.body.lastName;
     salesperson.idNumber = req.body.idNumber;
-    salesperson.firstName = req.body.firstName;
-    salesperson.lastName = req.body.lastName;
     salesperson.image = req.body.image;
+    salesperson.password = req.body.password;
     salesperson.address = req.body.address;
     salesperson.city = req.body.city;
     salesperson.phoneNumber = Number(req.body.phoneNumber);
     salesperson.email = req.body.email;
     salesperson.joinedDate = Date(req.body.joinedDate);
 
-    Salesperson
+    salesperson
         .save()
-        .then(() => res.json("manager updated!"))
+        .then(() => res.json("salesperson updated!"))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));

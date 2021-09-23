@@ -100,7 +100,7 @@ const ManagementList = ({ management, ...rest }) => {
                       </Link>
                       <Delete
                         className="deleteButt"
-                        onClick={() => handleDelete(d.idNumber)}
+                        onClick={() => handleDelete(d._id)}
                       />
                     </div>
                   </TableCell>
