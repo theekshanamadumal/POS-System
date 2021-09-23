@@ -10,39 +10,44 @@ export default function AddShop() {
                 <form className="newShopForm">
                     <div className="container">
                         <div className="leftItemsContainer">
-                            <div className="newShopItems">
-                                <label>Shop Name</label>
-                                <input placeholder="Idealz" type="text"></input>
+                            <div className="form-row">
+                                <div className="newShopItems col">
+                                    <label>Shop Name</label><br></br>
+                                    <input placeholder="Idealz" type="text"></input>
+                                </div>
+                                <div className="newShopItems col">
+                                    <label>Email Address</label><br></br>
+                                    <input placeholder="johnMich45@gmail.com" type="email"></input>
+                                </div>
                             </div>
-                            <div className="newShopItems">
-                                <label>Email Address</label>
-                                <input placeholder="johnMich45@gmail.com" type="email"></input>
+                            <div className="form-row">
+                                <div className="newShopItems col">
+                                    <label>Phone Number</label><br></br>
+                                    <input placeholder="+9476283893" type="number"></input>
+                                </div>
+                                
+                                <div className="newShopItems col">
+                                    <label>Address</label><br></br>
+                                    <input placeholder="N0.07, 5th lane, Colombo 03, SriLanka" type="text"></input>
+                                </div>
                             </div>
-                            <div className="newShopItems">
-                                <label>Phone Number</label>
-                                <input placeholder="+9476283893" type="number"></input>
+                            <div className="form-row">
+                                <div className="newShopItems col">
+                                    <label>City</label><br></br>
+                                    <input placeholder="Jaffna" type="text"></input>
+                                </div>
+                                <div className="newShopItems col">
+                                    <label>Route Number</label><br></br>
+                                    <input placeholder="893" type="number"></input>
+                                </div>
                             </div>
-                            
-                            <div className="newShopItems">
-                                <label>Address</label>
-                                <input placeholder="N0.07, 5th lane, Colombo 03, SriLanka" type="text"></input>
-                            </div>
-                            <div className="newShopItems">
-                                <label>City</label>
-                                <input placeholder="Jaffna" type="text"></input>
-                            </div>
-                            <div className="newShopItems">
-                                <label>Route Number</label>
-                                <input placeholder="893" type="number"></input>
-                            </div>
-                            
                         </div>
                         <div className="rightItemsContainer">
                             <div className="rightItemWrapper">
                                 <img htmlFor="file" className="shopImg" src="https://getstamped.co.uk/wp-content/uploads/WebsiteAssets/Placeholder.jpg" alt=""></img>
                                 <label className="uploadShop" htmlFor="file" ><PublishIcon className="icon"/>Upload</label><br></br>
                                 <input placeholder="img" type="file" id="file" style={{display:"none"} }></input>
-                                <button className="buttShop">Add</button>
+                                <button className="buttShop"><span className="buttShopspan">Add</span></button>
                             
                                 
 

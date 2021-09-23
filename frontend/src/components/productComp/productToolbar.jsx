@@ -16,12 +16,12 @@ export default function ProductToolBar() {
     <div className="spacing">
       <div className="containerSale">
         <h1 className="heading">Products</h1>
-        <Link to="/management/Products/addProduct">
+        <Link to="/management/addProduct">
           <button className="addUser">Add New Product</button>
         </Link>
       </div>
 
-      <Box className="search" sx={{ mt: 1 }}>
+      <Box className="search" sx={{ mt: 2 }}>
         <Card>
           <CardContent>
             <Box sx={{ maxWidth: 500 }}>

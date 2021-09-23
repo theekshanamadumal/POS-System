@@ -1,15 +1,11 @@
 import React from 'react';
-import "./viewSalesPerson.css";
+import "./editManager.css";
 import {Publish,Email,PhoneAndroid,LocationCity,Home} from '@material-ui/icons';
 
-export default function viewSalesPerson() {
+export default function editManager() {
     return (
         
-        <div className="viewSalesPerson">     
-            <div className="task">
-                <button className="buttTask">Assign Tasks</button>
-                <button className="buttTask">View Real Time Data</button>
-            </div>        
+        <div className="editManager">      
             <div className="Container">
                 <div className="detailsContainer">
                     <div className="detailMain">

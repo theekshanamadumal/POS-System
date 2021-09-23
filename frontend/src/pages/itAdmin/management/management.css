@@ -1,8 +1,5 @@
-th {
-  padding: 30px;
-}
 
-.salesPerson {
+.management {
   flex: 8;
   background-color: rgba(236, 234, 234, 0.699);
 }
@@ -15,6 +12,7 @@ th {
   float: left;
   height: 30px;
 }
+
 .editButton {
   padding: 0px 10px;
   background-color: rgb(16, 196, 46);

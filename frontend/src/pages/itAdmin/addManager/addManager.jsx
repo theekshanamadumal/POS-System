@@ -189,7 +189,7 @@ export default class AddManager extends Component {
 
                           <div className="mb-4 pb-2">
                             <div className="form-outline">
-                              <div value={this.state.firstName}>sdsdsd</div>
+                              {/* <div value={this.state.firstName}>sdsdsd</div>*/ }
 
                               <input
                                 required
@@ -231,7 +231,7 @@ export default class AddManager extends Component {
                                 <input
                                   required
                                   onChange={this.onChangePassword}
-                                  type="text"
+                                  type="password"
                                   id="form3Examplev2"
                                   className="form-control form-control-lg"
                                 />
@@ -248,7 +248,7 @@ export default class AddManager extends Component {
                                 <input
                                   required
                                   onChange={this.onChangePassword}
-                                  type="text"
+                                  type="password"
                                   id="form3Examplev3"
                                   className="form-control form-control-lg"
                                 />

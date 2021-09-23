@@ -55,6 +55,7 @@ class AddProduct extends Component {
   render() {
     return (
       <div className="newProduct">
+      <div className="addProdCon">
         <h1 className="title">Add a New Product</h1>
         <form onSubmit={this.onSubmit} className="newProductForm">
           <div className="newProductItems">
@@ -165,6 +166,7 @@ class AddProduct extends Component {
             </div>
           </div>
         </form>
+        </div>
       </div>
     );
   }

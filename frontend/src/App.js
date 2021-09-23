@@ -73,7 +73,7 @@ function App() {
             <ItAdminSidebar/> 
             <AddManager />  
           </Route>
-
+        
           <Route path="/itAdmin/management/:id">
             <ItAdminSidebar/> 
             <ViewSalesPerson/>
