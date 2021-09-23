@@ -2,86 +2,11 @@ import "./salesPerson.css";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import axios from "axios";
-//import { DataGrid } from "@material-ui/data-grid";
-//import { rows } from "../../../dataCollection";
 import { Delete, SportsMma } from "@material-ui/icons";
 
-import { Box } from '@material-ui/core';
+import { Box } from "@material-ui/core";
 import SalesPersonList from "../../../components/salesPersonComp/salesPesonListComp";
-import SalesPersonToolBar from '../../../components/salesPersonComp/salesPersonToolbar';
-
-/*const columns = [
-  { field: "_id", hide: true },
-
-  {
-    field: "idNumber",
-    headerName: "ID",
-    width: 120,
-  },
-  {
-    field: "fullName",
-    headerName: "Name",
-    width: 150,
-    renderCell: (params) => {
-      return (
-        <div>
-          {params.salesperson.firstName}
-          <span> </span>
-          {params.salesperson.lastName}
-        </div>
-      );
-    },
-  },
-  {
-    field: "password",
-    headerName: "password",
-    width: 100,
-  },
-  {
-    field: "address",
-    headerName: "address",
-    width: 130,
-  },
-  {
-    field: "city",
-    headerName: "City",
-    width: 130,
-  },
-  {
-    field: "phoneNo",
-    headerName: "Phone Number",
-    width: 120,
-  },
-  {
-    field: "email",
-    headerName: "Email",
-    width: 200,
-  },
-  {
-    field: "joinedDate",
-    headerName: "Joined Date",
-    width: 120,
-  },
-  {
-    field: "action",
-    headerName: "Action",
-    width: 160,
-    renderCell: (params) => {
-      return (
-        <div className="actionButton">
-          <Link to={"/management/salesPerson/" + params.salesperson.id}>
-            <button className="editButton">View</button>
-          </Link>
-
-          <Delete
-            className="deleteButton"
-            onClick={() => params.handleDelete(params.salesperson.idNumber)}
-          />
-        </div>
-      );
-    },
-  },
-];*/
+import SalesPersonToolBar from "../../../components/salesPersonComp/salesPersonToolbar";
 
 const Person = (props) => (
   <tr>
@@ -103,7 +28,7 @@ const Person = (props) => (
       <a
         href="#"
         onClick={() => {
-          props.handleDelete(props.salesperson.idNumber);
+          props.handleDelete(props.salesperson._id);
         }}
       >
         delete
@@ -119,7 +44,7 @@ export default class SalesPerson extends Component {
 
     this.handleDelete = this.handleDelete.bind(this);
     this.state = {
-       salespersons: [] 
+      salespersons: [],
     };
   }
   componentDidMount() {
@@ -159,50 +84,15 @@ export default class SalesPerson extends Component {
       );
     });
   }
-  
 
   render() {
     return (
-      <div className="salesPerson" >
-        <SalesPersonToolBar className="contain"/>
-            <Box sx={{ pt: 3 }} className="contain">
-                <SalesPersonList salesPerson={this.state.salespersons} />
-            </Box>
+      <div className="salesPerson">
+        <SalesPersonToolBar className="contain" />
+        <Box sx={{ pt: 3 }} className="contain">
+          <SalesPersonList salesPerson={this.state.salespersons} />
+        </Box>
       </div>
-    )
-
-
-
-
-
-      /*<div className="salesPerson">
-        <div className="contain">
-          <h1 className="heading">Salespersons</h1>
-          <Link to="/management/addSalesperson">
-            <button className="addUser">Add New Salesperson</button>
-          </Link>
-        </div>
-        <thead className="thead-light">
-          <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>password</th>
-            <th>address</th>
-            <th>city</th>
-            <th>phone number</th>
-            <th>email</th>
-            <th>joined date</th>
-          </tr>
-        </thead>
-        <tbody>{this.salespersonsList()}</tbody>
-        {/*<DataGrid
-          rows={this.state.salespersons}
-          columns={columns}
-          pageSize={10}
-          checkboxSelection
-          disableSelectionOnClick
-        />}
-      </div> 
-    );*/
+    );
   }
 }

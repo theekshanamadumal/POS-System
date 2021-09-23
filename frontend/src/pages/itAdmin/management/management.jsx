@@ -1,4 +1,5 @@
 import "./management.css";
+
 import React, { Component } from "react";
 import axios from "axios";
 import { Box } from '@material-ui/core';
@@ -63,5 +64,6 @@ export default class Management extends Component {
         </Box>
       </div>
     )
+
   }
 }

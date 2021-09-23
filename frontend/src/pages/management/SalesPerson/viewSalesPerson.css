@@ -1,5 +1,5 @@
-.viewSalesPerson{
-  flex:8;
+.viewSalesPerson {
+  flex: 8;
   background-color: rgba(236, 234, 234, 0.699);
   
 }
@@ -9,77 +9,83 @@ html *
 font-family: 'Source Serif Pro', serif !important;
 
 }
-.title{
+.title {
   padding: 10px;
-  
-  
 }
-.Container{
+.Container {
   display: flex;
   padding-top: 10px;
   
 }
+
 .detailsContainer{
   background-color: rgb(212, 55, 55);
+
   margin: 10px 20px;
   margin-right: -5px;
-  flex:3;
+  flex: 3;
   border-radius: 10px;
+
   box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
   -webkit-box-shadow: 0px 0px 11px -1px #000000;
   box-shadow: 0px 0px 11px -1px #000000;
+
 }
-.editContainer{
+.editContainer {
   background-color: rgb(255, 255, 255);
-  flex:5;
+  flex: 5;
   margin: 10px 20px;
   border-radius: 10px;
+
   box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
   -webkit-box-shadow: 0px 0px 11px -1px #000000;
   box-shadow: 0px 0px 11px -1px #000000;
   
+
 }
-.editTitle{
+.editTitle {
   padding-left: 20px;
   padding-top: 20px;
   margin-bottom: -20px;
 }
-.imNewSale{
+.imNewSale {
   height: 100px;
   width: 100px;
   border-radius: 100px;
-  margin:20px
+  margin: 20px;
 }
-.detailMain{
+.detailMain {
   display: flex;
 }
-.idName{
+.idName {
   padding: 30px;
 }
-.detail{
+.detail {
   padding: 10px;
-}li{
+}
+li {
   padding: 5px;
 }
-.value{
+.value {
   color: black;
   font-weight: bolder;
   margin-left: 10px;
 }
-.detailSub{
+.detailSub {
   padding-bottom: 30px;
 }
-.editItems{
+.editItems {
   display: flex;
-  
 }
+
 .leftItemContainer{
   flex:2;
   font-family: 'Scheherazade New', serif;
+
 }
-.rightItemContainer{
-  flex:2;
-  align-items:center;
+.rightItemContainer {
+  flex: 2;
+  align-items: center;
 }
 
 .upload{
@@ -119,35 +125,36 @@ font-family: 'Source Serif Pro', serif !important;
 .upload .prImg{
   width: 400px;
   height: 400px;
+
   margin-bottom: -40px;
-  
 }
-.upload label{
+.upload label {
   padding-left: 50px;
 }
-.update{
+.update {
   margin-left: 30px;
   margin-top: 60px;
 }
-.contact{
+.contact {
   display: flex;
 }
-.name{
+.name {
   padding-top: 20px;
   margin-left: -40px;
 }
-.task{
+.task {
   display: flex;
+
   justify-content: space-around;
   
-  
 }
-.instructions{
+.instructions {
   margin-top: -20px;
 }
-.detail{
+.detail {
   margin-bottom: 20px;
 }
+
 .leftItemContainer input , select{
   padding-bottom: -30px;
   margin-bottom: -80px;
@@ -160,3 +167,4 @@ font-family: 'Source Serif Pro', serif !important;
   padding-bottom: -30px;
   margin-bottom: -20px;
 }
+
