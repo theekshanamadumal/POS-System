@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-
 import "./addManager.css";
+
+var multer = require("multer");
+
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
 
 export default class AddManager extends Component {
   constructor(props) {
@@ -49,6 +53,13 @@ export default class AddManager extends Component {
     });
   }
   onChangeImage(e) {
+    const selectedImage = e;
+    upload.single("image");
+    const imgData = toString(selectedImage);
+    console.log(imgData);
+
+    const imgcontentType = "image/jpg";
+    const image = { data: imgData, contentType: imgcontentType };
     this.setState({
       image: e.target.value,
     });
@@ -114,7 +125,11 @@ export default class AddManager extends Component {
     return (
       <div className="newUser">
         <h1 className="title">Add a New Manager</h1>
-        <form className="addManagerForm" onSubmit={this.onSubmit}>
+        <form
+          className="addManagerForm"
+          onSubmit={this.onSubmit}
+          enctype="multipart/form-data"
+        >
           <section className="h-100 h-custom gradient-custom-2">
             <div className="container py-5 h-100">
               <div className="col-12">
