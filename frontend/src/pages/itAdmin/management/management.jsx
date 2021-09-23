@@ -1,85 +1,67 @@
-import { useState } from "react";
 import "./management.css";
-import { Link } from "react-router-dom";
-import React from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import { rows } from "../../../dataCollection";
-import { Delete } from "@material-ui/icons";
-export default function Management() {
-  const [data, setData] = useState(rows);
+import React, { Component } from "react";
+import axios from "axios";
+import { Box } from '@material-ui/core';
+import ManagementList from "../../../components/managementComp/managementListComp";
+import ManagementToolBar from '../../../components/managementComp/managementToolbar.jsx';
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+export default class Management extends Component {
+  constructor(props) {
+    super(props);
 
-  const columns = [
-    {
-      field: "id",
-      headerName: "ID",
-      width: 90,
-    },
-    {
-      field: "fullName",
-      headerName: "Full Name",
-      width: 200,
-      editable: true,
-      renderCell: (params) => {
-        return (
-          <div>
-            <span>{params.row.fullName}</span>
-          </div>
-        );
-      },
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      width: 300,
-      editable: true,
-    },
-    {
-      field: "phoneNo",
-      headerName: "Phone Number",
-      width: 200,
-      editable: true,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 160,
-      renderCell: (params) => {
-        return (
-          <div className="actionButton">
-            <Link to={"/itAdmin/management/" + params.row.id}>
-              <button className="editButton">Edit</button>
-            </Link>
+    this.handleDelete = this.handleDelete.bind(this);
+    this.state = {
+       managements: [] 
+    };
+  }
+  componentDidMount() {
+    axios
+      .get("http://localhost:3001/itAdmin/management")
+      .then((response) => {
+        this.setState({ managements: response.data });
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-            <Delete
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </div>
-        );
-      },
-    },
-  ];
+  handleDelete(id) {
+    axios
+      .delete("http://localhost:3001/itAdmin/management/" + id)
+      .then((response) => {
+        console.log(response.data);
+      });
 
-  return (
-    <div className="salesPerson">
-      <div className="contain ">
-        <h1 className="heading">Management List</h1>
-        <Link to="/itAdmin/addManager">
-          <button className="addUser">Add New Salesperson</button>
-        </Link>
+    this.setState({
+      exercises: this.state.managements.filter((el) => el._id !== id),
+    });
+  }
+
+ 
+
+  /*managementsList() {
+    console.log(this.managementsList);
+    return this.state.managements.map((currentmanagement) => {
+      return (
+        <Person
+          management={currentmanagement}
+          deleteExercise={this.handleDelete}
+          key={currentmanagement.idNumber}
+        />
+      );
+    });
+  }*/
+  
+
+  render() {
+    return (
+      <div className="management" >
+        <ManagementToolBar className="contain"/>
+        <Box sx={{ pt: 3 }} className="contain">
+          <ManagementList management={this.state.managements} />
+        </Box>
       </div>
-      <DataGrid
-        rows={data}
-        columns={columns}
-        pageSize={10}
-        checkboxSelection
-        disableSelectionOnClick
-        className="container grid"
-      />
-    </div>
-  );
+    )
+  }
 }

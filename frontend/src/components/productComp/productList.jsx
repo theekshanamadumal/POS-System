@@ -76,7 +76,7 @@ const ProductList = ({ products, ...rest }) => {
                   <TableCell>
                     <div className="actions">
                       <Link to={"/management/products/" + d.id}>
-                        <button className="editButt">View / Edit</button>
+                        <button className="editButt"><span className="editButtspan" >View / Edit</span></button>
                       </Link>
                       <Delete
                         className="deleteButt"

@@ -11,14 +11,11 @@ import { Search as SearchIcon } from 'react-feather';
 import { Link } from 'react-router-dom';
 import "../toolbar.css";
 
-export default function salesPersonToolBar() {
+export default function managementBar() {
     return (
         <div className="spacing">
             <div className="containerSale">
-                <h1 className="heading">Salespersons</h1>
-                <Link to="/management/addSalesPerson">
-                    <button className="addUser">Add New SalesPerson</button>
-                </Link>
+                <h1 className="heading">Management List</h1>
             </div>
                 
             
@@ -41,7 +38,7 @@ export default function salesPersonToolBar() {
                             </InputAdornment>
                             )
                         }}
-                        placeholder="Search SalesPerson"
+                        placeholder="Search Manager"
                         variant="outlined"
                         />
                     </Box>

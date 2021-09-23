@@ -2,9 +2,16 @@
     flex: 8;
     background-color: rgba(236, 234, 234, 0.699);
 }
-.title{
-    padding:20px;
+.addProdCon{
+    -webkit-box-shadow: 0px 0px 11px -1px #000000;
+    box-shadow: 0px 0px 11px -1px #000000;
     margin: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+.title{
+    padding:40px;
+    margin: 40px;
 }
 .newProductItems{
     display: flex;
@@ -36,27 +43,23 @@
     padding: 10px;
     color: rgb(58, 66, 73);
 } 
-.leftItems input{
-    width: 90%;
+.leftItemContainer input{
     height: 40px;
     padding-left: 10px;
     padding-right: 20px;
     box-shadow: teal;
-    margin-bottom: 15px;
+    margin-bottom: 3px;
     border: none;
-    border-bottom: solid 1px black;
-    border-radius: 0px;
+    border-radius: 10px;
 }
-.leftItems select{
+.leftItemContainer select{
     margin-bottom: 15px;
-    width: 97%;
-    height: 45px;
-    height: 40px;
+    background-color: rgb(231, 225, 255);;
+    height: 30px;
     padding-left: 10px;
     padding-right: 20px;
     border: none;
-    border-bottom: solid 1px black;
-    border-radius: 0px;
+    border-radius: 10px;
 }
 
 .rightItemContainer img{
@@ -66,19 +69,32 @@
     border-radius: 40px;
     
 }
-.butt{
-    height: 40px;
-    width: 200px;
-    background-color:rgb(16, 196, 46) ;
-    border-radius: 10px;
+.btn-info  {
+    background: -webkit-linear-gradient(right,	#32CD32,	#32CD32,	#32CD32);
+    border: none;
+    border-radius: 21px;
+    box-shadow: 0px 1px 8px #a0ada4;
     cursor: pointer;
-    margin: 10px;
-    font-size: 15px;
-    font-weight: bolder;
+    color: rgb(0, 0, 0);
+    font-family: "Raleway SemiBold", sans-serif;
+    height: 42.3px;
+    margin: 0 auto;
+    transition: 0.25s;
+    width: 153px;
+    outline: none;
+    height: 50px;
+    margin-top: 10px;
     float: left;
     margin-left: 55px;
     margin-top: 300px;
-}
+  }
+  .btn-info:hover {
+    box-shadow: 0px 1px 18px #192419;
+    border: none;
+    outline: none;
+  }
+
+
 .upload{
     padding: 10px;
     border-width: 2px;

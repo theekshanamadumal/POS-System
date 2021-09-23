@@ -9,11 +9,10 @@ import {Delete} from '@material-ui/icons';
 import "../list.css";
 import axios from "axios";
 
-const SalesPersonList = ({ salesPerson, ...rest }) => {
-  const limit=10;
+const ManagementList = ({ management, ...rest }) => {
 
-  //const [data,setData]=useState(salesPerson);
-  const [data,setData]=useState(salesPerson);
+  //const [data,setData]=useState(Management);
+  const [data,setData]=useState(management);
 
   /*const handleDelete=(idNumber)=>{
     setData(data.filter((item)=>item.idNumber !== idNumber))
@@ -21,7 +20,7 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
   const handleDelete=(id)=> {
     //setData(data.filter((item) => item.id !== id));
     axios
-      .delete("http://localhost:3001/management/salesperson/" + id)
+      .delete("http://localhost:3001/itAdmin/management/" + id)
       .then((response) => {
         console.log(response.data);
       });
@@ -61,7 +60,7 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody className="tbBody">
-              {salesPerson.map((d) => (
+              {management.map((d) => (
                 <TableRow
                   hover
                   key={d.idNumber}
@@ -107,7 +106,7 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
                   
                   <TableCell>
                     <div className="actions">
-                        <Link to={"/management/salesPerson/"+d.idNumber}>
+                        <Link to={"/itAdmin/editManager/"+d.idNumber}>
                             <button className="editButt">View / Edit</button>
                         </Link>
                         <Delete className="deleteButt" onClick={()=>handleDelete(d.idNumber)} />
@@ -126,8 +125,8 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
   );
 };
 
-SalesPersonList.propTypes = {
-  customers: PropTypes.array.isRequired
+ManagementList.propTypes = {
+  management: PropTypes.array.isRequired
 };
 
-export default SalesPersonList;
+export default ManagementList;

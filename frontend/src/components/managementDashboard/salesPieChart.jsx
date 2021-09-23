@@ -78,7 +78,7 @@ const SalesPieChart = (props) => {
       <CardContent>
         <Box
           sx={{
-            height: 274,
+            height: 280,
             position: 'relative'
           }}
         >

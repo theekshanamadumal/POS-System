@@ -6,6 +6,7 @@ import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
 import ItAdminHome from "./pages/itAdmin/Home/itAdminHome";
 import Management from './pages/itAdmin/management/management';
 import AddManager from './pages/itAdmin/addManager/addManager';
+import EditManager from "./pages/itAdmin/editManager/editManager";
 
 import ManagementSidebar from "./components/managementSidebar/Sidebar";
 import ManagementHome from "./pages/management/Home/managementHome";
@@ -69,8 +70,8 @@ function App() {
             <AddManager />  
           </Route>
           <Route path="/itAdmin/editManager">
-          <ItAdminSidebar/> 
-            <h1>edit user page</h1>
+            <ItAdminSidebar/> 
+            <EditManager/>
           </Route> 
 
 

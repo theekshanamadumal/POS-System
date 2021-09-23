@@ -137,7 +137,7 @@ export default class SalesPerson extends Component {
   handleDelete(id) {
     //setData(data.filter((item) => item.id !== id));
     axios
-      .delete("http://localhost:5000/management/salesperson/" + id)
+      .delete("http://localhost:3001/management/salesperson/" + id)
       .then((response) => {
         console.log(response.data);
       });

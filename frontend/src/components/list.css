@@ -1,16 +1,31 @@
 .card {
   padding: 10px;
+  width: 100%;
   box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
-  -webkit-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
-  -moz-box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
+  -webkit-box-shadow: 0px 0px 11px -1px #000000;
+  box-shadow: 0px 0px 11px -1px #000000;
 }
-.editButt {
-  background-color: rgb(16, 196, 46);
-  margin: 0px;
-  width: 90px;
-  margin-right: 20px;
-  margin-left: -20px;
+
+.editButt  {
+  background: -webkit-linear-gradient(right, #23497e,#0c3164,#23497e);
+  border: none;
+  border-radius: 21px;
+  box-shadow: 0px 1px 8px #a0ada4;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-family: "Raleway SemiBold", sans-serif;
+  height: 42.3px;
+  margin: 0 auto;
+  transition: 0.25s;
+  width: 153px;
+  outline: none;
 }
+.editButt:hover {
+  box-shadow: 0px 1px 18px #141418;
+  border: none;
+  outline: none;
+}
+
 .deleteButt {
   margin-top: 10px;
   cursor: pointer;
@@ -19,10 +34,12 @@
   display: flex;
 }
 .tbHeader {
-  background-color: rgb(194, 189, 189);
+  background-color: rgb(94, 17, 17);
   font-weight: bolder;
   font-size: 20px;
 }
-.tbBod {
-  height: -10px;
+.tbBody {
+  font-size: 30px;
+  font-weight:bolder;
 }
+
