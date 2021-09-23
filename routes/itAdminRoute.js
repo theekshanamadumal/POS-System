@@ -1,5 +1,8 @@
 const router = require("express").Router();
 let Manager = require("../models/manager");
+var multer = require("multer");
+var storage = multer.memoryStorage()
+var upload = multer({ storage: storage })
 
 router.route("/management").get((req, res) => {
  Manager.find()
@@ -7,11 +10,19 @@ router.route("/management").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/addManager").post((req, res) => {
+router.route("/addManager").post(upload.single("image"),(req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const idNumber = req.body.idNumber;
-  const image = req.body.image;
+
+  const selectedImage = req.body.image;
+  const imgData = selectedImage.buffer;
+  console.log(imgData)
+
+  const imgcontentType = "image/jpg";
+  const image= {data: imgData, 
+                contentType: imgcontentType};
+
   const password = req.body.password;
   const address = req.body.address;
   const city = req.body.city;
