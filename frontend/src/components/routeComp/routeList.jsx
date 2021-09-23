@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import moment from "moment";
 import {
   Box,
   Card,
@@ -44,8 +45,12 @@ const RouteList = ({ routes, ...rest }) => {
                   <h5>No of Shops</h5>
                 </TableCell>
                 <TableCell className="tbHeader">
+                  <h5>Last Visited</h5>
+                </TableCell>
+                <TableCell className="tbHeader">
                   <h5>Action</h5>
                 </TableCell>
+                
               </TableRow>
             </TableHead>
             <TableBody className="tbBody">
@@ -55,6 +60,9 @@ const RouteList = ({ routes, ...rest }) => {
                   <TableCell>{d.origin}</TableCell>
                   <TableCell>{d.destination}</TableCell>
                   <TableCell>{d.noOfShops}</TableCell>
+                  <TableCell>
+                    {moment(d.lastVisited).format('DD/MM/YYYY')}
+                  </TableCell>
                   <TableCell>
                     <div className="actions">
                       <Link to={"/management/routes/" + d.id}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./viewRoute.css";
 import {Publish,Email,PhoneAndroid,LocationCity,Home} from '@material-ui/icons';
-
+import { Link } from "react-router-dom";
 export default function ViewRoute(){
     return (
         <div className="viewRoute">     
@@ -17,6 +17,8 @@ export default function ViewRoute(){
                     <div className="detailSubRot">
                         <p className="detail"> Origin : <span className="value"> Moratuwa</span></p>
                         <p className="detail"> Destination : <span className="value"> Wellawatte</span></p>
+                        <p className="detail"> Last Visited : <span className="value"> 09/09/2021</span></p>
+                        <p className="detail"> Status : <span className="value"> Assigned</span></p>
                         <p className="detail"> No of Shops : <span className="value"> 4</span></p>
                         <p className="detail"> Shops : </p>
                         <ol className="instructionsRot">
@@ -25,6 +27,9 @@ export default function ViewRoute(){
                             <li  className="contactRot"> <span className="value">Store 3 </span></li>
                             <li className="contactRot"><span className="value">Store 4</span></li>
                         </ol>
+                        <Link to="/management/route/lastSales">
+                            <button className="updateRoute">View Last Month Sales</button>
+                        </Link>
                     </div>
                     
                 </div>

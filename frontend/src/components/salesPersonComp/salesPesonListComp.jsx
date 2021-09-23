@@ -1,7 +1,6 @@
 import { useState } from "react";
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Avatar,
@@ -18,6 +17,7 @@ import { Link } from "react-router-dom";
 import { Delete } from "@material-ui/icons";
 import "../list.css";
 import axios from "axios";
+import moment from "moment";
 
 const SalesPersonList = ({ salesPerson, ...rest }) => {
   const limit = 10;
@@ -62,7 +62,7 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
                   <h5>City</h5>
                 </TableCell>
                 <TableCell className="tbHeader">
-                  <h5>Registration date</h5>
+                  <h5>Joined Date</h5>
                 </TableCell>
                 <TableCell className="tbHeader">
                   <h5>Action</h5>
@@ -81,42 +81,25 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
                       }}
                     >
 
-                      <Avatar 
-                        src={d.avatar}
-                        sx={{ mr: 2 }}
-                      >
-                        
-                        
-                      </Avatar>
-                      <Typography
-                        color="textPrimary"
-                        variant="body1"
-                      >
-
-                 
-                        {`   ${d.firstName} ${d.lastName}`}
+                      <Avatar src={d.avatar} sx={{ mr: 2 }}></Avatar>
+                      <Typography color="textPrimary" variant="body1">
+                      {`   ${d.firstName} ${d.lastName}`}
                       </Typography>
                     </Box>
                   </TableCell>
 
-                  <TableCell  color="textPrimary"
-                        variant="body1">
+                  <TableCell color="textPrimary" variant="body1">
                     {d.email}
                   </TableCell>
+                  <TableCell>{d.phoneNumber}</TableCell>
+                  <TableCell>{d.city}</TableCell>
                   <TableCell>
-                    {d.phoneNumber}
-                  </TableCell>
-                  <TableCell>
-                    {d.city}
-                  </TableCell>
-                  <TableCell>
-                    {moment(d.joinedDate).format('DD/MM/YYYY')}
+                    {moment(d.joinedDate).format("DD/MM/YYYY")}
                   </TableCell>
                   
-
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/management/salesPerson/" + d.idNumber}>
+                      <Link to={"/management/salesPerson/" + d._id}>
                         <button className="editButt">View / Edit</button>
                       </Link>
                       <Delete

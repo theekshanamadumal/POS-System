@@ -13,23 +13,23 @@ import ManagementSidebar from "./components/managementSidebar/Sidebar";
 import ManagementHome from "./pages/management/Home/managementHome";
 
 
-import SalesPerson from"./pages/management/SalesPerson/salesPerson";
-import NewSalesPerson from"./pages/management/SalesPerson/newSalesPerson";
-import ViewSalesPerson from './pages/itAdmin/management/viewManager';
+import SalesPerson from "./pages/management/SalesPerson/salesPerson";
+import NewSalesPerson from "./pages/management/SalesPerson/newSalesPerson";
+import ViewSalesPerson from './pages/management/SalesPerson/viewSalesPerson';
 
 import Products from "./pages/management/Products/products";
 import AddProducts from "./pages/management/Products/addProduct";
 import ViewProducts from './pages/management/Products/viewProducts';
 
 import Orders from "./pages/management/Orders/orders";
-import AddOrders from "./pages/management/Orders/addOrder";
 import ViewOrders from './pages/management/Orders/viewOrder';
 
 import Routes from "./pages/management/Routes/route";
 import AddRoute from "./pages/management/Routes/addRoute";
 import ViewRoute from "./pages/management/Routes/viewRoute";
+import LastSales from './pages/management/Routes/lastSales';
 
-import Shops from"./pages/management/Shops/shops";
+import Shops from "./pages/management/Shops/shops";
 import AddShop from "./pages/management/Shops/addShop";
 import ViewShop from "./pages/management/Shops/viewShop";
 
@@ -76,7 +76,7 @@ function App() {
         
           <Route path="/itAdmin/management/:id">
             <ItAdminSidebar/> 
-            <ViewSalesPerson/>
+            <ViewManager/>
           </Route> 
 
 
@@ -90,12 +90,21 @@ function App() {
             <ManagementSidebar/>
             <Analytics/>
           </Route>  
-          
-          <Route path="/management/orders">
+
+          <Route exact path="/management/salesperson">
             <ManagementSidebar/>
-            <Orders/>
+            <SalesPerson/>
+          </Route> 
+
+          <Route path="/management/addSalesperson">
+            <ManagementSidebar/>
+            <NewSalesPerson/>
           </Route>  
           
+          <Route exact path="/management/salesPerson/:id">
+            <ManagementSidebar/>
+            <ViewSalesPerson/>
+          </Route>         
           
           <Route exact path="/management/products">
             <ManagementSidebar/>
@@ -122,35 +131,26 @@ function App() {
           <Routes/>
           </Route>  
 
-          <Route path="/management/routes/addRoute">
+          <Route exact path="/management/routes/addRoute">
               <ManagementSidebar/>
               <AddRoute/>
             </Route> 
 
-            <Route path="/management/routes/:id">
+            <Route exact path="/management/routes/:id">
               <ManagementSidebar/>
               <ViewRoute/>
             </Route>  
-          
-          <Route exact path="/management/salesperson">
-            <ManagementSidebar/>
-            <SalesPerson/>
-          </Route> 
 
-          <Route path="/management/addSalesperson">
-            <ManagementSidebar/>
-            <NewSalesPerson/>
-          </Route>  
-          
-          <Route exact path="/management/salesPerson/:id">
-            <ManagementSidebar/>
-            <ViewSalesPerson/>
-          </Route>
+            <Route path="/management/route/lastSales">
+              <ManagementSidebar/>
+              <LastSales/>
+            </Route>  
 
-          <Route path="/management/addOrders">
+            
+            <Route path="/management/orders">
             <ManagementSidebar/>
-            <AddOrders/>
-          </Route>  
+            <Orders/>
+          </Route>   
 
           <Route path="/management/Order/:id">
             <ManagementSidebar/>
