@@ -127,7 +127,7 @@ function App() {
           
           <Route path="/management/addProductCategory">
             <ManagementSidebar/>
-            <AddProductCategory/>
+            <AddProductCategory location="/management"/>
           </Route>  
 
           <Route path="/management/reports">
