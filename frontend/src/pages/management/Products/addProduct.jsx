@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import PublishIcon from "@material-ui/icons/Publish";
 import "./addProduct.css";
+import { Link } from "react-router-dom";
 
 class AddProduct extends Component {
   constructor(props) {
@@ -55,117 +56,122 @@ class AddProduct extends Component {
   render() {
     return (
       <div className="newProduct">
-      <div className="addProdCon">
-        <h1 className="title">Add a New Product</h1>
-        <form onSubmit={this.onSubmit} className="newProductForm">
-          <div className="newProductItems">
-            <div className="leftItemContainer">
-              <div className="form-outline mb-4">
-                <label className="form-label" for="form3Example1cg">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  id="form3Example1cg"
-                  className="form-control form-control-lg"
-                  value={this.state.itemName}
-                  onChange={this.onChangeItemName}
-                />
-              </div>
+        <Link to="/management/addProductCategory">
+          <button className="">Add New Product Category</button>
+        </Link>
 
-              <div className="form-outline mb-4">
-                <label className="form-label" for="form3Example3cg">
-                  category
-                </label>
-                <select
-                  required
-                  value={this.state.description}
-                  onChange={this.onChangeDescription}
-                  type="text"
-                  id="form3Example3cg"
-                  className="form-control form-control-lg"
-                >
-                  <option value="volvo">Phone</option>
-                  <option value="saab">Charger</option>
-                  <option value="mercedes">Earphone</option>
-                  <option value="audi">HeadPhone</option>
-                </select>
-              </div>
-              <div className="form-row">
-                <div className="form-outline mb-4  col">
-                  <label className="form-label" for="form3Example4cg">
-                    unit price
+        <div className="addProdCon">
+          <h1 className="title">Add a New Product</h1>
+
+          <form onSubmit={this.onSubmit} className="newProductForm">
+            <div className="newProductItems">
+              <div className="leftItemContainer">
+                <div className="form-outline mb-4">
+                  <label className="form-label" for="form3Example1cg">
+                    Name
                   </label>
                   <input
-                    value={this.state.stock}
-                    onChange={this.onChangeStock}
-                    type="number"
-                    id="form3Example4cg"
+                    type="text"
+                    required
+                    id="form3Example1cg"
                     className="form-control form-control-lg"
+                    value={this.state.itemName}
+                    onChange={this.onChangeItemName}
                   />
                 </div>
 
-                <div className="form-outline mb-4  col">
-                  <label className="form-label" for="form3Example4cg">
-                    stock amount
+                <div className="form-outline mb-4">
+                  <label className="form-label" for="form3Example3cg">
+                    category
                   </label>
-                  <input
-                    value={this.state.stock}
-                    onChange={this.onChangeStock}
-                    type="number"
-                    id="form3Example4cg"
+                  <select
+                    required
+                    value={this.state.description}
+                    onChange={this.onChangeDescription}
+                    type="text"
+                    id="form3Example3cg"
                     className="form-control form-control-lg"
-                  />
-                </div>
-              </div>
-              <div className="form-outline mb-4">
-                <label className="form-label" for="form3Example3cg">
-                  description
-                </label>
-                <input
-                  type="textArea"
-                  required
-                  id="form3Example1cg"
-                  className="form-control form-control-lg"
-                  value={this.state.itemName}
-                  onChange={this.onChangeItemName}
-                />
-              </div>
-            </div>
-            <div className="rightItemContainer">
-              <div>
-                <div className="image">
-                  <img
-                    src="https://images.unsplash.com/photo-1550684376-efcbd6e3f031?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80"
-                    alt=""
-                  ></img>
-                  <br></br>
-                  <label htmlFor="file" className="upload">
-                    <PublishIcon />
-                    Upload Image
-                  </label>
-                  <br></br>
-                  <input
-                    placeholder="img"
-                    type="file"
-                    id="file"
-                    style={{ display: "none" }}
-                  ></input>
-                </div>
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="submit"
-                    className="btn btn-info btn-lg"
-                    data-mdb-ripple-color="dark"
                   >
-                    Add Item
-                  </button>
+                    <option value="volvo">Phone</option>
+                    <option value="saab">Charger</option>
+                    <option value="mercedes">Earphone</option>
+                    <option value="audi">HeadPhone</option>
+                  </select>
+                </div>
+                <div className="form-row">
+                  <div className="form-outline mb-4  col">
+                    <label className="form-label" for="form3Example4cg">
+                      unit price
+                    </label>
+                    <input
+                      value={this.state.stock}
+                      onChange={this.onChangeStock}
+                      type="number"
+                      id="form3Example4cg"
+                      className="form-control form-control-lg"
+                    />
+                  </div>
+
+                  <div className="form-outline mb-4  col">
+                    <label className="form-label" for="form3Example4cg">
+                      stock amount
+                    </label>
+                    <input
+                      value={this.state.stock}
+                      onChange={this.onChangeStock}
+                      type="number"
+                      id="form3Example4cg"
+                      className="form-control form-control-lg"
+                    />
+                  </div>
+                </div>
+                <div className="form-outline mb-4">
+                  <label className="form-label" for="form3Example3cg">
+                    description
+                  </label>
+                  <input
+                    type="textArea"
+                    required
+                    id="form3Example1cg"
+                    className="form-control form-control-lg"
+                    value={this.state.itemName}
+                    onChange={this.onChangeItemName}
+                  />
+                </div>
+              </div>
+              <div className="rightItemContainer">
+                <div>
+                  <div className="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1550684376-efcbd6e3f031?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80"
+                      alt=""
+                    ></img>
+                    <br></br>
+                    <label htmlFor="file" className="upload">
+                      <PublishIcon />
+                      Upload Image
+                    </label>
+                    <br></br>
+                    <input
+                      placeholder="img"
+                      type="file"
+                      id="file"
+                      style={{ display: "none" }}
+                    ></input>
+                  </div>
+                  <div className="d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      className="btn btn-info btn-lg"
+                      data-mdb-ripple-color="dark"
+                    >
+                      Add Item
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
         </div>
       </div>
     );

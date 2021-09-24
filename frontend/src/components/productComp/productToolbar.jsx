@@ -19,6 +19,9 @@ export default function ProductToolBar() {
         <Link to="/management/addProduct">
           <button className="addUser">Add New Product</button>
         </Link>
+        <Link to="/management/addProductCategory">
+          <button className=" addUser">Add New Product Category</button>
+        </Link>
       </div>
 
       <Box className="search" sx={{ mt: 2 }}>
