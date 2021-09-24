@@ -112,3 +112,31 @@ export const rows = [
   
   ]
   export const salesRoute=[]
+
+  export const tasks=[
+    {id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
+    {id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
+    {id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
+    {id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
+    {id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
+    {id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
+    {id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
+  ]
+  export const achieved =[
+    {id:100,inventory:19,income:5000},
+    {id:100,inventory:19,income:5000},
+    {id:100,inventory:19,income:5000},
+    {id:100,inventory:19,income:5000},
+    {id:100,inventory:19,income:5000},
+    {id:100,inventory:19,income:5000},
+  ]
+  export const remain =[
+    {id:100,inventory:19},
+    {id:100,inventory:19},
+    {id:100,inventory:19},
+    {id:100,inventory:19},
+    {id:100,inventory:19},
+    {id:100,inventory:19},
+    {id:100,inventory:19},
+    {id:100,inventory:19},
+  ]

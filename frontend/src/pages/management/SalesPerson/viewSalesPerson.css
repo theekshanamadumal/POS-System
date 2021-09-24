@@ -47,6 +47,7 @@ font-family: 'Source Serif Pro', serif !important;
 .mainHead{
   margin-bottom: -20px;
   font-weight: bolder;
+  padding-left: 0px;
 }
 .subTitle{
   padding: 15px;
@@ -61,8 +62,10 @@ font-family: 'Source Serif Pro', serif !important;
 .detailMain {
   display: flex;
 }
-.idName {
-  padding: 30px;
+.name {
+  padding: 10px;
+  margin-top: -20px;
+  
 }
 .detail {
   padding: 10px;

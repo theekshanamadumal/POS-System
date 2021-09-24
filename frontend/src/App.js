@@ -13,8 +13,8 @@ import ViewManager from './pages/itAdmin/management/viewManager';
 import ManagementSidebar from "./components/managementSidebar/Sidebar";
 import ManagementHome from "./pages/management/Home/managementHome";
 
-import SalesPerson from"./pages/management/SalesPerson/salesPerson";
-import NewSalesPerson from"./pages/management/SalesPerson/newSalesPerson";
+import SalesPerson from "./pages/management/SalesPerson/salesPerson";
+import NewSalesPerson from "./pages/management/SalesPerson/newSalesPerson";
 import ViewSalesPerson from "./pages/management/SalesPerson/viewSalesPerson";
 
 import Products from "./pages/management/Products/products";
@@ -37,7 +37,10 @@ import ViewShop from "./pages/management/Shops/viewShop";
 import Analytics from "./pages/management/Analytics/analytics";
 import Reports from "./pages/management/Reports/reports";
 
-
+import Tasks from "./pages/management/Tasks/tasks";
+import ViewTasks from "./pages/management/Tasks/viewTasks";
+import AssignTasks from './pages/management/Tasks/assignTasks';
+import RealTimeData from "./pages/management/Tasks/realTimeData";
 
 
 function App() {
@@ -177,6 +180,28 @@ function App() {
             <ManagementSidebar/>
             <ViewShop/>
           </Route> 
+
+          <Route exact path="/management/tasks">
+            <ManagementSidebar/>
+            <Tasks/>
+          </Route>
+
+          <Route path="/management/tasks/:id/viewTasks">
+            <ManagementSidebar/>
+            <ViewTasks/>
+          </Route>
+
+          <Route path="/management/tasks/:id/assignTasks">
+            <ManagementSidebar/>
+            <AssignTasks/>
+          </Route>
+
+          <Route path="/management/tasks/:id/realData">
+            <ManagementSidebar/>
+            <RealTimeData/>
+          </Route> 
+          
+
         </Switch>  
         </div>
       
