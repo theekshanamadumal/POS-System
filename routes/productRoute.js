@@ -1,23 +1,26 @@
 const router = require("express").Router();
 let Product = require("../models/product");
 
-router.route("/management/products").get((req, res) => {
+
+router.route("/products").get((req, res) => {
     Product.find()
     .then((Product) => res.json(Product))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.route("/addProduct").post((req, res) => {
-  const itemName = req.body.itemName;
-  const description = req.body.description;
-  const stock = Number(req.body.stock);
-  const active = req.body.active;
+const itemName = req.body.itemName;
+const category = req.body.category;
+const unitPrice = Number(req.body.unitPrice);
+const stock = Number(req.body.stock);
+const description = req.body.description;
   
   const newProduct = new Product({
     itemName,
-    description,
+    category,
+    unitPrice,
     stock,
-    active,
+    description,
     
   });
 
@@ -27,27 +30,28 @@ router.route("/addProduct").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/management/product/:id").get((req, res) => {
+router.route("product/:id").get((req, res) => {
     Product.findById(req.params.id)
     .then((product) => res.json(user))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/management/product/:id").delete((req, res) => {
+router.route("product/:id").delete((req, res) => {
     Product.findByIdAndDelete(req.params.id)
     .then(() => res.json("user deleted."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/management/product/update/:id").post((req, res) => {
+router.route("product/update/:id").post((req, res) => {
     Product.findById(req.params.id)
     .then((product) => {
      
-      product.itemName = req.body.itemNamee;
-      product.description = req.body.descriptions;
-      product.stock = Number(req.body.stock);
-      product.active = req.body.activel;
-
+    const itemName = req.body.itemName;
+    const category = req.body.category;
+    const unitPrice = Number(req.body.unitPrice);
+    const stock = Number(req.body.stock);
+    const description = req.body.description;
+  
       product
         .save()
         .then(() => res.json("product updated!"))

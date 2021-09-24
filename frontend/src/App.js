@@ -20,6 +20,7 @@ import ViewSalesPerson from "./pages/management/SalesPerson/viewSalesPerson";
 import Products from "./pages/management/Products/products";
 import AddProducts from "./pages/management/Products/addProduct";
 import ViewProducts from './pages/management/Products/viewProducts';
+import AddProductCategory from './pages/management/Products/addProductCategory';
 
 import Orders from "./pages/management/Orders/orders";
 import ViewOrders from './pages/management/Orders/viewOrder';
@@ -79,7 +80,6 @@ function App() {
         
           <Route path="/itAdmin/editManager/:id">
             <ItAdminSidebar/> 
-            <ViewManager/>
             <ViewManager />
           </Route> 
 
@@ -125,6 +125,11 @@ function App() {
             <AddProducts/>
           </Route>  
           
+          <Route path="/management/addProductCategory">
+            <ManagementSidebar/>
+            <AddProductCategory location="/management"/>
+          </Route>  
+
           <Route path="/management/reports">
             <ManagementSidebar/>
             <Reports/>
