@@ -1,0 +1,15 @@
+.viewTasks{
+    flex: 8;
+}
+.detContain{
+    display: flex;
+    width: 100%;
+}
+.achieved{
+    flex:3;
+    margin: 20px;
+}
+.remain{
+    flex:2;
+    margin: 20px;
+}

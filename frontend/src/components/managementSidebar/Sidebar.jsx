@@ -79,6 +79,13 @@ export default function ManagementSidebar() {
                 Routes
               </li>
             </Link>
+
+            <Link to="/management/tasks" className="link">
+              <li className="sidebarListItem">
+                <LocalOffer className="sidebarIcon" />
+                Tasks
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

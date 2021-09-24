@@ -2,8 +2,6 @@ import "./salesPerson.css";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import axios from "axios";
-import { Delete, SportsMma } from "@material-ui/icons";
-
 import { Box } from "@material-ui/core";
 import SalesPersonList from "../../../components/salesPersonComp/salesPesonListComp";
 import SalesPersonToolBar from "../../../components/salesPersonComp/salesPersonToolbar";
