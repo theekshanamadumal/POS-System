@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import PublishIcon from "@material-ui/icons/Publish";
 import "./addProduct.css";
-import { Link } from "react-router-dom";
 import AddProductCategory from "./addProductCategory";
 class AddProduct extends Component {
   constructor(props) {
@@ -38,6 +36,7 @@ class AddProduct extends Component {
       })
       .catch((error) => {
         console.log(error);
+        alert(error, (window.location = "/management/products"));
       });
   }
 
@@ -75,9 +74,14 @@ class AddProduct extends Component {
 
     axios
       .post("http://localhost:3001/management/addProduct", product)
-      .then((res) => console.log(res.data));
-
-    window.location = "/management/products";
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data, (window.location = "/management/products"));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = "/management/products"));
+      });
   }
 
   render() {

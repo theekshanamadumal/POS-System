@@ -115,7 +115,7 @@ function App() {
             <Products/>
           </Route>  
           
-          <Route path="/management/products/:productName">
+          <Route exact path="/management/products/:id">
               <ManagementSidebar/>
               <ViewProducts/>
             </Route>  
@@ -176,7 +176,7 @@ function App() {
             <AddShop/>
           </Route> 
 
-          <Route path="/management/shops/:shopName">
+          <Route path="/management/shops/:id">
             <ManagementSidebar/>
             <ViewShop/>
           </Route> 

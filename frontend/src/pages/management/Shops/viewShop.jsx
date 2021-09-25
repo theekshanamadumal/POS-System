@@ -1,73 +1,269 @@
-import React from 'react';
+import React, { Component } from "react";
 import "./viewShop.css";
-import {Publish,Email,PhoneAndroid,LocationCity,Home} from '@material-ui/icons';
+import { withRouter } from "react-router";
+import axios from "axios";
 
-export default function ViewShop() {
-    return (
-        
-        <div className="viewShop">     
-            <div className="headingView">
-                <h1>Idealz</h1>
-            </div>        
-            <div className="Container">
-                <div className="detailsContainer">
-                    <div className="detailMain">
-                        <img className="im" src="https://scontent.fcmb1-2.fna.fbcdn.net/v/t1.6435-1/p720x720/180997770_3988495557911456_2793697284821502425_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=dbb9e7&_nc_ohc=hZR7nSn3oV8AX8yfbdg&_nc_ht=scontent.fcmb1-2.fna&oh=1eed1dc89ded05ace91c668453d303a9&oe=616AE1FA" alt=""></img>
-                        <div className="idName">
-                            <h2  className="name">Idealz</h2>
-                        </div>
-                    </div>
-                    <div className="detailSub">
-                        <p className="detail">Account Details:</p>
-                        <ul className="instructions">
-                            <li className="contact"> ID Number : <span className="value"> 987770000V</span></li>
-                            <li className="contact">Route ID :<span className="value">100 </span></li>
-                        </ul><br></br>
-                        <p className="detail">Contact Details:</p>
-                        <ul className="instructions">
-                            <li className="contact"> <Email/> <span className="value"> John@gmail.com</span></li>
-                            <li className="contact"><PhoneAndroid /><span className="value">0776378493 </span></li>
-                            <li  className="contact"><LocationCity/> <span className="value">Colombo </span></li>
-                            <li className="contact"><Home/>	<span className="value">N0.07, 5th lane, Colombo 03, SriLanka </span></li>
-                        </ul>
-                    </div>
-                    
+import { Email, PhoneAndroid, LocationCity, Home } from "@material-ui/icons";
+
+export default withRouter(
+  class ViewShop extends Component {
+    constructor(props) {
+      super(props);
+
+      this.onChangeShopName = this.onChangeShopName.bind(this);
+      this.onChangeOwner = this.onChangeOwner.bind(this);
+      this.onChangePhoneNo = this.onChangePhoneNo.bind(this);
+      this.onChangeEmail = this.onChangeEmail.bind(this);
+      this.onChangeCity = this.onChangeCity.bind(this);
+      this.onChangeRoute = this.onChangeRoute.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+      this.loadRoutes = this.loadRoutes.bind(this);
+
+      this.state = {
+        routeList: [],
+        shop: [],
+        dataId: "",
+        idNumber: "",
+        shopName: "",
+        owner: "",
+        phoneNo: "",
+        email: "",
+        city: "",
+        route: [],
+      };
+    }
+
+    loadRoutes() {
+      axios
+        .get("http://localhost:3001/management/routes")
+        .then((response) => {
+          this.setState({
+            routeList: response.data,
+          });
+          console.log("categories:");
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = "/management/products"));
+        });
+    }
+
+    componentDidMount() {
+      this.dataId = this.props.match.params.id;
+      console.log("dataId: ", this.dataId);
+      axios
+        .get("http://localhost:3001/management/shop/" + this.dataId)
+        .then((response) => {
+          this.setState({
+            shop: response.data,
+            idNumber: response.data._id,
+            shopName: response.data.shopName,
+            owner: response.data.owner,
+            phoneNo: response.data.phoneNo,
+            email: response.data.email,
+            city: response.data.city,
+            route: response.data.route,
+          });
+          console.log("response.data");
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = "/management/shops"));
+        });
+      //this.loadCategories();
+    }
+
+    onChangeShopName(e) {
+      this.setState({ shopName: e.target.value });
+    }
+    onChangeOwner(e) {
+      this.setState({ owner: e.target.value });
+    }
+    onChangePhoneNo(e) {
+      this.setState({ phoneNo: e.target.value });
+    }
+    onChangeEmail(e) {
+      this.setState({ email: e.target.value });
+    }
+    onChangeCity(e) {
+      this.setState({ city: e.target.value });
+    }
+    onChangeRoute(e) {
+      this.setState({ route: e.target.value });
+    }
+
+    onSubmit(e) {
+      e.preventDefault();
+      const shop = {
+        shopName: this.state.shopName,
+        owner: this.state.owner,
+        phoneNo: this.state.phoneNo,
+        email: this.state.email,
+        city: this.state.city,
+        route: this.state.route,
+      };
+
+      console.log(shop);
+
+      axios
+        .post(
+          "http://localhost:3001/management/updateShop/" + this.dataId,
+          shop
+        )
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data, (window.location = "/management/shops"));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = "/management/shops"));
+        });
+    }
+
+    render() {
+      return (
+        <div className="viewShop">
+          <div className="headingView">
+            <h1>Edit Shop Details</h1>
+          </div>
+          <div className="Container">
+            <div className="detailsContainer">
+              <div className="detailMain">
+                ....
+                <div className="idName">
+                  <h2 className="name"> {this.state.shop.shopName} </h2>
                 </div>
-                <div className="editContainer">
-                    <h1 className="editTitle">Edit</h1>
-                    <form action="" className="form">
-                        <div className="editItems">
-                            <div className="leftItemContainer">
-                                <label>Email Address</label><br></br>
-                                <input placeholder="John@gmail.com" type="email"></input><br></br><br></br>
-                                <label>Phone number </label><br></br>
-                                <input placeholder="0776378493" type="number"></input><br></br><br></br>
-                                <label>City</label><br></br>
-                                <input placeholder="Colombo" type="text"></input><br></br><br></br>
-                                <label>Address</label><br></br>
-                                <input placeholder="N0.07, 5th lane, Colombo 03, SriLanka" type="text" ></input><br></br><br></br>
-                                <label>Route ID</label><br></br>
-                                <input placeholder="100" type="number"></input><br></br>
-                            </div>
-                            
-                            <div className="rightItemContainer">
-                                <div className="upload">
-                                    <img className="prImg viewShopImg" src="https://scontent.fcmb1-2.fna.fbcdn.net/v/t1.6435-1/p720x720/180997770_3988495557911456_2793697284821502425_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=dbb9e7&_nc_ohc=hZR7nSn3oV8AX8yfbdg&_nc_ht=scontent.fcmb1-2.fna&oh=1eed1dc89ded05ace91c668453d303a9&oe=616AE1FA" alt=""></img>
-                                    <br></br><label htmlFor="file"><Publish />Upload</label><br></br>
-                                    <input placeholder="img" type="file" id="file" style={{display:"none"} }></input>
-                                    <br></br><button className="update">Update</button>
-                                    
-                                </div>
-                                
-                            </div>
-                            
-                        </div>
-                    </form> 
+              </div>
+              <div className="detailSub">
+                <p className="detail">Shop Details:</p>
+                <ul className="instructions">
+                  <li className="contact">
+                    {" "}
+                    <Email />{" "}
+                    <span className="value">
+                      ID: {String(this.state.shop._id).substr(19)}
+                    </span>
+                  </li>
+                  <li className="contact">
+                    <Home />{" "}
+                    <span className="value">
+                      Owner:{this.state.shop.owner}{" "}
+                    </span>
+                  </li>{" "}
+                  <li className="contact">
+                    <PhoneAndroid />
+                    <span className="value">
+                      Phone: {this.state.shop.phoneNo}{" "}
+                    </span>
+                  </li>
+                  <li className="contact">
+                    {" "}
+                    <Email />{" "}
+                    <span className="value">
+                      {" "}
+                      Email: {this.state.shop.email}
+                    </span>
+                  </li>
+                  <li className="contact">
+                    <LocationCity />{" "}
+                    <span className="value">City: {this.state.shop.city}</span>
+                  </li>
+                </ul>
+                <br></br>
+                <p className="detail">Route Details:</p>
+
+                <ul className="instructions">
+                  <li className="contact">
+                    {" "}
+                    Route ID :{" "}
+                    <span className="value">
+                      {" "}
+                      {String(this.state.shop.route).substr(19)}
+                    </span>
+                  </li>
+                  <li className="contact">
+                    Begin :
+                    <span className="value">{this.state.shop.route}</span>
+                  </li>
+                  <li className="contact">
+                    Destination :
+                    <span className="value">{this.state.shop.route}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="editContainer">
+              <h1 className="editTitle">Add new shop</h1>
+              <br />
+              <br />
+              <form action="" className="form" onSubmit={this.onSubmit}>
+                <div className="editItems">
+                  <div className="leftItemContainer">
+                    <label>shop Name</label>
+                    <input
+                      value={this.state.shopName}
+                      onChange={this.onChangeShopName}
+                      type="text"
+                      required
+                    ></input>
+                    <br />
+                    <label>Owner </label>
+                    <input
+                      value={this.state.owner}
+                      onChange={this.onChangeOwner}
+                      type="text"
+                    ></input>
+                    <br></br>
+                    <label>Phone Number</label>
+                    <input
+                      value={this.state.phoneNo}
+                      onChange={this.onChangePhoneNo}
+                      type="number"
+                      required
+                    ></input>
+                    <br />
+                    <label>Email </label>
+                    <input
+                      value={this.state.email}
+                      onChange={this.onChangeEmail}
+                      type="email"
+                    ></input>
+                    <br />
+                    <label>City </label>
+                    <input
+                      value={this.state.city}
+                      onChange={this.onChangeCity}
+                      type="text"
+                      required
+                    ></input>
+                    <br />
+                    <label>Route</label>
+                    <select
+                      value={this.state.route}
+                      onChange={this.onChangeroute}
+                      className="select"
+                    >
+                      {this.state.routeList.map((c) => (
+                        <option>{c.route}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="rightItemContainer">
+                    <div className="upload">
+                      <button type="submit" className="update">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
                 </div>
-            </div>  
-                  
-                  
+              </form>
+            </div>
+          </div>
         </div>
-        
-    )
-}
+      );
+    }
+  }
+);

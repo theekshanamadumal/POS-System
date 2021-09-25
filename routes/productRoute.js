@@ -30,27 +30,29 @@ const description = req.body.description;
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("product/:id").get((req, res) => {
+router.route("/product/:id").get((req, res) => {
+    console.log(req.params.id)
     Product.findById(req.params.id)
-    .then((product) => res.json(user))
+    .then((product) => res.json(product))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("product/:id").delete((req, res) => {
+router.route("/product/:id").delete((req, res) => {
+  console.log(req.params.id)
     Product.findByIdAndDelete(req.params.id)
-    .then(() => res.json("user deleted."))
+    .then(() => res.json("Product deleted."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("product/update/:id").post((req, res) => {
+router.route("/updateProduct/:id").post((req, res) => {
     Product.findById(req.params.id)
     .then((product) => {
      
-    const itemName = req.body.itemName;
-    const category = req.body.category;
-    const unitPrice = Number(req.body.unitPrice);
-    const stock = Number(req.body.stock);
-    const description = req.body.description;
+    product.itemName = req.body.itemName;
+    product.category = req.body.category;
+    product.unitPrice = Number(req.body.unitPrice);
+    product.stock = Number(req.body.stock);
+    product.description = req.body.description;
   
       product
         .save()
