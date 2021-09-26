@@ -1,6 +1,5 @@
 th {
   padding: 30px;
-  
 }
 
 .salesPerson {
@@ -18,7 +17,7 @@ th {
 }
 .editButton {
   padding: 0px 10px;
-  background-color: rgb(16, 196, 46);
+  background-color: #3cb371;
   border-radius: 10px;
   margin-right: 20px;
   cursor: pointer;
@@ -41,7 +40,7 @@ th {
 .addUser {
   height: 40px;
   width: 200px;
-  background-color: rgb(16, 196, 46);
+  background-color: #3cb371;
   border-radius: 10px;
   cursor: pointer;
   margin: 20px;

@@ -1,6 +1,7 @@
 import "./addShop.css";
 import React, { Component } from "react";
 import axios from "axios";
+import AddRouteComponent from "../Routes/addRouteComponent";
 
 class AddShop extends Component {
   constructor(props) {
@@ -29,22 +30,22 @@ class AddShop extends Component {
 
   loadRoutes() {
     axios
-      .get("http://localhost:3001/management/routes")
+      .get("http://localhost:3001/management/salesRoutes")
       .then((response) => {
         this.setState({
           routeList: response.data,
         });
-        console.log("categories:");
+        console.log("routes:");
         console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = "/management/products"));
+        alert(error, (window.location = "/management/shops/addShop"));
       });
   }
 
   componentDidMount() {
-    //this.loadCategories();
+    this.loadRoutes();
   }
 
   onChangeShopName(e) {
@@ -98,14 +99,15 @@ class AddShop extends Component {
         <div className="Container">
           <div className="detailsContainer">
             <h2 className="title">Add new route</h2>
-
-            <div className="container"></div>
+            <div className="container">
+              <AddRouteComponent location="/management/shops/addShop" />
+            </div>
           </div>
-          <div className="editContainer">
+          <div className="editContainer ">
             <h1 className="editTitle">Add new shop</h1>
             <br />
             <br />
-            <form action="" className="form" onSubmit={this.onSubmit}>
+            <form action="" className="form container" onSubmit={this.onSubmit}>
               <div className="editItems">
                 <div className="leftItemContainer">
                   <label>shop Name</label>
@@ -149,16 +151,24 @@ class AddShop extends Component {
                   <label>Route</label>
                   <select
                     value={this.state.route}
-                    onChange={this.onChangeroute}
+                    onChange={this.onChangeRoute}
                     className="select"
                   >
+                    <option value="">select a route</option>
                     {this.state.routeList.map((c) => (
-                      <option>{c.route}</option>
+                      <option value={c._id}>
+                        {"ID: " +
+                          String(c._id).substr(19) +
+                          " From " +
+                          c.origin +
+                          " To " +
+                          c.destination}
+                      </option>
                     ))}
                   </select>
                 </div>
 
-                <div className="rightItemContainer">
+                <div className="righ">
                   <div className="upload">
                     <button type="submit" className="update">
                       Submit

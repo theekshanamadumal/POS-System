@@ -29,18 +29,18 @@ export default withRouter(
         phoneNo: "",
         email: "",
         city: "",
-        route: [],
+        route: "",
       };
     }
 
     loadRoutes() {
       axios
-        .get("http://localhost:3001/management/routes")
+        .get("http://localhost:3001/management/salesRoutes")
         .then((response) => {
           this.setState({
             routeList: response.data,
           });
-          console.log("categories:");
+          console.log("routes:");
           console.log(response.data);
         })
         .catch((error) => {
@@ -50,6 +50,8 @@ export default withRouter(
     }
 
     componentDidMount() {
+      this.loadRoutes();
+
       this.dataId = this.props.match.params.id;
       console.log("dataId: ", this.dataId);
       axios
@@ -72,7 +74,6 @@ export default withRouter(
           console.log(error);
           alert(error, (window.location = "/management/shops"));
         });
-      //this.loadCategories();
     }
 
     onChangeShopName(e) {
@@ -124,16 +125,15 @@ export default withRouter(
 
     render() {
       return (
-        <div className="viewShop">
+        <div className="viewShop ">
           <div className="headingView">
             <h1>Edit Shop Details</h1>
           </div>
           <div className="Container">
             <div className="detailsContainer">
               <div className="detailMain">
-                ....
                 <div className="idName">
-                  <h2 className="name"> {this.state.shop.shopName} </h2>
+                  <h2 className="name"> {"-" + this.state.shop.shopName} </h2>
                 </div>
               </div>
               <div className="detailSub">
@@ -143,19 +143,19 @@ export default withRouter(
                     {" "}
                     <Email />{" "}
                     <span className="value">
-                      ID: {String(this.state.shop._id).substr(19)}
+                      ID : {String(this.state.shop._id).substr(19)}
                     </span>
                   </li>
                   <li className="contact">
                     <Home />{" "}
                     <span className="value">
-                      Owner:{this.state.shop.owner}{" "}
+                      Owner : {this.state.shop.owner}{" "}
                     </span>
                   </li>{" "}
                   <li className="contact">
                     <PhoneAndroid />
                     <span className="value">
-                      Phone: {this.state.shop.phoneNo}{" "}
+                      Phone : {this.state.shop.phoneNo}{" "}
                     </span>
                   </li>
                   <li className="contact">
@@ -163,12 +163,12 @@ export default withRouter(
                     <Email />{" "}
                     <span className="value">
                       {" "}
-                      Email: {this.state.shop.email}
+                      Email : {this.state.shop.email}
                     </span>
                   </li>
                   <li className="contact">
                     <LocationCity />{" "}
-                    <span className="value">City: {this.state.shop.city}</span>
+                    <span className="value">City : {this.state.shop.city}</span>
                   </li>
                 </ul>
                 <br></br>
@@ -183,6 +183,7 @@ export default withRouter(
                       {String(this.state.shop.route).substr(19)}
                     </span>
                   </li>
+
                   <li className="contact">
                     Begin :
                     <span className="value">{this.state.shop.route}</span>
@@ -242,11 +243,18 @@ export default withRouter(
                     <label>Route</label>
                     <select
                       value={this.state.route}
-                      onChange={this.onChangeroute}
+                      onChange={this.onChangeRoute}
                       className="select"
                     >
                       {this.state.routeList.map((c) => (
-                        <option>{c.route}</option>
+                        <option value={c._id}>
+                          {"ID: " +
+                            String(c._id).substr(19) +
+                            " From " +
+                            c.origin +
+                            " To " +
+                            c.destination}
+                        </option>
                       ))}
                     </select>
                   </div>

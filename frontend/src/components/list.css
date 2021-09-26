@@ -6,8 +6,8 @@
   box-shadow: 0px 0px 11px -1px #000000;
 }
 
-.editButt  {
-  background: -webkit-linear-gradient(right, #23497e,#0c3164,#23497e);
+.editButt {
+  background: -webkit-linear-gradient(#1a53a3, #1a53a3);
   border: none;
   border-radius: 21px;
   box-shadow: 0px 1px 8px #a0ada4;
@@ -40,6 +40,6 @@
 }
 .tbBody {
   font-size: 30px;
-  font-weight:bolder;
+  font-weight: bolder;
+  color: #23497e;
 }
-

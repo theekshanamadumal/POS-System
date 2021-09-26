@@ -12,7 +12,23 @@ export default class Shops extends Component {
 
     this.state = {
       shops: [],
+      routeList: [],
     };
+  }
+  loadRoutes() {
+    axios
+      .get("http://localhost:3001/management/salesRoutes")
+      .then((response) => {
+        this.setState({
+          routeList: response.data,
+        });
+        console.log("routes:");
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = "/management"));
+      });
   }
   componentDidMount() {
     axios
@@ -25,6 +41,8 @@ export default class Shops extends Component {
         console.log(error);
         alert(error, (window.location = "/management"));
       });
+
+    this.loadRoutes();
   }
 
   render() {
@@ -32,7 +50,7 @@ export default class Shops extends Component {
       <div className="product">
         <ShopToolBar className="contain" />
         <Box sx={{ pt: 3 }} className="contain">
-          <ShopList shops={this.state.shops} />
+          <ShopList shops={this.state.shops} routes={this.state.routeList} />
         </Box>
       </div>
     );

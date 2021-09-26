@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
+import Login from "./components/login/login";
+
 //it admin
 import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
 import ItAdminHome from "./pages/itAdmin/Home/itAdminHome";
@@ -55,7 +57,9 @@ function App() {
         <Switch>
         
           <Route exact path="/">
-           <h1>login page</h1>         
+           <h1>login page</h1>      <br/>
+
+           <Login/>
           </Route>
       
           <Route exact path="/itAdmin">

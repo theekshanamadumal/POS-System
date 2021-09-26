@@ -15,7 +15,7 @@ import { Delete } from "@material-ui/icons";
 import "../list.css";
 import axios from "axios";
 
-const ShopList = ({ shops, ...rest }) => {
+const ShopList = ({ shops, routes, ...rest }) => {
   console.log("data send to list", shops);
 
   const [limit, setLimit] = useState(10);
@@ -69,7 +69,18 @@ const ShopList = ({ shops, ...rest }) => {
                   <TableCell>{d.shopName}</TableCell>
                   <TableCell>{d.phoneNo}</TableCell>
                   <TableCell>{d.city}</TableCell>
-                  <TableCell>{d.route}</TableCell>
+                  <TableCell>
+                    {routes.map((r) =>
+                      d.route == r._id
+                        ? "ID: " +
+                          String(r._id).substr(19) +
+                          " From " +
+                          r.origin +
+                          " To " +
+                          r.destination
+                        : null
+                    )}
+                  </TableCell>
                   <TableCell>
                     <div className="actions">
                       <Link to={"/management/shops/" + d._id}>

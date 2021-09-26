@@ -34,13 +34,6 @@ export default function ManagementSidebar() {
                 Analytics
               </li>
             </Link>
-
-            <Link to="/management/reports" className="link">
-              <li className="sidebarListItem">
-                <Assessment className="sidebarIcon" />
-                Reports
-              </li>
-            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">

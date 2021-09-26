@@ -1,25 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 import "./addRoute.css";
+import axios from "axios";
+import AddRouteComponent from "../Routes/addRouteComponent";
 
-export default function AddRoute() {
-  return (
-    <div className="addRoute">
-      <div className="addRouteContainer">
-        <h1 className="addRoutehead">Add a New Route</h1>
-        <form action="" className="formAdd">
-          <label>Origin</label>
-          <br></br>
-          <input placeholder="Moratuwa" type="text"></input>
-          <br></br>
-          <br></br>
-          <label>Destination </label>
-          <br></br>
-          <input placeholder="Wellawatte" type="text"></input>
-          <br></br>
-          <br></br>
-          <button className="addRouteBtn">Update</button>
-        </form>
+export default class AddRoute extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className="viewRoute">
+        <div className="spacing">
+          <div className="containerSale">
+            <h1 className="heading">New Route</h1>
+          </div>
+
+          <div className="Container addRoute ">
+            <div className="">
+              <div className="container ">
+                <div className="detailsContainer">
+                  <h1 className="editRoute">Enter Route Details</h1>
+                  <AddRouteComponent location="/management/routes" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
