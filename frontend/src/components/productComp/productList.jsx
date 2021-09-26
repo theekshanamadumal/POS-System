@@ -1,8 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
-  Avatar,
   Box,
   Card,
   Table,
@@ -14,15 +13,26 @@ import {
 import { Link } from "react-router-dom";
 import { Delete } from "@material-ui/icons";
 import "../list.css";
-import React from "react";
+import axios from "axios";
 
 const ProductList = ({ products, ...rest }) => {
   const [limit, setLimit] = useState(10);
 
-  const [data, setData] = useState(products);
+  //const [data, setData] = useState(products);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    console.log("data send to back");
+    console.log(id);
+    axios
+      .delete("http://localhost:3001/management/product/" + id)
+      .then((response) => {
+        console.log(response.data);
+        alert(response.data, (window.location = "/management/products"));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = "/management"));
+      });
   };
 
   return (
@@ -33,22 +43,19 @@ const ProductList = ({ products, ...rest }) => {
             <TableHead sx={{ innerHeight: 100 }}>
               <TableRow>
                 <TableCell className="tbHeader">
-                  <h5>ID</h5>
+                  <h5>Item ID</h5>
                 </TableCell>
                 <TableCell className="tbHeader">
-                  <h5>Name</h5>{" "}
+                  <h5>Item Name</h5>{" "}
                 </TableCell>
                 <TableCell className="tbHeader">
-                  <h5>Image</h5>
+                  <h5>Category</h5>
                 </TableCell>
                 <TableCell className="tbHeader">
-                  <h5>Stock</h5>
+                  <h5>Unit Price</h5>
                 </TableCell>
                 <TableCell className="tbHeader">
-                  <h5>UnitPrice</h5>{" "}
-                </TableCell>
-                <TableCell className="tbHeader">
-                  <h5>Active</h5>
+                  <h5>Stock</h5>{" "}
                 </TableCell>
                 <TableCell className="tbHeader">
                   <h5>Action</h5>
@@ -56,31 +63,21 @@ const ProductList = ({ products, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody className="tbBody">
-              {data.slice(0, limit).map((d) => (
-                <TableRow hover key={d.id}>
-                  <TableCell>{d.id}</TableCell>
-                  <TableCell>{d.productName}</TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        alignItems: "center",
-                        display: "flex",
-                      }}
-                    >
-                      <Avatar src={d.avatar} sx={{ mr: 2 }}></Avatar>
-                    </Box>
-                  </TableCell>
-                  <TableCell>{d.amount}</TableCell>
+              {products.map((d) => (
+                <TableRow hover key={d._id}>
+                  <TableCell>{d._id.substr(19)}</TableCell>
+                  <TableCell>{d.itemName}</TableCell>
+                  <TableCell>{d.category}</TableCell>
                   <TableCell>{d.unitPrice}</TableCell>
-                  <TableCell>{d.active}</TableCell>
+                  <TableCell>{d.stock}</TableCell>
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/management/products/" + d.id}>
-                        <button className="editButt"><span className="editButtspan" >View / Edit</span></button>
+                      <Link to={"/management/products/" + d._id}>
+                        <button className="editButt">View / Edit</button>
                       </Link>
                       <Delete
                         className="deleteButt"
-                        onClick={() => handleDelete(d.id)}
+                        onClick={() => handleDelete(d._id)}
                       />
                     </div>
                   </TableCell>

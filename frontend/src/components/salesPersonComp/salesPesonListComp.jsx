@@ -23,7 +23,7 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
   const limit = 10;
 
   //const [data,setData]=useState(salesPerson);
-  const [data, setData] = useState(salesPerson);
+  //const [data, setData] = useState(salesPerson);
 
   /*const handleDelete=(idNumber)=>{
     setData(data.filter((item)=>item.idNumber !== idNumber))
@@ -34,9 +34,14 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
       .delete("http://localhost:3001/management/salesperson/" + id)
       .then((response) => {
         console.log(response.data);
+        alert(response.data, (window.location = "/management/salesperson"));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = "/management"));
       });
 
-    setData(data.filter((el) => el._id !== id));
+    //setData(data.filter((el) => el._id !== id));
   };
 
   return (

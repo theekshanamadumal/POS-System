@@ -26,9 +26,14 @@ class AddProductCategory extends Component {
 
     axios
       .post("http://localhost:3001/management/addProductCategory", Category)
-      .then((res) => console.log(res.data));
-
-    window.location = this.props.location;
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data, (window.location = this.props.location));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = this.props.location));
+      });
   }
 
   render() {

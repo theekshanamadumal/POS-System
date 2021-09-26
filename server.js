@@ -21,11 +21,16 @@ const itAdminRouter = require('./routes/itAdminRoute');
 const managementRouter = require('./routes/managementRoute');
 const productRouter = require('./routes/productRoute');
 const productCategoryRouter = require('./routes/productCategoryRoute');
+const shopRouter = require('./routes/shopRoute');
+const salesRouteRouter = require('./routes/salesRouteRouter');
+
 
 app.use('/itAdmin', itAdminRouter);
 app.use('/management', managementRouter);
 app.use('/management', productRouter);
 app.use('/management', productCategoryRouter);
+app.use('/management', shopRouter);
+app.use('/management', salesRouteRouter);
 
 
 const port=process.env.port||3001;

@@ -130,7 +130,7 @@ export default class NewSalesPerson extends Component {
                             className="fw-normal mb-5"
                             style={{ color: "#4835d4" }}
                           >
-                            General Info
+                            Account Details
                           </h3>
 
                           <div className="row">
@@ -174,7 +174,7 @@ export default class NewSalesPerson extends Component {
 
                           <div className="mb-4 pb-2">
                             <div className="form-outline">
-                              <input 
+                              <input
                                 required
                                 value={this.state.idNumber}
                                 onChange={this.onChangeIdNumber}
@@ -193,7 +193,8 @@ export default class NewSalesPerson extends Component {
 
                           <div className="mb-4 pb-2">
                             <div className="form-outline">
-                              <input style={{height:"40px"}}
+                              <input
+                                style={{ height: "40px" }}
                                 onChange={this.onChangeImage}
                                 type="file"
                                 id="form3Examplev4"

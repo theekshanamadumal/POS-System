@@ -1,13 +1,9 @@
 .viewSalesPerson {
   flex: 8;
   background-color: rgba(236, 234, 234, 0.699);
-  
 }
-html *
-{
-
-font-family: 'Source Serif Pro', serif !important;
-
+html * {
+  font-family: "Source Serif Pro", serif !important;
 }
 .title {
   padding: 10px;
@@ -15,10 +11,9 @@ font-family: 'Source Serif Pro', serif !important;
 .Container {
   display: flex;
   padding-top: 10px;
-  
 }
 
-.detailsContainerSale{
+.detailsContainerSale {
   margin: 10px 20px;
   margin-right: -5px;
   flex: 2;
@@ -29,7 +24,7 @@ font-family: 'Source Serif Pro', serif !important;
   -webkit-box-shadow: 0px 0px 11px -1px #000000;
   box-shadow: 0px 0px 11px -1px #000000;
 }
-.detailsContainerSale span{
+.detailsContainerSale span {
   color: white;
 }
 .editContainer {
@@ -38,18 +33,16 @@ font-family: 'Source Serif Pro', serif !important;
   margin: 10px 20px;
   border-radius: 10px;
 
-  box-shadow: 1px 1px 3px 4px rgba(239,228,228,0.5);
+  box-shadow: 1px 1px 3px 4px rgba(239, 228, 228, 0.5);
   -webkit-box-shadow: 0px 0px 11px -1px #000000;
   box-shadow: 0px 0px 11px -1px #000000;
-  
-
 }
-.mainHead{
+.mainHead {
   margin-bottom: -20px;
   font-weight: bolder;
   padding-left: 0px;
 }
-.subTitle{
+.subTitle {
   padding: 15px;
   margin-bottom: -30px;
 }
@@ -65,7 +58,6 @@ font-family: 'Source Serif Pro', serif !important;
 .name {
   padding: 10px;
   margin-top: -20px;
-  
 }
 .detail {
   padding: 10px;
@@ -85,12 +77,11 @@ li {
   display: flex;
 }
 
-.leftItemContainerSale{
-  flex:3.2;
-  font-family: 'Scheherazade New', serif;
+.leftItemContainerSale {
+  flex: 3.2;
+  font-family: "Scheherazade New", serif;
   width: 100%;
   width: 600px;
-
 }
 .rightItemContainerSale {
   flex: 2;
@@ -98,13 +89,14 @@ li {
   width: 100px;
 }
 
-.upload{
+.upload {
   display: flex;
   flex-direction: column;
   margin-top: -70px;
 }
 
-.submitSale ,.buttTask {
+.submitSale,
+.buttTask {
   border: none;
   border-radius: 21px;
   box-shadow: 0px 1px 8px #a0ada4;
@@ -118,21 +110,22 @@ li {
   height: 50px;
   margin-top: 10px;
 }
-.update:hover , .buttTask:hover{
+.update:hover,
+.buttTask:hover {
   box-shadow: 0px 1px 18px #192419;
   border: none;
   outline: none;
 }
-.update{
+.update {
   color: rgb(0, 0, 0);
-  background: -webkit-linear-gradient(right,	#32CD32,	#32CD32,	#32CD32);
+  background: -webkit-linear-gradient(right, #3cb371, #3cb371, #3cb371);
 }
-.buttTask{
+.buttTask {
   color: rgb(255, 255, 255);
-  background: -webkit-linear-gradient(right, #23497e,#0c3164,#23497e);
+  background: -webkit-linear-gradient(right, #23497e, #0c3164, #23497e);
 }
 
-.upload .prImg{
+.upload .prImg {
   width: 400px;
   height: 400px;
 
@@ -156,7 +149,6 @@ li {
   display: flex;
 
   justify-content: space-around;
-  
 }
 .instructions {
   margin-top: -20px;
@@ -165,7 +157,8 @@ li {
   margin-bottom: 20px;
 }
 
-.leftItemContainerSale input , select{
+.leftItemContainerSale input,
+select {
   margin-left: 5px;
   outline: none;
   border: none;
@@ -173,14 +166,13 @@ li {
   border-radius: 10px;
   width: 100%;
   height: 40px;
-  
 }
-.leftItemContainerSale label{
+.leftItemContainerSale label {
   margin-bottom: 3px;
 }
 
-.submitSale  {
-  background: -webkit-linear-gradient(right,	#32CD32,	#32CD32,	#32CD32);
+.submitSale {
+  background: -webkit-linear-gradient(right, #32cd32, #32cd32, #32cd32);
   border: none;
   border-radius: 21px;
   box-shadow: 0px 1px 8px #a0ada4;

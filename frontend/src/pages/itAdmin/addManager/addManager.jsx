@@ -145,7 +145,7 @@ export default class AddManager extends Component {
                             className="fw-normal mb-5"
                             style={{ color: "#4835d4" }}
                           >
-                            General Info
+                            Account Details
                           </h3>
 
                           <div className="row">
