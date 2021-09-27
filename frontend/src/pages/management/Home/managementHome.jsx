@@ -8,12 +8,12 @@ export default function Home() {
   return (
     <div className="home">
       <Info />
-      <Chart
+        <Chart  
         data={chartData}
         title="Total Profit Analysis"
         dataKey="month"
         grid
-      />
+        />   
     </div>
   );
 }

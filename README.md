@@ -1,7 +1,4 @@
-# notes-app
-
-web site to add and read notes
-
+# pos-app
 mongoDB atlas
 react
 nodeJS

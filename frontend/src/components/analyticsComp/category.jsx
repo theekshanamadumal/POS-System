@@ -1,43 +1,52 @@
 import { Doughnut,Pie } from 'react-chartjs-2';
 import {Box,Card,CardContent,CardHeader,Divider,Typography,colors,useTheme} from '@material-ui/core';
-import { Link } from "react-router-dom";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import "./category.css";
+import { Button } from 'reactstrap';
 
-const SalesPieChart = (props) => {
+const Category = (props) => {
   const theme = useTheme();
   const devices = [
     {
       title: 'Laptop',
-      value: 28,
+      value: 27,
       color: colors.indigo[500]
     },
     {
         title: 'Tablet',
-        value: 15,
+        value: 18,
         color: colors.grey[500]
       },
       {
+        title: 'Desktop',
+        value: 13,
+        color: colors.pink[600]
+      },
+      {
         title: 'Mobile Phone',
-        value: 32,
+        value: 28,
         color: colors.green[500]
       },
     {
       title: 'EarPhone',
-      value: 15,
+      value: 10,
       color: colors.red[600]
     },
+
     {
       title: 'Others',
-      value: 10,
+      value: 8,
       color: colors.orange[600]
     }
   ];
   const data = {
     datasets: [
       {
-        data: [28,15,32,15,10],
+        data: [25,18,13,28,10,8],
         backgroundColor: [
           colors.indigo[500],
           colors.grey[500],
+          colors.pink[600],
           colors.green[500],
           colors.red[600],
           colors.orange[600]
@@ -47,7 +56,7 @@ const SalesPieChart = (props) => {
         hoverBorderColor: colors.common.white
       }
     ],
-    labels: ['Laptop', 'Tablet', 'Mobile Phone','EarPhone','Others']
+    labels: ['Laptop', 'Tablet','Desktop', 'Mobile Phone','EarPhone','Others']
   };
 
   const options = {
@@ -62,7 +71,6 @@ const SalesPieChart = (props) => {
     tooltips: {
       backgroundColor: theme.palette.background.paper,
       bodyFontColor: theme.palette.text.secondary,
-      borderColor: theme.palette.divider,
       borderWidth: 7,
       enabled: true,
       footerFontColor: theme.palette.text.secondary,
@@ -72,10 +80,40 @@ const SalesPieChart = (props) => {
     }
   };
 
+  const dataBar = [
+    {
+      name: 'Mobile',
+      sales: 420000,
+    },
+    {
+      name: 'Desktop',
+      sales: 200000,
+    },
+    {
+      name: 'Earphone',
+      sales: 84000,
+    },
+    {
+      name: 'Tablet',
+      sales: 177800,
+    },
+    {
+      name: 'Laptop',
+      sales: 381000,
+    },
+    {
+      name: 'USB pen',
+      sales: 23900,
+    },
+    {
+      name: 'Others',
+      sales: 34900,
+    },
+  ];
   return (
-    <Link to="management/analytics#category" className="linkAnaly">
-      <Card {...props} sx={{height:220}} style={{cursor:"pointer"}}>
-        <CardHeader title="Income By Catergory" />
+    <div className="category">
+      <Card   {...props} sx={{height:220}}>
+        <h1 class="text-center">Income By Catergory </h1>
         <Divider />
         <CardContent>
           <Box
@@ -126,9 +164,36 @@ const SalesPieChart = (props) => {
             ))}
           </Box>
         </CardContent>
-      </Card>
-    </Link>
+      </Card><br></br>
+
+      <ResponsiveContainer width="100%" aspect={3 / 1}>
+        <BarChart
+          width={500}
+          height={300}
+          data={dataBar}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+          barSize={20}
+        >
+          <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Bar dataKey="sales" fill="#8884d8" background={{ fill: '#eee' }} />
+        </BarChart>
+      </ResponsiveContainer>
+
+                
+
+
+      <Button>Download</Button>
+    </div>
   );
 };
 
-export default SalesPieChart;
+export default Category;

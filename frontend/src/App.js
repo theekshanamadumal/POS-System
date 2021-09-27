@@ -95,7 +95,7 @@ function App() {
             <ManagementHome/>
           </Route>  
           
-          <Route path="/management/analytics">
+          <Route exact path="/management/analytics">
             <ManagementSidebar/>
             <Analytics/>
           </Route>  

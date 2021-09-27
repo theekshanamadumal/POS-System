@@ -110,6 +110,23 @@ export const rows = [
     {id:11, name:"Sivangi Krish" ,income:22000},
     
   
+  ];
+
+  export const personPerform=[
+    {id:"457895152v", name:"Sivangi Krish" ,income:26000},
+    {id:"2001546789", name:"Sathish Kriti" ,income:27000},
+    {id:"897288291V", name:"Mahen Dhoni" ,income:33000},
+    {id:"926738782V", name:"Siva Krish" ,income:22800},
+    {id:"98234567V", name:"John Smith" ,income:22900},
+    {id:"887895152v", name:"Siva Krithhi" ,income:22000},
+    {id:"887895152v", name:"Siva Krithhi" ,income:22000},
+    {id:"887895152v", name:"Siva Krithhi" ,income:52000},
+    {id:"887895152v", name:"Siva Krithhi" ,income:32000},
+    {id:"887895152v", name:"Siva Krithhi" ,income:91000},
+    {id:"887895152v", name:"Siva Krithhi" ,income:34500},
+    {id:"887895152v", name:"Siva Krithhi" ,income:82000},
+    {id:"887895152v", name:"Siva Krithhi" ,income:22000},
+    {id:"887895152v", name:"Siva Krithhi" ,income:89000},  
   ]
   export const salesRoute=[]
 
