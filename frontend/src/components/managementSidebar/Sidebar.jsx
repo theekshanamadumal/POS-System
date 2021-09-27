@@ -5,8 +5,6 @@ import "./sidebar.css";
 import {
   LineStyle,
   Timeline,
-  TrendingUp,
-  Assessment,
   ShoppingCart,
   Storefront,
   PeopleAlt,
@@ -30,65 +28,67 @@ export default function ManagementSidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <li className={(splitLocation).length=== 2 ? "active sidebarListItem" : "sidebarListItem"}>
-              <Link to="/management" className="link">
+            
+            <Link to="/management" className="link">
+              <li className={(splitLocation).length=== 2 ? "active sidebarListItem" : "sidebarListItem"}>
                 <LineStyle className="sidebarIcon" />
                 Home
-              </Link>
-            </li>
-
-            <li className={splitLocation[2] === "analytics" ? "active sidebarListItem" : "sidebarListItem"}>
-              <Link to="/management/analytics" className="link">
+              </li>
+            </Link>
+            
+            <Link to="/management/analytics" className="link">
+              <li className={splitLocation[2] === "analytics" ? "active sidebarListItem" : "sidebarListItem"}>
                 <Timeline className="sidebarIcon" />
                 Analytics
-              </Link>
-            </li> 
+              </li> 
+            </Link>
+            
           </ul>
         </div>
         <div className="sidebarMenu">
           <ul className="sidebarList">
-            <li className={splitLocation[2] === "salesperson" ? "active sidebarListItem" : "sidebarListItem"}>
-              <Link to="/management/salesperson" className="link">
+            <Link to="/management/salesperson" className="link">
+              <li className={splitLocation[2] === "salesperson" ? "active sidebarListItem" : "sidebarListItem"}>
                 <PeopleAlt className="sidebarIcon" />
                 Salesperson
-              </Link>
-            </li>
-
-            <li className={splitLocation[2] === "products" ? "active sidebarListItem" : "sidebarListItem"}>
-              <Link to="/management/products" className="link">
+              </li>
+            </Link>
+            
+            <Link to="/management/products" className="link">
+              <li className={splitLocation[2] === "products" ? "active sidebarListItem" : "sidebarListItem"}>
                 <LocalOffer className="sidebarIcon" />
                 Products
-              </Link>
-            </li>
-
-            <li className={splitLocation[2] === "orders" ? "active sidebarListItem" : "sidebarListItem"}>
-              <Link to="/management/orders" className="link">
+              </li>
+            </Link>
+            
+            <Link to="/management/orders" className="link">
+              <li className={splitLocation[2] === "orders" ? "active sidebarListItem" : "sidebarListItem"}>
                 <ShoppingCart className="sidebarIcon" />
                 Orders
-              </Link>
-            </li>
-
-            <li className={splitLocation[2] === "shops" ? "active sidebarListItem" : "sidebarListItem"}>
-              <Link to="/management/shops" className="link">
+              </li>
+            </Link>
+            
+            <Link to="/management/shops" className="link">
+              <li className={splitLocation[2] === "shops" ? "active sidebarListItem" : "sidebarListItem"}>
                 <Storefront className="sidebarIcon" />
                 Shops
-              </Link>
-            </li>
-
-            <li className={splitLocation[2] === "routes" ? "active sidebarListItem" : "sidebarListItem"}>
-              <Link to="/management/routes" className="link">
+              </li>
+            </Link>
+            
+            <Link to="/management/routes" className="link">
+              <li className={splitLocation[2] === "routes" ? "active sidebarListItem" : "sidebarListItem"}>
                 <LocationOn className="sidebarIcon" />
                 Routes
-              </Link>
-            </li>
-
-            <li className={splitLocation[2] === "tasks" ? "active sidebarListItem" : "sidebarListItem"}>
-              <Link to="/management/tasks" className="link">
+              </li>
+            </Link>
+            
+            <Link to="/management/tasks" className="link">
+              <li className={splitLocation[2] === "tasks" ? "active sidebarListItem" : "sidebarListItem"}>
                 <LocalOffer className="sidebarIcon" />
                 Tasks
-              </Link>
-            </li>
-
+              </li>
+            </Link>
+      
           </ul>
         </div>
       </div>

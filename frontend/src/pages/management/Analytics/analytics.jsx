@@ -21,10 +21,10 @@ class Analytics extends Component {
             <a class="nav-link active" aria-current="page" href="#sales">Sales Analytics</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#salesperson">Salesperson Analytics</a>
+            <a class="nav-link active" href="#salesperson">Salesperson Analytics</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#category">category Analytics</a>
+            <a class="nav-link active" href="#category">category Analytics</a>
           </li>
         </ul>   
         <br></br>

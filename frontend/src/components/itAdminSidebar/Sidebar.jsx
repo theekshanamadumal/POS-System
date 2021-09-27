@@ -8,8 +8,17 @@ import {
   WorkOutline,
   BarChart,
 } from "@material-ui/icons";
+import { useLocation } from "react-router-dom";
 
 export default function ItAdminSidebar() {
+  //assigning location variable
+  const location = useLocation();
+
+  //destructuring pathname from location
+  const { pathname } = location;
+
+  //Javascript split method to get the name of the path in array
+  const splitLocation = pathname.split("/");
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -18,7 +27,7 @@ export default function ItAdminSidebar() {
 
           <ul className="sidebarList">
             <Link to="/itAdmin" className="link">
-              <li className="sidebarListItem active">
+              <li className={(splitLocation).length=== 2 ? "active sidebarListItem" : "sidebarListItem"}>
                 <LineStyle className="sidebarIcon" />
                 Home
               </li>
@@ -28,14 +37,14 @@ export default function ItAdminSidebar() {
         <div className="sidebarMenu">
           <ul className="sidebarList">
             <Link to="/itAdmin/management" className="link">
-              <li className="sidebarListItem">
+              <li className={splitLocation[2] === "management" ? "active sidebarListItem" : "sidebarListItem"}>
                 <PermIdentity className="sidebarIcon" />
                 Management
               </li>
             </Link>
 
             <Link to="/itAdmin/addManager" className="link">
-              <li className="sidebarListItem">
+              <li className={splitLocation[2] === "addManager" ? "active sidebarListItem" : "sidebarListItem"}>
                 <WorkOutline className="sidebarIcon" />
                 Add Manager
               </li>
@@ -46,13 +55,7 @@ export default function ItAdminSidebar() {
         <div className="sidebarMenu">
           <ul className="sidebarList">
             <Link to="/itAdmin" className="link">
-              <li className="sidebarListItem">
-                <BarChart className="sidebarIcon" />
-                Reports
-              </li>
-            </Link>
-            <Link to="/itAdmin" className="link">
-              <li className="sidebarListItem">
+              <li className={splitLocation[2] === "analytics" ? "active sidebarListItem" : "sidebarListItem"}>
                 <Timeline className="sidebarIcon" />
                 Analytics
               </li>

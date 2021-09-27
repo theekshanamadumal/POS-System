@@ -6,9 +6,41 @@ import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 import "./salespersonPerform.css";
 import { Button } from 'reactstrap';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
 const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
+
+    const dataBar = [
+        {
+          name: 'Mobile',
+          sales: 420000,
+        },
+        {
+          name: 'Desktop',
+          sales: 200000,
+        },
+        {
+          name: 'Earphone',
+          sales: 84000,
+        },
+        {
+          name: 'Tablet',
+          sales: 177800,
+        },
+        {
+          name: 'Laptop',
+          sales: 381000,
+        },
+        {
+          name: 'USB pen',
+          sales: 23900,
+        },
+        {
+          name: 'Others',
+          sales: 34900,
+        },
+      ];
     
     return (
       <div className="tablePerson">
@@ -51,6 +83,7 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
                 </TableContainer>
             </Paper>
         </Container>
+        <br></br>
         <br></br>
         <a href="http://localhost:3000/management/analytics#salesperson/page.pdf" download rel="noopener noreferrer" target="_blank">
             <Button>Download</Button>
