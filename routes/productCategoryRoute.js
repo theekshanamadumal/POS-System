@@ -1,4 +1,3 @@
-let Category = require("../models/category");
 const router = require("express").Router();
 let ProductCategoryController = require("../controllers/productCategoryController");
 

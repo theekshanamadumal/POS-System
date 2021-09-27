@@ -26,5 +26,5 @@ module.exports =  class ProductCategoryController {
         .save()
         .then(() => res.json("productCategory added!"))
         .catch((err) => res.status(400).json("Error: " + err));
-        }
+    }
   }
