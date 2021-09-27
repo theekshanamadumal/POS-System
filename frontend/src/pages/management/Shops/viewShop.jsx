@@ -133,7 +133,7 @@ export default withRouter(
             <div className="detailsContainer">
               <div className="detailMain">
                 <div className="idName">
-                  <h2 className="name"> {"-" + this.state.shop.shopName} </h2>
+                  <h2 className="name"> {this.state.shop.shopName} </h2>
                 </div>
               </div>
               <div className="detailSub">
@@ -186,17 +186,25 @@ export default withRouter(
 
                   <li className="contact">
                     Begin :
-                    <span className="value">{this.state.shop.route}</span>
+                    <span className="value">
+                      {this.state.routeList.map((r) =>
+                        this.state.shop.route == r._id ? r.origin : null
+                      )}
+                    </span>
                   </li>
                   <li className="contact">
                     Destination :
-                    <span className="value">{this.state.shop.route}</span>
+                    <span className="value">
+                      {this.state.routeList.map((r) =>
+                        this.state.shop.route == r._id ? r.destination : null
+                      )}
+                    </span>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="editContainer">
-              <h1 className="editTitle">Add new shop</h1>
+              <h1 className="editTitle">Change Details</h1>
               <br />
               <br />
               <form action="" className="form" onSubmit={this.onSubmit}>

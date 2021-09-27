@@ -14,6 +14,9 @@ export default function ViewRoute() {
       <div className="spacing">
         <div className="containerSale">
           <h1 className="heading">Routes</h1>
+          <Link to="/management/route/lastSales">
+            <button className="addUser">View Last Month Sales</button>
+          </Link>
           <Link to="/management/routes/addroute">
             <button className="addUser">Add New Route</button>
           </Link>
@@ -69,9 +72,6 @@ export default function ViewRoute() {
                   <span className="value">Store 4</span>
                 </li>
               </ol>
-              <Link to="/management/route/lastSales">
-                <button className="updateRoute">View Last Month Sales</button>
-              </Link>
             </div>
           </div>
           <div className="editContainer">
@@ -93,7 +93,7 @@ export default function ViewRoute() {
                 <br></br>
                 <br></br>
 
-                <button className="updateRoute">Update</button>
+                <button className="updateRoute ">Update</button>
               </div>
             </form>
           </div>
