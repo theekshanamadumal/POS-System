@@ -4,9 +4,7 @@ const LocationHistory = mongoose.model(
     "LocationHistory",
     new mongoose.Schema({
         sellerId: String,
-        location:String,
-        // location: {
-        //     type:Map, of: { type: Number }},
+        location:[Number],
         dateTime: Date,
 
     })

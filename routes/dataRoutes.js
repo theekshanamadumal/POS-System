@@ -34,6 +34,12 @@ module.exports = function (app) {
         controller.updateSalesProgress
     );
 
+    app.patch(
+        "/api/task/salesperson/updateLocation",
+        authJwt.verifyToken,
+        controller.updateLocation
+    );
+
     app.post(
         "/api/task/salesperson/addPayment",
         authJwt.verifyToken,
@@ -46,11 +52,7 @@ module.exports = function (app) {
         controller.payments
     );
 
-    app.patch(
-        "/api/task/salesperson/updateLocation",
-        authJwt.verifyToken,
-        controller.updateLocation
-    );
+    
 
 };
 

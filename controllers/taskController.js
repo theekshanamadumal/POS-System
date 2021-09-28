@@ -3,6 +3,8 @@ const nodemailer = require('nodemailer');
 const DailyTask = db.task;
 const Payment = db.payment;
 const LocationHistory = db.locationHistory;
+const endOfDay = require('date-fns/endOfDay');
+const startOfDay = require('date-fns/startOfDay');
 
 exports.findTask = async (req, res) => {
     await DailyTask.findOne({
@@ -76,7 +78,7 @@ exports.addPayment = async (req, res) => {
     list = JSON.parse(listString);
     console.log(list);
 
-    
+
 
     const newPayment = new Payment({
         sellerId: req.body.sellerId,
@@ -84,7 +86,7 @@ exports.addPayment = async (req, res) => {
         total: req.body.total,
         dateTime: req.body.dateTime,
         transactions: list,
-        isOnline : req.body.isOnline
+        isOnline: req.body.isOnline
     });
 
     await newPayment.save(function (err) {
@@ -92,9 +94,9 @@ exports.addPayment = async (req, res) => {
             res.status(500).send({ message: err });
             return;
         }
-        
-        if (req.body.isOnline){
-            var sellerId= req.body.sellerId;
+
+        if (req.body.isOnline) {
+            var sellerId = req.body.sellerId;
             var shopId = req.body.shopId;
             var total = req.body.total;
             var dateTime = req.body.dateTime;
@@ -107,9 +109,9 @@ exports.addPayment = async (req, res) => {
                 },
                 secure: true,
             });
-            var link = '<form action="https://sandbox.payhere.lk/pay/checkout?merchant_id=1218725&return_url=http://google.com/return&cancel_url=http://google.com/cancel&notify_url=http://google.com/notify&first_name=Theekshana&last_name=Madumal&email=xprnypnblck@gmail.com&phone=0722403591&address=No:1,Galle Road&city=Colombo&country=Sri Lanka&order_id=Invoice : 8&items=Inovice for 09/27&currency=LKR&amount='+total+'" method="post">';
-            htmlButton =  link+'<input type="submit" name="Pay" value="Pay"/></form>';
-        
+            var link = '<form action="https://sandbox.payhere.lk/pay/checkout?merchant_id=1218725&return_url=http://google.com/return&cancel_url=http://google.com/cancel&notify_url=http://google.com/notify&first_name=Theekshana&last_name=Madumal&email=xprnypnblck@gmail.com&phone=0722403591&address=No:1,Galle Road&city=Colombo&country=Sri Lanka&order_id=Invoice : 8&items=Inovice for 09/27&currency=LKR&amount=' + total + '" method="post">';
+            htmlButton = link + '<input type="submit" name="Pay" value="Pay"/></form>';
+
             const mailData = {
                 from: 'sahan.18@cse.mrt.ac.lk',  // sender address
                 to: 'xprnypnblck@gmail.com',   // list of receivers
@@ -117,8 +119,8 @@ exports.addPayment = async (req, res) => {
                 text: 'This is the invoice invoice',
                 html: htmlButton
             };
-        
-            transporter.sendMail(mailData , function (err, info) {
+
+            transporter.sendMail(mailData, function (err, info) {
                 if (err)
                     console.log(err)
                 else
@@ -131,8 +133,17 @@ exports.addPayment = async (req, res) => {
 
 exports.payments = async (req, res) => {
 
+    console.log(startOfDay(new Date()));
+    console.log(endOfDay(new Date()));
+    // console.log(new Date("2021-09-27T13:50:27.681+00:00"));
+
     await Payment.find({
-        sellerId: req.body.sellerId
+        sellerId: req.body.sellerId,
+        // dateTime:new Date("2021-09-27T13:50:27.681+00:00"),
+        dateTime: {
+            $gte: endOfDay(new Date(2021, 08, 26)),
+            $lte: endOfDay(new Date(2021, 08, 28))
+        }
     })
         .exec((err, payment) => {
             if (err) {
@@ -148,16 +159,13 @@ exports.payments = async (req, res) => {
 };
 
 exports.updateLocation = async (req, res) => {
-    const newLocation = new LocationHistory({
+    await LocationHistory.findOneAndUpdate({
         sellerId: req.body.sellerId,
-        location: req.body.position,
-        dateTime: req.body.dateTime,
-    });
-
-    await newLocation.save(function (err) {
+    }, req.body, { upsert: true }).exec(function (err) {
         if (err) {
             res.status(500).send({ message: err });
             return;
         }
         return res.status(200).send("Done");
-})};
+    })
+};
