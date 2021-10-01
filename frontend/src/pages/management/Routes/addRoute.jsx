@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import "./addRoute.css";
-import axios from "axios";
 import AddRouteComponent from "../Routes/addRouteComponent";
 
 export default class AddRoute extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="viewRoute">

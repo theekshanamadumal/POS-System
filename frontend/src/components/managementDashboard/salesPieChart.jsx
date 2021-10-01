@@ -1,4 +1,4 @@
-import { Doughnut,Pie } from 'react-chartjs-2';
+import { Doughnut} from 'react-chartjs-2';
 import {Box,Card,CardContent,CardHeader,Divider,Typography,colors,useTheme} from '@material-ui/core';
 import { Link } from "react-router-dom";
 

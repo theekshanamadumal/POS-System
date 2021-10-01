@@ -76,5 +76,4 @@ export const productRows = [
   { id: 9, avatar :"https://images.unsplash.com/photo-1610085927744-7217728267a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=329&q=80", productName: 'Huawei nova 2i', amount: '78', unitPrice: "220000" },
 ];
 export const tasks=[
-
-,]
+]

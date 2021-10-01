@@ -1,15 +1,12 @@
 import React from "react";
 import { Button } from "reactstrap";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   Area,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
   AreaChart
 } from "recharts";
 
@@ -57,23 +54,23 @@ export default function SalesAnalytics({ title, data, dataKey, grid }) {
       
     <h1>Sales Analytics</h1>
     <span className="chartTitle">{title}</span>
-    <br></br><br></br>
+    <br></br>
 
-    <form>
+    <form style={{margin:"0px 60px"}}>
         <div className="row">
           {/** Bind changeSelectOptionHandler to onChange method of select.
            * This method will trigger every time different
            * option is selected.
            */}
            <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
-          <select className="form-select col"  onChange={changeSelectOptionHandler}>
+          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
             <option>Choose...</option>
             <option>Year</option>
             <option>Month</option>
             <option>Week</option>
           </select>
         
-          <select className="col" >
+          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
             {
               /** This is where we have used our options variable */
               options

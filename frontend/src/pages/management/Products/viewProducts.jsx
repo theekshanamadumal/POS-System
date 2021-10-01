@@ -3,13 +3,6 @@ import axios from "axios";
 
 import "./viewProducts.css";
 import { withRouter } from "react-router";
-import {
-  Publish,
-  Email,
-  PhoneAndroid,
-  LocationCity,
-  Home,
-} from "@material-ui/icons";
 
 export default withRouter(
   class viewProducts extends Component {

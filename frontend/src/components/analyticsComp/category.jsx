@@ -1,8 +1,9 @@
-import { Doughnut,Pie } from 'react-chartjs-2';
-import {Box,Card,CardContent,CardHeader,Divider,Typography,colors,useTheme} from '@material-ui/core';
+import { Doughnut } from 'react-chartjs-2';
+import {Box,Card,CardContent,Divider,Typography,colors,useTheme} from '@material-ui/core';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import "./category.css";
 import { Button } from 'reactstrap';
+import React from "react";
 
 const Category = (props) => {
   const theme = useTheme();
@@ -110,11 +111,54 @@ const Category = (props) => {
       sales: 34900,
     },
   ];
+  const [selected, setSelected] = React.useState("");
+  const changeSelectOptionHandler = (event) => {
+    setSelected(event.target.value);
+  };
+  const year= [
+    "2021",
+    "2020",
+  ];
+  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const dataStructure = ["Last week","Last 2 weeks","Last 3 weeks"];
+  let type = null;
+  let optionsSelect = null;
+
+  if (selected === "Year") {
+    type = year;
+  } else if (selected === "Month") {
+    type = month;
+  } else if (selected === "Week") {
+    type = dataStructure;
+  }
+  if (type) {
+    optionsSelect = type.map((el) => <option key={el}>{el}</option>);
+  }
   return (
     <div className="category">
       <Card   {...props} sx={{height:220}}>
         <h1 class="text-center">Income By Catergory </h1>
         <Divider />
+        <br></br>
+        <form style={{margin:"0px 60px"}}>
+          <div className="row">
+            <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
+            <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}}  onChange={changeSelectOptionHandler}>
+              <option>Choose...</option>
+              <option>Year</option>
+              <option>Month</option>
+              <option>Week</option>
+            </select>
+          
+            <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+              {optionsSelect}
+            </select>
+          
+            <button className="btn btn btn-secondary">View Analysis</button>
+          </div> 
+        </form>
+        <br></br>
+
         <CardContent>
           <Box
             sx={{
@@ -176,15 +220,16 @@ const Category = (props) => {
             right: 30,
             left: 20,
             bottom: 5,
+            
           }}
-          barSize={20}
+          barCategoryGap={50}
         >
           <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
           <YAxis />
           <Tooltip />
           <Legend />
           <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey="sales" fill="#8884d8" background={{ fill: '#eee' }} />
+          <Bar barGap={10} dataKey="sales" fill="indianred" stroke="#494949" background={{ fill: '#eee' }} />
         </BarChart>
       </ResponsiveContainer>
 
