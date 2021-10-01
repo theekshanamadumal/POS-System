@@ -3,6 +3,7 @@ import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
 import Login from "./components/login/login";
+import Maps from "./pages/Maps";
 
 //it admin
 import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
@@ -59,7 +60,7 @@ function App() {
           <Route exact path="/">
            <h1>login page</h1>      <br/>
 
-           <Login/>
+           <Maps/>
           </Route>
       
           <Route exact path="/itAdmin">
