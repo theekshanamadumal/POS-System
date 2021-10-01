@@ -9,6 +9,12 @@ const userSchema= new Schema(
     lastName: {type: String,required: true, trim: true},
     image: {data: Buffer, contentType: String},
     password: {type: String,required: true, trim: true},
+    roles: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Role"
+      }
+    ],
     address:{type: String, trim: true},
     city:{type: String, trim: true},     
     phoneNumber: {type: Number, trim: true,lengthe: 10,},

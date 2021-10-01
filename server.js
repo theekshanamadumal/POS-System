@@ -1,7 +1,6 @@
 const express = require('express')
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const mongoose = require("mongoose");
 
 const { DB, port } = require("./config");
 const db = require("./models");
@@ -31,7 +30,7 @@ db.mongoose
     process.exit();
   });
 
-  app.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log("Server started on port:" + PORT);
 })
 
@@ -52,6 +51,8 @@ app.use('/management', salesRouteRouter);
 require('./routes/authRoutes')(app);
 require('./routes/routes')(app);
 require('./routes/dataRoutes')(app);
+
+
 
 function initialDbSetup() {
     Role.estimatedDocumentCount((err, count) => {
