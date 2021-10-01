@@ -11,7 +11,6 @@ import {
     TableHead,
     TableRow,
   } from "@material-ui/core";
-  import { Link } from "react-router-dom";
 
 export default class ViewTasks extends Component {
     render() {

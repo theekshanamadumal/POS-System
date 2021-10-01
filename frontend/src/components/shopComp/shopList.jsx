@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
@@ -17,9 +16,6 @@ import axios from "axios";
 
 const ShopList = ({ shops, routes, ...rest }) => {
   console.log("data send to list", shops);
-
-  const [limit, setLimit] = useState(10);
-  const [data, setData] = useState(shops);
 
   const handleDelete = (id) => {
     console.log("data send to back");
@@ -71,7 +67,7 @@ const ShopList = ({ shops, routes, ...rest }) => {
                   <TableCell>{d.city}</TableCell>
                   <TableCell>
                     {routes.map((r) =>
-                      d.route == r._id
+                      d.route === r._id
                         ? "ID: " +
                           String(r._id).substr(19) +
                           " From " +

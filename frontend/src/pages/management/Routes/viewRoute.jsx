@@ -1,12 +1,5 @@
 import React from "react";
 import "./viewRoute.css";
-import {
-  Publish,
-  Email,
-  PhoneAndroid,
-  LocationCity,
-  Home,
-} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 export default function ViewRoute() {
   return (

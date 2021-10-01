@@ -1,11 +1,6 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import {
-  Avatar,
   Paper,
-  Box,
-  Card,
   Table,
   TableBody,
   TableCell,
@@ -18,14 +13,6 @@ import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 
 const InvoiceList = ({ invoices, ...rest }) => {
-  const [limit, setLimit] = useState(10);
-
-  const [data, setData] = useState(invoices);
-
-  const [total, setTotal] = useState();
-
-  const reducer = (acc, value) => acc + value;
-
   return (
     <Container maxWidth="md" className="tableCont">
       <Paper>
@@ -43,7 +30,6 @@ const InvoiceList = ({ invoices, ...rest }) => {
 
             <TableBody>
               {invoices
-                .slice(0, limit)
                 .filter((item) => item.unitPrice > 0)
                 .sort((a, b) => (a.name > b.productName ? 1 : -1))
                 .map((item, index) => {

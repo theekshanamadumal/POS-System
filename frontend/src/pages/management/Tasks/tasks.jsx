@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./tasks.css";
-import axios from 'axios';
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Box,
@@ -12,7 +11,6 @@ import {
   TableRow,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import { tasks } from '../../../dataCollection';
 
 export default class Tasks extends Component {
@@ -79,7 +77,7 @@ export default class Tasks extends Component {
                                         <button className="actionsTasks">Assign Tasks</button>
                                     </Link>
                                     <Link to={"/management/tasks/" + d.id+"/realData"}>
-                                        <button className="actionsTasks">Real Time Data</button>
+                                        <button className="actionsTasks">View Location</button>
                                     </Link>
                                 </div>
                             </TableCell>

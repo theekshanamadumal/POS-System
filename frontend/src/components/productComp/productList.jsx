@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
@@ -16,9 +15,6 @@ import "../list.css";
 import axios from "axios";
 
 const ProductList = ({ products, ...rest }) => {
-  const [limit, setLimit] = useState(10);
-
-  //const [data, setData] = useState(products);
 
   const handleDelete = (id) => {
     console.log("data send to back");

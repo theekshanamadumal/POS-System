@@ -1,15 +1,12 @@
 import React from "react";
 import "./chart.css";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   Area,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
   AreaChart
 } from "recharts";
 import { Link } from "react-router-dom";

@@ -17,7 +17,6 @@ import "../list.css";
 import React from "react";
 
 const RouteList = ({ routes, ...rest }) => {
-  const [limit, setLimit] = useState(10);
 
   const [data, setData] = useState(routes);
 
@@ -54,7 +53,7 @@ const RouteList = ({ routes, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody className="tbBody">
-              {data.slice(0, limit).map((d) => (
+              {data.map((d) => (
                 <TableRow hover key={d.id}>
                   <TableCell>{d.id}</TableCell>
                   <TableCell>{d.origin}</TableCell>

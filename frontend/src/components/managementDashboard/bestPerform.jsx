@@ -36,8 +36,8 @@ const BestPerform = ({ bestPerform, ...rest }) => {
                     {bestPerform
                       .map((item) => {
                         return (
-                          <TableRow key={item.name}>
-                            <TableCell align="center">{item.name}</TableCell>
+                          <TableRow key={item.id}>
+                            <TableCell align="center">{item.firstName+" "+item.lastName}</TableCell>
                             <TableCell align="center">{item.id}</TableCell>
                             <TableCell align="right">
                               {" "}

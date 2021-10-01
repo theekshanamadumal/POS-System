@@ -1,4 +1,3 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
@@ -16,9 +15,6 @@ import React from "react";
 import moment from "moment";
 
 const OrderList = ({ orders, ...rest }) => {
-  const [limit, setLimit] = useState(10);
-
-  const [data, setData] = useState(orders);
 
   return (
     <Card {...rest} className="card">
@@ -45,7 +41,7 @@ const OrderList = ({ orders, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody className="tbBody">
-              {data.slice(0, limit).map((d) => (
+              {orders.map((d) => (
                 <TableRow hover key={d.id}>
                   <TableCell>{d.id}</TableCell>
                   <TableCell>{d.shopName}</TableCell>

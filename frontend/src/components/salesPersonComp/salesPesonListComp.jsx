@@ -1,4 +1,3 @@
-import { useState } from "react";
 import React from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -20,7 +19,6 @@ import axios from "axios";
 import moment from "moment";
 
 const SalesPersonList = ({ salesPerson, ...rest }) => {
-  const limit = 10;
 
   //const [data,setData]=useState(salesPerson);
   //const [data, setData] = useState(salesPerson);

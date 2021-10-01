@@ -6,7 +6,6 @@ import {
   Timeline,
   PermIdentity,
   WorkOutline,
-  BarChart,
 } from "@material-ui/icons";
 import { useLocation } from "react-router-dom";
 

@@ -102,31 +102,31 @@ export const rows = [
   ];
 
   export const bestPerform=[
-    {id:5, name:"Sivangi Krish" ,income:22000},
-    {id:19, name:"Sivangi Krish" ,income:22000},
-    {id:3, name:"Sivangi Krish" ,income:22000},
-    {id:7, name:"Sivangi Krish" ,income:22000},
-    {id:11, name:"Sivangi Krish" ,income:22000},
-    {id:11, name:"Sivangi Krish" ,income:22000},
+    {id:5, firstName:"Siva" , lastName:"Krish", income:22000},
+    {id:19, firstName:"Siva" , lastName:"Krish", income:22000},
+    {id:3, firstName:"Siva" , lastName:"Krish", income:22000},
+    {id:7, firstName:"Siva" , lastName:"Krish", income:22000},
+    {id:11, firstName:"Siva" , lastName:"Krish", income:22000},
+    {id:11, firstName:"Siva" , lastName:"Krish", income:22000},
     
   
   ];
 
   export const personPerform=[
-    {id:"457895152v", name:"Sivangi Krish" ,income:26000},
-    {id:"2001546789", name:"Sathish Kriti" ,income:27000},
-    {id:"897288291V", name:"Mahen Dhoni" ,income:33000},
-    {id:"926738782V", name:"Siva Krish" ,income:22800},
-    {id:"98234567V", name:"John Smith" ,income:22900},
-    {id:"887895152v", name:"Siva Krithhi" ,income:22000},
-    {id:"887895152v", name:"Siva Krithhi" ,income:22000},
-    {id:"887895152v", name:"Siva Krithhi" ,income:52000},
-    {id:"887895152v", name:"Siva Krithhi" ,income:32000},
-    {id:"887895152v", name:"Siva Krithhi" ,income:91000},
-    {id:"887895152v", name:"Siva Krithhi" ,income:34500},
-    {id:"887895152v", name:"Siva Krithhi" ,income:82000},
-    {id:"887895152v", name:"Siva Krithhi" ,income:22000},
-    {id:"887895152v", name:"Siva Krithhi" ,income:89000},  
+    {id:"457895152v", firstName:"Siva" , lastName:"Krish", income:26000},
+    {id:"2001546789", firstName:"Siva" , lastName:"Krish",income:27000},
+    {id:"897288291V", firstName:"Siva" , lastName:"Krish",income:33000},
+    {id:"926738782V", firstName:"Siva" , lastName:"Krish",income:62800},
+    {id:"98234567V", firstName:"Siva" , lastName:"Krish" ,income:22900},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:42000},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:22000},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:52000},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:32000},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:91000},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:34500},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:82000},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:52000},
+    {id:"887895152v", firstName:"Siva" , lastName:"Krish",income:89000},  
   ]
   export const salesRoute=[]
 
