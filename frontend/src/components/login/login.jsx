@@ -1,10 +1,47 @@
 import "./login.css";
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+
+    this.state = {
+      email: "",
+      password: "",
+    };
+  }
+  onChangeEmail(e) {
+    this.setState({ email: e.target.value });
+  }
+  onChangePassword(e) {
+    this.setState({ password: e.target.value });
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    const userData = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    console.log(userData);
+
+    axios
+      .post("http://localhost:3001/management/addProduct", userData)
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data, (window.location = "/"));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = "/"));
+      });
+  }
   render() {
     return (
-      <form>
+      <form onSubmit={this.onSubmit}>
         <h3>Sign In</h3>
 
         <div className="form-group">
@@ -13,6 +50,8 @@ export default class Login extends Component {
             type="email"
             className="form-control"
             placeholder="Enter email"
+            value={this.state.email}
+            onChange={this.onChangeEmail}
           />
         </div>
 
@@ -22,6 +61,8 @@ export default class Login extends Component {
             type="password"
             className="form-control"
             placeholder="Enter password"
+            value={this.state.password}
+            onChange={this.onChangePassword}
           />
         </div>
 

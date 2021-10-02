@@ -1,4 +1,5 @@
-let Category = require("../models/category");
+const db = require("../models");
+const Category = db.category;
 
 module.exports =  class ProductCategoryController {
   

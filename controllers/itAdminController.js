@@ -1,17 +1,16 @@
 const db = require("../models");
-const Product = db.product;
+const User = db.user;
 
-module.exports =  class ProductController {
+module.exports =  class UserController {
   
     // Constructor
     constructor() {
     }
 
-    static allProducts(res) {
-    Product.find()
-    .then((category) => res.json(category))
-    .catch((err) => res.status(400).json("Error: " + err));
-    return this.res;
+    static allManagement(res) {
+        User.find()
+        .then((category) => res.json(category))
+        .catch((err) => res.status(400).json("Error: " + err));
     }
 
 

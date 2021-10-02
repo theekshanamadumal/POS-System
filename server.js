@@ -49,7 +49,7 @@ app.use('/management', shopRouter);
 app.use('/management', salesRouteRouter);
 
 require('./routes/authRoutes')(app);
-require('./routes/routes')(app);
+//require('./routes/routes')(app);
 require('./routes/dataRoutes')(app);
 
 

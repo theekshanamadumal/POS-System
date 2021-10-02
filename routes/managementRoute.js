@@ -1,79 +1,34 @@
 const router = require("express").Router();
-const Salesperson = require("../models/salesperson");
+const { authJwt } = require("../middlewares");
+let UserController = require("../controllers/userController");
+const UC = new UserController("Manager");
+
 
 router.route("/salesperson").get((req, res) => {
-Salesperson.find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json("Error: " + err));
+  [authJwt.verifyToken, authJwt.isManager],
+  UC.allUsers(res);
+ 
 });
 
 router.route("/addSalesperson").post((req, res) => {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const idNumber = req.body.idNumber;
-  const image = req.body.image;
-  const password = req.body.password;
-  const address = req.body.address;
-  const city = req.body.city;
-  const phoneNumber = Number(req.body.phoneNumber);
-  const email = req.body.email;
-  const joinedDate = Date(req.body.joinedDate);
-
-  const newUser = new Salesperson({
-    firstName,
-    lastName,
-    idNumber,
-    image,
-    password,
-    address,
-    city,
-    phoneNumber, 
-    email,
-    joinedDate
-  });
-
-  newUser
-    .save()
-    .then(() => res.json("salesperson added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+  [authJwt.verifyToken, authJwt.isManager],
+  UC.addUser(req,res);
 });
 
 router.route("/salesperson/:id").get((req, res) => {
-  Salesperson.findById(req.params.id)
-    .then((user) => res.json(user))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
+  [authJwt.verifyToken, authJwt.isManager],
+  UC.getUser(req,res);
+ });
 
 router.route("/salesperson/:id").delete((req, res) => {
-  Salesperson.findByIdAndDelete(req.params.id)
-    .then(() => res.json("user deleted."))
-    .catch((err) => res.status(400).json("Error: " + err));
+  [authJwt.verifyToken, authJwt.isManager],
+  UC.deleteUser(req,res);
 });
 
 router.route("/updateSalesperson/:id").post((req, res) => {
   console.log("postedid",req.params.id)
-  Salesperson.findById(req.params.id)
-    .then((salesperson) => {
-      console.log(salesperson)
-      console.log(req.body)
-
-    salesperson.firstName = req.body.firstName;
-    salesperson.lastName = req.body.lastName;
-    salesperson.idNumber = req.body.idNumber;
-    salesperson.image = req.body.image;
-    salesperson.password = req.body.password;
-    salesperson.address = req.body.address;
-    salesperson.city = req.body.city;
-    salesperson.phoneNumber = Number(req.body.phoneNumber);
-    salesperson.email = req.body.email;
-    salesperson.joinedDate = Date(req.body.joinedDate);
-
-    salesperson
-        .save()
-        .then(() => res.json("salesperson updated!"))
-        .catch((err) => res.status(400).json("Error: " + err));
-    })
-    .catch((err) => res.status(400).json("Error: " + err));
+  [authJwt.verifyToken, authJwt.isManager],
+  UC.updateUser(req,res);
 });
 
 module.exports = router;

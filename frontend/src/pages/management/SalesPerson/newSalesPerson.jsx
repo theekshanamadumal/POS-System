@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./newSalesperson.css";
-import { Visibility,VisibilityOff } from "@material-ui/icons";
-import {Input,IconButton,InputAdornment} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Input, IconButton, InputAdornment } from "@material-ui/core";
 
 export default class NewSalesPerson extends Component {
   constructor(props) {
-    
     super(props);
     this.onChangeLastName = this.onChangeLastName.bind(this);
     this.onChangeFirstName = this.onChangeFirstName.bind(this);
@@ -28,34 +27,32 @@ export default class NewSalesPerson extends Component {
       idNumber: "",
       image: "",
       password: "",
-      conPassword:"",
+      conPassword: "",
       address: "",
       city: "",
       phoneNumber: "",
       email: "",
       joinedDate: new Date(),
-      showPassword:false,
-      showConPassword:false,
+      showPassword: false,
+      showConPassword: false,
     };
-    this.errorList=[];
+    this.errorList = [];
   }
 
-  
   handleClickShowPassword = () => {
-    this.setState ({ 
-      showPassword: !this.state.showPassword ,
+    this.setState({
+      showPassword: !this.state.showPassword,
     });
-  }
+  };
   handleClickShowConPassword = () => {
-    this.setState ({ 
-      showConPassword: !this.state.showConPassword ,
+    this.setState({
+      showConPassword: !this.state.showConPassword,
     });
-  }
-  
+  };
+
   handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  
 
   onChangeFirstName(e) {
     this.setState({
@@ -85,7 +82,7 @@ export default class NewSalesPerson extends Component {
   onChangeConPassword(e) {
     this.setState({
       conPassword: e.target.value,
-    });    
+    });
   }
   onChangeAddress(e) {
     this.setState({
@@ -103,7 +100,6 @@ export default class NewSalesPerson extends Component {
     this.setState({
       phoneNumber: e.target.value,
     });
-
   }
   onChangeEmail(e) {
     this.setState({
@@ -117,113 +113,110 @@ export default class NewSalesPerson extends Component {
   }
   handleBlur(input) {
     //check for any input
-    const formControl=input.target.parentElement;
-    const small=formControl.querySelector("small");
-    if (input.target.value==="") {
-      small.innerText="Can't be empty";
-      formControl.className="form-outline error";
-      if (this.errorList.includes(input.target.id)===false){
-        this.errorList.push(input.target.id)
+    const formControl = input.target.parentElement;
+    const small = formControl.querySelector("small");
+    if (input.target.value === "") {
+      small.innerText = "Can't be empty";
+      formControl.className = "form-outline error";
+      if (this.errorList.includes(input.target.id) === false) {
+        this.errorList.push(input.target.id);
       }
-      
     } //check for invalid id number
-    else if (input.target.id==="idNumber"){
-      let idValid=true;
-      if (input.target.value.trim().length===12) {
+    else if (input.target.id === "idNumber") {
+      let idValid = true;
+      if (input.target.value.trim().length === 12) {
         let isnum = /^\d+$/.test(input.target.value);
-        if (isnum!==true){
-          idValid=false;
-        }    
+        if (isnum !== true) {
+          idValid = false;
+        }
+      } else if (input.target.value.trim().length === 10) {
+        let isnum = /^\d+$/.test(
+          input.target.value.substring(0, input.target.value.length - 1)
+        );
+        let islett =
+          input.target.value
+            .substring(input.target.value.length - 1)
+            .toLowerCase() === "v";
+        if (isnum === false || islett === false) {
+          idValid = false;
+        }
+      } else {
+        idValid = false;
       }
-      else if (input.target.value.trim().length===10){
-        let isnum = /^\d+$/.test(input.target.value.substring(0,input.target.value.length-1));
-        let islett=input.target.value.substring(input.target.value.length-1).toLowerCase()==="v";
-        if (isnum===false || islett===false){
-          idValid=false;
-        }   
+      if (idValid === true) {
+        small.innerText = " ";
+        formControl.className = "form-outline success";
+        if (this.errorList.includes(input.target.id) === true) {
+          const index = this.errorList.indexOf(input.target.id);
+          this.errorList.splice(index, 1);
+        }
+      } else {
+        small.innerText = "Invalid ID Number";
+        formControl.className = "form-outline error";
+        if (this.errorList.includes(input.target.id) === false) {
+          this.errorList.push(input.target.id);
+        }
       }
-      else{
-        idValid=false;
-      }
-      if (idValid===true){
-        small.innerText=" ";
-        formControl.className="form-outline success";
-        if (this.errorList.includes(input.target.id)===true){
+    } // check for password match
+    else if (input.target.id === "conPassword") {
+      if (input.target.value !== this.state.password) {
+        small.innerText = "Password doesn't match";
+        formControl.className = "form-outline error";
+        if (this.errorList.includes(input.target.id) === false) {
+          this.errorList.push(input.target.id);
+        }
+      } else {
+        small.innerText = " ";
+        formControl.className = "form-outline success";
+        if (this.errorList.includes(input.target.id) === true) {
           const index = this.errorList.indexOf(input.target.id);
           this.errorList.splice(index, 1);
         }
       }
-      else{
-        small.innerText="Invalid ID Number";
-        formControl.className="form-outline error";
-        if (this.errorList.includes(input.target.id)===false){
-          this.errorList.push(input.target.id)
+    } //check for invalid phone number
+    else if (input.target.id === "phoneNumber") {
+      if (input.target.value.length !== 10) {
+        small.innerText = "Invalid Phone number";
+        formControl.className = "form-outline error";
+        if (this.errorList.includes(input.target.id) === false) {
+          this.errorList.push(input.target.id);
         }
-      }
-    }// check for password match
-    else if (input.target.id==="conPassword"){
-      if (input.target.value!==this.state.password){
-        small.innerText="Password doesn't match";
-        formControl.className="form-outline error";
-        if (this.errorList.includes(input.target.id)===false){
-          this.errorList.push(input.target.id)
-        }
-      }
-      else{
-        small.innerText=" ";
-        formControl.className="form-outline success";
-        if (this.errorList.includes(input.target.id)===true){
+      } else {
+        small.innerText = " ";
+        formControl.className = "form-outline success";
+        if (this.errorList.includes(input.target.id) === true) {
           const index = this.errorList.indexOf(input.target.id);
           this.errorList.splice(index, 1);
         }
       }
-    }//check for invalid phone number
-    else if (input.target.id==="phoneNumber"){
-      if (input.target.value.length!==10){
-        small.innerText="Invalid Phone number";
-        formControl.className="form-outline error";
-        if (this.errorList.includes(input.target.id)===false){
-          this.errorList.push(input.target.id)
-        }
-      }
-      else{
-        small.innerText=" ";
-        formControl.className="form-outline success";
-        if (this.errorList.includes(input.target.id)===true){
-          const index = this.errorList.indexOf(input.target.id);
-          this.errorList.splice(index, 1);
-        }
-      }
-      
-    }
-    else{
-      small.innerText="   ";
-      formControl.className="form-outline success";
-      if (this.errorList.includes(input.target.id)===true){
+    } else {
+      small.innerText = "   ";
+      formControl.className = "form-outline success";
+      if (this.errorList.includes(input.target.id) === true) {
         const index = this.errorList.indexOf(input.target.id);
         this.errorList.splice(index, 1);
       }
     }
-}
+  }
 
   onSubmit(e) {
     e.preventDefault();
-    var arr=this.state;
-    var errorMsg=false;
+    var arr = this.state;
+    var errorMsg = false;
     for (var key in arr) {
-      var val = arr[key]; 
-      if (typeof(val)==="string" ){
-        var inp=document.getElementById(key);
-        const formControl=inp.parentElement;
-        const small=formControl.querySelector("small");
-        if (val==="") {
-          small.innerText="Can't be empty";
-          formControl.className="form-outline error";
-          errorMsg=true;
-        } 
+      var val = arr[key];
+      if (typeof val === "string") {
+        var inp = document.getElementById(key);
+        const formControl = inp.parentElement;
+        const small = formControl.querySelector("small");
+        if (val === "") {
+          small.innerText = "Can't be empty";
+          formControl.className = "form-outline error";
+          errorMsg = true;
+        }
       }
     }
-    if (errorMsg===false &&  this.errorList.length===0){
+    if (errorMsg === false && this.errorList.length === 0) {
       const user = {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -237,13 +230,17 @@ export default class NewSalesPerson extends Component {
         joinedDate: this.state.joinedDate,
       };
       console.log(user);
-  
+
       axios
         .post("http://localhost:3001/management/addSalesperson", user)
-        .then((res) => console.log(res.data));
-  
-      window.location = "/management/salesperson";
-
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data, (window.location = "/management/salesperson"));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = "/management/salesperson"));
+        });
     }
   }
 
@@ -273,10 +270,7 @@ export default class NewSalesPerson extends Component {
                           <div className="row">
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label
-                                  className="form-label"
-                                  for="firstName"
-                                >
+                                <label className="form-label" for="firstName">
                                   First Name
                                 </label>
                                 <input
@@ -286,16 +280,13 @@ export default class NewSalesPerson extends Component {
                                   id="firstName"
                                   className="form-control form-control-lg"
                                   onBlur={this.handleBlur}
-                                />                                
+                                />
                                 <small>error</small>
                               </div>
                             </div>
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label
-                                  className="form-label"
-                                  for="lastName"
-                                >
+                                <label className="form-label" for="lastName">
                                   Last name
                                 </label>
                                 <input
@@ -313,10 +304,7 @@ export default class NewSalesPerson extends Component {
 
                           <div className="mb-2 pb-2">
                             <div className="form-outline">
-                              <label
-                                className="form-label"
-                                for="idNumber"
-                              >
+                              <label className="form-label" for="idNumber">
                                 ID Number
                               </label>
                               <input
@@ -333,10 +321,7 @@ export default class NewSalesPerson extends Component {
 
                           <div className="mb-2 pb-2">
                             <div className="form-outline">
-                              <label
-                                className="form-label"
-                                for="image"
-                              >
+                              <label className="form-label" for="image">
                                 Add Image
                               </label>
                               <input
@@ -354,40 +339,78 @@ export default class NewSalesPerson extends Component {
                           <div className="row">
                             <div className="col-md-6 col-sm-12 mb-2 pb-2">
                               <div className="form-outline">
-                                <label
-                                  className="form-label"
-                                  for="password"
-                                >
+                                <label className="form-label" for="password">
                                   Enter Password
                                 </label>
                                 <input
                                   onChange={this.onChangePassword}
-                                  type={this.state.showPassword ? "text" : "password"}
+                                  type={
+                                    this.state.showPassword
+                                      ? "text"
+                                      : "password"
+                                  }
                                   id="password"
                                   className="pass form-control form-control-lg"
                                   onBlur={this.handleBlur}
                                 />
-                                {this.state.showPassword ? <Visibility style={{position:"absolute" ,marginTop:"-30px" , marginLeft:"100px"}} onClick={this.handleClickShowPassword} /> : <VisibilityOff style={{position:"absolute" ,marginTop:"-30px" , marginLeft:"100px"}} onClick={this.handleClickShowPassword}/>}
+                                {this.state.showPassword ? (
+                                  <Visibility
+                                    style={{
+                                      position: "absolute",
+                                      marginTop: "-30px",
+                                      marginLeft: "100px",
+                                    }}
+                                    onClick={this.handleClickShowPassword}
+                                  />
+                                ) : (
+                                  <VisibilityOff
+                                    style={{
+                                      position: "absolute",
+                                      marginTop: "-30px",
+                                      marginLeft: "100px",
+                                    }}
+                                    onClick={this.handleClickShowPassword}
+                                  />
+                                )}
                                 <small>error</small>
                               </div>
                             </div>
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label
-                                  className="form-label"
-                                  for="conPassword"
-                                >
+                                <label className="form-label" for="conPassword">
                                   Confirm Password
                                 </label>
                                 <input
                                   onChange={this.onChangeConPassword}
-                                  type={this.state.showConPassword ? "text" : "password"}
+                                  type={
+                                    this.state.showConPassword
+                                      ? "text"
+                                      : "password"
+                                  }
                                   id="conPassword"
                                   className="pass form-control form-control-sm"
                                   onBlur={this.handleBlur}
                                 />
-                                {this.state.showConPassword ? <Visibility style={{position:"absolute" ,marginTop:"-30px" , marginLeft:"100px"}} onClick={this.handleClickShowConPassword} /> : <VisibilityOff style={{position:"absolute" ,marginTop:"-30px" , marginLeft:"100px"}} onClick={this.handleClickShowConPassword}/>}
-                                <small>error message.</small> 
+                                {this.state.showConPassword ? (
+                                  <Visibility
+                                    style={{
+                                      position: "absolute",
+                                      marginTop: "-30px",
+                                      marginLeft: "100px",
+                                    }}
+                                    onClick={this.handleClickShowConPassword}
+                                  />
+                                ) : (
+                                  <VisibilityOff
+                                    style={{
+                                      position: "absolute",
+                                      marginTop: "-30px",
+                                      marginLeft: "100px",
+                                    }}
+                                    onClick={this.handleClickShowConPassword}
+                                  />
+                                )}
+                                <small>error message.</small>
                               </div>
                             </div>
                           </div>
