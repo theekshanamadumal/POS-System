@@ -24,6 +24,7 @@ module.exports =  class ShopController {
         const phoneNo = req.body.phoneNo;
         const email = req.body.email;
         const city = req.body.city;
+        const location = [];
         const route = req.body.route;
         
         const newShop = new Shop({
@@ -33,12 +34,18 @@ module.exports =  class ShopController {
             email,
             city,
             route,
-        });
+            location,
 
+        });
+        console.log("shop new:", newShop);
         newShop
             .save()
-            .then(() => res.json("shop added!"))
-            .catch((err) => res.status(400).json("DataBase Error " +err));
+            .then(() => {
+                res.json("shop added!"); 
+                console.log("shop added");})
+            .catch((err) => {
+                res.status(400).json("DataBase Error " +err);
+                console.log("shop Error:", err);});
 }
 
     static getShop(req,res ) {
@@ -64,7 +71,9 @@ module.exports =  class ShopController {
         shop.email = req.body.email;
         shop.city = req.body.city;
         shop.route = req.body.route;
+        shop.location = [];
   
+        console.log("shop update:", shop);
       shop
         .save()
         .then(() => res.json("shop updated!"))

@@ -10,6 +10,7 @@ const shopSchema= new Schema(
     email: {type: String, trim: true},
     city: {type: String,required: true, trim:true},
     route: {type: String, trim:true},
+    location: {type: [Number] , trim:true},
   },
   { timestamps: true }
 );
