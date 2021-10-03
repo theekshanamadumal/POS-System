@@ -72,6 +72,11 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
+          alert(
+            "Error:",
+            error.data,
+            (window.location = "/itAdmin/management")
+          );
         });
     }
 
@@ -157,9 +162,16 @@ export default withRouter(
           "http://localhost:3001/itAdmin/managerUpdate/" + this.dataId,
           user
         )
-        .then((res) => console.log(res.data));
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data, (window.location = "/itAdmin/management"));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = "/itAdmin/management"));
+        });
 
-      window.location = "/itAdmin/editManager/" + this.dataId;
+      //window.location = "/itAdmin/editManager/" + this.dataId;
     }
 
     render() {

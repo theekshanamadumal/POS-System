@@ -32,6 +32,11 @@ const ManagementList = ({ management, ...rest }) => {
       .delete("http://localhost:3001/itAdmin/management/" + id)
       .then((response) => {
         console.log(response.data);
+        alert(response.data, (window.location = "/itAdmin/management"));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = "/itAdmin/management"));
       });
 
     setData(data.filter((el) => el._id !== id));

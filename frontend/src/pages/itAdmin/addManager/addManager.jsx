@@ -116,9 +116,14 @@ export default class AddManager extends Component {
 
     axios
       .post("http://localhost:3001/itAdmin/addManager", user)
-      .then((res) => console.log(res.data));
-
-    window.location = "/itAdmin/management";
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data, (window.location = "/itAdmin/management"));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = "/itAdmin/management"));
+      });
   }
 
   render() {

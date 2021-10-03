@@ -58,9 +58,8 @@ function App() {
         <Switch>
         
           <Route exact path="/">
-           <h1>login page</h1>      <br/>
 
-           <Maps/>
+           <Login/>
           </Route>
       
           <Route exact path="/itAdmin">
