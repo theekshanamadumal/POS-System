@@ -9,8 +9,9 @@ const shopSchema= new Schema(
     phoneNo: {type: Number,required: true, trim: true},
     email: {type: String, trim: true},
     city: {type: String,required: true, trim:true},
+    location: {type: [String] , trim:true},
     route: {type: String, trim:true},
-    location: {type: [Number] , trim:true},
+
   },
   { timestamps: true }
 );

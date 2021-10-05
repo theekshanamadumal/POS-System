@@ -16,6 +16,7 @@ export default withRouter(
       this.onChangeEmail = this.onChangeEmail.bind(this);
       this.onChangeCity = this.onChangeCity.bind(this);
       this.onChangeRoute = this.onChangeRoute.bind(this);
+      this.onChangeLocation = this.onChangeLocation.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
       this.loadRoutes = this.loadRoutes.bind(this);
 
@@ -29,6 +30,7 @@ export default withRouter(
         phoneNo: "",
         email: "",
         city: "",
+        location: [],
         route: "",
       };
     }
@@ -62,9 +64,10 @@ export default withRouter(
             idNumber: response.data._id,
             shopName: response.data.shopName,
             owner: response.data.owner,
-            phoneNo: response.data.phoneNo,
+            phoneNo: Number(response.data.phoneNo),
             email: response.data.email,
             city: response.data.city,
+            location: response.data.location,
             route: response.data.route,
           });
           console.log("response.data");
@@ -91,6 +94,9 @@ export default withRouter(
     onChangeCity(e) {
       this.setState({ city: e.target.value });
     }
+    onChangeLocation(e) {
+      this.setState({ location: e.target.value });
+    }
     onChangeRoute(e) {
       this.setState({ route: e.target.value });
     }
@@ -103,10 +109,12 @@ export default withRouter(
         phoneNo: this.state.phoneNo,
         email: this.state.email,
         city: this.state.city,
+        location: this.state.location,
         route: this.state.route,
       };
 
       console.log(shop);
+      console.log(shop.location);
 
       axios
         .post(
@@ -170,7 +178,14 @@ export default withRouter(
                     <LocationCity />{" "}
                     <span className="value">City : {this.state.shop.city}</span>
                   </li>
+                  <li className="contact">
+                    <LocationCity /> <span className="value">Location</span>
+                  </li>
+                  <li className="contact">
+                    <span>: {this.state.shop.location}</span>
+                  </li>
                 </ul>
+
                 <br></br>
                 <p className="detail">Route Details:</p>
 
@@ -248,6 +263,16 @@ export default withRouter(
                       required
                     ></input>
                     <br />
+                    <label>Location </label>
+
+                    <input
+                      value={this.state.location}
+                      onChange={this.onChangeLocation}
+                      type="text"
+                      required
+                    ></input>
+                    <br />
+
                     <label>Route</label>
                     <select
                       value={this.state.route}

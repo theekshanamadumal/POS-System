@@ -15,13 +15,22 @@ import { Link } from "react-router-dom";
 import { Delete } from "@material-ui/icons";
 import "../list.css";
 import React from "react";
+import axios from "axios";
 
 const RouteList = ({ routes, ...rest }) => {
-
-  const [data, setData] = useState(routes);
-
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    console.log("data send to back");
+    console.log(id);
+    axios
+      .delete("http://localhost:3001/management/salesRoute/" + id)
+      .then((response) => {
+        console.log(response.data);
+        alert(response.data, (window.location = "/management/routes"));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = "/management"));
+      });
   };
 
   return (
@@ -43,33 +52,32 @@ const RouteList = ({ routes, ...rest }) => {
                 <TableCell className="tbHeader">
                   <h5>No of Shops</h5>
                 </TableCell>
-                <TableCell className="tbHeader">
+                {/* <TableCell className="tbHeader">
                   <h5>Last Visited</h5>
-                </TableCell>
+                </TableCell> */}
                 <TableCell className="tbHeader">
                   <h5>Action</h5>
                 </TableCell>
-                
               </TableRow>
             </TableHead>
             <TableBody className="tbBody">
-              {data.map((d) => (
-                <TableRow hover key={d.id}>
-                  <TableCell>{d.id}</TableCell>
+              {routes.map((d) => (
+                <TableRow hover key={d._id}>
+                  <TableCell>{d._id.substr(19)}</TableCell>
                   <TableCell>{d.origin}</TableCell>
                   <TableCell>{d.destination}</TableCell>
-                  <TableCell>{d.noOfShops}</TableCell>
-                  <TableCell>
+                  <TableCell>{d.noOfShops || 0}</TableCell>
+                  {/* <TableCell>
                     {moment(d.lastVisited).format('DD/MM/YYYY')}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/management/routes/" + d.id}>
+                      <Link to={"/management/routes/" + d._id}>
                         <button className="editButt">View / Edit</button>
                       </Link>
                       <Delete
                         className="deleteButt"
-                        onClick={() => handleDelete(d.id)}
+                        onClick={() => handleDelete(d._id)}
                       />
                     </div>
                   </TableCell>
