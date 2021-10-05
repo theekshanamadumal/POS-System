@@ -2,6 +2,7 @@ import "./addShop.css";
 import React, { Component } from "react";
 import axios from "axios";
 import AddRouteComponent from "../Routes/addRouteComponent";
+import Map from "../../../components/Map";
 
 class AddShop extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class AddShop extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
     this.onChangeRoute = this.onChangeRoute.bind(this);
+    this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.loadRoutes = this.loadRoutes.bind(this);
 
@@ -24,6 +26,7 @@ class AddShop extends Component {
       phoneNo: "",
       email: "",
       city: "",
+      location: [],
       route: "",
     };
   }
@@ -66,6 +69,9 @@ class AddShop extends Component {
   onChangeRoute(e) {
     this.setState({ route: e.target.value });
   }
+  onChangeLocation(e) {
+    this.setState({ location: e.target.value });
+  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -75,6 +81,7 @@ class AddShop extends Component {
       phoneNo: this.state.phoneNo,
       email: this.state.email,
       city: this.state.city,
+      location: this.state.location,
       route: this.state.route,
     };
 
@@ -147,6 +154,16 @@ class AddShop extends Component {
                     type="text"
                     required
                   ></input>
+
+                  <label>Location </label>
+
+                  <input
+                    value={this.state.location}
+                    onChange={this.onChangeLocation}
+                    type="text"
+                    required
+                  ></input>
+
                   <br />
                   <label>Route</label>
                   <select

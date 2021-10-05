@@ -24,7 +24,7 @@ module.exports =  class ShopController {
         const phoneNo = req.body.phoneNo;
         const email = req.body.email;
         const city = req.body.city;
-        const location = [];
+        const location = req.body.location;
         const route = req.body.route;
         
         const newShop = new Shop({
@@ -70,8 +70,8 @@ module.exports =  class ShopController {
         shop.phoneNo = Number(req.body.phoneNo);
         shop.email = req.body.email;
         shop.city = req.body.city;
+        shop.location =req.body.location;
         shop.route = req.body.route;
-        shop.location = [];
   
         console.log("shop update:", shop);
       shop
