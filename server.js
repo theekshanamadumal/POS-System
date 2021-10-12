@@ -98,3 +98,8 @@ function initialDbSetup() {
       }
     });
   }
+
+
+  const wrd =  '123,456';
+  const lst  = wrd.split(',');
+  console.log('lst',lst[0]);

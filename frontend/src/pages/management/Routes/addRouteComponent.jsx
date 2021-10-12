@@ -15,9 +15,9 @@ export default class AddRouteComponent extends Component {
 
     this.state = {
       origin: "",
-      originLocation: [],
+      originLocation: "",
       destination: "",
-      destinationLocation: [],
+      destinationLocation: "",
       cities: [],
     };
   }

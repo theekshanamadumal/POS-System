@@ -24,7 +24,7 @@ module.exports =  class ShopController {
         const phoneNo = req.body.phoneNo;
         const email = req.body.email;
         const city = req.body.city;
-        const location = req.body.location;
+        const location = (req.body.location).split(',');
         const route = req.body.route;
         
         const newShop = new Shop({
@@ -62,6 +62,7 @@ module.exports =  class ShopController {
         .catch((err) => res.status(400).json("Error: " + err));
     }
     static updateShop(req,res ) {
+        console.log("..........shop update recieved");
         Shop.findById(req.params.id)
     .then((shop) => {
      
@@ -70,15 +71,17 @@ module.exports =  class ShopController {
         shop.phoneNo = Number(req.body.phoneNo);
         shop.email = req.body.email;
         shop.city = req.body.city;
-        shop.location =req.body.location;
+        shop.location =(req.body.location).split(",");
         shop.route = req.body.route;
   
-        console.log("shop update:", shop);
       shop
         .save()
-        .then(() => res.json("shop updated!"))
-        .catch((err) => res.status(400).json("Error: " + err));
+        .then(() => {res.json("shop updated!");
+        console.log("..........shop updated..............");})
+        .catch((err) => {res.status(400).json("Error: " + err);
+        console.log("..........shop update error:", err);});
     })
-    .catch((err) => res.status(400).json("Error: " + err));
+    .catch((err) => {res.status(400).json("Error: " + err);
+    console.log("..........shop find error:", err);});
         }
 }

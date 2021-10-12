@@ -30,7 +30,7 @@ export default withRouter(
         phoneNo: "",
         email: "",
         city: "",
-        location: [],
+        location: "",
         route: "",
       };
     }
@@ -67,7 +67,7 @@ export default withRouter(
             phoneNo: Number(response.data.phoneNo),
             email: response.data.email,
             city: response.data.city,
-            location: response.data.location,
+            location: String(response.data.location),
             route: response.data.route,
           });
           console.log("response.data");

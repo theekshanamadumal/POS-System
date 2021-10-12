@@ -42,7 +42,7 @@ import Reports from "./pages/management/Reports/reports";
 
 import Tasks from "./pages/management/Tasks/tasks";
 import ViewTasks from "./pages/management/Tasks/viewTasks";
-import AssignTasks from './pages/management/Tasks/assignTasks';
+import AssignTasks from './pages/management/Tasks/assignTasks/assignTasks';
 import RealTimeData from "./pages/management/Tasks/realTimeData";
 
 

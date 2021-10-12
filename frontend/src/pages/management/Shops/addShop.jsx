@@ -26,7 +26,7 @@ class AddShop extends Component {
       phoneNo: "",
       email: "",
       city: "",
-      location: [],
+      location: "",
       route: "",
     };
   }
