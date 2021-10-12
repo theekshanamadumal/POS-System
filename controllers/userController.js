@@ -90,9 +90,10 @@ module.exports =  class UserController {
           .then(() => res.json("user deleted."))
           .catch((err) => res.status(400).json("Error: " + err));
     }
+
     updateUser(req,res ) {
-        User.findById(req.params.id)
-        .then((User) => {
+
+        console.log("postedid to controller");
 
         const selectedImage = req.body.image;
         const imgData = selectedImage.buffer;
@@ -100,26 +101,32 @@ module.exports =  class UserController {
         const image= {data: imgData, 
                         contentType: imgcontentType};
 
+        User.findById(req.params.id)
+        .then((user) => {
 
-        User.firstName = req.body.firstName;
-        User.lastName = req.body.lastName;
-        User.idNumber = req.body.idNumber;
-        User.firstName = req.body.firstName;
-        User.lastName = req.body.lastName;
-        User.image =image;
-        User.password = req.body.password;
-        User.address = req.body.address;
-        User.city = req.body.city;
-        User.phoneNumber = Number(req.body.phoneNumber);
-        User.email = req.body.email;
-        User.joinedDate = Date(req.body.joinedDate);
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.idNumber = req.body.idNumber;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.image =image;
+        user.password = req.body.password;
+        user.address = req.body.address;
+        user.city = req.body.city;
+        user.phoneNumber = Number(req.body.phoneNumber);
+        user.email = req.body.email;
+        user.joinedDate = Date(req.body.joinedDate);
 
-        User
+        user
             .save()
             .then(() => res.json("User updated!"))
-            .catch((err) => res.status(400).json("Error: " + err));
+            .catch((err) => {res.status(400).json("Data insert Error: " + err), 
+            console.log("user update error : ", err)});
         })
-        .catch((err) => res.status(400).json("Error: " + err));
+        .catch((err) => {res.status(400).json("Data find Error: " + err), 
+                        console.log("user update error : ", err)});
+
+                        
     }
 }
 

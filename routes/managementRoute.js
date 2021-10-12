@@ -26,8 +26,8 @@ router.route("/salesperson/:id").delete((req, res) => {
 });
 
 router.route("/updateSalesperson/:id").post((req, res) => {
-  console.log("postedid",req.params.id)
   [authJwt.verifyToken, authJwt.isManager],
+  console.log("posted id to update user",req.params.id),
   UC.updateUser(req,res);
 });
 

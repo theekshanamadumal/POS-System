@@ -26,6 +26,7 @@ router.route("/salesRoute/:id").delete((req, res) => {
 });
 
 router.route("/updateSalesRoute/:id").post((req, res) => {
+  console.log("back resieved route update request ");
   [authJwt.verifyToken, authJwt.isManager],
   SC.updateRoute(req,res);
   
