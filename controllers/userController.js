@@ -1,3 +1,5 @@
+//Test funtions to check authorization
+
 exports.admin = (req, res) => {
     res.status(200).send("Admin Content.");
 };

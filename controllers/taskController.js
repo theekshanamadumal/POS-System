@@ -6,10 +6,34 @@ const LocationHistory = db.locationHistory;
 const endOfDay = require('date-fns/endOfDay');
 const startOfDay = require('date-fns/startOfDay');
 
+//Tasks for Salesperson Use Cases
+
+//Return assgined daily task to the salesperson
 exports.findTask = async (req, res) => {
     await DailyTask.findOne({
         sellerId: req.body.sellerId
     })
+        .populate({
+            path: 'sellerId',
+            model: "User",
+            select: '_id username'
+        })
+        .populate('dailyRoute', 'destinationLocation originLocation origin destination')
+        .populate({
+            path: 'dailyShops',
+            populate: {
+                path: 'shopId',
+                model: 'Shops'
+            }
+        })
+        .populate({
+            path: 'dailyInventory',
+            populate: {
+                path: 'productId',
+                model: 'Product',
+                select: '_id itemName unitPrice'
+            }
+        })
         .exec((err, task) => {
             if (err) {
                 res.status(500).send({ message: err });
@@ -26,11 +50,13 @@ exports.findTask = async (req, res) => {
         });
 };
 
+
+//Update salespersons' assigned daily task inventory
 exports.updateInventory = async (req, res) => {
 
-    itemId = req.body.itemId;
+    itemIndex = req.body.itemIndex;
     value = req.body.quantity;
-    query = "dailyInventory." + itemId + ".quantity";
+    query = "dailyInventory." + itemIndex + ".quantity";
 
     await DailyTask.updateOne({ sellerId: req.body.sellerId }, { [query]: value })
         .exec((err) => {
@@ -42,11 +68,12 @@ exports.updateInventory = async (req, res) => {
         });
 };
 
+//Check a shop on salespersons' shop list
 exports.checkShop = async (req, res) => {
 
-    shopId = req.body.shopId;
+    shopIndex = req.body.shopIndex;
     value = req.body.isCovered;
-    query = "dailyShops." + shopId + ".isCovered";
+    query = "dailyShops." + shopIndex + ".isCovered";
 
     await DailyTask.updateOne({ sellerId: req.body.sellerId }, { [query]: value })
         .exec((err) => {
@@ -57,6 +84,8 @@ exports.checkShop = async (req, res) => {
             res.status(200).send({ message: "Done" });
         });
 };
+
+//Update salespersons' assigned daily task sales progression
 exports.updateSalesProgress = async (req, res) => {
 
     value = req.body.dailySalesProgression;
@@ -72,13 +101,11 @@ exports.updateSalesProgress = async (req, res) => {
         });
 };
 
+//Add new payment and email invoice to the customer with digital payment methoed
 exports.addPayment = async (req, res) => {
 
     listString = req.body.transactions;
     list = JSON.parse(listString);
-    console.log(list);
-
-
 
     const newPayment = new Payment({
         sellerId: req.body.sellerId,
@@ -95,7 +122,8 @@ exports.addPayment = async (req, res) => {
             return;
         }
 
-        if (req.body.isOnline) {
+        //Send Email and the invoice to the customer if transaction was online
+        if (req.body.isOnline == true) {
             var sellerId = req.body.sellerId;
             var shopId = req.body.shopId;
             var total = req.body.total;
@@ -105,7 +133,7 @@ exports.addPayment = async (req, res) => {
                 host: "smtp.gmail.com",
                 auth: {
                     user: 'sahan.samarakoon.4@gmail.com',
-                    pass: 'hkbpncwvgajuzmqn',
+                    pass: '',// Setup Google App password for the sender's Google account
                 },
                 secure: true,
             });
@@ -113,10 +141,10 @@ exports.addPayment = async (req, res) => {
             htmlButton = link + '<input type="submit" name="Pay" value="Pay"/></form>';
 
             const mailData = {
-                from: 'sahan.18@cse.mrt.ac.lk',  // sender address
+                from: 'sahan.samarakoon.4@gmail.com',  // sender address
                 to: 'xprnypnblck@gmail.com',   // list of receivers
                 subject: 'Online Payment ',
-                text: 'This is the invoice invoice',
+                text: 'This is the invoice',
                 html: htmlButton
             };
 
@@ -131,20 +159,26 @@ exports.addPayment = async (req, res) => {
     });
 };
 
-exports.payments = async (req, res) => {
 
-    console.log(startOfDay(new Date()));
-    console.log(endOfDay(new Date()));
-    // console.log(new Date("2021-09-27T13:50:27.681+00:00"));
+//Get payments for a salesperson on current day
+exports.payments = async (req, res) => {
 
     await Payment.find({
         sellerId: req.body.sellerId,
-        // dateTime:new Date("2021-09-27T13:50:27.681+00:00"),
         dateTime: {
-            $gte: endOfDay(new Date(2021, 08, 26)),
-            $lte: endOfDay(new Date(2021, 08, 28))
+            $gte: startOfDay(new Date()),
+            $lte: endOfDay(new Date())
         }
     })
+        .populate('shopId', 'shopName')
+        .populate({
+            path: 'transactions',
+            populate: {
+                path: 'id',
+                model: 'Product',
+                select: '_id itemName unitPrice'
+            }
+        })
         .exec((err, payment) => {
             if (err) {
                 res.status(500).send({ message: err });
@@ -154,14 +188,31 @@ exports.payments = async (req, res) => {
             if (!payment) {
                 return res.status(404).send();
             }
+
+            var paymentInfo = {
+                id: payment["_id"],
+
+            }
             res.status(200).send(payment);
         });
 };
 
+
+//Update the salesperson location data
 exports.updateLocation = async (req, res) => {
+
+    listString = req.body.position;
+    list = JSON.parse(listString);
+
+    var data = {
+        sellerId: req.body.sellerId,
+        location: list,
+        dateTime: req.body.dateTime
+    }
+
     await LocationHistory.findOneAndUpdate({
         sellerId: req.body.sellerId,
-    }, req.body, { upsert: true }).exec(function (err) {
+    }, data, { upsert: true }).exec(function (err) {
         if (err) {
             res.status(500).send({ message: err });
             return;

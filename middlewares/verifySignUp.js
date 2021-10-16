@@ -2,6 +2,8 @@ const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;
 
+//Middleware funtions for Signup procces
+
 checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
   User.findOne({
