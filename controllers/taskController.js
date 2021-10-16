@@ -1,5 +1,8 @@
 const db = require("../models");
 const nodemailer = require('nodemailer');
+const ejs = require('ejs');
+const fs = require('file-system');
+
 const DailyTask = db.task;
 const Payment = db.payment;
 const LocationHistory = db.locationHistory;
@@ -116,45 +119,68 @@ exports.addPayment = async (req, res) => {
         isOnline: req.body.isOnline
     });
 
-    await newPayment.save(function (err) {
+    await newPayment.save(function (err, payment) {
         if (err) {
             res.status(500).send({ message: err });
             return;
         }
+        var paymentId = payment._id;
+        Payment.findOne({
+            _id: paymentId,
 
-        //Send Email and the invoice to the customer if transaction was online
-        if (req.body.isOnline == true) {
-            var sellerId = req.body.sellerId;
-            var shopId = req.body.shopId;
-            var total = req.body.total;
-            var dateTime = req.body.dateTime;
-            const transporter = nodemailer.createTransport({
-                port: 465,               // true for 465, false for other ports
-                host: "smtp.gmail.com",
-                auth: {
-                    user: 'sahan.samarakoon.4@gmail.com',
-                    pass: '',// Setup Google App password for the sender's Google account
-                },
-                secure: true,
+        })
+            .populate('shopId', 'shopName')
+            .populate({
+                path: 'transactions',
+                populate: {
+                    path: 'id',
+                    model: 'Product',
+                    select: '_id itemName unitPrice'
+                }
+            })
+            .exec((err, payment) => {
+                if (err) {
+                    res.status(500).send({ message: err });
+                    return;
+                }
+
+                if (!payment) {
+                    return res.status(404).send();
+                }
+                var transactions = payment.transactions;
+                var sellerId = req.body.sellerId;
+                var total = req.body.total;
+                var dateTime = req.body.dateTime;
+                var isOnline = req.body.isOnline;
+                //Send Email and the invoice to the customer if transaction was online
+
+                const transporter = nodemailer.createTransport({
+                    port: 465,               // true for 465, false for other ports
+                    host: "smtp.gmail.com",
+                    auth: {
+                        user: 'sahan.samarakoon.4@gmail.com',
+                        pass: '',// Setup Google App password for the sender's Google account
+                    },
+                    secure: true,
+                });
+
+                var template = fs.readFileSync('invoice.ejs', { encoding: 'utf-8' });
+                var htmlTest = ejs.render(template, { invoiceId: paymentId, dateTime: dateTime, transactions: transactions, total: total, isOnline: isOnline, sellerId: sellerId });
+
+                const mailData = {
+                    from: 'sahan.samarakoon.4@gmail.com',  // sender address
+                    to: 'xprnypnblck@gmail.com',   // list of receivers
+                    subject: 'Smart POS - Online Invoice',
+                    text: 'This is the invoice',
+                    html: htmlTest
+                };
+                transporter.sendMail(mailData, function (err, info) {
+                    if (err)
+                        console.log(err);
+                    else
+                        console.log(info);
+                });
             });
-            var link = '<form action="https://sandbox.payhere.lk/pay/checkout?merchant_id=1218725&return_url=http://google.com/return&cancel_url=http://google.com/cancel&notify_url=http://google.com/notify&first_name=Theekshana&last_name=Madumal&email=xprnypnblck@gmail.com&phone=0722403591&address=No:1,Galle Road&city=Colombo&country=Sri Lanka&order_id=Invoice : 8&items=Inovice for 09/27&currency=LKR&amount=' + total + '" method="post">';
-            htmlButton = link + '<input type="submit" name="Pay" value="Pay"/></form>';
-
-            const mailData = {
-                from: 'sahan.samarakoon.4@gmail.com',  // sender address
-                to: 'xprnypnblck@gmail.com',   // list of receivers
-                subject: 'Online Payment ',
-                text: 'This is the invoice',
-                html: htmlButton
-            };
-
-            transporter.sendMail(mailData, function (err, info) {
-                if (err)
-                    console.log(err)
-                else
-                    console.log(info);
-            });
-        }
         res.status(200).send({ message: "Done" });
     });
 };
@@ -187,11 +213,6 @@ exports.payments = async (req, res) => {
 
             if (!payment) {
                 return res.status(404).send();
-            }
-
-            var paymentInfo = {
-                id: payment["_id"],
-
             }
             res.status(200).send(payment);
         });
