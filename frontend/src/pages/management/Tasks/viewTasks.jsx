@@ -8,15 +8,21 @@ import {
     Table,
     TableBody,
     TableCell,
-    TableHead,
+    TableHead, 
     TableRow,
   } from "@material-ui/core";
+import Percentage from "../../../components/taskComp/percentage";
+import { useLocation } from "react-router-dom";
 
-export default class ViewTasks extends Component {
-    render() {
-        return (
-            <div className="viewTasks">
-                <div className="detContain">
+export default function ViewTasks() {
+    const location = useLocation();
+    const { pathname } = location;
+    const splitLocation = pathname.split("/");
+    const id=splitLocation[3];
+    return (
+        <div className="viewTasks">
+            <Percentage remain={remain} achieved={achieved} id={id}/>
+            <div className="detContain">
                 <div className="achieved">
                 <h1>Achieved Tasks</h1>
                     <Card >
@@ -51,7 +57,7 @@ export default class ViewTasks extends Component {
                             </PerfectScrollbar>
                             </Card>
                             </div>
-                  
+                
 
                         <div className="remain">
                         <h1>Remaining Tasks</h1>
@@ -82,10 +88,7 @@ export default class ViewTasks extends Component {
                             </PerfectScrollbar>
                 </Card>
                 </div>
-                   
-                </div>
-                
             </div>
-        )
-    }
+        </div>
+    )
 }

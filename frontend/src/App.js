@@ -42,7 +42,7 @@ import Reports from "./pages/management/Reports/reports";
 
 import Tasks from "./pages/management/Tasks/tasks";
 import ViewTasks from "./pages/management/Tasks/viewTasks";
-import AssignTasks from './pages/management/Tasks/assignTasks/assignTasks';
+import AssignTasks from './pages/management/Tasks/assign';
 import RealTimeData from "./pages/management/Tasks/realTimeData";
 
 
@@ -197,7 +197,7 @@ function App() {
 
           <Route path="/management/tasks/:id/assignTasks">
             <ManagementSidebar/>
-            <AssignTasks/>
+            <AssignTasks />
           </Route>
 
           <Route path="/management/tasks/:id/realData">
