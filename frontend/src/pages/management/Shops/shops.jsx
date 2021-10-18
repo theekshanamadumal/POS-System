@@ -48,10 +48,7 @@ export default class Shops extends Component {
   render() {
     return (
       <div className="product">
-        <ShopToolBar className="contain" />
-        <Box sx={{ pt: 3 }} className="contain">
-          <ShopList shops={this.state.shops} routes={this.state.routeList} />
-        </Box>
+        <ShopToolBar className="contain"  shops={this.state.shops} routes={this.state.routeList} />
       </div>
     );
   }

@@ -30,10 +30,7 @@ export default class Products extends Component {
   render() {
     return (
       <div className="product">
-        <ProductToolBar className="contain" />
-        <Box sx={{ pt: 3 }} className="contain">
-          <ProductList products={this.state.products} />
-        </Box>
+        <ProductToolBar className="contain" products={this.state.products}  />
       </div>
     );
   }

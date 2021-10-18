@@ -29,10 +29,7 @@ export default class SalesPerson extends Component {
   render() {
     return (
       <div className="salesPerson">
-        <SalesPersonToolBar className="contain" />
-        <Box sx={{ pt: 3 }} className="contain">
-          <SalesPersonList salesPerson={this.state.salespersons} />
-        </Box>
+        <SalesPersonToolBar className="contain" salesPerson={this.state.salespersons} />
       </div>
     );
   }

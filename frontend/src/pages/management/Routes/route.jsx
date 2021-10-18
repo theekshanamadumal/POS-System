@@ -33,10 +33,7 @@ export default class Routes extends Component {
   render() {
     return (
       <div className="product">
-        <RouteToolBar className="contain" />
-        <Box sx={{ pt: 3 }} className="contain">
-          <RouteList routes={this.state.routeList} shops={this.state.shops} />
-        </Box>
+        <RouteToolBar className="contain" routes={this.state.routeList} shops={this.state.shops}/>
       </div>
     );
   }
