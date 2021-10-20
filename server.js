@@ -40,6 +40,7 @@ const productRouter = require('./routes/productRoute');
 const productCategoryRouter = require('./routes/productCategoryRoute');
 const shopRouter = require('./routes/shopRoute');
 const salesRouteRouter = require('./routes/salesRouteRouter');
+const locationRouter = require('./routes/locationRoute');
 
 app.use('/itAdmin', itAdminRouter);
 app.use('/management', managementRouter);
@@ -47,6 +48,7 @@ app.use('/management', productRouter);
 app.use('/management', productCategoryRouter);
 app.use('/management', shopRouter);
 app.use('/management', salesRouteRouter);
+app.use('/management', locationRouter);
 
 require('./routes/authRoutes')(app);
 //require('./routes/routes')(app);
@@ -100,6 +102,3 @@ function initialDbSetup() {
   }
 
 
-  const wrd =  '123,456';
-  const lst  = wrd.split(',');
-  console.log('lst',lst[0]);

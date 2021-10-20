@@ -3,7 +3,7 @@ import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
 import Login from "./components/login/login";
-import Maps from "./pages/Maps";
+import Maps from "./pages/management/sellerLocation/Maps";
 
 //it admin
 import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";

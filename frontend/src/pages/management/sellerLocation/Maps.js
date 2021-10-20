@@ -33,8 +33,9 @@ import { Card, Container, Row } from "reactstrap";
 const MapWrapper = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
-      defaultZoom={12}
-      defaultCenter={{ lat: 40.748817, lng: -73.985428 }}
+      defaultZoom={9}
+      defaultCenter={{ lat: 7.489083614888397, lng: 80.36274774593174 }}
+      
       defaultOptions={{
         scrollwheel: false,
         styles: [
@@ -81,7 +82,8 @@ const MapWrapper = withScriptjs(
         ]
       }}
     >
-      <Marker position={{ lat: 40.748817, lng: -73.985428 }} />
+      <Marker position={{ lat: 7.489083614888397, lng: 80.6197034967649 }} />
+      <Marker position={{ lat: 7.489083614888397, lng: 80.36274774593174 }} />
     </GoogleMap>
   ))
 );
@@ -97,7 +99,7 @@ class Maps extends React.Component {
             <div className="col">
               <Card className="shadow border-0">
                 <MapWrapper
-                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"
+                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBep5QR6Bb7XGLylqgoplGzYH-3XYpcXIE"
                   loadingElement={<div style={{ height: `100%` }} />}
                   containerElement={
                     <div
