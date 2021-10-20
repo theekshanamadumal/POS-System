@@ -6,5 +6,7 @@ URL.sellerLocation = "http://localhost:3001/management/sellerLocation";
 
 URL.management = "/management";
 
+URL.invoice = "http://localhost:3001/management/invoice";
+
 
 module.exports = URL;

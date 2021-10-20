@@ -15,7 +15,6 @@ import React from "react";
 import moment from "moment";
 
 const OrderList = ({ orders, ...rest }) => {
-
   return (
     <Card {...rest} className="card">
       <PerfectScrollbar>
@@ -42,16 +41,16 @@ const OrderList = ({ orders, ...rest }) => {
             </TableHead>
             <TableBody className="tbBody">
               {orders.map((d) => (
-                <TableRow hover key={d.id}>
-                  <TableCell>{d.id}</TableCell>
-                  <TableCell>{d.shopName}</TableCell>
-                  <TableCell>{d.totalAmount}</TableCell>
+                <TableRow hover key={d._id}>
+                  <TableCell>{d._id.substr(19)}</TableCell>
+                  <TableCell>{d.shopId.shopName}</TableCell>
+                  <TableCell>{d.total}</TableCell>
                   <TableCell>
-                    {moment(d.orderedDate).format("DD/MM/YYYY")}
+                    {moment(d.dateTime).format("DD/MM/YYYY")}
                   </TableCell>
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/management/order/" + d.id}>
+                      <Link to={"/management/order/" + d._id}>
                         <button className="editButt">View</button>
                       </Link>
                     </div>

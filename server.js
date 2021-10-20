@@ -41,6 +41,7 @@ const productCategoryRouter = require('./routes/productCategoryRoute');
 const shopRouter = require('./routes/shopRoute');
 const salesRouteRouter = require('./routes/salesRouteRouter');
 const locationRouter = require('./routes/locationRoute');
+const billRouter = require('./routes/billRoute');
 
 app.use('/itAdmin', itAdminRouter);
 app.use('/management', managementRouter);
@@ -49,6 +50,7 @@ app.use('/management', productCategoryRouter);
 app.use('/management', shopRouter);
 app.use('/management', salesRouteRouter);
 app.use('/management', locationRouter);
+app.use('/management', billRouter);
 
 require('./routes/authRoutes')(app);
 //require('./routes/routes')(app);

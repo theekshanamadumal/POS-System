@@ -1,7 +1,7 @@
 import React from "react";
 import "./invoiceDetails.css";
 
-export default function invoiceDetails() {
+export default function invoiceDetails({ invoiceData }) {
   return (
     <div className="invoiceDetails">
       <h1 className="invoicehead">Invoice</h1>
@@ -9,11 +9,12 @@ export default function invoiceDetails() {
         <div className="leftCont">
           <p className="detailInv">
             {" "}
-            Invoice ID :<span className="value"> 21</span>
+            Invoice ID :
+            <span className="value">{String(invoiceData._id).substr(19)}</span>
           </p>
           <p className="detailInv">
             {" "}
-            Shop Name :<span className="value"> Store 2</span>
+            Shop :<span className="value"> {invoiceData.shopId._id}</span>
           </p>
           <p className="detailInv">
             {" "}
