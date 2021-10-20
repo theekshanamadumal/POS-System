@@ -14,7 +14,7 @@ export default function invoiceDetails({ invoiceData }) {
           </p>
           <p className="detailInv">
             {" "}
-            Shop :<span className="value"> {invoiceData.shopId._id}</span>
+            Shop :<span className="value"> {"invoiceData.shopId._id"}</span>
           </p>
           <p className="detailInv">
             {" "}
