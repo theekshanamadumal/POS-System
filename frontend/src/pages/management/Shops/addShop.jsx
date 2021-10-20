@@ -2,7 +2,6 @@ import "./addShop.css";
 import React, { Component } from "react";
 import axios from "axios";
 import AddRouteComponent from "../Routes/addRouteComponent";
-import Map from "../../../components/Map";
 
 class AddShop extends Component {
   constructor(props) {
