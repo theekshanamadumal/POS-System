@@ -92,7 +92,7 @@ export default function ManagementSidebar() {
                 }
               >
                 <ShoppingCart className="sidebarIcon" />
-                Orders
+                Invoices
               </li>
             </Link>
 

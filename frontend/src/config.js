@@ -6,6 +6,8 @@ URL.sellerLocation = "http://localhost:3001/management/sellerLocation";
 
 URL.management = "/management";
 
+URL.invoice = "http://localhost:3001/management/invoice";
+
 URL.products = "/management/products";
 URL.addProduct = "/management/addProduct";
 URL.productCategory = "/management/productCategory";
