@@ -59,15 +59,15 @@ export const rows = [
     { id: 9, avatar :"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", active:"yes", productName: 'Huawei nova 2i', amount: '78', unitPrice: "220000.00" },
   ];
   export const orderRows = [
-    { id: 1, shopName: 'idea Beam', orderedDate: "09/08/2021" , totalAmount: '30000.00'},
-    { id: 2, shopName: 'idealz Lanka',  orderedDate: "09/08/2021" , totalAmount: '4900.00'},
-    { id: 3, shopName: 'Greenware Technologies',  orderedDate: "09/08/2021" , totalAmount: '7830.00'},
-    { id: 4, shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '8925.00' },
-    { id: 5, shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '8220.00' },
-    { id: 6, shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '990.00'},
-    { id: 7, shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '770.00'},
-    { id: 8, shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '6700.00'},
-    { id: 9, shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '1200.00'},
+    { id: "1", shopName: 'idea Beam', orderedDate: "09/08/2021" , totalAmount: '30000.00'},
+    { id: "2", shopName: 'idealz Lanka',  orderedDate: "09/08/2021" , totalAmount: '4900.00'},
+    { id: "3", shopName: 'Greenware Technologies',  orderedDate: "09/08/2021" , totalAmount: '7830.00'},
+    { id: "4", shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '8925.00' },
+    { id: "5", shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '8220.00' },
+    { id: "6", shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '990.00'},
+    { id: "7", shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '770.00'},
+    { id: "8", shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '6700.00'},
+    { id: "9", shopName: 'idealz Lanka', orderedDate: "09/08/2021" , totalAmount: '1200.00'},
   ];
   export const shopRows = [
     { id: 1, shopName: 'idea Beam', email: 'info@ideabeam.com', phoneNo: "0776564493" , city: "Colombo" ,route:"100"},
@@ -132,12 +132,12 @@ export const rows = [
 
   export const tasks=[
     {_id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
-    {_id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
-    {_id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
-    {_id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
-    {_id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
-    {_id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
-    {_id:"9827272819V", firstName:"Siva" , lastName:"Krish",remainingTasks:8,acheivements:10,sales:10000},
+    {_id:"9738990020V", firstName:"Sujara" , lastName:"Mahela",remainingTasks:8,acheivements:10,sales:10000},
+    {_id:"9388382829V", firstName:"Sanga" , lastName:"Bandara",remainingTasks:8,acheivements:10,sales:10000},
+    {_id:"9139339919V", firstName:"Shaba" , lastName:"Harish",remainingTasks:8,acheivements:10,sales:10000},
+    {_id:"9378392819V", firstName:"Siva" , lastName:"Vimal",remainingTasks:8,acheivements:10,sales:10000},
+    {_id:"9289228852V", firstName:"Harish" , lastName:"Raj",remainingTasks:8,acheivements:10,sales:10000},
+    {_id:"8028237839V", firstName:"Silva" , lastName:"Shan",remainingTasks:8,acheivements:10,sales:10000},
   ]
   export const achieved =[
     {id:100,inventory:19,income:5000},

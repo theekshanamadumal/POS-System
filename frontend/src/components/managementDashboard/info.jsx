@@ -5,6 +5,7 @@ import SalesPieChart from "./salesPieChart";
 import BestPerform from "./bestPerform";
 import { bestPerform } from "..//../dataCollection";
 import { Link } from "react-router-dom";
+import URL from "../../config";
 
 export default function Info() {
     return (
@@ -28,7 +29,7 @@ export default function Info() {
                     <hr className="line"></hr>
                     <div className="featuredUser">
                         <div className="featuredUs">
-                            <Link to="/management/salesperson" className="linkTo">
+                            <Link to={URL.salesperson} className="linkTo">
                                 <PeopleAlt fontSize="large" className="Icon" />
                                 <div className="descript">Total Salespersons</div>
                                 <div className="count">23</div>
@@ -36,7 +37,7 @@ export default function Info() {
                         </div>
                         
                         <div className="featuredUs">
-                            <Link to="/management/shops" className="linkTo">
+                            <Link to={URL.shops} className="linkTo">
                                 <Storefront fontSize="large" className="Icon" />
                                 <div className="descript">Total<br></br> Shops </div>
                                 <div className="count">180</div>
@@ -46,7 +47,7 @@ export default function Info() {
                     </div>
                 </div>
                 <div className="down">
-                    <Link to="/management/products" className="linkTo">
+                    <Link to={URL.products} className="linkTo">
                         <span className="featuredTitle">Product Details</span>
                         <hr className="line"></hr>
                         <div className="featuredContainer">

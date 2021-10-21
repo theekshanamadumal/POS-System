@@ -18,7 +18,7 @@ export default function Home() {
         grid
       />
 
-      <AllSellersLocations />
+      <AllSellersLocations style={{width:"1000px"}} />
     </div>
   );
 }

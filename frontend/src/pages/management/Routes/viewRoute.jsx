@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router";
-
+import URL from "../../../config";
 import "./viewRoute.css";
 import { Link } from "react-router-dom";
 
@@ -34,7 +34,7 @@ export default withRouter(
 
       console.log("dataId: ", this.dataId);
       axios
-        .get("http://localhost:3001/management/salesRoute/" + this.dataId)
+        .get(URL.main+URL.salesRouteComp+ this.dataId)
         .then((response) => {
           this.setState({
             route: response.data,
@@ -49,7 +49,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/routess"));
+          alert(error, (window.location = URL.routes));
         });
     }
 
@@ -83,16 +83,16 @@ export default withRouter(
 
       axios
         .post(
-          "http://localhost:3001/management/updateSalesRoute/" + this.dataId,
+          URL.main+URL.updateSaleRoute+ this.dataId,
           route
         )
         .then((res) => {
           console.log(res.data);
-          alert(res.data, (window.location = "/management/routes"));
+          alert(res.data, (window.location = URL.routes));
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/routes"));
+          alert(error, (window.location = URL.routes));
         });
     }
 
@@ -102,10 +102,10 @@ export default withRouter(
           <div className="spacing">
             <div className="containerSale">
               <h1 className="heading">Routes</h1>
-              <Link to="/management/route/lastSales">
+              <Link to={URL.lastSales}>
                 <button className="addUser">View Last Month Sales</button>
               </Link>
-              <Link to="/management/routes/addroute">
+              <Link to={URL.addRoute}>
                 <button className="addUser">Add New Route</button>
               </Link>
             </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import URL from "../../../config";
 
 export default class AddRouteComponent extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ export default class AddRouteComponent extends Component {
     console.log("before post", route);
 
     axios
-      .post("http://localhost:3001/management/addSalesRoute", route)
+      .post(URL.addSalesRoute, route)
       .then((res) => {
         console.log(res.data);
         alert(res.data, (window.location = this.props.location));

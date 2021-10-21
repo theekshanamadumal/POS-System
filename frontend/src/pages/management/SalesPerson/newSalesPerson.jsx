@@ -3,6 +3,7 @@ import axios from "axios";
 import "./newSalesperson.css";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Input, IconButton, InputAdornment } from "@material-ui/core";
+import URL from "../../../config";
 
 export default class NewSalesPerson extends Component {
   constructor(props) {
@@ -232,14 +233,14 @@ export default class NewSalesPerson extends Component {
       console.log(user);
 
       axios
-        .post("http://localhost:3001/management/addSalesperson", user)
+        .post(URL.main+URL.addSalesperson, user)
         .then((res) => {
           console.log(res.data);
-          alert(res.data, (window.location = "/management/salesperson"));
+          alert(res.data, (window.location = URL.salesperson));
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/salesperson"));
+          alert(error, (window.location = URL.salesperson));
         });
     }
   }

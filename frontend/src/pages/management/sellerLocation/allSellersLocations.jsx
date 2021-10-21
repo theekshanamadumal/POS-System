@@ -36,7 +36,7 @@ class AllSellersLocations extends Component {
 
   render() {
     return (
-      <div>
+      <div >
         {" "}
         <MapGL sellersData={this.state.sellersData} />{" "}
       </div>

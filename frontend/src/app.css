@@ -31,3 +31,6 @@ code {
   width: 20px;
   height: 20px;
 }
+.background {
+  background-color: rgba(109, 43, 43, 0.699);
+}

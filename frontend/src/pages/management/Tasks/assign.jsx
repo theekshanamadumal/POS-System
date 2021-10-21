@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./assignTasks/assignTasks.css";
 import {Delete,Add} from '@material-ui/icons';
 import axios from "axios";
+import URL from "../../../config";
 
 export default class AssignTasks extends Component {
     constructor(props){
@@ -47,7 +48,7 @@ export default class AssignTasks extends Component {
 
     loadRoutes() {
     axios
-        .get("http://localhost:3001/management/salesRoutes")
+        .get(URL.main+URL.salesRoutes)
         .then((response) => {
         this.setState({
             routeList: response.data,
@@ -57,7 +58,7 @@ export default class AssignTasks extends Component {
         })
         .catch((error) => {
         console.log(error);
-        alert(error, (window.location = "/management/shops/addShop"));
+        alert(error, (window.location = URL.addShops));
         });
     }
 
@@ -76,14 +77,14 @@ export default class AssignTasks extends Component {
         console.log(dailyTarget);
 
         axios
-            .post("http://localhost:3001/management/adddailyTarget", dailyTarget)
+            .post(URL.main+URL.addDailyTarget, dailyTarget)
             .then((res) => {
             console.log(res.data);
-            alert(res.data, (window.location = "/management/tasks"));
+            alert(res.data, (window.location = URL.tasks));
             })
             .catch((error) => {
             console.log(error);
-            alert(error, (window.location = "/management/tasks"));
+            alert(error, (window.location = URL.tasks));
         });
     }
     
