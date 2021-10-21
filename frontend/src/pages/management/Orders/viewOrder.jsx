@@ -8,10 +8,10 @@ import InvoiceList from "../../../components/Invoice/invoiceList";
 
 //import { invoiceRows } from "../../../dataCollection";
 
-export default class viewOrder extends Component {
+class viewOrder extends Component {
   constructor(props) {
     super(props);
-    this.state = { invoiceData: [], invoiceID: "616da296d9f30137446e8548" };
+    this.state = { invoiceData: "", invoiceID: "616da296d9f30137446e8548" };
   }
 
   loadInvoices() {
@@ -22,8 +22,7 @@ export default class viewOrder extends Component {
           invoiceData: response.data,
         });
 
-        console.log("id: ", this.state.invoiceID);
-        console.log("invoice------------:");
+        console.log("-------invoice------------:");
         console.log(response.data);
       })
       .catch((error) => {
@@ -50,3 +49,5 @@ export default class viewOrder extends Component {
     );
   }
 }
+
+export default viewOrder;
