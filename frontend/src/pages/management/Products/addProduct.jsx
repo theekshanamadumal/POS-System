@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./addProduct.css";
 import AddProductCategory from "./addProductCategory";
+import URL from "../../../config";
 class AddProduct extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ class AddProduct extends Component {
 
   loadCategories() {
     axios
-      .get("http://localhost:3001/management/productCategory")
+      .get(URL.main+URL.productCategory)
       .then((response) => {
         this.setState({
           categoryList: response.data,
@@ -36,7 +37,7 @@ class AddProduct extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = "/management/products"));
+        alert(error, (window.location = URL.products ));
       });
   }
 
@@ -73,14 +74,14 @@ class AddProduct extends Component {
     console.log(product);
 
     axios
-      .post("http://localhost:3001/management/addProduct", product)
+      .post(URL.main+URL.addProduct , product)
       .then((res) => {
         console.log(res.data);
-        alert(res.data, (window.location = "/management/products"));
+        alert(res.data, (window.location = URL.products ));
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = "/management/products"));
+        alert(error, (window.location = URL.products ));
       });
   }
 
@@ -90,10 +91,10 @@ class AddProduct extends Component {
         <h1 className="title">New Product Page</h1>
         <div className="Container">
           <div className="detailsContainer">
-            <h2 className="title">Add new Category</h2>
+            
 
             <div className="container">
-              <AddProductCategory location="/management/addProduct" />
+              <AddProductCategory location={URL.addProduct}  />
             </div>
           </div>
           <div className="editContainer">

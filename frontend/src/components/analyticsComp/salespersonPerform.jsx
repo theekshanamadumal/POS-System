@@ -70,7 +70,7 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
       </ResponsiveContainer>
       <br></br>
       <br></br>
-      <a href="http://localhost:3000/management/analytics#salesperson/page.pdf" download rel="noopener noreferrer" target="_blank">
+      <a href="" download rel="noopener noreferrer" target="_blank">
           <Button>Download</Button>
       </a>
     </div>

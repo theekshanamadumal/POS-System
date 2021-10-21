@@ -2,6 +2,7 @@ import "./addShop.css";
 import React, { Component } from "react";
 import axios from "axios";
 import AddRouteComponent from "../Routes/addRouteComponent";
+import URL from "../../../config";
 
 class AddShop extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class AddShop extends Component {
 
   loadRoutes() {
     axios
-      .get("http://localhost:3001/management/salesRoutes")
+      .get(URL.main+URL.salesRoutes)
       .then((response) => {
         this.setState({
           routeList: response.data,
@@ -42,7 +43,7 @@ class AddShop extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = "/management/shops/addShop"));
+        alert(error, (window.location = URL.addShops));
       });
   }
 
@@ -87,14 +88,14 @@ class AddShop extends Component {
     console.log(shop);
 
     axios
-      .post("http://localhost:3001/management/addShop", shop)
+      .post(URL.main+URL.addShops, shop)
       .then((res) => {
         console.log(res.data);
-        alert(res.data, (window.location = "/management/shops"));
+        alert(res.data, (window.location = URL.shops));
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = "/management/shops"));
+        alert(error, (window.location = URL.shops));
       });
   }
 
@@ -106,7 +107,7 @@ class AddShop extends Component {
           <div className="detailsContainer">
             <h2 className="title">Add new route</h2>
             <div className="container">
-              <AddRouteComponent location="/management/shops/addShop" />
+              <AddRouteComponent location={URL.addShops} />
             </div>
           </div>
           <div className="editContainer ">

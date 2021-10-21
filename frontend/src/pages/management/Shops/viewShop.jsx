@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./viewShop.css";
 import { withRouter } from "react-router";
 import axios from "axios";
+import URL from "../../../config";
 
 import { Email, PhoneAndroid, LocationCity, Home } from "@material-ui/icons";
 
@@ -37,7 +38,7 @@ export default withRouter(
 
     loadRoutes() {
       axios
-        .get("http://localhost:3001/management/salesRoutes")
+        .get(URL.main+URL.salesRoutes)
         .then((response) => {
           this.setState({
             routeList: response.data,
@@ -47,7 +48,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/products"));
+          alert(error, (window.location = URL.products));
         });
     }
 
@@ -57,7 +58,7 @@ export default withRouter(
       this.dataId = this.props.match.params.id;
       console.log("dataId: ", this.dataId);
       axios
-        .get("http://localhost:3001/management/shop/" + this.dataId)
+        .get(URL.main+URL.shopComp + this.dataId)
         .then((response) => {
           this.setState({
             shop: response.data,
@@ -75,7 +76,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/shops"));
+          alert(error, (window.location = URL.shops));
         });
     }
 
@@ -118,16 +119,16 @@ export default withRouter(
 
       axios
         .post(
-          "http://localhost:3001/management/updateShop/" + this.dataId,
+          URL.main+URL.updateShop + this.dataId,
           shop
         )
         .then((res) => {
           console.log(res.data);
-          alert(res.data, (window.location = "/management/shops"));
+          alert(res.data, (window.location = URL.shops));
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/shops"));
+          alert(error, (window.location = URL.shops));
         });
     }
 

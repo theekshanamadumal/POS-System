@@ -5,7 +5,7 @@ export default function MapGL({sellersData}) {
   const [viewport, setViewport] = useState({
     latitude:7.489083614888397,
     longitude: 80.36274774593174,
-    width: "80vw",
+    width: "69vw",
     height: "80vh",
     zoom: 8
   });
@@ -25,7 +25,7 @@ export default function MapGL({sellersData}) {
   }, []);
 
   return (
-    <div>
+    <div className="category">
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}

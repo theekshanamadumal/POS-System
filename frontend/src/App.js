@@ -52,15 +52,17 @@ function App() {
     <Router>
     <div className="App">
 
+    
     <Topbar/>
         <div className='contain'>
     
         <Switch>
-        
-          <Route exact path="/">
 
-           <Login/>
-          </Route>
+        <Route exact path="/">
+          <Login/>
+        </Route>
+        
+          
       
           <Route exact path="/itAdmin">
             <ItAdminSidebar/>  

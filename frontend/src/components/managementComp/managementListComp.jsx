@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { Delete } from "@material-ui/icons";
 import "../list.css";
 import axios from "axios";
+import URL from "../../config";
 
 const ManagementList = ({ management, ...rest }) => {
   //const [data,setData]=useState(Management);
@@ -29,14 +30,14 @@ const ManagementList = ({ management, ...rest }) => {
   const handleDelete = (id) => {
     //setData(data.filter((item) => item.id !== id));
     axios
-      .delete("http://localhost:3001/itAdmin/management/" + id)
+      .delete(URL.main+URL.manager+ id)
       .then((response) => {
         console.log(response.data);
-        alert(response.data, (window.location = "/itAdmin/management"));
+        alert(response.data, (window.location = URL.manager));
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = "/itAdmin/management"));
+        alert(error, (window.location = URL.manager));
       });
 
     setData(data.filter((el) => el._id !== id));
@@ -100,7 +101,7 @@ const ManagementList = ({ management, ...rest }) => {
 
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/itAdmin/editManager/" + d._id}>
+                      <Link to={URL.editManager + d._id}>
                         <button className="editButt">View / Edit</button>
                       </Link>
                       <Delete

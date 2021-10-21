@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./viewSalesPerson.css";
+import URL from "../../../config";
 
 import {
   Publish,
@@ -53,7 +54,7 @@ export default withRouter(
       this.dataId = this.props.match.params.id;
 
       axios
-        .get("http://localhost:3001/management/salesperson/" + this.dataId)
+        .get(URL.main+URL.salesperson+"/" + this.dataId)
         .then((response) => {
           this.setState({
             manager: response.data,
@@ -73,7 +74,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/salesperson"));
+          alert(error, (window.location = URL.salesperson));
         });
     }
 
@@ -156,16 +157,16 @@ export default withRouter(
 
       axios
         .post(
-          "http://localhost:3001/management/updateSalesperson/" + this.dataId,
+          URL.main=URL.updateSalesperson+ this.dataId,
           user
         )
         .then((res) => {
           console.log(res.data);
-          alert(res.data, (window.location = "/management/salesperson"));
+          alert(res.data, (window.location =URL.salesperson));
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/salesperson"));
+          alert(error, (window.location = URL.salesperson));
         });
     }
 

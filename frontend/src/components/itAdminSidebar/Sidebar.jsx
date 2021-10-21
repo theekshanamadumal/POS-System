@@ -8,6 +8,7 @@ import {
   WorkOutline,
 } from "@material-ui/icons";
 import { useLocation } from "react-router-dom";
+import URL from "../../config";
 
 export default function ItAdminSidebar() {
   //assigning location variable
@@ -25,7 +26,7 @@ export default function ItAdminSidebar() {
           <h3 className="sidebarTitle">Dashboard</h3>
 
           <ul className="sidebarList">
-            <Link to="/itAdmin" className="link">
+            <Link to={URL.itAdmin} className="link">
               <li className={(splitLocation).length=== 2 ? "active sidebarListItem" : "sidebarListItem"}>
                 <LineStyle className="sidebarIcon" />
                 Home
@@ -35,14 +36,14 @@ export default function ItAdminSidebar() {
         </div>
         <div className="sidebarMenu">
           <ul className="sidebarList">
-            <Link to="/itAdmin/management" className="link">
+            <Link to={URL.manager} className="link">
               <li className={splitLocation[2] === "management" ? "active sidebarListItem" : "sidebarListItem"}>
                 <PermIdentity className="sidebarIcon" />
                 Management
               </li>
             </Link>
 
-            <Link to="/itAdmin/addManager" className="link">
+            <Link to={URL.addManager} className="link">
               <li className={splitLocation[2] === "addManager" ? "active sidebarListItem" : "sidebarListItem"}>
                 <WorkOutline className="sidebarIcon" />
                 Add Manager
@@ -53,7 +54,7 @@ export default function ItAdminSidebar() {
 
         <div className="sidebarMenu">
           <ul className="sidebarList">
-            <Link to="/itAdmin" className="link">
+            <Link to={URL.itAdmin} className="link">
               <li className={splitLocation[2] === "analytics" ? "active sidebarListItem" : "sidebarListItem"}>
                 <Timeline className="sidebarIcon" />
                 Analytics

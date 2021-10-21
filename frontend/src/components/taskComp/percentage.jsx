@@ -23,7 +23,7 @@ export default class Percentage extends Component {
                         lineWidth={24} // Number: Defines the thickness of the circle's stroke. 
                         progress={achievedPercentage} // Number: Update to change the progress and percentage.
                         progressColor="cornflowerblue"  // String: Color of "progress" portion of circle.
-                        bgColor="whitesmoke" // String: Color of "empty" portion of circle.
+                        bgColor="white" // String: Color of "empty" portion of circle.
                         textColor="black" // String: Color of percentage text color.
                         textStyle={{ 
                             font: 'bold 5rem Helvetica, Arial, sans-serif' // CSSProperties: Custom styling for percentage.

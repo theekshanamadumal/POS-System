@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import URL from "../../config";
 import "./sidebar.css";
 import {
   LineStyle,
@@ -28,7 +28,7 @@ export default function ManagementSidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/management" className="link">
+            <Link to={URL.management} className="link">
               <li
                 className={
                   splitLocation.length === 2
@@ -41,7 +41,7 @@ export default function ManagementSidebar() {
               </li>
             </Link>
 
-            <Link to="/management/analytics" className="link">
+            <Link to={URL.analytics} className="link">
               <li
                 className={
                   splitLocation[2] === "analytics"
@@ -57,7 +57,7 @@ export default function ManagementSidebar() {
         </div>
         <div className="sidebarMenu">
           <ul className="sidebarList">
-            <Link to="/management/salesperson" className="link">
+            <Link to={URL.salesperson} className="link">
               <li
                 className={
                   splitLocation[2] === "salesperson"
@@ -70,7 +70,7 @@ export default function ManagementSidebar() {
               </li>
             </Link>
 
-            <Link to="/management/products" className="link">
+            <Link to={URL.products} className="link">
               <li
                 className={
                   splitLocation[2] === "products"
@@ -83,7 +83,7 @@ export default function ManagementSidebar() {
               </li>
             </Link>
 
-            <Link to="/management/orders" className="link">
+            <Link to={URL.orders} className="link">
               <li
                 className={
                   splitLocation[2] === "orders"
@@ -96,7 +96,7 @@ export default function ManagementSidebar() {
               </li>
             </Link>
 
-            <Link to="/management/shops" className="link">
+            <Link to={URL.shops} className="link">
               <li
                 className={
                   splitLocation[2] === "shops"
@@ -109,7 +109,7 @@ export default function ManagementSidebar() {
               </li>
             </Link>
 
-            <Link to="/management/routes" className="link">
+            <Link to={URL.routes} className="link">
               <li
                 className={
                   splitLocation[2] === "routes"
@@ -122,7 +122,7 @@ export default function ManagementSidebar() {
               </li>
             </Link>
 
-            <Link to="/management/tasks" className="link">
+            <Link to={URL.tasks} className="link">
               <li
                 className={
                   splitLocation[2] === "tasks"
