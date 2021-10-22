@@ -8,7 +8,7 @@ var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 
 router.route("/management").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isAdmin],
+  [authJwt.verifyToken, authJwt.isAdmin],s
   UC.allUsers(res);
  
 });

@@ -1,12 +1,28 @@
 const URL = {}
-URL.main="http://localhost:3001";
+
+
 URL.GoogleMapsAPI = 'AIzaSyBNQsYuKSBIV1GWz8O3t0HKjMkGD_k5fsM';
 
+/////////////////////// react app //////////////////////////
+
+
+/////////////////////// rest api //////////////////////////
+
+
+URL.main="http://localhost:3001";
+
+
 URL.sellerLocation = "http://localhost:3001/management/sellerLocation";
+URL.invoice = "http://localhost:3001/management/invoice";
+
+URL.signin = "/api/auth/signin";
+URL.signup = "/api/auth/signin";
+URL.signout = "/api/auth/signout";
+
+
 
 URL.management = "/management";
 
-URL.invoice = "http://localhost:3001/management/invoice";
 
 URL.products = "/management/products";
 URL.addProduct = "/management/addProduct";

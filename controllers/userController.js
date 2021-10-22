@@ -86,6 +86,7 @@ module.exports =  class UserController {
 
                         
     }
+}
   
 //Test funtions to check authorization
 exports.admin = (req, res) => {
