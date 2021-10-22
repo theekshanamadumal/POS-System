@@ -1,10 +1,11 @@
 const db = require("../models");
 const User = db.user;
+const bcrypt = require("bcrypt");
 
 module.exports =  class UserController {
     // Constructor
     constructor(type) {
-       
+
         var roleType;
         switch (type) {
             case 'Admin':
@@ -30,49 +31,6 @@ module.exports =  class UserController {
 
 
 // Static method
-    addUser(req,res ) {
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
-        const idNumber = req.body.idNumber;
-
-        const selectedImage = req.body.image;
-        const imgData = selectedImage.buffer;
-        console.log(imgData)
-
-        const imgcontentType = "image/jpg";
-        const image= {data: imgData, 
-                        contentType: imgcontentType};
-
-        const password = req.body.password;
-        const roles = this.roleType;
-        const address = req.body.address;
-        const city = req.body.city;
-        const phoneNumber = Number(req.body.phoneNumber);
-        const email = req.body.email;
-        const joinedDate = Date(req.body.joinedDate);
-
-        const newUser = new User({
-            firstName,
-            lastName,
-            idNumber,
-            image,
-            password,
-            roles,
-            address,
-            city,
-            phoneNumber, 
-            email,
-            joinedDate
-        });
-        console.log("new user c:",newUser);
-        newUser
-            .save()
-            .then(() => res.json("User added!"))
-            .catch((err) => res.status(400).json("Error: " + err));
-           
-        return res;
-
-    }
 
     getUser(req,res ) {
         console.log('req.params.id')
@@ -110,7 +68,7 @@ module.exports =  class UserController {
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
         user.image =image;
-        user.password = req.body.password;
+        user.password = bcrypt.hashSync(req.body.password, 8);
         user.address = req.body.address;
         user.city = req.body.city;
         user.phoneNumber = Number(req.body.phoneNumber);
@@ -128,11 +86,7 @@ module.exports =  class UserController {
 
                         
     }
-}
-
-
-
-
+  
 //Test funtions to check authorization
 exports.admin = (req, res) => {
     res.status(200).send("Admin Content.");
@@ -145,3 +99,4 @@ exports.manager = (req, res) => {
 exports.salesperson = (req, res) => {
     res.status(200).send("Salesperson Content.");
 };
+

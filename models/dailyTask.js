@@ -1,7 +1,4 @@
 const mongoose = require("mongoose");
-const db = require("./index");
-const Shop = db.shop;
-
 
 const DailyTask = mongoose.model(
     "DailyTask",
