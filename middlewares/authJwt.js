@@ -4,6 +4,8 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
+//Middleware funtion for the JWT token authetication
+
 verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
@@ -19,6 +21,8 @@ verifyToken = (req, res, next) => {
     next();
   });
 };
+
+//Funtions for authorization managemnt
 
 isAdmin = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {

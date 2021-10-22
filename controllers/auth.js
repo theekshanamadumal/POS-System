@@ -1,4 +1,4 @@
-const {SECRET} = require("../config");
+const { SECRET } = require("../config");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
@@ -6,6 +6,8 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcrypt");
 
+
+//Signup ad save hashed password on the DB
 exports.signup = (req, res) => {
     const user = new User({
         username: req.body.username,
@@ -43,6 +45,8 @@ exports.signup = (req, res) => {
     });
 };
 
+
+//Signing in and returning the JWT token funtion
 exports.signin = (req, res) => {
     User.findOne({
         email: req.body.email
@@ -89,6 +93,8 @@ exports.signin = (req, res) => {
         });
 };
 
+
+//Singout by clearing client-side token data
 exports.signout = (req, res) => {
     res.status(200).send({ auth: false, token: null });
 };

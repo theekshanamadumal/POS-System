@@ -1,19 +1,27 @@
+//Imporitng required NPM packges
 const express = require('express')
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+
+//Imporitng required dependencies
 const { DB, port } = require("./config");
 const db = require("./models");
-
 const app = express();
 const Role = db.role;
 
+//
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
+app.use(express.json());
 
+
+//Setting up server port accroding to the server enviroment
 const PORT=process.env.port||port;
 
+
+//Connectiong to DB and start the server
 db.mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -57,19 +65,10 @@ require('./routes/authRoutes')(app);
 require('./routes/dataRoutes')(app);
 
 
-
+//Initialize auth details on the DB when the server runs for the first time
 function initialDbSetup() {
     Role.estimatedDocumentCount((err, count) => {
       if (!err && count === 0) {
-        new Role({
-          name: "user"
-        }).save(err => {
-          if (err) {
-            console.log("error", err);
-          }
-  
-          console.log("Added 'user' to roles collection");
-        });
   
         new Role({
           name: "manager"

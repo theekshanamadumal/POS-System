@@ -8,28 +8,28 @@ const DailyTask = mongoose.model(
     new mongoose.Schema({
         sellerId: String,
         dailyInventory: {
-            type: Map, of:
-                new mongoose.Schema({
-                    name: { type: String },
-                    price: { type: Number },
-                    quantity: { type: Number },
-                }),
+            type: [new mongoose.Schema({
+                productId: {
+                    type: mongoose.Schema.ObjectId,
+                    ref: "Product"
+                },
+                quantity: { type: Number },
+            })]
         },
         dailyRoute: {
-            type: Map, of: { type: [Number] },
+            type: mongoose.Schema.ObjectId,
+            ref: "routes"
         },
         dailySalesProgression: Number,
         dailySalesTarget: Number,
         dailyShops: {
-            type: Map, of:
-                new mongoose.Schema({
-                    title: { type: String },
-                    address: { type: String },
-                    cp: { type: String },
-                    isCovered: { type: Boolean },
-                    telephone: { type: String },
-                    location: { type: [Number] },
-                }),
+            type: [new mongoose.Schema({
+                isCovered: { type: Boolean },
+                shopId: {
+                    type: mongoose.Schema.ObjectId,
+                    ref: "Shops"
+                }
+            })]
         },
         name: String,
     })
