@@ -3,15 +3,21 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 
 //Signup ad save hashed password on the DB
 exports.signup = (req, res) => {
     const user = new User({
-        username: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        idNumber: req.body.idNumber,
         email: req.body.email,
+        adress: req.body.adress,
+        city: req.body.city,
+        phoneNumber: Number(req.body.phoneNumber),
+        joinedDate: Date(req.body.joinedDate),
         password: bcrypt.hashSync(req.body.password, 8)
     });
 

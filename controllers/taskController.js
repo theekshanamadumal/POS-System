@@ -125,10 +125,11 @@ exports.addPayment = async (req, res) => {
             return;
         }
         var paymentId = payment._id;
-        Payment.findOne({
-            _id: paymentId,
+        if (req.body.isOnline == true) {
+            Payment.findOne({
+                _id: paymentId,
 
-        })
+            })
             .populate('shopId', 'shopName')
             .populate({
                 path: 'transactions',
@@ -181,6 +182,8 @@ exports.addPayment = async (req, res) => {
                         console.log(info);
                 });
             });
+        }
+
         res.status(200).send({ message: "Done" });
     });
 };
