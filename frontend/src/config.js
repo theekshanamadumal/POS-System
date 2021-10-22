@@ -48,4 +48,6 @@ URL.analyticsCategory="management/analytics#category";
 URL.orders="/management/orders";
 URL.orderComp="/management/order/";
 
+URL.dailyTasks="/management/dailyTasks";
+
 module.exports = URL;

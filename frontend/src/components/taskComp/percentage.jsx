@@ -4,14 +4,15 @@ import Circle from 'react-circle';
 
 export default class Percentage extends Component {
     render() {
-        const achievedPercentage=((this.props.achieved.length/(this.props.remain.length+this.props.achieved.length))*100).toFixed(2);
+        const achievedPercentage=((this.props.achieved/(this.props.target))*100).toFixed(2);
         return (
             <div className="row ">
                 
                 <div className="col-md-5  mx-3 my-5" >
-                    <div style={{fontSize:"30px"}} className="my-5 mx-4 fw-bolder">Salesperson ID :<span className="text-dark" style={{fontWeight:"bolder"}}>{" "+this.props.id}</span> </div>
-                    <div className="my-5 mx-4" style={{fontSize:"30px"}}>Salesperson Name:<span style={{fontWeight:"bolder"}}> Joseph</span></div>
-                    <div className="my-5 mx-4" style={{fontSize:"30px"}}>Achieved Tasks  : <span style={{fontWeight:"bolder"}}> {" "+achievedPercentage} %</span></div>
+                    <div style={{fontSize:"30px"}} className="my-4 mx-4 fw-bolder">Salesperson ID :<span className="text-dark" style={{fontWeight:"bolder"}}>{" "+this.props.id}</span> </div>
+                    <div className="my-4 mx-4" style={{fontSize:"30px"}}>Name:<span style={{fontWeight:"bolder"}}>{this.props.name}</span></div>
+                    <div className="my-4 mx-4" style={{fontSize:"30px"}}>Achieved Tasks  : <span style={{fontWeight:"bolder"}}> {" "+achievedPercentage} %</span></div>
+                    <div className="my-4 mx-4" style={{fontSize:"30px"}}>Route ID: <span style={{fontWeight:"bolder"}}> {this.props.route} </span></div>
                 </div>
                 
                 <div className="col-md-5" style={{ width: 400, height: 400 }}>

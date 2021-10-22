@@ -1,7 +1,6 @@
 import "./tasks.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import axios from "axios";
-
 import { React, useState, useEffect } from "react";
 import {
   Box,
@@ -28,6 +27,7 @@ import URL from "../../../config";
 export default function Tasks() {
   const [disabled, setDisabled] = useState(true);
   const [searchBy, setSearchBy] = useState("");
+  const [dailyTasks, setDailyTasks] = useState([]);
 
   const handleChange = (event) => {
     setSearchBy(event.target.value);
@@ -35,12 +35,12 @@ export default function Tasks() {
   };
   const [word, setWord] = useState("");
 
-  /*
+  
   useEffect(() => {
     axios
-      .get(URL.main + URL.products)
+      .get(URL.main + URL.dailyTasks)
       .then((response) => {
-        setProducts(response.data);
+        setDailyTasks(response.data);
         console.log(response.data);
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ export default function Tasks() {
         alert(error, (window.location = URL.management));
       });
   }, []);
-*/
+
 
   return (
     <div className="tasks">
@@ -126,7 +126,7 @@ export default function Tasks() {
                       <h5>Progression</h5>
                     </TableCell>
                     <TableCell align="right" className="tbHeader">
-                      <h5>Remaining</h5>{" "}
+                      <h5>Route ID</h5>{" "}
                     </TableCell>
 
                     <TableCell align="center" className="tbHeader">
@@ -135,7 +135,7 @@ export default function Tasks() {
                   </TableRow>
                 </TableHead>
                 <TableBody className="tbBody">
-                  {tasks
+                  {dailyTasks
                     .filter((val) => {
                       if (word === "") {
                         return val;
