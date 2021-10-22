@@ -1,5 +1,5 @@
 const { verifySignUp } = require("../middlewares");
-const controller = require("../controllers/auth");
+const controller = require("../controllers/authController");
 
 
 //Authetication RESTful APIs
