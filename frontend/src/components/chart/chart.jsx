@@ -1,23 +1,21 @@
 import React from "react";
 import "./chart.css";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   Area,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
   AreaChart
 } from "recharts";
 import { Link } from "react-router-dom";
+import URL from "../../config";
 
 export default function chart({ title, data, dataKey, grid }) {
   return (
     <div className="chart" style={{cursor:"pointer"} }>
-      <Link to="management/analytics#sales" className="linkAnaly">
+      <Link to={URL.sales} className="linkAnaly">
         <span className="chartTitle">{title}</span>
         <br></br><br></br>
         <ResponsiveContainer width="100%" aspect={3 / 1}>

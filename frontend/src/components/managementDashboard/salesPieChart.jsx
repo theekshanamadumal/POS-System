@@ -1,6 +1,7 @@
-import { Doughnut,Pie } from 'react-chartjs-2';
+import { Doughnut} from 'react-chartjs-2';
 import {Box,Card,CardContent,CardHeader,Divider,Typography,colors,useTheme} from '@material-ui/core';
 import { Link } from "react-router-dom";
+import URL from "../../config";
 
 const SalesPieChart = (props) => {
   const theme = useTheme();
@@ -73,7 +74,7 @@ const SalesPieChart = (props) => {
   };
 
   return (
-    <Link to="management/analytics#category" className="linkAnaly">
+    <Link to={URL.analyticsCategory} className="linkAnaly">
       <Card {...props} sx={{height:220}} style={{cursor:"pointer"}}>
         <CardHeader title="Income By Catergory" />
         <Divider />

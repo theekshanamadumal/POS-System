@@ -1,25 +1,12 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import {
-  Box,
-  Card,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import { TableCell, TableHead, TableRow } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./orderList.css";
 import React from "react";
 import moment from "moment";
+import URL from "../../config";
 
 const OrderList = ({ orders, ...rest }) => {
-  const [limit, setLimit] = useState(10);
-
-  const [data, setData] = useState(orders);
-
   return (
     <Card {...rest} className="card">
       <PerfectScrollbar>
@@ -45,17 +32,17 @@ const OrderList = ({ orders, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody className="tbBody">
-              {data.slice(0, limit).map((d) => (
-                <TableRow hover key={d.id}>
-                  <TableCell>{d.id}</TableCell>
-                  <TableCell>{d.shopName}</TableCell>
-                  <TableCell>{d.totalAmount}</TableCell>
+              {orders.map((d) => (
+                <TableRow hover key={d._id}>
+                  <TableCell>{d._id.substr(19)}</TableCell>
+                  <TableCell>{d.shopId.shopName}</TableCell>
+                  <TableCell>{d.total}</TableCell>
                   <TableCell>
-                    {moment(d.orderedDate).format("DD/MM/YYYY")}
+                    {moment(d.dateTime).format("DD/MM/YYYY")}
                   </TableCell>
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/management/order/" + d.id}>
+                      <Link to={"/management/order/" + d._id}>
                         <button className="editButt">View</button>
                       </Link>
                     </div>
@@ -69,6 +56,32 @@ const OrderList = ({ orders, ...rest }) => {
     </Card>
   );
 };
+
+////////////////////////////////////
+//ur new one
+/*
+const OrderList = (props) => {
+  const d=props.orders;
+  return (
+    <TableRow hover key={d.id}>
+      <TableCell>{d.id}</TableCell>
+      <TableCell>{d.shopName}</TableCell>
+      <TableCell>{d.totalAmount}</TableCell>
+      <TableCell>
+        {moment(d.orderedDate).format("DD/MM/YYYY")}
+      </TableCell>
+      <TableCell>
+        <div className="actions">
+          <Link to={URL.orderComp + d.id}>
+            <button className="editButt">View</button>
+          </Link>
+        </div>
+      </TableCell>
+    </TableRow>
+  );
+};
+*/
+///////////////////////////
 
 OrderList.propTypes = {
   orders: PropTypes.array.isRequired,

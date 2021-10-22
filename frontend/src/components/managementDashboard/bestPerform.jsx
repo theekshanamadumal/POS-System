@@ -5,13 +5,13 @@ import React from 'react';
 import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 import { Link } from 'react-router-dom';
-
+import URL from '../../config';
 
 const BestPerform = ({ bestPerform, ...rest }) => {
     
     return (
       <div style={{cursor:"pointer"}} className="tableCont" >
-        <Link to="management/analytics#salesperson" >
+        <Link to={URL.analyticsSalesperson} >
           <h3 style={{textAlign:"center"}}>Best Performing Salespersons</h3>
           <br></br>
           <Container maxWidth="lg" >
@@ -36,8 +36,8 @@ const BestPerform = ({ bestPerform, ...rest }) => {
                     {bestPerform
                       .map((item) => {
                         return (
-                          <TableRow key={item.name}>
-                            <TableCell align="center">{item.name}</TableCell>
+                          <TableRow key={item.id}>
+                            <TableCell align="center">{item.firstName+" "+item.lastName}</TableCell>
                             <TableCell align="center">{item.id}</TableCell>
                             <TableCell align="right">
                               {" "}

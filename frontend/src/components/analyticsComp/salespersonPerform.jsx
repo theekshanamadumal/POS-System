@@ -1,96 +1,79 @@
 import PropTypes from 'prop-types';
-import {Paper,Table,TableBody,TableCell,TableHead,TableRow} from '@material-ui/core';
 import "../list.css";
 import React from 'react';
-import { Container } from "@material-ui/core";
-import TableContainer from "@material-ui/core/TableContainer";
 import "./salespersonPerform.css";
 import { Button } from 'reactstrap';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis,YAxis, CartesianGrid, Tooltip,ResponsiveContainer,LabelList } from 'recharts';
 
 
 const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
+  const [selected, setSelected] = React.useState("");
+  const changeSelectOptionHandler = (event) => {
+    setSelected(event.target.value);
+  };
+  const year= [
+    "2021",
+    "2020",
+  ];
+  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const dataStructure = ["Last week","Last 2 weeks","Last 3 weeks"];
+  let type = null;
+  let options = null;
 
-    const dataBar = [
-        {
-          name: 'Mobile',
-          sales: 420000,
-        },
-        {
-          name: 'Desktop',
-          sales: 200000,
-        },
-        {
-          name: 'Earphone',
-          sales: 84000,
-        },
-        {
-          name: 'Tablet',
-          sales: 177800,
-        },
-        {
-          name: 'Laptop',
-          sales: 381000,
-        },
-        {
-          name: 'USB pen',
-          sales: 23900,
-        },
-        {
-          name: 'Others',
-          sales: 34900,
-        },
-      ];
+  if (selected === "Year") {
+    type = year;
+  } else if (selected === "Month") {
+    type = month;
+  } else if (selected === "Week") {
+    type = dataStructure;
+  }
+  if (type) {
+    options = type.map((el) => <option key={el}>{el}</option>);
+  }
     
-    return (
-      <div className="tablePerson">
+  return (
+    <div className="tablePerson">
       <h1 style={{textAlign:"center"}}>Sales By Salespersons</h1>
       <br></br>
-        <Container maxWidth="lg" >
-            <Paper>
-                <TableContainer>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="center">
-                                Name
-                                </TableCell>
-                                <TableCell align="center">
-                                ID
-                                </TableCell>
-                                <TableCell align="right">
-                                Sales
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-
-                        <TableBody>
-                        {salespersonPerform
-                            .map((item) => {
-                            return (
-                                <TableRow key={item.name}>
-                                <TableCell align="center">{item.name}</TableCell>
-                                <TableCell align="center">{item.id}</TableCell>
-                                <TableCell align="right">
-                                    {" "}
-                                    {(item.income ).toFixed(2)}{" "}
-                                </TableCell>
-                                </TableRow>
-                            );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
-        </Container>
-        <br></br>
-        <br></br>
-        <a href="http://localhost:3000/management/analytics#salesperson/page.pdf" download rel="noopener noreferrer" target="_blank">
-            <Button>Download</Button>
-        </a>
-
+      <form style={{margin:"0px 60px"}}>
+        <div className="row">
+           <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
+          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
+            <option>Choose...</option>
+            <option>Year</option>
+            <option>Month</option>
+            <option>Week</option>
+          </select>
         
-        </div>
+          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+            {options}
+          </select>
+        
+          <button className="btn btn btn-secondary">View Analysis</button>
+        </div>  
+      </form>
+      <br></br>
+      <ResponsiveContainer width="100%" aspect={1.5 / 1}>
+        <BarChart
+          data={salespersonPerform}
+          margin={{top: 5, right: 3, left: 2, bottom: 5}}
+          margin={{left:59,right:59}}
+          layout="vertical">
+          <XAxis type="number" orientation="bottom" stroke="black"/>
+          <YAxis type="category" dataKey="lastName" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
+          <Bar background dataKey="income" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
+              <LabelList dataKey="income"  position="right" style={{ fill: "#0004ff" }} />
+          </Bar>
+          <Tooltip cursor={{fill: 'transparent'}}  contentStyle={{width:"150px", height:"80px"}}/>
+          <CartesianGrid strokeDasharray="1 1"/>
+        </BarChart>
+      </ResponsiveContainer>
+      <br></br>
+      <br></br>
+      <a href="" download rel="noopener noreferrer" target="_blank">
+          <Button>Download</Button>
+      </a>
+    </div>
   );
 };
 

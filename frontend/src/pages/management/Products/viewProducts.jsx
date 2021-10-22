@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
+import URL from "../../../config";
 
 import "./viewProducts.css";
 import { withRouter } from "react-router";
-import {
-  Publish,
-  Email,
-  PhoneAndroid,
-  LocationCity,
-  Home,
-} from "@material-ui/icons";
 
 export default withRouter(
   class viewProducts extends Component {
@@ -38,7 +32,7 @@ export default withRouter(
     }
     loadCategories() {
       axios
-        .get("http://localhost:3001/management/productCategory")
+        .get(URL.main+URL.productCategory)
         .then((response) => {
           this.setState({
             categoryList: response.data,
@@ -48,7 +42,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/products"));
+          alert(error, (window.location =URL.products));
         });
     }
     componentDidMount() {
@@ -56,7 +50,7 @@ export default withRouter(
 
       console.log("dataId: ", this.dataId);
       axios
-        .get("http://localhost:3001/management/product/" + this.dataId)
+        .get(URL.main+URL.productComp+this.dataId)
         .then((response) => {
           this.setState({
             product: response.data,
@@ -72,7 +66,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/products"));
+          alert(error, (window.location =URL.products));
         });
 
       this.loadCategories();
@@ -119,16 +113,16 @@ export default withRouter(
 
       axios
         .post(
-          "http://localhost:3001/management/updateProduct/" + this.dataId,
+          URL.main+URL.updateProduct+ this.dataId,
           product
         )
         .then((res) => {
           console.log(res.data);
-          alert(res.data, (window.location = "/management/products"));
+          alert(res.data, (window.location = URL.products));
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/products"));
+          alert(error, (window.location = URL.products));
         });
     }
 

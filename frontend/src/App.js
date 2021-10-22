@@ -3,6 +3,7 @@ import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
 import Login from "./components/login/login";
+import Maps from "./pages/management/sellerLocation/Maps";
 
 //it admin
 import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
@@ -41,7 +42,7 @@ import Reports from "./pages/management/Reports/reports";
 
 import Tasks from "./pages/management/Tasks/tasks";
 import ViewTasks from "./pages/management/Tasks/viewTasks";
-import AssignTasks from './pages/management/Tasks/assignTasks';
+import AssignTasks from './pages/management/Tasks/assign';
 import RealTimeData from "./pages/management/Tasks/realTimeData";
 
 
@@ -51,16 +52,17 @@ function App() {
     <Router>
     <div className="App">
 
+    
     <Topbar/>
         <div className='contain'>
     
         <Switch>
-        
-          <Route exact path="/">
-           <h1>login page</h1>      <br/>
 
-           <Login/>
-          </Route>
+        <Route exact path="/">
+          <Login/>
+        </Route>
+        
+          
       
           <Route exact path="/itAdmin">
             <ItAdminSidebar/>  
@@ -197,7 +199,7 @@ function App() {
 
           <Route path="/management/tasks/:id/assignTasks">
             <ManagementSidebar/>
-            <AssignTasks/>
+            <AssignTasks />
           </Route>
 
           <Route path="/management/tasks/:id/realData">

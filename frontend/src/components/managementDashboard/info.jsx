@@ -5,15 +5,17 @@ import SalesPieChart from "./salesPieChart";
 import BestPerform from "./bestPerform";
 import { bestPerform } from "..//../dataCollection";
 import { Link } from "react-router-dom";
+import URL from "../../config";
 
 export default function Info() {
     return (
-        <div className="featured">
+        <div className="container featured">
+        <div className="row">
 
-            <div className="featuredItem1">
+            <div className="col-sm-3.8 featuredItem1">
                 <SalesPieChart />
             </div>
-            <div className="featuredItem2">
+            <div className="col-sm-3.8 featuredItem2">
                 
                 <div className="up">
                     <BestPerform bestPerform={bestPerform} />
@@ -21,13 +23,13 @@ export default function Info() {
             </div>
             
             
-            <div className="featuredItem3">
+            <div className="col-sm-3.8 featuredItem3">
                 <div className="up">
                     <span className="featuredTitle">No of users</span>
                     <hr className="line"></hr>
                     <div className="featuredUser">
                         <div className="featuredUs">
-                            <Link to="/management/salesperson" className="linkTo">
+                            <Link to={URL.salesperson} className="linkTo">
                                 <PeopleAlt fontSize="large" className="Icon" />
                                 <div className="descript">Total Salespersons</div>
                                 <div className="count">23</div>
@@ -35,7 +37,7 @@ export default function Info() {
                         </div>
                         
                         <div className="featuredUs">
-                            <Link to="/management/shops" className="linkTo">
+                            <Link to={URL.shops} className="linkTo">
                                 <Storefront fontSize="large" className="Icon" />
                                 <div className="descript">Total<br></br> Shops </div>
                                 <div className="count">180</div>
@@ -45,7 +47,7 @@ export default function Info() {
                     </div>
                 </div>
                 <div className="down">
-                    <Link to="/management/products" className="linkTo">
+                    <Link to={URL.products} className="linkTo">
                         <span className="featuredTitle">Product Details</span>
                         <hr className="line"></hr>
                         <div className="featuredContainer">
@@ -68,7 +70,7 @@ export default function Info() {
                 </div>
             </div>
 
-
+            </div>
             
             
         </div>

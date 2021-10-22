@@ -1,24 +1,16 @@
-let Category = require("../models/category");
 const router = require("express").Router();
+let ProductCategoryController = require("../controllers/productCategoryController");
+const { authJwt } = require("../middlewares");
 
 
 router.route("/productCategory").get((req, res) => {
-    Category.find()
-    .then((category) => res.json(category))
-    .catch((err) => res.status(400).json("Error: " + err));
+  [authJwt.verifyToken, authJwt.isManager],
+  ProductCategoryController.allCategories(res);
 });
 
 router.route("/addProductCategory").post((req, res) => {
-const category = req.body.category;
-  console.log("category:",category)
-  const newCategory = new Category({
-    category,   
-  });
-
-  newCategory
-    .save()
-    .then(() => res.json("productCategory added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+  [authJwt.verifyToken, authJwt.isManager],
+  ProductCategoryController.addNewCategory(req,res);
 });
 
 
