@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 import "../../toolbar.css";
 import ListComponent from "../../../components/listComponent";
 import URL from "../../../config";
+import moment from "moment";
 
 export default function SalesPerson(props) {
   const [salespersons, setSalespersons]=useState([]);
@@ -163,6 +164,11 @@ export default function SalesPerson(props) {
                                     }
                                     else if (searchBy==="phoneNumber"){
                                         if ((val.phoneNumber.toString()).includes(word)){
+                                            return val
+                                        }
+                                    }
+                                    else if (searchBy==="joinedDate"){
+                                        if (moment(val.joinedDate).format("DD/MM/YYYY").toLowerCase().trim().includes(word.toLowerCase().trim())){
                                             return val
                                         }
                                     }

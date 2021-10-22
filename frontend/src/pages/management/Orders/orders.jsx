@@ -55,7 +55,8 @@ export default Order;
 ////////////////////////////////////////////////////////////////////
 import "./order.css";
 import { orderRows } from "../../../dataCollection";
-import { React, useState } from "react";
+import { React, useState,useEffect } from "react";
+import moment from "moment";
 import {
   Box,
   Card,
@@ -75,6 +76,7 @@ import {
 } from "@material-ui/core";
 import { Search as SearchIcon } from "react-feather";
 import "../../toolbar.css";
+import URL from "../../../config";
 import axios from "axios";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import OrderListComponent from "../../../components/orderComp/orderList";
@@ -83,11 +85,32 @@ export default function Orders() {
   const [disabled, setDisabled] = useState(true);
   const [searchBy, setSearchBy] = useState("");
 
+  const [paymentsData,setPaymentsData]=useState([]);
+
   const handleChange = (event) => {
     setSearchBy(event.target.value);
     setDisabled(false);
   };
   const [word, setWord] = useState("");
+
+  const loadInvoices=()=> {
+    console.log("finded..........")
+    axios
+      .get(URL.invoice)
+      .then((response) => {
+        setPaymentsData( response.data,);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = URL.management));
+      });
+  }
+
+  useEffect(() => {
+    loadInvoices();
+  }, []);
+
   return (
     <div className="background">
       <div className="spacing">
@@ -113,9 +136,9 @@ export default function Orders() {
                     label="Age"
                     onChange={handleChange}
                   >
-                    <MenuItem value="id">Order ID</MenuItem>
+                    <MenuItem value="_id">Order ID</MenuItem>
                     <MenuItem value="shopName">Shop Name</MenuItem>
-                    <MenuItem value="orderedDate">Issued Date</MenuItem>
+                    <MenuItem value="dateTime">Issued Date</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
@@ -168,27 +191,40 @@ export default function Orders() {
                   </TableRow>
                 </TableHead>
                 <TableBody className="tbBody">
-                  {orderRows
+                  {paymentsData
                     .filter((val) => {
                       if (word === "") {
                         return val;
                       } else {
-                        console.log(val);
-                        console.log(searchBy);
-                        if (
-                          val[searchBy]
-                            .toLowerCase()
-                            .trim()
-                            .includes(word.toLowerCase().trim())
-                        ) {
-                          return val;
+                        if (searchBy==="shopName"){
+                          if ((val.shopId.shopName).toLowerCase().trim().includes(word.toLowerCase().trim())){
+                              return val
+                          }
                         }
+                        else if (searchBy==="_id"){
+                          
+                          if ((val[searchBy].substr(19)).toLowerCase().trim().includes(word.toLowerCase().trim())){
+                              return val
+                          }
+                        } 
+                        else{
+                          console.log(val)
+                          console.log(word)
+                          console.log(moment(val.dateTime).format("DD/MM/YYYY"))
+                          if (moment(val.dateTime).format("DD/MM/YYYY").toLowerCase().trim().includes(word.toLowerCase().trim())) {
+                            return val;
+                          }
+                        }
+                        
                       }
                     })
                     .map((val) => {
                       return (
-                        console.log(val.id),
-                        (<OrderListComponent orders={val} key={val.id} />)
+                        console.log("invoices------------:"),
+                        console.log(paymentsData),
+                        console.log("id.........*********"),
+                        console.log(val),
+                        (<OrderListComponent orders={val} key={val._id} />)
                       );
                     })}
                 </TableBody>
