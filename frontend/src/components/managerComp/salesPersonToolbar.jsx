@@ -10,13 +10,14 @@ import {
 import { Search as SearchIcon } from "react-feather";
 import { Link } from "react-router-dom";
 import "../toolbar.css";
+import URL from "../../config";
 
 export default function managerToolBar() {
   return (
     <div className="spacing">
       <div className="containerSale">
         <h1 className="heading">Management</h1>
-        <Link to="/itAdmin/addManager">
+        <Link to={URL.addManager}>
           <button className="addUser">Add New Manager</button>
         </Link>
       </div>

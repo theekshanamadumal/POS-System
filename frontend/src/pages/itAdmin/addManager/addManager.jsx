@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./addManager.css";
+import URL from "../../../config";
 
 var multer = require("multer");
 
@@ -115,10 +116,15 @@ export default class AddManager extends Component {
     console.log(user);
 
     axios
-      .post("http://localhost:3001/itAdmin/addManager", user)
-      .then((res) => console.log(res.data));
-
-    window.location = "/itAdmin/management";
+      .post(URL.main+URL.addManager, user)
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data, (window.location = URL.manager));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = URL.manager));
+      });
   }
 
   render() {

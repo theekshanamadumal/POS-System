@@ -18,6 +18,7 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
+import URL from "../../config";
 
 const SalesPersonList = ({ salesPerson, ...rest }) => {
   const limit = 10;
@@ -31,13 +32,13 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
   const handleDelete = (_id) => {
     //setData(data.filter((item) => item.id !== id));
     axios
-      .delete("http://localhost:3001/itAdmin/management/" + _id)
+      .delete(URL.main+URL.manager+ _id)
       .then((response) => {
         console.log(response.data);
       });
 
     setData(data.filter((el) => el._id !== _id));
-    window.location = "/itAdmin/management";
+    window.location =URL.manager;
   };
 
   return (
@@ -96,7 +97,7 @@ const SalesPersonList = ({ salesPerson, ...rest }) => {
 
                   <TableCell>
                     <div className="actions">
-                      <Link to={"/itAdmin/management/" + d.idNumber}>
+                      <Link to={URL.manager + d.idNumber}>
                         <button className="editButt">View / Edit</button>
                       </Link>
                       <Delete

@@ -1,11 +1,6 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import {
-  Avatar,
   Paper,
-  Box,
-  Card,
   Table,
   TableBody,
   TableCell,
@@ -18,14 +13,6 @@ import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 
 const InvoiceList = ({ invoices, ...rest }) => {
-  const [limit, setLimit] = useState(10);
-
-  const [data, setData] = useState(invoices);
-
-  const [total, setTotal] = useState();
-
-  const reducer = (acc, value) => acc + value;
-
   return (
     <Container maxWidth="md" className="tableCont">
       <Paper>
@@ -42,22 +29,21 @@ const InvoiceList = ({ invoices, ...rest }) => {
             </TableHead>
 
             <TableBody>
-              {invoices
-                .slice(0, limit)
-                .filter((item) => item.unitPrice > 0)
-                .sort((a, b) => (a.name > b.productName ? 1 : -1))
+              {invoices.transactions
+                //.filter((item) => item.id.unitPrice > 0)
+                // .sort((a, b) => (a.name > b.productName ? 1 : -1))
                 .map((item, index) => {
                   return (
-                    <TableRow key={item.productName}>
+                    <TableRow key={item.id._id}>
                       <TableCell align="center">{index + 1}</TableCell>
-                      <TableCell align="center">{item.productName}</TableCell>
+                      <TableCell align="center">{item.id.itemName}</TableCell>
                       <TableCell align="right">
                         {" "}
-                        {item.unitPrice.toFixed(2)}{" "}
+                        {item.id.unitPrice.toFixed(2)}{" "}
                       </TableCell>
                       <TableCell align="right">{item.quantity} </TableCell>
                       <TableCell align="right">
-                        {(item.unitPrice * item.quantity).toFixed(2)}{" "}
+                        {(item.id.unitPrice * item.quantity).toFixed(2)}{" "}
                       </TableCell>
                     </TableRow>
                   );
@@ -70,10 +56,11 @@ const InvoiceList = ({ invoices, ...rest }) => {
                   <strong>Total Amount in LKR</strong>
                 </TableCell>
                 <TableCell align="right">
-                  {invoices
+                  {invoices.total}
+                  {/*invoices
                     .map((item) => item.unitPrice)
                     .reduce((acc, value) => acc + value)
-                    .toFixed(2)}{" "}
+                  .toFixed(2)*/}{" "}
                 </TableCell>
               </TableRow>
             </TableBody>

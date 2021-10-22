@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import "./addRoute.css";
-import axios from "axios";
 import AddRouteComponent from "../Routes/addRouteComponent";
+import URL from "../../../config";
 
 export default class AddRoute extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="viewRoute">
@@ -21,7 +17,7 @@ export default class AddRoute extends Component {
               <div className="container ">
                 <div className="detailsContainer">
                   <h1 className="editRoute">Enter Route Details</h1>
-                  <AddRouteComponent location="/management/routes" />
+                  <AddRouteComponent location={URL.routes}/>
                 </div>
               </div>
             </div>

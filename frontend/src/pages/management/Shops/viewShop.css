@@ -1,12 +1,15 @@
-.viewShop{
-    flex:8;
-    background-color: rgba(236, 234, 234, 0.699);
+.viewShop {
+  flex: 8;
+  background-color: rgba(236, 234, 234, 0.699);
 }
-.headingView{
-    padding: 10px;
-    margin-bottom: -20px;
-    
+.headingView {
+  padding: 10px;
+  margin-bottom: -20px;
 }
-.viewShopImg{
-    margin-top: -40px;
+.viewShopImg {
+  margin-top: -40px;
+}
+
+.name {
+  margin-left: 0px;
 }

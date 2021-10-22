@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./viewShop.css";
 import { withRouter } from "react-router";
 import axios from "axios";
+import URL from "../../../config";
 
 import { Email, PhoneAndroid, LocationCity, Home } from "@material-ui/icons";
 
@@ -16,6 +17,7 @@ export default withRouter(
       this.onChangeEmail = this.onChangeEmail.bind(this);
       this.onChangeCity = this.onChangeCity.bind(this);
       this.onChangeRoute = this.onChangeRoute.bind(this);
+      this.onChangeLocation = this.onChangeLocation.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
       this.loadRoutes = this.loadRoutes.bind(this);
 
@@ -29,13 +31,14 @@ export default withRouter(
         phoneNo: "",
         email: "",
         city: "",
+        location: "",
         route: "",
       };
     }
 
     loadRoutes() {
       axios
-        .get("http://localhost:3001/management/salesRoutes")
+        .get(URL.main+URL.salesRoutes)
         .then((response) => {
           this.setState({
             routeList: response.data,
@@ -45,7 +48,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/products"));
+          alert(error, (window.location = URL.products));
         });
     }
 
@@ -55,16 +58,17 @@ export default withRouter(
       this.dataId = this.props.match.params.id;
       console.log("dataId: ", this.dataId);
       axios
-        .get("http://localhost:3001/management/shop/" + this.dataId)
+        .get(URL.main+URL.shopComp + this.dataId)
         .then((response) => {
           this.setState({
             shop: response.data,
             idNumber: response.data._id,
             shopName: response.data.shopName,
             owner: response.data.owner,
-            phoneNo: response.data.phoneNo,
+            phoneNo: Number(response.data.phoneNo),
             email: response.data.email,
             city: response.data.city,
+            location: String(response.data.location),
             route: response.data.route,
           });
           console.log("response.data");
@@ -72,7 +76,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/shops"));
+          alert(error, (window.location = URL.shops));
         });
     }
 
@@ -91,6 +95,9 @@ export default withRouter(
     onChangeCity(e) {
       this.setState({ city: e.target.value });
     }
+    onChangeLocation(e) {
+      this.setState({ location: e.target.value });
+    }
     onChangeRoute(e) {
       this.setState({ route: e.target.value });
     }
@@ -103,23 +110,25 @@ export default withRouter(
         phoneNo: this.state.phoneNo,
         email: this.state.email,
         city: this.state.city,
+        location: this.state.location,
         route: this.state.route,
       };
 
       console.log(shop);
+      console.log(shop.location);
 
       axios
         .post(
-          "http://localhost:3001/management/updateShop/" + this.dataId,
+          URL.main+URL.updateShop + this.dataId,
           shop
         )
         .then((res) => {
           console.log(res.data);
-          alert(res.data, (window.location = "/management/shops"));
+          alert(res.data, (window.location = URL.shops));
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/management/shops"));
+          alert(error, (window.location = URL.shops));
         });
     }
 
@@ -133,7 +142,7 @@ export default withRouter(
             <div className="detailsContainer">
               <div className="detailMain">
                 <div className="idName">
-                  <h2 className="name"> {"-" + this.state.shop.shopName} </h2>
+                  <h2 className="name"> {this.state.shop.shopName} </h2>
                 </div>
               </div>
               <div className="detailSub">
@@ -170,7 +179,14 @@ export default withRouter(
                     <LocationCity />{" "}
                     <span className="value">City : {this.state.shop.city}</span>
                   </li>
+                  <li className="contact">
+                    <LocationCity /> <span className="value">Location</span>
+                  </li>
+                  <li className="contact">
+                    <span>: {this.state.shop.location}</span>
+                  </li>
                 </ul>
+
                 <br></br>
                 <p className="detail">Route Details:</p>
 
@@ -186,17 +202,25 @@ export default withRouter(
 
                   <li className="contact">
                     Begin :
-                    <span className="value">{this.state.shop.route}</span>
+                    <span className="value">
+                      {this.state.routeList.map((r) =>
+                        this.state.shop.route == r._id ? r.origin : null
+                      )}
+                    </span>
                   </li>
                   <li className="contact">
                     Destination :
-                    <span className="value">{this.state.shop.route}</span>
+                    <span className="value">
+                      {this.state.routeList.map((r) =>
+                        this.state.shop.route == r._id ? r.destination : null
+                      )}
+                    </span>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="editContainer">
-              <h1 className="editTitle">Add new shop</h1>
+              <h1 className="editTitle">Change Details</h1>
               <br />
               <br />
               <form action="" className="form" onSubmit={this.onSubmit}>
@@ -240,6 +264,16 @@ export default withRouter(
                       required
                     ></input>
                     <br />
+                    <label>Location </label>
+
+                    <input
+                      value={this.state.location}
+                      onChange={this.onChangeLocation}
+                      type="text"
+                      required
+                    ></input>
+                    <br />
+
                     <label>Route</label>
                     <select
                       value={this.state.route}
