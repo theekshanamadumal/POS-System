@@ -35,7 +35,6 @@ export default function Tasks() {
   };
   const [word, setWord] = useState("");
 
-  
   useEffect(() => {
     axios
       .get(URL.main + URL.dailyTasks)
@@ -48,7 +47,6 @@ export default function Tasks() {
         alert(error, (window.location = URL.management));
       });
   }, []);
-
 
   return (
     <div className="tasks">
@@ -76,8 +74,8 @@ export default function Tasks() {
                     label="Age"
                     onChange={handleChange}
                   >
-                    <MenuItem value="_id">Salesperson ID</MenuItem>
-                    <MenuItem value="name">Salesperson Name</MenuItem>
+                    <MenuItem value="_id">Seller ID</MenuItem>
+                    <MenuItem value="name">Seller Name</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
@@ -113,10 +111,10 @@ export default function Tasks() {
                 <TableHead sx={{ innerHeight: 100 }}>
                   <TableRow>
                     <TableCell align="center" className="tbHeader">
-                      <h5>Salesperson ID</h5>
+                      <h5>Seller ID</h5>
                     </TableCell>
                     <TableCell align="center" className="tbHeader">
-                      <h5>Salesperson Name</h5>
+                      <h5>Seller Name</h5>
                     </TableCell>
 
                     <TableCell align="right" className="tbHeader">

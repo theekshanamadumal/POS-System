@@ -12,7 +12,9 @@ import React from "react";
 import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 
-const InvoiceList = ({ invoices,transactions, ...rest }) => {
+const InvoiceList = ({ invoices, transactions, ...rest }) => {
+  console.log("transactions", transactions[0].id.itemName);
+
   return (
     <Container maxWidth="md" className="tableCont">
       <Paper>
@@ -29,9 +31,7 @@ const InvoiceList = ({ invoices,transactions, ...rest }) => {
             </TableHead>
 
             <TableBody>
-            {console.log("checkkkkkkkkkk")}
-            {console.log(transactions)}
-
+              {}
               {/*{transactions
                 //.filter((item) => item.id.unitPrice > 0)
                 // .sort((a, b) => (a.name > b.productName ? 1 : -1))
@@ -51,6 +51,7 @@ const InvoiceList = ({ invoices,transactions, ...rest }) => {
                     </TableRow>
                   );
                 })}*/}
+
               <TableRow>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
@@ -58,13 +59,7 @@ const InvoiceList = ({ invoices,transactions, ...rest }) => {
                 <TableCell align="right">
                   <strong>Total Amount in LKR</strong>
                 </TableCell>
-                <TableCell align="right">
-                  {invoices.total}
-                  {/*invoices
-                    .map((item) => item.unitPrice)
-                    .reduce((acc, value) => acc + value)
-                  .toFixed(2)*/}{" "}
-                </TableCell>
+                <TableCell align="right">{invoices.total}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -74,7 +69,4 @@ const InvoiceList = ({ invoices,transactions, ...rest }) => {
   );
 };
 
-InvoiceList.propTypes = {
-  Products: PropTypes.array.isRequired,
-};
 export default InvoiceList;

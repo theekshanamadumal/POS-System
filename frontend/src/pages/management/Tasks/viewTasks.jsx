@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 import Percentage from "../../../components/taskComp/percentage";
-import Maps from "../sellerLocation/Maps";
+//import Maps from "../sellerLocation/Maps";
 import SellerLocation from "../../../pages/management/sellerLocation/sellerLocations";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
@@ -28,29 +28,28 @@ export default function ViewTasks() {
   const [tasks, setTasks] = useState([]);
   const [seller, setSeller] = useState([]);
 
-  const loadSalesPerson=(idNum)=> {
+  const loadSalesPerson = (idNum) => {
     axios
-      .get(URL.main+URL.salesperson+"/" + idNum)
+      .get(URL.main + URL.salesperson + "/" + idNum)
       .then((response) => {
         setSeller(response.data);
         console.log(seller);
-        console.log("seller.........")
+        console.log("seller.........");
       })
       .catch((error) => {
         console.log(error);
         alert(error, (window.location = URL.salesperson));
       });
-  }
+  };
   useEffect(() => {
     axios
-      .get(URL.main + URL.dailyTasks+"/"+id)
+      .get(URL.main + URL.dailyTasks + "/" + id)
       .then((response) => {
         setTasks(response.data);
-        console.log("grtttttttt")
+        console.log("grtttttttt");
         console.log(response.data);
         console.log(response.data.sellerId);
-        loadSalesPerson(response.data.sellerId)
-        
+        loadSalesPerson(response.data.sellerId);
       })
       .catch((error) => {
         console.log(error);
@@ -59,7 +58,13 @@ export default function ViewTasks() {
   }, []);
   return (
     <div className="viewTasks">
-      <Percentage target={tasks.dailySalesTarget} achieved={tasks.dailySalesProgression} id={seller.idNumber}  name={seller.firstName+" "+seller.lastName} route={String(tasks.dailyRoute).substr(19)}/>
+      <Percentage
+        target={tasks.dailySalesTarget}
+        achieved={tasks.dailySalesProgression}
+        id={seller.idNumber}
+        name={seller.firstName + " " + seller.lastName}
+        route={String(tasks.dailyRoute).substr(19)}
+      />
       <div className="detContain">
         <div className="achieved">
           <h1>Daily Inventory</h1>
@@ -78,8 +83,8 @@ export default function ViewTasks() {
                     </TableRow>
                   </TableHead>
                   <TableBody className="tbBody">
-                  {console.log("rgugugerrrrrrrrrrr")}
-                  {console.log(tasks.dailyInventory)}
+                    {console.log("rgugugerrrrrrrrrrr")}
+                    {console.log(tasks.dailyInventory)}
                     {/*{tasks.dailyInventory.map((d) => (
                       <TableRow hover key={d.productId}>
                         <TableCell align="center">{d.productId}</TableCell>
@@ -110,7 +115,7 @@ export default function ViewTasks() {
                     </TableRow>
                   </TableHead>
                   <TableBody className="tbBody">
-                  {/*}
+                    {/*}
                     {tasks.dailyShops.map((e) => (
                       <TableRow hover key={e.shopId}>
                         <TableCell align="center">{e.shopId}</TableCell>

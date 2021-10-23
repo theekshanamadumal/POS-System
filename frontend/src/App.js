@@ -38,7 +38,7 @@ import AddShop from "./pages/management/Shops/addShop";
 import ViewShop from "./pages/management/Shops/viewShop";
 
 import Analytics from "./pages/management/Analytics/analytics";
-import Reports from "./pages/management/Reports/reports";
+//import Reports from "./pages/management/Reports/reports";
 
 import Tasks from "./pages/management/Tasks/tasks";
 import ViewTasks from "./pages/management/Tasks/viewTasks";
@@ -135,11 +135,6 @@ function App() {
             <AddProductCategory location="/management"/>
           </Route>  
 
-          <Route path="/management/reports">
-            <ManagementSidebar/>
-            <Reports/>
-          </Route>  
-          
           <Route exact path="/management/routes">
           <ManagementSidebar/>
           <Routes/>

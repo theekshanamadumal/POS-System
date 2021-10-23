@@ -4,12 +4,7 @@ import moment from "moment";
 import "./invoiceDetails.css";
 import { parseJSON } from "date-fns/esm";
 
-export default function invoiceDetails(props) {
-  console.log(
-    "-------------invoice data to invoice details componennt -------------------",
-    props.invoiceData
-  );
-  const {_id,total,dateTime,shopId}=props.invoiceData;
+export default function invoiceDetails({ invoiceData, sellerData, shopName }) {
   return (
     <div className="invoiceDetails">
       <h1 className="invoicehead">Invoice</h1>
@@ -18,18 +13,22 @@ export default function invoiceDetails(props) {
           <p className="detailInv">
             {" "}
             Invoice ID :
-            <span className="value">{String(_id).substr(19)}</span>
+            <span className="value">{String(invoiceData._id).substr(19)}</span>
           </p>
           <p className="detailInv">
             {" "}
-            Shop :<span className="value"> {props.shopName}</span>
+            Shop :<span className="value"> {shopName}</span>
           </p>
           <p className="detailInv">
-            {" "}
-            Issued Date :{" "}
+            Seller :
             <span className="value">
-              {" "}
-              {moment(dateTime).format("DD/MM/YYYY")}
+              {sellerData.firstName + " " + sellerData.lastName}
+            </span>
+          </p>
+          <p className="detailInv">
+            Issued Date :
+            <span className="value">
+              {moment(invoiceData.sellerId).format("DD/MM/YYYY")}
             </span>
           </p>
         </div>
