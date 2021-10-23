@@ -126,17 +126,17 @@ export default class NewSalesPerson extends Component {
     else if (input.target.id === "idNumber") {
       let idValid = true;
       if (input.target.value.trim().length === 12) {
-        let isnum = /^\d+$/.test(input.target.value);
+        let isnum = /^\d+$/.test(input.target.value.trim());
         if (isnum !== true) {
           idValid = false;
         }
       } else if (input.target.value.trim().length === 10) {
         let isnum = /^\d+$/.test(
-          input.target.value.substring(0, input.target.value.length - 1)
+          input.target.value.trim().substring(0, input.target.value.trim().length - 1)
         );
         let islett =
-          input.target.value
-            .substring(input.target.value.length - 1)
+          input.target.value.trim()
+            .substring(input.target.value.trim().length - 1)
             .toLowerCase() === "v";
         if (isnum === false || islett === false) {
           idValid = false;

@@ -9,7 +9,7 @@
   }
 }
 .loginBox{
-  height: 500px;
+  height: 550px;
   width: 320px;
   background-color: rgb(255, 255, 255);
   align-content: center;
@@ -39,6 +39,30 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  
-
 }
+
+.form-out small{
+  color: rgb(250, 4, 4);
+  visibility: hidden;
+  
+  
+}
+.form-out.error small{
+  visibility:visible;
+  font-size: medium;
+  margin-left: 10px;
+}
+.form-out.success input{
+  border: solid 2px forestgreen;
+  margin-bottom: 20px;
+}
+
+.form-out.success input.pass{
+  margin-bottom: 0px;
+}
+
+.form-out.error input{
+  border:  solid 2px rgb(250, 4, 4);
+  
+}
+

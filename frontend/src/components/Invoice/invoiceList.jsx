@@ -13,7 +13,13 @@ import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 
 const InvoiceList = ({ invoices, transactions, ...rest }) => {
-  console.log("transactions", transactions[0].id.itemName);
+  console.log("transactions", transactions);
+  const product=transactions[0];
+  const count=transactions.length;
+  {/*const pId=product.id;
+  console.log(pId.itemName,"item Name....")
+  console.log(transactions[0].quantity,"quantity.......")
+  console.log(transactions.length)*/}
 
   return (
     <Container maxWidth="md" className="tableCont">
@@ -31,7 +37,7 @@ const InvoiceList = ({ invoices, transactions, ...rest }) => {
             </TableHead>
 
             <TableBody>
-              {}
+              
               {/*{transactions
                 //.filter((item) => item.id.unitPrice > 0)
                 // .sort((a, b) => (a.name > b.productName ? 1 : -1))
@@ -42,11 +48,11 @@ const InvoiceList = ({ invoices, transactions, ...rest }) => {
                       <TableCell align="center">{item.id}</TableCell>
                       <TableCell align="right">
                         {" "}
-                        {item.quantity.toFixed(2)}{" "}
+                        {item.id.unitPrice.toFixed(2)}{" "}
                       </TableCell>
                       <TableCell align="right">{item.quantity} </TableCell>
                       <TableCell align="right">
-                        {(item.quantity * item.quantity).toFixed(2)}{" "}
+                        {(item.id.unitPrice * item.quantity).toFixed(2)}{" "}
                       </TableCell>
                     </TableRow>
                   );
