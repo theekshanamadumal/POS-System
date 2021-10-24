@@ -11,7 +11,7 @@ export default function Topbar(props) {
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">
-            {localStorage.getItem("user")}
+            {localStorage.getItem("user").id}
           </div>
           <div className="topbarIconContainer">
             <NotificationsNone />
