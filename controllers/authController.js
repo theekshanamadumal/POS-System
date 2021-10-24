@@ -54,17 +54,23 @@ exports.signup = (req, res) => {
 
 //Signing in and returning the JWT token funtion
 exports.signin = (req, res) => {
+    console.log("------------------------------------------------------------------signin back---------------------------------------------------------------------------------",req.body.email);
+
     User.findOne({
         email: req.body.email
     })
         .populate("roles", "-__v")
         .exec((err, user) => {
+            console.log("--------user----------",user);
+
             if (err) {
                 res.status(500).send({ message: err });
                 return;
             }
 
             if (!user) {
+                console.log("--------user not found");
+
                 return res.status(404).send({ message: "User Not found." });
             }
 
