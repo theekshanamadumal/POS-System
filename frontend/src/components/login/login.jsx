@@ -94,20 +94,40 @@ export default class Login extends Component {
       }
     }
     let w = "";
+    /////////////////// login with jwt ///////////////////
+    AuthService.login(this.state.email, this.state.password).then(
+      () => {
+        console.log("----------log done----------");
+
+        //this.props.history.push("/profile");
+        //window.location.reload();
+        /*
+        if (condition) {
+        } else {
+        }*/
+        window.location = "/management";
+      },
+      (error) => {
+        console.log("----------log failed----------");
+      }
+    );
+    ///////////////////////////////////////////////
+
     if (errorMsg === false && this.state.errorList.length === 0) {
       this.state.salespersons.filter((val) => {
         if (val.email === this.state.email) {
           w = "correct email";
           if (val.password === this.state.password) {
             //window.location = "/management";
-            AuthService.login(val.email, val.password);
           }
+
           if (val.password !== this.state.password) {
             this.setMessage("error", "Incorrect Password", "password");
             errorMsg = true;
           }
         }
       });
+
       if (w !== "correct email") {
         this.setMessage("error", "Incorrect Email", "email");
         errorMsg = true;
