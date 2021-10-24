@@ -33,8 +33,8 @@ export default function ViewTasks() {
       .get(URL.main + URL.salesperson + "/" + idNum)
       .then((response) => {
         setSeller(response.data);
-        console.log(seller);
         console.log("seller.........");
+        console.log(seller._id);
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +46,7 @@ export default function ViewTasks() {
       .get(URL.main + URL.dailyTasks + "/" + id)
       .then((response) => {
         setTasks(response.data);
-        console.log("grtttttttt");
+        console.log("dailyTask data");
         console.log(response.data);
         console.log(response.data.sellerId);
         loadSalesPerson(response.data.sellerId);
@@ -83,7 +83,7 @@ export default function ViewTasks() {
                     </TableRow>
                   </TableHead>
                   <TableBody className="tbBody">
-                    {console.log("rgugugerrrrrrrrrrr")}
+                    {console.log("dailyInventory")}
                     {console.log(tasks.dailyInventory)}
                     {/*{tasks.dailyInventory.map((d) => (
                       <TableRow hover key={d.productId}>
@@ -130,8 +130,8 @@ export default function ViewTasks() {
         </div>
       </div>
 
-      {/* <Maps /> */}
-      <SellerLocation sellerID={"615713be47fbf9190c7b8a25"} />
+      {console.log("---------aaaaa----------", seller._id)}
+      <SellerLocation sellerID={"61671c22346f6b3724faef50"} />
     </div>
   );
 }
