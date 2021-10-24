@@ -12,7 +12,6 @@ export default class Login extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onSubmit=this.onSubmit.bind(this);
     this.handleBlur=this.handleBlur.bind(this);
-    this.errorList = [];
     this.setMessage=this.setMessage.bind(this);
     this.handleClickShowPassword=this.handleClickShowPassword.bind(this);
 
@@ -24,6 +23,7 @@ export default class Login extends Component {
       salespersons:[],
       cEmail:"",
       isLogin:false,
+      errorList : [],
     };
   }
   componentDidMount() {
@@ -46,29 +46,29 @@ export default class Login extends Component {
   handleBlur(input){
     if (input.target.value === "") {
       this.setMessage("error",input.target.name+" can't be empty",input.target.id);
-      if (this.errorList.includes(input.target.id) === false) {
-        this.errorList.push(input.target.id);
+      if (this.state.errorList.includes(input.target.id) === false) {
+        this.state.errorList.push(input.target.id);
       }
     }else if (input.target.id==="email"){
       if (input.target.value.trim().includes("@")===false){
         this.setMessage("error", "Invalid Email Address",input.target.id);
-        if (this.errorList.includes(input.target.id) === false) {
-          this.errorList.push(input.target.id);
+        if (this.state.errorList.includes(input.target.id) === false) {
+          this.state.errorList.push(input.target.id);
         }
       }
       else {
         this.setMessage("success", " ",input.target.id);
-        if (this.errorList.includes(input.target.id) === true) {
-          const index = this.errorList.indexOf(input.target.id);
-          this.errorList.splice(index, 1);
+        if (this.state.errorList.includes(input.target.id) === true) {
+          const index = this.state.errorList.indexOf(input.target.id);
+          this.state.errorList.splice(index, 1);
         }
       }
     }
     else {
       this.setMessage("success", " ",input.target.id);
-      if (this.errorList.includes(input.target.id) === true) {
-        const index = this.errorList.indexOf(input.target.id);
-        this.errorList.splice(index, 1);
+      if (this.state.errorList.includes(input.target.id) === true) {
+        const index = this.state.errorList.indexOf(input.target.id);
+        this.state.errorList.splice(index, 1);
       }
     }
   }
@@ -90,7 +90,7 @@ export default class Login extends Component {
         }
       }
     }let w="";
-    if (errorMsg === false && this.errorList.length === 0) {
+    if (errorMsg === false && this.state.errorList.length === 0) {
       this.state.salespersons.filter((val)=>{
         if (val.email===this.state.email){
           w="correct email";
@@ -120,18 +120,19 @@ export default class Login extends Component {
   }
   render() {
     return (
-      <body className="bgImg" >
-      <h1 className="text-center p-2 text-light">Welcome To POS System!</h1>
+      <div data-testid="login" className="bgImg" >
+      <h1 className="text-center p-4 mt-4 text-light">Welcome To POS System!</h1>
       {/*<img src="/images/cyan.png" style={{width:"100%", height:"100%"}}></img>*/}
       <div className="d-flex justify-content-center">
         <div className="mx-2 loginBox p-4">
           <form onSubmit={this.onSubmit}>
             <h3 className="text-center">Sign In</h3>
-            <img className="align-center userLogo my-4" src="/images/userlogo.png"></img>
+            <img className="align-center userLogo my-2" src="/images/userlogo.png"></img>
 
             <div className="form-group">
               <label>Email address</label>
               <input
+                data-testid="email"
                 id="email"
                 className="form-control"
                 placeholder="Enter email"
@@ -140,12 +141,13 @@ export default class Login extends Component {
                 onBlur={this.handleBlur}
                 name="Email"
               />
-              <small></small>
+              <small data-testid="emailStatus"></small>
             </div>
 
             <div className="form-out form-group">
               <label>Password</label>
               <input
+                data-testid="password"
                 type={this.state.showPassword? "text": "password"}
                 id="password"
                 className="form-control pass"
@@ -161,6 +163,7 @@ export default class Login extends Component {
                     position: "absolute",
                     marginTop: "-30px",
                     marginLeft: "230px",
+                    color:"rgb(97, 96, 96)",
                   }}
                   onClick={this.handleClickShowPassword}
                 />
@@ -170,6 +173,7 @@ export default class Login extends Component {
                     position: "absolute",
                     marginTop: "-30px",
                     marginLeft: "230px",
+                    color:"rgb(97, 96, 96)",
                   }}
                   onClick={this.handleClickShowPassword}
                 />
@@ -190,7 +194,7 @@ export default class Login extends Component {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-block text-light" style={{backgroundColor:"rgb(46, 100, 100)"}}>
+            <button data-testid="loginBtn" type="submit" className="btn btn-block text-light lgBtn" style={{backgroundColor:"rgb(46, 100, 100)"}}>
               Submit
             </button>
             <p className="forgot-password text-right">
@@ -200,7 +204,7 @@ export default class Login extends Component {
         </div>
         
         </div>
-      </body>
+      </div>
     );
   }
 }

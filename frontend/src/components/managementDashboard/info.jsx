@@ -1,13 +1,28 @@
 import "./info.css";
-import React from 'react';
+import { React, useState, useEffect } from "react";
 import {Storefront,PeopleAlt} from '@material-ui/icons';
 import SalesPieChart from "./salesPieChart";
 import BestPerform from "./bestPerform";
 import { bestPerform } from "..//../dataCollection";
 import { Link } from "react-router-dom";
 import URL from "../../config";
+import axios from "axios";
 
 export default function Info() {
+    const [salespersonCount, setSalespersonCount] = useState(0);
+    const [shopCount, setShopCount] = useState(0);
+    useEffect(() => {
+        axios.all(
+            [axios.get(URL.main + URL.salesperson),
+            axios.get(URL.main+URL.shops)]
+        ).then(axios.spread((...responses) => {
+            setSalespersonCount( responses[0].data.length)
+            setShopCount(responses[1].data.length)
+          })).catch((error) => {
+            console.log(error);
+            alert(error, (window.location = URL.management));
+          });
+      }, []);
     return (
         <div className="container featured">
         <div className="row">
@@ -32,7 +47,7 @@ export default function Info() {
                             <Link to={URL.salesperson} className="linkTo">
                                 <PeopleAlt fontSize="large" className="Icon" />
                                 <div className="descript">Total Salespersons</div>
-                                <div className="count">23</div>
+                                <div className="count">{salespersonCount}</div>
                             </Link>
                         </div>
                         
@@ -40,7 +55,7 @@ export default function Info() {
                             <Link to={URL.shops} className="linkTo">
                                 <Storefront fontSize="large" className="Icon" />
                                 <div className="descript">Total<br></br> Shops </div>
-                                <div className="count">180</div>
+                                <div className="count">{shopCount}</div>
                             </Link>
                         </div>
                        

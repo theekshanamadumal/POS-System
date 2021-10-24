@@ -17,24 +17,24 @@ class Analytics extends Component {
   render() {
     return (
       <div className="analytics">
-        <ul class="nav nav-pills">
-          <li class="nav-item">
+        <ul class="nav nav-pills m-4 mx-5">
+          <li class="nav-item mx-5">
             <a class="nav-link active" aria-current="page" href="#sales">
               Sales Analytics
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mx-5">
             <a class="nav-link active" href="#salesperson">
               Salesperson Analytics
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mx-5">
             <a class="nav-link active" href="#category">
               category Analytics
             </a>
           </li>
         </ul>
-        <br></br>
+        
         <AllSellersLocations />
         <br></br>
         <a name="sales"></a>

@@ -29,7 +29,7 @@ module.exports =  class UserController {
         .catch((err) => res.status(400).json("Error: " + err));
     }
 
-
+    
 // Static method
 
     getUser(req,res ) {
