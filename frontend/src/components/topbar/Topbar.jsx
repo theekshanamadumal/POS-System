@@ -11,6 +11,9 @@ export default function Topbar(props) {
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">
+            {localStorage.getItem("user").id}
+          </div>
+          <div className="topbarIconContainer">
             <NotificationsNone />
             <span className="topIconBadge">2</span>
           </div>

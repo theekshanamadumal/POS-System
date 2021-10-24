@@ -80,6 +80,7 @@ exports.signin = (req, res) => {
             );
 
             if (!passwordIsValid) {
+                console.log("--------user not found");
                 return res.status(401).send({
                     accessToken: null,
                     message: "Invalid Password!"
@@ -96,7 +97,7 @@ exports.signin = (req, res) => {
             }
             res.status(200).send({
                 id: user._id,
-                username: user.username,
+                username: user.firstName ,
                 email: user.email,
                 roles: authorities,
                 accessToken: token,
