@@ -28,6 +28,7 @@ export default class Login extends Component {
     };
   }
   componentDidMount() {
+    /*
     axios
       .get(URL.main + URL.salesperson)
       .then((response) => {
@@ -37,6 +38,7 @@ export default class Login extends Component {
       .catch((error) => {
         console.log(error);
       });
+      */
   }
   onChangeEmail(e) {
     this.setState({ email: e.target.value });
@@ -105,10 +107,19 @@ export default class Login extends Component {
         if (condition) {
         } else {
         }*/
-        window.location = "/management";
+        window.location = URL.management;
       },
       (error) => {
         console.log("----------log failed----------");
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        this.setMessage("error", resMessage, "email");
+        errorMsg = true;
       }
     );
     ///////////////////////////////////////////////
