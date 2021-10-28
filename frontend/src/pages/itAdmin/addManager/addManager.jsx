@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./addManager.css";
 import URL from "../../../config";
+import AuthService from "../../../services/authService";
 
 var multer = require("multer");
 
@@ -114,9 +115,7 @@ export default class AddManager extends Component {
     };
 
     console.log(user);
-
-    axios
-      .post(URL.main+URL.addManager, user)
+    AuthService.register(user)
       .then((res) => {
         console.log(res.data);
         alert(res.data, (window.location = URL.manager));
