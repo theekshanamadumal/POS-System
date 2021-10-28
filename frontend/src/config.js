@@ -11,9 +11,8 @@ URL.GoogleMapsAPI = 'AIzaSyBNQsYuKSBIV1GWz8O3t0HKjMkGD_k5fsM';
 
 URL.main="http://localhost:3001";
 
-
-URL.sellerLocation = "http://localhost:3001/management/sellerLocation";
-URL.invoice = "http://localhost:3001/management/invoice";
+URL.sellerLocation = URL.main+ "/management/sellerLocation";
+URL.invoice = URL.main+ "/management/invoice";
 
 URL.signin = "/api/auth/signin";
 URL.signup = "/api/auth/signin";
