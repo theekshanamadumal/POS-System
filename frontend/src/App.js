@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
-import AuthService from "./services/authService";
+//import AuthService from "./services/authService";
 import {PrivateAdminRoute,PrivateManagerRoute} from "./services/roleHandler";
 //import AccessController from "./services/roleHandler";
 
@@ -54,45 +54,13 @@ import AssignTasks from './pages/management/Tasks/assign';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.logOut = this.logOut.bind(this);
-
-    this.state = {
-      currentUser: undefined,
-      isManager: false,
-      isAdmin: false,
-    };
   }
 
   componentDidMount() { 
     
-    const user = AuthService.getCurrentUser();
-
-    console.log("----------user did mount----------",user);
-
-    if (user) {
-      this.setState({
-        currentUser: user,
-        isManager: user.roles.includes("ROLE_MANAGER"),
-        isAdmin: user.roles.includes("ROLE_ADMIN"),
-      });
-
-      console.log("----------user roles----------",user.roles);
-
-    }
-  }
-
-  logOut() {
-    AuthService.logout();
   }
 
   render() {
-   // const { currentUser, isManager, isAdmin } = this.state;
-
-   // const Access = new AccessController(isAdmin,isManager); 
-
-
-    //console.log("----------isManager----------",this.state.isManager);
-    //console.log("----------isAdmin----------",this.state.isAdmin);
 
   return (
     <Router>
@@ -157,11 +125,13 @@ class App extends Component {
 
           
           <PrivateManagerRoute exact path="/management">
+          
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <ManagementHome/>
             </div>
+            
           </PrivateManagerRoute>  
           
 

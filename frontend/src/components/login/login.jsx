@@ -104,10 +104,9 @@ export default class Login extends Component {
             error.message ||
             error.toString();
 
-          if (resMessage.toString().toLowerCase().includes("email")){
+          if (resMessage.toString().toLowerCase().includes("email")) {
             this.setMessage("error", resMessage, "email");
-          }
-          else{
+          } else {
             this.setMessage("error", resMessage, "password");
           }
           errorMsg = true;
@@ -122,11 +121,10 @@ export default class Login extends Component {
     const small = formControl.querySelector("small");
     small.innerText = msg;
     formControl.className = "form-out " + msgType;
-    if (idElem==="password"){
+    if (idElem === "password") {
       var chk = document.getElementById("customCheck1");
-      const formControl2= chk.parentElement;
+      const formControl2 = chk.parentElement;
       formControl2.className = "custom-control custom-checkbox chk " + msgType;
-      
     }
   }
   render() {
@@ -204,12 +202,12 @@ export default class Login extends Component {
                     className="custom-control-input"
                     id="customCheck1"
                   />
-                  <label
+                  {/* <label
                     className="custom-control-label"
                     htmlFor="customCheck1"
                   >
                     Remember me
-                  </label>
+                  </label> */}
                 </div>
               </div>
 

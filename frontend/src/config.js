@@ -19,6 +19,9 @@ URL.signup = "/api/auth/signin";
 URL.signout = "/api/auth/signout";
 
 
+URL.mainpage = "/";
+URL.signinpage = "/login";
+
 
 URL.management = "/management";
 
