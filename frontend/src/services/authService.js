@@ -26,6 +26,9 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
+    console.log("logging out");
+    window.location =URL.signinpage;
+
   }
 
 

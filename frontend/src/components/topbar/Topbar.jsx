@@ -1,8 +1,14 @@
 import React from "react";
 import "./topbar.css";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import AuthService from "../../services/authService";
 
 export default function Topbar(props) {
+  function logout() {
+    //e.preventDefault();
+    AuthService.logout();
+  }
+
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -11,9 +17,10 @@ export default function Topbar(props) {
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">
-            {localStorage.getItem("user").id}
+            {AuthService.getCurrentUser().username}
+            {console.log(AuthService.getCurrentUser())}
           </div>
-          <div className="topbarIconContainer">
+          {/* <div className="topbarIconContainer">
             <NotificationsNone />
             <span className="topIconBadge">2</span>
           </div>
@@ -22,12 +29,22 @@ export default function Topbar(props) {
           </div>
           <div className="topbarIconContainer">
             <Settings />
-          </div>
+          </div> */}
           <img
             src={process.env.PUBLIC_URL + "/images/user2.jpg"}
             alt="user"
             className="topAvatar"
           />
+
+          <div className="topbarIconContainer">
+            <button onClick={logout}> Logout</button>
+            <btn
+              href=""
+              target=""
+              rel="noopener noreferrer"
+              onClick={"kjk"}
+            ></btn>
+          </div>
         </div>
       </div>
     </div>
