@@ -1,9 +1,15 @@
+import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
+import AuthService from "./services/authService";
+import {PrivateAdminRoute,PrivateManagerRoute} from "./services/roleHandler";
+//import AccessController from "./services/roleHandler";
+
+
 import Login from "./components/login/login";
-import Maps from "./pages/management/sellerLocation/Maps";
+//import Maps from "./pages/management/sellerLocation/Maps";
 
 //it admin
 import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
@@ -45,8 +51,48 @@ import ViewTasks from "./pages/management/Tasks/viewTasks";
 import AssignTasks from './pages/management/Tasks/assign';
 
 
-function App() {
-//const logged = true;
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+
+    this.state = {
+      currentUser: undefined,
+      isManager: false,
+      isAdmin: false,
+    };
+  }
+
+  componentDidMount() {
+    const user = AuthService.getCurrentUser();
+
+    console.log("----------user did mount----------",user);
+
+    if (user) {
+      this.setState({
+        currentUser: user,
+        isManager: user.roles.includes("ROLE_MANAGER"),
+        isAdmin: user.roles.includes("ROLE_ADMIN"),
+      });
+
+      console.log("----------user roles----------",user.roles);
+
+    }
+  }
+
+  logOut() {
+    AuthService.logout();
+  }
+
+  render() {
+    const { currentUser, isManager, isAdmin } = this.state;
+
+   // const Access = new AccessController(isAdmin,isManager); 
+
+
+    console.log("----------isManager----------",this.state.isManager);
+    console.log("----------isAdmin----------",this.state.isAdmin);
+
   return (
     <Router>
       <div className="App">
@@ -55,219 +101,236 @@ function App() {
             <Login/>
           </Route>
 
-          <Route exact path="/itAdmin">
+          <Route exact path="/login">
+            <Login/>
+          </Route>
+
+          {/*  admin routes  */}
+    
+        <PrivateAdminRoute exact path="/itAdmin">
+
             <Topbar name={"Admin"}/>
             <div className="contain">
               <ItAdminSidebar/>  
               <ItAdminHome />  
             </div>
-          </Route>
 
-          <Route path="/itAdmin/reports">
+        </PrivateAdminRoute>
+    
+
+
+          <PrivateAdminRoute path="/itAdmin/reports">
             <Topbar name={"Admin"}/>
             <div className="contain">
               <ItAdminSidebar/>  
               <h1>reports page</h1> 
             </div>
-          </Route>
+          </PrivateAdminRoute>
 
-          <Route exact path="/itAdmin/management">
+          <PrivateAdminRoute exact path="/itAdmin/management">
             <Topbar name={"Admin"}/>
             <div className="contain">
               <ItAdminSidebar/> 
               <Management/> 
             </div>
-          </Route>
+          </PrivateAdminRoute>
 
-          <Route path="/itAdmin/addManager">
+          <PrivateAdminRoute path="/itAdmin/addManager">
             <Topbar name={"Admin"}/>
             <div className="contain">
               <ItAdminSidebar/> 
               <AddManager />  
             </div>
-          </Route>
+          </PrivateAdminRoute>
         
-          <Route path="/itAdmin/editManager/:id">
+          <PrivateAdminRoute path="/itAdmin/editManager/:id">
             <Topbar name={"Admin"}/>
             <div className="contain">
               <ItAdminSidebar/> 
               <ViewManager />
             </div>
-          </Route> 
+          </PrivateAdminRoute> 
+
+          {/*  management routes  */}
+
           
-          <Route exact path="/management">
+          <PrivateManagerRoute exact path="/management">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <ManagementHome/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
           
-          <Route exact path="/management/analytics">
+          <PrivateManagerRoute exact path="/management/analytics">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <Analytics/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
 
-          <Route exact path="/management/salesperson">
+
+
+
+          <PrivateManagerRoute exact path="/management/salesperson">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <SalesPerson/>
             </div>
-          </Route> 
+          </PrivateManagerRoute> 
 
-          <Route exact path="/management/addSalesperson">
+          <PrivateManagerRoute path="/management/addSalesperson">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <NewSalesPerson/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
           
-          <Route exact path="/management/salesPerson/:id">
+          <PrivateManagerRoute exact path="/management/salesPerson/:id">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <ViewSalesPerson/>
             </div>
-          </Route>         
+          </PrivateManagerRoute>         
           
-          <Route exact path="/management/products">
+          <PrivateManagerRoute exact path="/management/products">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <Products/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
           
-          <Route exact path="/management/products/:id">
+          <PrivateManagerRoute exact path="/management/products/:id">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <ViewProducts/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
 
-          <Route exact path="/management/addProduct">
+          <PrivateManagerRoute path="/management/addProduct">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <AddProducts/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
           
-          <Route path="/management/addProductCategory">
+          <PrivateManagerRoute path="/management/addProductCategory">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <AddProductCategory location="/management"/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
 
-          <Route exact path="/management/routes">
+          <PrivateManagerRoute exact path="/management/routes">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <Routes/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
 
-          <Route exact path="/management/routes/addRoute">
+          <PrivateManagerRoute exact path="/management/routes/addRoute">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <AddRoute/>
             </div>
-          </Route> 
+          </PrivateManagerRoute> 
 
-          <Route exact path="/management/routes/:id">
+          <PrivateManagerRoute exact path="/management/routes/:id">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <ViewRoute/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
 
-          <Route path="/management/route/lastSales">
+          <PrivateManagerRoute path="/management/route/lastSales">
             <Topbar name={"Management"}/>
             <div className="contain">
               <LastSales/>
               <ManagementSidebar/>
             </div>           
-          </Route>  
+          </PrivateManagerRoute>  
 
             
-          <Route path="/management/orders">
+          <PrivateManagerRoute path="/management/orders">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <Orders/>
             </div>
-          </Route>   
+          </PrivateManagerRoute>   
 
-          <Route path="/management/Order/:id">
+          <PrivateManagerRoute path="/management/Order/:id">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <ViewOrders/>
             </div>
-          </Route>  
+          </PrivateManagerRoute>  
 
-          <Route exact path="/management/shops">
+          <PrivateManagerRoute exact path="/management/shops">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <Shops/>
             </div>
-          </Route> 
+          </PrivateManagerRoute> 
 
-          <Route path="/management/shops/addShop">
+          <PrivateManagerRoute path="/management/shops/addShop">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <AddShop/>
             </div>
-          </Route> 
+          </PrivateManagerRoute> 
 
-          <Route path="/management/shops/:id">
+          <PrivateManagerRoute path="/management/shops/:id">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <ViewShop/>
             </div>
-          </Route> 
+          </PrivateManagerRoute> 
 
-          <Route exact path="/management/tasks">
+          <PrivateManagerRoute exact path="/management/tasks">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <Tasks/>
             </div>
-          </Route>
+          </PrivateManagerRoute>
 
-          <Route path="/management/tasks/:id/viewTasks">
+          <PrivateManagerRoute exact path="/management/tasks/:id/viewTasks">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <ViewTasks/>
             </div>
-          </Route>
+          </PrivateManagerRoute>
 
-          <Route path="/management/tasks/:id/assignTasks">
+          <PrivateManagerRoute exact path="/management/tasks/:id/assignTasks">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
               <AssignTasks />
             </div>
-          </Route>
+          </PrivateManagerRoute>
 
         </Switch>  
       </div>
     </Router>
   );
+}
 }
 
 export default App;
