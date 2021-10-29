@@ -69,9 +69,9 @@ exports.signin = (req, res) => {
             }
 
             if (!user) {
-                console.log("--------user not found");
+                console.log("--------user not found..invalid email");
 
-                return res.status(404).send({ message: "User Not found." });
+                return res.status(404).send({ message: "Incorrect Email!" });
             }
 
             var passwordIsValid = bcrypt.compareSync(
@@ -80,10 +80,10 @@ exports.signin = (req, res) => {
             );
 
             if (!passwordIsValid) {
-                console.log("--------user not found");
+                console.log("--------user not found....password invalid");
                 return res.status(401).send({
                     accessToken: null,
-                    message: "Invalid Password!"
+                    message: "Incorrect Password!"
                 });
             }
             var token = jwt.sign({ id: user.id }, SECRET, {

@@ -119,7 +119,7 @@ function App() {
             </div>
           </Route> 
 
-          <Route path="/management/addSalesperson">
+          <Route exact path="/management/addSalesperson">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>
@@ -151,7 +151,7 @@ function App() {
             </div>
           </Route>  
 
-          <Route path="/management/addProduct">
+          <Route exact path="/management/addProduct">
             <Topbar name={"Management"}/>
             <div className="contain">
               <ManagementSidebar/>

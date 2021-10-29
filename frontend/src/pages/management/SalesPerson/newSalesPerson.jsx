@@ -247,7 +247,7 @@ export default class NewSalesPerson extends Component {
 
   render() {
     return (
-      <div className="newUser">
+      <div data-testid="newSalesperson" className="newUser">
         <h1 className="title">Add a New Salesperson</h1>
         <form className="addSalespersonForm" onSubmit={this.onSubmit}>
           <section className="h-100 h-custom gradient-custom-2">
@@ -271,7 +271,7 @@ export default class NewSalesPerson extends Component {
                           <div className="row">
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label className="form-label" for="firstName">
+                                <label className="form-label" htmlFor="firstName">
                                   First Name
                                 </label>
                                 <input
@@ -287,7 +287,7 @@ export default class NewSalesPerson extends Component {
                             </div>
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label className="form-label" for="lastName">
+                                <label className="form-label" htmlFor="lastName">
                                   Last name
                                 </label>
                                 <input
@@ -305,7 +305,7 @@ export default class NewSalesPerson extends Component {
 
                           <div className="mb-2 pb-2">
                             <div className="form-outline">
-                              <label className="form-label" for="idNumber">
+                              <label className="form-label" htmlFor="idNumber">
                                 ID Number
                               </label>
                               <input
@@ -322,7 +322,7 @@ export default class NewSalesPerson extends Component {
 
                           <div className="mb-2 pb-2">
                             <div className="form-outline">
-                              <label className="form-label" for="image">
+                              <label className="form-label" htmlFor="image">
                                 Add Image
                               </label>
                               <input
@@ -340,7 +340,7 @@ export default class NewSalesPerson extends Component {
                           <div className="row">
                             <div className="col-md-6 col-sm-12 mb-2 pb-2">
                               <div className="form-outline">
-                                <label className="form-label" for="password">
+                                <label className="form-label" htmlFor="password">
                                   Enter Password
                                 </label>
                                 <input
@@ -378,7 +378,7 @@ export default class NewSalesPerson extends Component {
                             </div>
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label className="form-label" for="conPassword">
+                                <label className="form-label" htmlFor="conPassword">
                                   Confirm Password
                                 </label>
                                 <input
@@ -425,7 +425,7 @@ export default class NewSalesPerson extends Component {
                               <div className="form-outline">
                                 <label
                                   className="form-label text-white"
-                                  for="address"
+                                  htmlFor="address"
                                 >
                                   Address
                                 </label>
@@ -447,7 +447,7 @@ export default class NewSalesPerson extends Component {
                               <div className="form-outline">
                                 <label
                                   className="form-label text-white"
-                                  for="city"
+                                  htmlFor="city"
                                 >
                                   city
                                 </label>
@@ -467,7 +467,7 @@ export default class NewSalesPerson extends Component {
                             <div className="form-outline">
                               <label
                                 className="form-label text-white"
-                                for="phoneNumber"
+                                htmlFor="phoneNumber"
                               >
                                 Phone Number
                               </label>
@@ -486,7 +486,7 @@ export default class NewSalesPerson extends Component {
                             <div className="form-outline">
                               <label
                                 className="form-label text-white"
-                                for="email"
+                                htmlFor="email"
                               >
                                 Email Address
                               </label>

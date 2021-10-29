@@ -4,7 +4,7 @@ import URL from "../config";
 const API_URL = "http://localhost:3001/api/auth/";
 
 class AuthService {
-
+  
   login(email, password) {
     return axios
       .post(API_URL + "signin", {

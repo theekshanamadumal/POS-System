@@ -24,13 +24,12 @@ export default function Info() {
           });
       }, []);
     return (
-        <div className="container featured">
+        <div className="featured">
         <div className="row">
-
-            <div className="col-sm-3.8 featuredItem1">
+            <div className="col-md-3.8 featuredItem1">
                 <SalesPieChart />
             </div>
-            <div className="col-sm-3.8 featuredItem2">
+            <div className="col-md-3.8 featuredItem2">
                 
                 <div className="up">
                     <BestPerform bestPerform={bestPerform} />
@@ -38,7 +37,7 @@ export default function Info() {
             </div>
             
             
-            <div className="col-sm-3.8 featuredItem3">
+            <div className="col-md-3.8 featuredItem3">
                 <div className="up">
                     <span className="featuredTitle">No of users</span>
                     <hr className="line"></hr>

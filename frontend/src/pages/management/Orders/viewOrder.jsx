@@ -15,10 +15,10 @@ export default withRouter(
       super(props);
       this.state = {
         invoiceData: [],
-        sellerData: "",
+        //sellerData: "",
         invoiceID: "",
-        shopName: "",
-        transactions: "",
+        //shopName: "",
+        //transactions: "",
       };
       this.loadInvoices = this.loadInvoices.bind(this);
     }
@@ -27,12 +27,20 @@ export default withRouter(
       axios
         .get(URL.invoice + "/" + this.state.invoiceID)
         .then((response) => {
+          const st=JSON.stringify(response.data);
+          const jsObj=JSON.parse(st);
           this.setState({
-            invoiceData: response.data,
-            sellerData: response.data.sellerId,
-            shopName: response.data.shopId.shopName,
-            transactions: response.data.transactions,
+            
+            invoiceData: (jsObj),
+            //sellerData: response.data.sellerId,
+            //shopName: response.data.shopId.shopName,
+            //transactions: JSON.parse(localStorage.getItem('transactions')),
+            
           });
+          console.log("***********")
+          console.log(this.state.invoiceData)
+          console.log((this.state.invoiceData).transactions[0].id.itemName)
+          
         })
         .catch((error) => {
           console.log(error);
@@ -50,17 +58,21 @@ export default withRouter(
       return (
         <div className="viewOrder">
           <div className="detailCont">
-            <InvoiceDetails
+          {console.log((this.state.invoiceData))}
+          {console.log("type",typeof this.state.invoiceData)}
+          
+          
+            {/*<InvoiceDetails
               className="contain"
               invoiceData={this.state.invoiceData}
-              sellerData={this.state.sellerData}
-              shopName={this.state.shopName}
+              //sellerData={this.state.sellerData}
+              //shopName={this.state.shopName}
             />
             <InvoiceList
               className="invTab"
               invoices={this.state.invoiceData}
-              transactions={this.state.transactions}
-            />
+              //transactions={this.state.transactions}
+            />*/}
           </div>
         </div>
       );

@@ -101,7 +101,7 @@ class AddShop extends Component {
 
   render() {
     return (
-      <div className="addShop">
+      <div data-testid="newShop" className="addShop">
         <h1 className="title">New shop Page</h1>
         <div className="Container">
           <div className="detailsContainer">

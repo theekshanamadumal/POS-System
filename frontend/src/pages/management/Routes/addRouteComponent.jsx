@@ -67,8 +67,8 @@ export default class AddRouteComponent extends Component {
     return (
       <div className="container ">
         <form action="" className="form" onSubmit={this.onSubmit}>
-          <div class="form-outline mb-4">
-            <div class="form-group">
+          <div className="form-outline mb-4">
+            <div className="form-group">
               <div className="editRoutes">
                 <label>Origin</label>
                 <br></br>
