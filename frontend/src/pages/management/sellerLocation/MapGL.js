@@ -5,7 +5,7 @@ export default function MapGL({sellersData}) {
   const [viewport, setViewport] = useState({
     latitude:7.489083614888397,
     longitude: 80.36274774593174,
-    width: "69vw",
+    width: "72vw",
     height: "80vh",
     zoom: 8
   });

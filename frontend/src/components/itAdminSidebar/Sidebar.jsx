@@ -6,7 +6,6 @@ import {
   Timeline,
   PermIdentity,
   WorkOutline,
-  PeopleAlt,
 } from "@material-ui/icons";
 import { useLocation } from "react-router-dom";
 import URL from "../../config";
@@ -28,13 +27,7 @@ export default function ItAdminSidebar() {
 
           <ul className="sidebarList">
             <Link to={URL.itAdmin} className="link">
-              <li
-                className={
-                  splitLocation.length === 2
-                    ? "active sidebarListItem"
-                    : "sidebarListItem"
-                }
-              >
+              <li className={(splitLocation).length=== 2 ? "active sidebarListItem" : "sidebarListItem"}>
                 <LineStyle className="sidebarIcon" />
                 Home
               </li>
@@ -44,54 +37,16 @@ export default function ItAdminSidebar() {
         <div className="sidebarMenu">
           <ul className="sidebarList">
             <Link to={URL.manager} className="link">
-              <li
-                className={
-                  splitLocation[2] === "management"
-                    ? "active sidebarListItem"
-                    : "sidebarListItem"
-                }
-              >
+              <li className={splitLocation[2] === "management" ? "active sidebarListItem" : "sidebarListItem"}>
                 <PermIdentity className="sidebarIcon" />
                 Management
               </li>
             </Link>
 
             <Link to={URL.addManager} className="link">
-              <li
-                className={
-                  splitLocation[2] === "addManager"
-                    ? "active sidebarListItem"
-                    : "sidebarListItem"
-                }
-              >
+              <li className={splitLocation[2] === "addManager" ? "active sidebarListItem" : "sidebarListItem"}>
                 <WorkOutline className="sidebarIcon" />
                 Add Manager
-              </li>
-            </Link>
-
-            <Link to={URL.salesperson} className="link">
-              <li
-                className={
-                  splitLocation[2] === "salesperson"
-                    ? "active sidebarListItem"
-                    : "sidebarListItem"
-                }
-              >
-                <PeopleAlt className="sidebarIcon" />
-                Salesperson
-              </li>
-            </Link>
-
-            <Link to={URL.addSalesperson} className="link">
-              <li
-                className={
-                  splitLocation[2] === "addSalesperson"
-                    ? "active sidebarListItem"
-                    : "sidebarListItem"
-                }
-              >
-                <WorkOutline className="sidebarIcon" />
-                Add Seller
               </li>
             </Link>
           </ul>
@@ -100,13 +55,7 @@ export default function ItAdminSidebar() {
         <div className="sidebarMenu">
           <ul className="sidebarList">
             <Link to={URL.itAdmin} className="link">
-              <li
-                className={
-                  splitLocation[2] === "analytics"
-                    ? "active sidebarListItem"
-                    : "sidebarListItem"
-                }
-              >
+              <li className={splitLocation[2] === "analytics" ? "active sidebarListItem" : "sidebarListItem"}>
                 <Timeline className="sidebarIcon" />
                 Analytics
               </li>

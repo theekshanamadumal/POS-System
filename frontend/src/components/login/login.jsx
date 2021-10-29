@@ -1,6 +1,5 @@
 import "./login.css";
 import React, { Component } from "react";
-import axios from "axios";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import URL from "../../config";
 import AuthService from "../../services/authService";
@@ -21,24 +20,10 @@ export default class Login extends Component {
       password: "",
       cpassword: "",
       showPassword: false,
-      salespersons: [],
       cEmail: "",
       isLogin: false,
       errorList: [],
     };
-  }
-  componentDidMount() {
-    /*
-    axios
-      .get(URL.main + URL.salesperson)
-      .then((response) => {
-        this.setState({ salespersons: response.data });
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      */
   }
   onChangeEmail(e) {
     this.setState({ email: e.target.value });
@@ -97,54 +82,39 @@ export default class Login extends Component {
     }
     let w = "";
     /////////////////// login with jwt ///////////////////
-    AuthService.login(this.state.email, this.state.password).then(
-      () => {
-        console.log("----------log done----------");
-
-        //this.props.history.push("/profile");
-        //window.location.reload();
-        /*
-        if (condition) {
-        } else {
-        }*/
-        window.location = URL.management;
-      },
-      (error) => {
-        console.log("----------log failed----------");
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        this.setMessage("error", resMessage, "email");
-        errorMsg = true;
-      }
-    );
-    ///////////////////////////////////////////////
-
     if (errorMsg === false && this.state.errorList.length === 0) {
-      this.state.salespersons.filter((val) => {
-        if (val.email === this.state.email) {
-          w = "correct email";
-          if (val.password === this.state.password) {
-            //window.location = "/management";
-          }
+      AuthService.login(this.state.email, this.state.password).then(
+        () => {
+          console.log("----------log done----------");
 
-          if (val.password !== this.state.password) {
-            this.setMessage("error", "Incorrect Password", "password");
-            errorMsg = true;
+          //this.props.history.push("/profile");
+          //window.location.reload();
+          /*
+          if (condition) {
+          } else {
+          }*/
+          window.location = URL.management;
+        },
+        (error) => {
+          console.log("----------log failed----------");
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          if (resMessage.toString().toLowerCase().includes("email")){
+            this.setMessage("error", resMessage, "email");
           }
+          else{
+            this.setMessage("error", resMessage, "password");
+          }
+          errorMsg = true;
         }
-      });
-
-      if (w !== "correct email") {
-        this.setMessage("error", "Incorrect Email", "email");
-        errorMsg = true;
-        this.setMessage("error", "", "password");
-      }
+      );
     }
+    ///////////////////////////////////////////////
   }
   setMessage(msgType, msg, idElem) {
     var inp = document.getElementById(idElem);
@@ -152,6 +122,12 @@ export default class Login extends Component {
     const small = formControl.querySelector("small");
     small.innerText = msg;
     formControl.className = "form-out " + msgType;
+    if (idElem==="password"){
+      var chk = document.getElementById("customCheck1");
+      const formControl2= chk.parentElement;
+      formControl2.className = "custom-control custom-checkbox chk " + msgType;
+      
+    }
   }
   render() {
     return (
@@ -169,7 +145,7 @@ export default class Login extends Component {
                 src="/images/userlogo.png"
               ></img>
 
-              <div className="form-group">
+              <div className="form-group form-out">
                 <label>Email address</label>
                 <input
                   data-testid="email"

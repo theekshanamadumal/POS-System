@@ -13,9 +13,7 @@ import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 
 const InvoiceList = ({ invoices, transactions, ...rest }) => {
-  console.log("transactions", transactions);
-  const product=transactions[0];
-  const count=transactions.length;
+  
   {/*const pId=product.id;
   console.log(pId.itemName,"item Name....")
   console.log(transactions[0].quantity,"quantity.......")
