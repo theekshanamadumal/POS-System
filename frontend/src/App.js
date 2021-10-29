@@ -63,7 +63,8 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount() { 
+    
     const user = AuthService.getCurrentUser();
 
     console.log("----------user did mount----------",user);
@@ -85,13 +86,13 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, isManager, isAdmin } = this.state;
+   // const { currentUser, isManager, isAdmin } = this.state;
 
    // const Access = new AccessController(isAdmin,isManager); 
 
 
-    console.log("----------isManager----------",this.state.isManager);
-    console.log("----------isAdmin----------",this.state.isAdmin);
+    //console.log("----------isManager----------",this.state.isManager);
+    //console.log("----------isAdmin----------",this.state.isAdmin);
 
   return (
     <Router>
@@ -153,6 +154,7 @@ class App extends Component {
 
           {/*  management routes  */}
 
+
           
           <PrivateManagerRoute exact path="/management">
             <Topbar name={"Management"}/>
@@ -162,6 +164,8 @@ class App extends Component {
             </div>
           </PrivateManagerRoute>  
           
+
+
           <PrivateManagerRoute exact path="/management/analytics">
             <Topbar name={"Management"}/>
             <div className="contain">

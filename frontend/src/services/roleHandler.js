@@ -18,20 +18,20 @@ export const PrivateAdminRoute = (Component) => (
         }
 
         // authorised so return component
-        return Component;
+        return (Component);
     }} />
 )
 
 
-export const PrivateManagerRoute =  (Component) => (
+export const PrivateManagerRoute =  ({Component, ...rest}) => (
   console.log("----------Component----------",Component),
 
-    <Route render={props => {
+    <Route {...rest} render={props => {
 
         const currentUser = AuthService.getCurrentUser();
         console.log("----------currentUser----------",currentUser.roles);
 
-        const isManager = currentUser.roles.includes("ROLE_ADMIN");
+        const isManager = currentUser.roles.includes("ROLE_MANAGER");
 
         if (!isManager) {
             // not logged in so redirect to login page with the return url
@@ -41,29 +41,7 @@ export const PrivateManagerRoute =  (Component) => (
             return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
         }
         console.log("----------role is a manager----------");
-
         // authorised so return component
-        return Component;
+        return(Component);
     }} />
 )
-/*
-class RoleHandler {
-  
-  // Constructor
-    constructor(isAdmin,isManager) {
-      const adminRole = isAdmin;
-      const managerRole = isManager;
-    }
-
-    admin(component) {
-      
-        console.log("----------isAdmin in controller----------",this.adminRole);
-
-        return (this.adminRole && component);
-      
-    }
-
-}
-
-export default RoleHandler;  
-*/
