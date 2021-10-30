@@ -1,8 +1,13 @@
 import AuthService from "./authService";
 import { Route, Redirect } from 'react-router-dom';
 
-export const PrivateAdminRoute = ({Component, ...rest}) => (
-  console.log("----------Component----------",Component),
+import Topbar from "../components/topbar/Topbar";
+import ItAdminSidebar from "../components/itAdminSidebar/Sidebar";
+import ManagementSidebar from "../components/managementSidebar/Sidebar";
+
+
+export const PrivateAdminRoute = ({component: Component, ...rest}) => (
+  //console.log("----------Component----------",Component),
 
     <Route {...rest} render={props => {
         const currentUser = AuthService.getCurrentUser();
@@ -10,8 +15,15 @@ export const PrivateAdminRoute = ({Component, ...rest}) => (
         if (currentUser && currentUser.roles.includes("ROLE_ADMIN")) {
             console.log("----------role is a admin----------");
             // authorised so return component
-            return (Component);
-        }
+            return (
+              <div>
+                <Topbar name={"Admin"}/>
+              <div className="contain">
+                <ItAdminSidebar/>
+                <Component {...props}/>
+              </div>
+              </div>
+              );        }
 
         // not logged in so redirect to login page with the return url
         console.log("----------role is not admin----------");
@@ -23,8 +35,8 @@ export const PrivateAdminRoute = ({Component, ...rest}) => (
 )
 
 
-export const PrivateManagerRoute =  ({Component, ...rest}) => ( 
-  console.log("----------Component----------",Component),
+export const PrivateManagerRoute =  ({component: Component, ...rest}) => ( 
+  //console.log("----------Component----------",Component),
 
     <Route {...rest} render={props => {
         const currentUser = AuthService.getCurrentUser();
@@ -32,7 +44,15 @@ export const PrivateManagerRoute =  ({Component, ...rest}) => (
         if (currentUser && currentUser.roles.includes("ROLE_MANAGER")) {
             console.log("----------role is a manager----------");
             // authorised so return component
-            return Component;
+            return (
+            <div>
+              <Topbar name={"Management"}/>
+            <div className="contain">
+              <ManagementSidebar/>
+              <Component {...props}/>
+            </div>
+            </div>
+            );
         }
   
         // not logged in so redirect to login page with the return url
