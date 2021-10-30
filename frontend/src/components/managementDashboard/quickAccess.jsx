@@ -5,7 +5,7 @@ import URL from "../../config";
 export default class QuickAccess extends Component {
     render() {
         return (
-            <div className="row">
+            <div style={{display:"flex", justifyContent:"space-evenly"}}>
                 <Link className="col-md-2 mx-3 mx-4" to={URL.addSalesperson}>
                     <button className="addUser" style={{marginRight:"10px"}}>Add New SalesPerson</button>
                 </Link>

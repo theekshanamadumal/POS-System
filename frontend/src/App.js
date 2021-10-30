@@ -78,209 +78,57 @@ class App extends Component {
     
         <PrivateAdminRoute exact path="/itAdmin" component={ItAdminHome}/>
 
-    
+        <PrivateAdminRoute exact path="/itAdmin/reports" component={<h1>reports page</h1> }/>
 
+        <PrivateAdminRoute exact path="/itAdmin/management" component={Management}/>
 
-          <PrivateAdminRoute path="/itAdmin/reports">
-            <Topbar name={"Admin"}/>
-            <div className="contain">
-              <ItAdminSidebar/>  
-              <h1>reports page</h1> 
-            </div>
-          </PrivateAdminRoute>
+        <PrivateAdminRoute exact path="/itAdmin/addManager" component={AddManager}/>
 
-          <PrivateAdminRoute exact path="/itAdmin/management">
-            <Topbar name={"Admin"}/>
-            <div className="contain">
-              <ItAdminSidebar/> 
-              <Management/> 
-            </div>
-          </PrivateAdminRoute>
-
-          <PrivateAdminRoute path="/itAdmin/addManager">
-            <Topbar name={"Admin"}/>
-            <div className="contain">
-              <ItAdminSidebar/> 
-              <AddManager />  
-            </div>
-          </PrivateAdminRoute>
-        
-          <PrivateAdminRoute path="/itAdmin/editManager/:id">
-            <Topbar name={"Admin"}/>
-            <div className="contain">
-              <ItAdminSidebar/> 
-              <ViewManager />
-            </div>
-          </PrivateAdminRoute> 
+        <PrivateAdminRoute exact path="/itAdmin/editManager/:id" component={ViewManager}/>
 
           {/*  management routes  */}
-
-
-          
           <PrivateManagerRoute exact path="/management" component={ManagementHome}/>
           
-          
-
-
           <PrivateManagerRoute exact path="/management/analytics" component={Analytics}/> 
-            
 
+          <PrivateManagerRoute exact path="/management/salesperson" component={SalesPerson}/> 
 
+          <PrivateManagerRoute exact path="/management/addSalesperson" component={NewSalesPerson}/> 
 
+          <PrivateManagerRoute exact path="/management/salesPerson/:id" component={ViewSalesPerson}/> 
 
-          <PrivateManagerRoute exact path="/management/salesperson">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <SalesPerson/>
-            </div>
-          </PrivateManagerRoute> 
+          <PrivateManagerRoute exact path="/management/products" component={Products}/> 
 
-          <PrivateManagerRoute path="/management/addSalesperson">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <NewSalesPerson/>
-            </div>
-          </PrivateManagerRoute>  
-          
-          <PrivateManagerRoute exact path="/management/salesPerson/:id">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <ViewSalesPerson/>
-            </div>
-          </PrivateManagerRoute>         
-          
-          <PrivateManagerRoute exact path="/management/products">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <Products/>
-            </div>
-          </PrivateManagerRoute>  
-          
-          <PrivateManagerRoute exact path="/management/products/:id">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <ViewProducts/>
-            </div>
-          </PrivateManagerRoute>  
+          <PrivateManagerRoute exact path="/management/products/:id" component={ViewProducts}/> 
 
-          <PrivateManagerRoute path="/management/addProduct">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <AddProducts/>
-            </div>
-          </PrivateManagerRoute>  
-          
-          <PrivateManagerRoute path="/management/addProductCategory">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <AddProductCategory location="/management"/>
-            </div>
-          </PrivateManagerRoute>  
+          <PrivateManagerRoute exact path="/management/addProduct" component={AddProducts}/> 
 
-          <PrivateManagerRoute exact path="/management/routes">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <Routes/>
-            </div>
-          </PrivateManagerRoute>  
+          <PrivateManagerRoute exact path="/management/addProductCategory" component={AddProductCategory}/> 
 
-          <PrivateManagerRoute exact path="/management/routes/addRoute">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <AddRoute/>
-            </div>
-          </PrivateManagerRoute> 
+          <PrivateManagerRoute exact path="/management/routes" component={Routes}/> 
 
-          <PrivateManagerRoute exact path="/management/routes/:id">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <ViewRoute/>
-            </div>
-          </PrivateManagerRoute>  
+          <PrivateManagerRoute exact path="/management/routes/addRoute" component={AddRoute}/> 
 
-          <PrivateManagerRoute path="/management/route/lastSales">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <LastSales/>
-              <ManagementSidebar/>
-            </div>           
-          </PrivateManagerRoute>  
+          <PrivateManagerRoute exact path="/management/routes/:id" component={ViewRoute}/> 
 
-            
-          <PrivateManagerRoute path="/management/orders">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <Orders/>
-            </div>
-          </PrivateManagerRoute>   
+          <PrivateManagerRoute exact path="/management/route/lastSales" component={LastSales}/> 
 
-          <PrivateManagerRoute path="/management/Order/:id">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <ViewOrders/>
-            </div>
-          </PrivateManagerRoute>  
+          <PrivateManagerRoute exact path="/management/orders" component={Orders}/> 
 
-          <PrivateManagerRoute exact path="/management/shops">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <Shops/>
-            </div>
-          </PrivateManagerRoute> 
+          <PrivateManagerRoute exact path="/management/Order/:id" component={ViewOrders}/> 
 
-          <PrivateManagerRoute path="/management/shops/addShop">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <AddShop/>
-            </div>
-          </PrivateManagerRoute> 
+          <PrivateManagerRoute exact path="/management/shops" component={Shops}/> 
 
-          <PrivateManagerRoute path="/management/shops/:id">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <ViewShop/>
-            </div>
-          </PrivateManagerRoute> 
+          <PrivateManagerRoute exact path="/management/shops/addShop" component={AddShop}/> 
 
-          <PrivateManagerRoute exact path="/management/tasks">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <Tasks/>
-            </div>
-          </PrivateManagerRoute>
+          <PrivateManagerRoute exact path="/management/shops/:id" component={ViewShop}/> 
 
-          <PrivateManagerRoute exact path="/management/tasks/:id/viewTasks">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <ViewTasks/>
-            </div>
-          </PrivateManagerRoute>
+          <PrivateManagerRoute exact path="/management/tasks" component={Tasks}/> 
 
-          <PrivateManagerRoute exact path="/management/tasks/:id/assignTasks">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <AssignTasks />
-            </div>
-          </PrivateManagerRoute>
+          <PrivateManagerRoute exact path="/management/tasks/:id/viewTasks" component={ViewTasks}/> 
 
+          <PrivateManagerRoute exact path="/management/tasks/:id/assignTasks" component={AssignTasks }/> 
+    
         </Switch>  
       </div>
     </Router>

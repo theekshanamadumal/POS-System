@@ -1,9 +1,7 @@
 .featured{
     display: flex;
     margin-top: 20px;
-    width: 80vw;
     justify-content: space-between;
-    margin-left: 20px;
 }
 .featuredItem1{
     flex:2;
