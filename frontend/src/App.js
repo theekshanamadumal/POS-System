@@ -76,15 +76,8 @@ class App extends Component {
 
           {/*  admin routes  */}
     
-        <PrivateAdminRoute exact path="/itAdmin">
+        <PrivateAdminRoute exact path="/itAdmin" component={ItAdminHome}/>
 
-            <Topbar name={"Admin"}/>
-            <div className="contain">
-              <ItAdminSidebar/>  
-              <ItAdminHome />  
-            </div>
-
-        </PrivateAdminRoute>
     
 
 
@@ -124,25 +117,13 @@ class App extends Component {
 
 
           
-          <PrivateManagerRoute exact path="/management">
+          <PrivateManagerRoute exact path="/management" component={ManagementHome}/>
           
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <ManagementHome/>
-            </div>
+          
+
+
+          <PrivateManagerRoute exact path="/management/analytics" component={Analytics}/> 
             
-          </PrivateManagerRoute>  
-          
-
-
-          <PrivateManagerRoute exact path="/management/analytics">
-            <Topbar name={"Management"}/>
-            <div className="contain">
-              <ManagementSidebar/>
-              <Analytics/>
-            </div>
-          </PrivateManagerRoute>  
 
 
 
