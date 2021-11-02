@@ -127,8 +127,9 @@ class App extends Component {
 
           <PrivateManagerRoute exact path="/management/tasks/:id/viewTasks" component={ViewTasks}/> 
 
-          <PrivateManagerRoute exact path="/management/tasks/:id/assignTasks" component={AssignTasks }/> 
+          <PrivateManagerRoute exact path="/management/tasks/assignTasks" component={AssignTasks }/> 
     
+
         </Switch>  
       </div>
     </Router>

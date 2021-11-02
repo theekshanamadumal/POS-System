@@ -10,9 +10,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { Delete } from "@material-ui/icons";
 import "../list.css";
-import axios from "axios";
 import URL from "../../config";
 
 const TaskList = (props) => {
@@ -23,7 +21,7 @@ const TaskList = (props) => {
     <TableRow hover key={d._id}>
       <TableCell align="center">{d.sellerId.idNumber}</TableCell>
       <TableCell align="center">
-        { d.sellerId.firstName}
+        { d.sellerId.firstName+" "+ d.sellerId.lastName}
       </TableCell>
       <TableCell align="right">
         {" "}
@@ -34,16 +32,12 @@ const TaskList = (props) => {
         {d.dailySalesProgression.toFixed(2)}{" "}
       </TableCell>
       <TableCell align="center"> {d.dailyRoute.substr(19)}</TableCell>
-      <TableCell align="right">
-        <div className="actionTasks">
+      <TableCell>
+        <div className="text-center">
           <Link to={URL.tasks+"/" + d._id + "/viewTasks"}>
-            <button className="actionsTasks">View</button>
+            <button className="actionsTasks">View Tasks</button>
           </Link>
-          <Link
-            to={URL.tasks+"/"+ d._id + "/assignTasks"}
-          >
-            <button className="actionsTasks">Assign</button>
-          </Link>
+          
         </div>
       </TableCell>
     </TableRow>

@@ -17,10 +17,9 @@ router.route("/dailyTasks/:id").get((req, res) => {
 });
 
 router.route("/adddailyTasks").post((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
+  console.log("get ti done...")
+  //[authJwt.verifyToken, authJwt.isManager],
   DT.addNewdailyTask(req,res);
-
-
 });
 
 

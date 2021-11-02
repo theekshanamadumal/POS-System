@@ -8,11 +8,19 @@ module.exports =  class ProductController {
     }
 
     static allProducts(res) {
-    Product.find()
-    .then((category) => res.json(category))
-    .catch((err) => res.status(400).json("Error: " + err));
-    return this.res;
-    }
+        Product.find()
+        .then((category) => res.json(category))
+        .catch((err) => res.status(400).json("Error: " + err));
+        return this.res;
+        }
+
+    static allProductIds(res) {
+        Product.find()
+        .select("_id  itemName stock unitPrice")
+        .then((category) => res.json(category))
+        .catch((err) => res.status(400).json("Error: " + err));
+        return this.res;
+        }
 
 
 // Static method

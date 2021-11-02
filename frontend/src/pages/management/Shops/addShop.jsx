@@ -67,6 +67,7 @@ class AddShop extends Component {
     this.setState({ city: e.target.value });
   }
   onChangeRoute(e) {
+    console.log("route",e.target.value)
     this.setState({ route: e.target.value });
   }
   onChangeLocation(e) {

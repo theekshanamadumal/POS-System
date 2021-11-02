@@ -10,6 +10,11 @@ router.route("/shops").get((req, res) => {
   SC.allShops(req,res);
 });
 
+router.route("/shops/getRoutes/:dailyRoute").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isManager],
+  SC.allShopRoute(req,res);
+});
+
 router.route("/addShop").post((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   SC.addNewShop(req,res);

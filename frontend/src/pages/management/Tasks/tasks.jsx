@@ -23,6 +23,7 @@ import { Search as SearchIcon } from "react-feather";
 import { tasks } from "../../../dataCollection";
 import TaskListComponent from "../../../components/taskComp/taskList";
 import URL from "../../../config";
+import { Link } from "react-router-dom";
 
 export default function Tasks() {
   const [disabled, setDisabled] = useState(true);
@@ -53,6 +54,11 @@ export default function Tasks() {
       <div className="spacing">
         <div className="containerSale">
           <h1 className="heading">Daily Tasks</h1>
+          <Link
+            to={URL.tasks+ "/assignTasks"}
+          >
+            <button className="actionsTasks">Assign Tasks</button>
+          </Link>
         </div>
 
         <Box className="search" sx={{ mt: 1 }}>
