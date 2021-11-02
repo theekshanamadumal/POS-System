@@ -44,11 +44,13 @@ URL.lastSales="/management/route/lastSales";
 URL.salesperson="/management/salesperson";
 URL.addSalesperson="/management/addSalesperson";
 URL.updateSalesperson="/management/updateSalesperson/";
+URL.salespersonCount="/management/salespersonCount/";
 
 URL.shops="/management/shops";
 URL.shopComp="/management/shop/";
 URL.addShops="/management/shops/addShop";
 URL.updateShop="/management/updateShop/";
+URL.shopsCount="/management/shopsCount/";
 
 URL.tasks="/management/tasks";
 URL.addDailyTarget="/management/adddailyTasks";

@@ -10,6 +10,14 @@ router.route("/shops").get((req, res) => {
   SC.allShops(req,res);
 });
 
+
+router.route("/shopsCount").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isManager],
+  console.log("shop count request to back")
+  SC.shopCount(res);
+ 
+});
+
 router.route("/shops/getRoutes/:dailyRoute").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   SC.allShopRoute(req,res);

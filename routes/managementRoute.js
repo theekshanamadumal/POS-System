@@ -10,6 +10,12 @@ router.route("/salesperson").get((req, res) => {
  
 });
 
+router.route("/salespersonCount").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isManager],
+  UC.userCount(res);
+ 
+});
+
 router.route("/addSalesperson").post((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   UC.addUser(req,res);

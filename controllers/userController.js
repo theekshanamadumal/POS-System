@@ -29,6 +29,11 @@ module.exports =  class UserController {
         .catch((err) => res.status(400).json("Error: " + err));
     }
 
+    userCount(res) {
+        User.countDocuments({roles:this.roleType})
+        .then((count) => res.json(count))
+        .catch((err) => res.status(400).json("Error: " + err));
+    }
     
 // Static method
 

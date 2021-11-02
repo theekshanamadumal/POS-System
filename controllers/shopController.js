@@ -32,6 +32,15 @@ module.exports =  class ShopController {
     
     }
     
+    static shopCount(res) {
+        Shop.countDocuments({})
+        .then((count) =>{ res.json(count);    
+            console.log("shops count :",count);
+        })
+        .catch((err) => res.status(400).json("Database Error: try later "));
+    
+    }
+
     static allShopRoute(req,res) {
         console.log("requsted for dailyRoute id......")
         Shop.find({route:req.params.dailyRoute})
