@@ -1,3 +1,4 @@
+import color from "@material-ui/core/colors/amber";
 import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
@@ -50,6 +51,9 @@ export default function MapGL({sellersData}) {
               }}
             >
               <img src="/skateboarding.svg" alt="Seller Icon" />
+              <h4 style={{ color: 'blue' }}>{sellerData.sellerId.firstName}</h4>
+
+
             </button>
           </Marker>
         ))}
