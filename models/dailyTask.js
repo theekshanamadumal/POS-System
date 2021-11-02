@@ -28,7 +28,7 @@ const DailyTask = mongoose.model(
                 }
             })]
         },
-        name: String,
+        
     })
 );
 

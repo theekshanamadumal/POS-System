@@ -6,6 +6,22 @@ module.exports =  class ShopController {
     // Constructor
     constructor() {
     }
+    static loadShops(req,res){
+        axios.get(URL.main+URL.shops+"/getRoutes/"+this.state.dailyRoute)
+            .then((res) => {
+                this.setState({shopsId:res.data});
+                console.log(res.data,"response&&&&&&&&&&");
+                this.state.shopsId.map(e=>{
+                    console.log(typeof e,"type.....");
+                    e.isCovered=false;
+                })
+                
+                console.log("routes******",this.state.shopsId);
+            }).catch((error) => {
+                console.log(error);
+                alert(error, (window.location = URL.tasks));
+        });
+    }
 
     static allShops(req,res) {
         Shop.find()
@@ -13,6 +29,21 @@ module.exports =  class ShopController {
             console.log("shops :",shop)
         })
         .catch((err) => res.status(400).json("Database Error: try later "));
+    
+    }
+    
+    static allShopRoute(req,res) {
+        console.log("requsted for dailyRoute id......")
+        Shop.find({route:req.params.dailyRoute})
+        .select("_id")
+        .then((shop) =>{ 
+            shop.map(e=>e.isCovered=false)
+            console.log("shops :",shop)
+            res.json(shop);    
+            //console.log("shops :",shop)
+        })
+        .catch((err) => {res.status(400).json("Database Error: try later ");
+        console.log("error found..........")});
     
     }
 

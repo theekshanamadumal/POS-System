@@ -51,7 +51,7 @@ URL.addShops="/management/shops/addShop";
 URL.updateShop="/management/updateShop/";
 
 URL.tasks="/management/tasks";
-URL.addDailyTarget="/management/adddailyTarget";
+URL.addDailyTarget="/management/adddailyTasks";
 
 URL.itAdmin="/itAdmin";
 URL.manager="/itAdmin/management/";
