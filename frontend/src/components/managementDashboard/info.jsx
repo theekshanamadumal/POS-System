@@ -116,18 +116,6 @@ export default function Info() {
           </Link>
         </div>
       </div>
-      <div className="featuredContainer">
-        <span className="featuredDetail">Total items in stock</span>
-        <span className="featuredAmount">416</span>
-      </div>
-      <div className="featuredContainer">
-        <span className="LowDetail">Low stock items</span>
-        <span className="LowAmount">11</span>
-      </div>
-      <div className="featuredContainer">
-        <span className="OutDetail">Out of stock items</span>
-        <span className="OutAmount">2</span>
-      </div>
     </div>
   );
 }
