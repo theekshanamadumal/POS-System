@@ -13,6 +13,14 @@ module.exports =  class ProductCategoryController {
       .catch((err) => res.status(400).json("Error: " + err));
       return this.res;
     }
+    static countCategories(res) {
+      console.log("requestred for count.....")
+      Category.countDocuments({})
+      .then((category) =>res.json(category)
+      )
+      .catch((err) => res.status(400).json("Error: " + err));
+      return this.res;
+    }
     
 
     // Static method

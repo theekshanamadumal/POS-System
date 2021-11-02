@@ -20,7 +20,15 @@ module.exports =  class ProductController {
         .then((category) => res.json(category))
         .catch((err) => res.status(400).json("Error: " + err));
         return this.res;
-        }
+    }
+    static totalStock(res) {
+        console.log("req for tot stock..")
+        Product.aggregate([
+            {"$group" : {_id:"", count:{$sum:"$stock"}}}])
+        .then((total) => res.json(total[0].count))
+        .catch((err) => res.status(400).json("Error: " + err));
+        return this.res;
+    }
 
 
 // Static method

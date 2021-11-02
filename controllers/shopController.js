@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const db = require("../models");
 const Shop = db.shop;
 
@@ -6,7 +7,7 @@ module.exports =  class ShopController {
     // Constructor
     constructor() {
     }
-    static loadShops(req,res){
+    /*static loadShops(req,res){
         axios.get(URL.main+URL.shops+"/getRoutes/"+this.state.dailyRoute)
             .then((res) => {
                 this.setState({shopsId:res.data});
@@ -21,6 +22,32 @@ module.exports =  class ShopController {
                 console.log(error);
                 alert(error, (window.location = URL.tasks));
         });
+    }*/
+
+    static groupByRoutes(req,res){
+        console.log("requested for group by routes..")
+        Shop.aggregate([
+            //{"$group" : {_id:"route", count:{$sum:"$stock"}}}])
+            {$group: {
+                "_id": "$route",
+                //"status": { "$addToSet": "false" },
+                "shopsName": {
+                    $push: "$shopName"
+                },
+                "shopsID": {
+                    $push: "$_id"
+                },
+                "count": {
+                    $sum: 1
+                }
+                }
+            },
+            
+        ])
+        .then((total) => {console.log(total);
+            res.json(total)})
+        .catch((err) => res.status(400).json("Error: " + err));
+        return this.res;
     }
 
     static allShops(req,res) {
@@ -29,7 +56,13 @@ module.exports =  class ShopController {
             console.log("shops :",shop)
         })
         .catch((err) => res.status(400).json("Database Error: try later "));
-    
+    }
+    static countShops(req,res) {
+        Shop.countDocuments({})
+        .then((shop) =>{ res.json(shop);    
+            console.log("shops count :",shop)
+        })
+        .catch((err) => res.status(400).json("Database Error: try later "));
     }
     
     static shopCount(res) {

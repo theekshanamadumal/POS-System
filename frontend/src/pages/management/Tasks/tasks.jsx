@@ -57,7 +57,7 @@ export default function Tasks() {
           <Link
             to={URL.tasks+ "/assignTasks"}
           >
-            <button className="actionsTasks">Assign Tasks</button>
+            <button className="addUser">Assign Tasks</button>
           </Link>
         </div>
 

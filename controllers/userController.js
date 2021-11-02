@@ -28,6 +28,11 @@ module.exports =  class UserController {
         .then((category) => res.json(category))
         .catch((err) => res.status(400).json("Error: " + err));
     }
+    countUsers(res) {
+        User.countDocuments({roles:this.roleType})
+        .then((category) => res.json(category))
+        .catch((err) => res.status(400).json("Error: " + err));
+    }
 
     userCount(res) {
         User.countDocuments({roles:this.roleType})

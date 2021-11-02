@@ -38,7 +38,7 @@ export default function listComponent(props) {
           );
         } else if (e === "noOfShops") {
           return (
-            <TableCell className="text-center">{d.noOfShops || 0}</TableCell>
+            <TableCell className="text-center">{props.count }</TableCell>
           );
         } else if (e === "email") {
           return (
@@ -65,7 +65,8 @@ export default function listComponent(props) {
               )}
             </TableCell>
           );
-        } else {
+        } 
+        else {
           return <TableCell>{d[e]}</TableCell>;
         }
       })}

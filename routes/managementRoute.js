@@ -7,7 +7,10 @@ const UC = new UserController("Manager");
 router.route("/salesperson").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   UC.allUsers(res);
- 
+});
+router.route("/salesperson/count").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isManager],
+  UC.countUsers(res);
 });
 
 router.route("/salespersonCount").get((req, res) => {

@@ -16,8 +16,8 @@ export default function Topbar(props) {
           <span className="logo">{props.name}</span>
         </div>
         <div className="topRight">
-          <div className="topbarIconContainer">
-            {AuthService.getCurrentUser().username}
+          <div className="topbarIconContainer fw-bolder">
+            {AuthService.getCurrentUser().username.toUpperCase()}
             {console.log(AuthService.getCurrentUser())}
           </div>
           {/* <div className="topbarIconContainer">
@@ -36,14 +36,14 @@ export default function Topbar(props) {
             className="topAvatar"
           />
 
-          <div className="topbarIconContainer">
-            <button onClick={logout}> Logout</button>
-            <btn
+          <div className="topbarIconContainer mx-4">
+            <button className="btn btn-outline-light" onClick={logout}> Logout</button>
+            {/*<btn
               href=""
               target=""
               rel="noopener noreferrer"
               onClick={"kjk"}
-            ></btn>
+            ></btn>*/}
           </div>
         </div>
       </div>
