@@ -26,6 +26,7 @@ export default withRouter(
         destination: "",
         destinationLocation: "",
         cities: [],
+        routesDetails:[],
       };
     }
 
@@ -33,20 +34,23 @@ export default withRouter(
       this.dataId = this.props.match.params.id;
 
       console.log("dataId: ", this.dataId);
-      axios
-        .get(URL.main+URL.salesRouteComp+ this.dataId)
-        .then((response) => {
+      axios.all(
+        [axios.get(URL.main+URL.salesRouteComp+ this.dataId),
+          axios.get(URL.main + URL.shops+"/groupByRoute")
+        ])
+        .then(axios.spread((...responses) => {
           this.setState({
-            route: response.data,
-            origin: response.data.origin,
-            originLocation: String(response.data.originLocation),
-            destination: response.data.destination,
-            destinationLocation: String(response.data.destinationLocation),
-            cities: response.data.cities,
+            route: responses[0].data,
+            origin: responses[0].data.origin,
+            originLocation: String(responses[0].data.originLocation),
+            destination: responses[0].data.destination,
+            destinationLocation: String(responses[0].data.destinationLocation),
+            cities: responses[0].data.cities,
           });
-          console.log("response.data");
-          console.log(response.data);
-        })
+          this.setState({routesDetails:responses[1].data });
+          console.log("responses[0].data");
+          console.log(responses[0].data);
+        }))
         .catch((error) => {
           console.log(error);
           alert(error, (window.location = URL.routes));
@@ -105,9 +109,9 @@ export default withRouter(
               <Link to={URL.lastSales}>
                 <button className="addUser">View Last Month Sales</button>
               </Link>
-              <Link to={URL.addRoute}>
+              {/*<Link to={URL.addRoute}>
                 <button className="addUser">Add New Route</button>
-              </Link>
+              </Link>*/}
             </div>
 
             <div className="Container">

@@ -8,10 +8,14 @@ router.route("/productCategory").get((req, res) => {
   ProductCategoryController.allCategories(res);
 });
 
+router.route("/productCategory/count").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isManager],
+  ProductCategoryController.countCategories(res);
+});
+
 router.route("/addProductCategory").post((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   ProductCategoryController.addNewCategory(req,res);
 });
-
 
 module.exports = router;

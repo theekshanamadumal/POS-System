@@ -7,6 +7,11 @@ router.route("/products").get((req, res) => {
    ProductController.allProducts(res);
 });
 
+router.route("/products/total").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isManager],
+   ProductController.totalStock(res);
+});
+
 router.route("/products/productIds").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
    ProductController.allProductIds(res);

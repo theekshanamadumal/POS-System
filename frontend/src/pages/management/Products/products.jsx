@@ -73,7 +73,7 @@ export default function Products() {
             <button className="addUser mx-5">Add New Product</button>
           </Link>
           <Link to={URL.addProductCategory}>
-            <button className=" addUser mx-2">Add New Product Category</button>
+            <button className="addUser mx-2">Add New Product Category</button>
           </Link>
         </div>
 

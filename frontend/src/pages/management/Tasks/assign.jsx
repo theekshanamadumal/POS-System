@@ -15,20 +15,16 @@ export default class AssignTasks extends Component {
             salespersonId:"",
             productList:[],
             salespersonList:[],
-            shopsRoute:[],
             shopsId:[],
             tot:[],
             finalTotal:0,
             arr:[1,2,3],
+            shopsDetails:[],
         }
         this.onChangeDailyRoute = this.onChangeDailyRoute.bind(this);
         this.onChangeDailySalesTarget = this.onChangeDailySalesTarget.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.loadRoutes = this.loadRoutes.bind(this);
-        this.loadProducts=this.loadProducts.bind(this);
-        this.loadSalesperson=this.loadSalesperson.bind(this);
         this.onChangeSalesperson=this.onChangeSalesperson.bind(this);
-        this.loadShops=this.loadShops.bind(this);
     }
     handleInventoryInputChange = (e, index) => {
         const { name, value,type } = e.target;
@@ -94,73 +90,35 @@ export default class AssignTasks extends Component {
     onChangeDailySalesTarget(e) {
         this.setState({ dailySalesTarget: parseInt(e.target.value,10) });
     }
-    loadProducts() {
-        axios
-            .get(URL.main + URL.products+"/productIds")
-            .then((response) => {
-            console.log("products...",response.data)
-            this.setState({
-                productList: response.data,
-            });
-            console.log(response.data);
-            })
-            .catch((error) => {
-            console.log(error);
-            alert(error, (window.location = URL.management));
-            });
-        }
-    loadRoutes() {
-        axios
-            .get(URL.main+URL.salesRoutes)
-            .then((response) => {
-            this.setState({
-                routeList: response.data,
-            });
-            console.log(response.data);
-            })
-            .catch((error) => {
-            console.log(error);
-            alert(error, (window.location = URL.management));
-            });
-        }
-    loadSalesperson() {
-        axios.get(URL.main+URL.salesperson)
-            .then((response) => {
-                this.setState({
-                    salespersonList:response.data,
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-                alert(error, (window.location = URL.management));
-            });
-        }
-        
 
     componentDidMount() {
-        this.loadRoutes();
-        this.loadSalesperson();
-        this.loadProducts();
-    }
-    loadShops(){
-        axios.get(URL.main+URL.shops+"/getRoutes/"+this.state.dailyRoute)
-            .then((res) => {
-                this.setState({shopsId:res.data});
-                this.state.shopsId.map(e=>{
-                    e.isCovered=false;
-                })
-                console.log("shops id",this.state.shopsId)
-                
-            }).catch((error) => {
-                console.log(error);
-                alert(error, (window.location = URL.tasks));
-        });
-    }
+        axios.all(
+            [axios.get(URL.main+URL.salesRoutes),
+            axios.get(URL.main+URL.salesperson),
+            axios.get(URL.main + URL.products+"/productIds"),
+            axios.get(URL.main + URL.shops+"/groupByRoute"),
+        ]
+        ).then(axios.spread((...responses) => {
+            this.setState({routeList: responses[0].data});
+            this.setState({salespersonList:responses[1].data});
+            this.setState({productList: responses[2].data});
+            this.setState({shopsDetails: responses[3].data});
+            console.log("details",this.state.shopsDetails)
+        }))
+        .catch((error) => {
+            console.log(error);
+            alert(error, (window.location = URL.management));
+        })
+    };
     onSubmit(e) {
         e.preventDefault();
 
-        this.loadShops();
-        console.log("shops id again",this.state.shopsId)
+        const lis=this.state.shopsDetails.filter(det=>det._id===this.state.dailyRoute)[0].shopsID;
+        console.log("lis",lis);
+        lis.map(li=>{
+            console.log("li..",li)
+            this.setState({shopsId:this.state.shopsId.push({shopId:li,isCovered:false})})
+        });
         const dailyTarget = {
             sellerId: this.state.salespersonId,
             dailyRoute: this.state.dailyRoute,
@@ -168,7 +126,6 @@ export default class AssignTasks extends Component {
             dailyInventory:this.state.inventoryList,
             dailyShops:this.state.shopsId,
         };
-        console.log("shops id again",this.state.shopsId)
         console.log(dailyTarget);
         axios
             .post(URL.main+URL.addDailyTarget, dailyTarget)

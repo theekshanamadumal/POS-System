@@ -27,7 +27,8 @@ export default function Route() {
   const [shops, setShops]=useState([]);
   const [routeList, setRouteList]=useState([]);
   const columnName=["_id","origin","destination","noOfShops"];
-
+  const [routesDetails, setRoutesDetails]=useState([]);
+  
   const handleDelete = (id) => {
     console.log("data send to back");
     console.log(id);
@@ -42,6 +43,15 @@ export default function Route() {
         alert(error, (window.location = URL.management ));
       });
   };
+  const countShops=(id)=>{
+      const li=routesDetails.filter(e=>e._id===id);
+      if (li.length>0){
+          return li[0].count
+      }
+      else{
+        return 0
+      }  
+  }
   const [word, setWord] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [searchBy, setSearchBy] = useState('');
@@ -51,21 +61,23 @@ export default function Route() {
       setDisabled(false)
   };
 
-  const loadRoutes=()=> {
-    axios
-      .get(URL.main+URL.salesRoutes)
-      .then((response) => {
-        setRouteList(response.data );
-        console.log("routes recieved", routeList);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.management ));
-      });
-  }
-
   useEffect(() => {
-    loadRoutes();
+    axios.all(
+        [
+            axios.get(URL.main+URL.salesRoutes),
+            axios.get(URL.main + URL.shops+"/groupByRoute")
+        ])
+        .then(axios.spread((...responses) => {
+            setRouteList(responses[0].data );
+            setRoutesDetails(responses[1].data );
+            console.log("routes recieved", responses[0].data );
+            console.log("routes count",responses[1].data );
+        }))
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.routes));
+        });
+    //loadRoutes();
   }, []);
 
   return (
@@ -164,9 +176,10 @@ export default function Route() {
                                     
                                 }
                             }).map((val)=>{
+                                const c=countShops(val._id);
                                 return(
-                                console.log(val),
-                                    <ListComponent urlName="routes" rowComp={val} key={val._id} columnName={columnName} handleDelete={handleDelete}/>
+                                //countShops(val._id),
+                                    <ListComponent urlName="routes" rowComp={val} key={val._id} columnName={columnName} handleDelete={handleDelete} count={c}/>
                                 )
                             })}
                         </TableBody>
