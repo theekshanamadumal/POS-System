@@ -215,9 +215,9 @@ export default class Login extends Component {
                 data-testid="loginBtn"
                 type="submit"
                 className="btn btn-block text-light lgBtn"
-                style={{ backgroundColor: "rgb(46, 100, 100)" }}
+                style={{ backgroundColor: "rgb(46, 100, 100)" ,marginTop:"-20px"}}
               >
-                Submit
+                Sign In
               </button>
               <p className="forgot-password text-right">
                 Forgot <a href="#">password?</a>

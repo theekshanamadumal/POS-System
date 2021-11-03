@@ -19,17 +19,17 @@ class Analytics extends Component {
       <div className="analytics">
         <ul class="nav nav-pills m-4 mx-5">
           <li class="nav-item mx-5">
-            <a class="nav-link active" aria-current="page" href="#sales">
+            <a class="nav-link active p-3 px-5" style={{borderRadius:"20px",fontSize:"20px"}} aria-current="page" href="#sales">
               Sales Analytics
             </a>
           </li>
           <li class="nav-item mx-5">
-            <a class="nav-link active" href="#salesperson">
+            <a class="nav-link active p-3 px-5" style={{borderRadius:"20px",fontSize:"20px"}} href="#salesperson">
               Salesperson Analytics
             </a>
           </li>
           <li class="nav-item mx-5">
-            <a class="nav-link active" href="#category">
+            <a class="nav-link active p-3 px-5" style={{borderRadius:"20px",fontSize:"20px"}} href="#category">
               category Analytics
             </a>
           </li>

@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useState,useEffect} from 'react';
 import PropTypes from "prop-types";
 import {
   Avatar,
@@ -12,9 +12,60 @@ import { Delete } from "@material-ui/icons";
 import "./list.css";
 import moment from "moment";
 import URL from "../config";
+import { useLocation } from "react-router-dom";
 
-export default function listComponent(props) {
+export default function ListComponent(props) {
+  const location = useLocation();
+  const { pathname } = location;
+  const userType = pathname.split("/")[1];
   const d = props.rowComp;
+  const [userRoles,setUserRoles]=useState("");
+
+  const rolesAll=(rolesList)=>{
+    rolesList.map(val=>{
+      if (val==="6153648ac5809858d4b761f2"){
+        setUserRoles(userRoles+" Manager ")
+      }if (val==="6153648ac5809858d4b761f3"){
+        setUserRoles(userRoles+" Salesperson ")
+      }if (val==="6153648ac5809858d4b761f4"){
+        setUserRoles(userRoles+" Admin ")
+      }
+    })
+    //return userRoles;
+  }
+  const userRolesField=()=>{
+    if (userType==="itAdmin"){
+      return (
+        <TableCell color="textPrimary" variant="body1">
+          {props.rolesTotal}
+        </TableCell>
+      )
+    }
+  }
+
+  const actionButtons=()=>{
+    if (props.urlName!=="salesperson"){
+      return (
+        <div className="actions">
+          <Link to={"/"+userType + "/" + props.urlName + "/" + d._id}>
+            <button className="editButt">View / Edit</button>
+          </Link>
+          <Delete
+            className="deleteButt"
+            onClick={() => props.handleDelete(d._id)}
+          />
+        </div>
+      )
+    }else{
+      return (
+        <div className="actions">
+          <Link to={"/"+userType + "/" + props.urlName + "/" + d._id}>
+            <button className="editButt">View</button>
+          </Link>
+        </div>
+      )
+    }
+  }
   return (
     <TableRow hover key={props.key}>
       {props.columnName.map((e) => {
@@ -46,7 +97,9 @@ export default function listComponent(props) {
               {d.email}
             </TableCell>
           );
-        } else if (e === "joinedDate") {
+        } 
+        
+        else if (e === "joinedDate") {
           return (
             <TableCell>{moment(d.joinedDate).format("DD/MM/YYYY")}</TableCell>
           );
@@ -70,16 +123,10 @@ export default function listComponent(props) {
           return <TableCell>{d[e]}</TableCell>;
         }
       })}
+      {userRolesField()}
+      
       <TableCell>
-        <div className="actions">
-          <Link to={URL.itAdmin + "/" + props.urlName + "/" + d._id}>
-            <button className="editButt">View / Edit</button>
-          </Link>
-          <Delete
-            className="deleteButt"
-            onClick={() => props.handleDelete(d._id)}
-          />
-        </div>
+        {actionButtons()}
       </TableCell>
     </TableRow>
   );

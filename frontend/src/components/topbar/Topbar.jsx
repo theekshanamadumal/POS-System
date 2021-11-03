@@ -37,7 +37,7 @@ export default function Topbar(props) {
           />
 
           <div className="topbarIconContainer mx-4">
-            <button className="btn btn-outline-light" onClick={logout}> Logout</button>
+            <button className="btn btn-outline-light text-uppercase" onClick={logout}> Log out</button>
             {/*<btn
               href=""
               target=""

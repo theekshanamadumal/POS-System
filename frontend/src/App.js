@@ -23,7 +23,6 @@ import ManagementSidebar from "./components/managementSidebar/Sidebar";
 import ManagementHome from "./pages/management/Home/managementHome";
 
 import SalesPerson from "./pages/management/SalesPerson/salesPerson";
-import NewSalesPerson from "./pages/management/SalesPerson/newSalesPerson";
 import ViewSalesPerson from "./pages/management/SalesPerson/viewSalesPerson";
 
 import Products from "./pages/management/Products/products";
@@ -92,8 +91,6 @@ class App extends Component {
           <PrivateManagerRoute exact path="/management/analytics" component={Analytics}/> 
 
           <PrivateManagerRoute exact path="/management/salesperson" component={SalesPerson}/> 
-
-          <PrivateManagerRoute exact path="/management/addSalesperson" component={NewSalesPerson}/> 
 
           <PrivateManagerRoute exact path="/management/salesPerson/:id" component={ViewSalesPerson}/> 
 

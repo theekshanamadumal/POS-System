@@ -36,13 +36,18 @@ module.exports =  class UserController {
         .catch((err) => res.status(400).json("Error: " + err));
     }
     countUsers(res) {
-        User.countDocuments({roles:this.roleType})
+        User.countDocuments({roles:'6153648ac5809858d4b761f3'})
+        .then((category) => res.json(category))
+        .catch((err) => res.status(400).json("Error: " + err));
+    }
+    countManagers(res) {
+        User.countDocuments({roles:'6153648ac5809858d4b761f2'})
         .then((category) => res.json(category))
         .catch((err) => res.status(400).json("Error: " + err));
     }
 
     userCount(res) {
-        User.countDocuments({roles:this.roleType})
+        User.countDocuments({roles:'6153648ac5809858d4b761f3'})
         .then((count) => res.json(count))
         .catch((err) => res.status(400).json("Error: " + err));
     }
@@ -84,6 +89,7 @@ module.exports =  class UserController {
         user.idNumber = req.body.idNumber;
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
+        user.roles = req.body.roles;
         user.image =image;
         user.password = bcrypt.hashSync(req.body.password, 8);
         user.address = req.body.address;

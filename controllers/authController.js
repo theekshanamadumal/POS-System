@@ -9,6 +9,7 @@ const bcrypt = require("bcrypt");
 
 //Signup ad save hashed password on the DB
 exports.signup = (req, res) => {
+    console.log("requested for signup...")
     const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -18,7 +19,8 @@ exports.signup = (req, res) => {
         city: req.body.city,
         phoneNumber: Number(req.body.phoneNumber),
         joinedDate: Date(req.body.joinedDate),
-        password: bcrypt.hashSync(req.body.password, 8)
+        password: bcrypt.hashSync(req.body.password, 8),
+        roles:req.body.roles,
     });
 
     user.save((err, user) => {

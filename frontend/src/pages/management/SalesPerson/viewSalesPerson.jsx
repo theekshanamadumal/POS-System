@@ -176,182 +176,65 @@ export default withRouter(
           <div className="task">
             <h1 className="mainHead">Salesperson</h1>
           </div>
-          <div className="Container">
-            <div className="detailsContainerSale">
-              <div className="detailMain">
-                <img
-                  className="imNewSale"
-                  src="https://media.istockphoto.com/photos/handsome-smiling-business-man-in-blue-shirt-standing-with-crossed-picture-id1098036052"
-                  alt=""
-                ></img>
-                <div className="idName">
-                  <h2 className="name">
-                    {this.state.manager.firstName +
-                      " " +
-                      this.state.manager.lastName}
-                  </h2>
-                </div>
-              </div>
-              <div className="detailSub">
-                <p className="detail">Account Details:</p>
-                <ul className="instructions">
-                  <li className="contact">
-                    ID Number :
-                    <span className="value">{this.state.manager.idNumber}</span>
-                  </li>
-                  <li className="contact">
-                    Joined Date :
-                    <span className="value">
-                      {String(this.state.manager.joinedDate).substr(0, 10)}
-                    </span>
-                  </li>
-                  <li className="contact">
-                    password :
-                    <span className="value">{this.state.manager.password}</span>
-                  </li>
-                </ul>
-
-                <p className="detail">Contact Details:</p>
-                <ul className="instructions">
-                  <li className="contact">
-                    <Email />{" "}
-                    <span className="value"> {this.state.manager.email}</span>
-                  </li>
-                  <li className="contact">
-                    <PhoneAndroid />
-                    <span className="value">
-                      {this.state.manager.phoneNumber}
-                    </span>
-                  </li>
-                  <li className="contact">
-                    <LocationCity />{" "}
-                    <span className="value">{this.state.manager.city} </span>
-                  </li>
-                  <li className="contact">
-                    <Home />{" "}
-                    <span className="value">{this.state.manager.address}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="editContainer">
-              <h1 className="subTitle">Edit</h1>
-              <br></br>
-              <form
-                className="form"
-                onSubmit={this.onSubmit}
-                enctype="multipart/form-data"
-              >
-                <div className="editItems">
-                  <div className="leftItemContainerSale saleSLI">
-                    <div className="form-row">
-                      <div className="col">
-                        <label>First Name</label>
-                        <input
-                          value={this.state.firstName}
-                          onChange={this.onChangeFirstName}
-                          type="text"
-                          required
-                        ></input>
-                      </div>
-                      <div className="col">
-                        <label>Last Name</label>
-                        <br></br>
-                        <input
-                          value={this.state.lastName}
-                          onChange={this.onChangeLastName}
-                          type="text"
-                          required
-                        ></input>
-                      </div>
-                    </div>
-                    <br></br>
-                    <div className="form-row">
-                      <div className="col">
-                        <label>ID Number</label>
-                        <input
-                          value={this.state.idNumber}
-                          onChange={this.onChangeIdNumber}
-                          type="text"
-                          required
-                        ></input>
-                      </div>
-                      <div className="col">
-                        <label>Password</label>
-                        <input
-                          onChange={this.onChangePassword}
-                          value={this.state.password}
-                          type="text"
-                          required
-                        ></input>
-                      </div>
-                    </div>
-                    <br></br>
-                    <div className="form-row">
-                      <div className="col">
-                        <label>Email Address</label>
-                        <input
-                          value={this.state.email}
-                          onChange={this.onChangeEmail}
-                          type="email"
-                          required
-                        ></input>
-                      </div>
-                      <div className="col">
-                        <label>Phone number </label>
-                        <input
-                          required
-                          value={this.state.phoneNumber}
-                          onChange={this.onChangePhoneNumber}
-                          type="Number"
-                        ></input>
-                      </div>
-                    </div>
-                    <br></br>
-                    <div className="form-row">
-                      <div className="col">
-                        <label>City</label>
-                        <input
-                          required
-                          value={this.state.city}
-                          onChange={this.onChangeCity}
-                          type="text"
-                          required
-                        ></input>
-                      </div>
-                      <div className="col">
-                        <label>Address</label>
-                        <br></br>
-                        <input
-                          value={this.state.address}
-                          onChange={this.onChangeAddress}
-                          type="text"
-                        ></input>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="rightItemContainerSale">
-                    <div className="upload">
-                      <input
-                        onChange={this.onChangeImage}
-                        type="file"
-                        id="file"
-                        className="form-control form-control-lg"
-                      />
-                      <br></br>
-                      <label htmlFor="file">
-                        <Publish />
-                        Upload Profile
-                      </label>
-                      <br></br>
-                      <button type="submit" className="submitSale">
-                        Update
-                      </button>
-                    </div>
+        
+          <div className="d-flex" >
+            <div className="col-md-3"></div>
+            <div className="col-md-5 detailsContainerSale" style={{width:"400px"}} >
+                <div className="detailMain">
+                  <img
+                    className="imNewSale"
+                    src="https://media.istockphoto.com/photos/handsome-smiling-business-man-in-blue-shirt-standing-with-crossed-picture-id1098036052"
+                    alt=""
+                  ></img>
+                  <div className="idName">
+                    <h2 className="name">
+                      {this.state.manager.firstName +
+                        " " +
+                        this.state.manager.lastName}
+                    </h2>
                   </div>
                 </div>
-              </form>
+                <div className="detailSub">
+                  <p className="detail">Account Details:</p>
+                  <ul className="instructions">
+                    <li className="contact">
+                      ID Number :
+                      <span className="value">{this.state.manager.idNumber}</span>
+                    </li>
+                    <li className="contact">
+                      Joined Date :
+                      <span className="value">
+                        {String(this.state.manager.joinedDate).substr(0, 10)}
+                      </span>
+                    </li>
+                    {/*<li className="contact">
+                      password :
+                      <span className="value">{this.state.manager.password}</span>
+                    </li>*/}
+                  </ul>
+
+                  <p className="detail">Contact Details:</p>
+                  <ul className="instructions">
+                    <li className="contact">
+                      <Email />{" "}
+                      <span className="value"> {this.state.manager.email}</span>
+                    </li>
+                    <li className="contact">
+                      <PhoneAndroid />
+                      <span className="value">
+                        {this.state.manager.phoneNumber}
+                      </span>
+                    </li>
+                    <li className="contact">
+                      <LocationCity />{" "}
+                      <span className="value">{this.state.manager.city} </span>
+                    </li>
+                    <li className="contact">
+                      <Home />{" "}
+                      <span className="value">{this.state.manager.address}</span>
+                    </li>
+                  </ul>
+                </div>
             </div>
           </div>
         </div>

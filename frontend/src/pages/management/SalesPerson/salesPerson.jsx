@@ -68,9 +68,6 @@ export default function SalesPerson(props) {
         <div className="spacing">
             <div className="containerSale">
                 <h1 className="heading">Salespersons</h1>
-                <Link to={URL.addSalesperson}>
-                    <button className="addUser">Add New SalesPerson</button>
-                </Link>
             </div>
                 
             

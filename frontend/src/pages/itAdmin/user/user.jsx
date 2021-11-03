@@ -26,7 +26,7 @@ import moment from "moment";
 
 export default function User(props) {
   const [users, setUsers]=useState([]);
-  const columnName=["idNumber","sName","email","phoneNumber","city","userRole"];
+  const columnName=["idNumber","sName","email","phoneNumber","city"];
 
   const [word, setWord] = useState("");
 
@@ -91,7 +91,6 @@ export default function User(props) {
                                     <MenuItem value="phoneNumber">Phone</MenuItem>
                                     <MenuItem value="city">City</MenuItem>
                                     <MenuItem value="joinedDate">Joined Date</MenuItem>
-                                    <MenuItem value="userRole">User Role</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>
@@ -178,8 +177,18 @@ export default function User(props) {
                                     }
                                 }
                             }).map((val)=>{
+                                let rolesTotal="";
+                                val.roles.map(r=>{
+                                    if (r==="6153648ac5809858d4b761f2"){
+                                        rolesTotal+=" Manager ";
+                                    }if (r==="6153648ac5809858d4b761f3"){
+                                        rolesTotal+=" Salesperson ";
+                                    }if (r==="6153648ac5809858d4b761f4"){
+                                        rolesTotal+=" Admin ";
+                                    }
+                                })
                                 return(
-                                    <ListComponent columnName={columnName} urlName="user" rowComp={val} key={val.idNumber} handleDelete={handleDelete}/>
+                                    <ListComponent columnName={columnName} urlName="user" rowComp={val} key={val.idNumber} handleDelete={handleDelete} rolesTotal={rolesTotal}/>
                                 )
                             })}
                             </TableBody>

@@ -10,7 +10,10 @@ var upload = multer({ storage: storage })
 router.route("/user").get((req, res) => {
   [authJwt.verifyToken, authJwt.isAdmin],
   UC.allUsers(res);
- 
+});
+router.route("/manager/count").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isAdmin],
+  UC.countManagers(res);
 });
 
 router.route("/addUser").post(upload.single("image"),(req, res) => {

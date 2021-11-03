@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./viewUser.css";
+import URL from "../../../config";
+
 import {
   Publish,
   Email,
@@ -31,6 +33,7 @@ export default withRouter(
       this.onChangeEmail = this.onChangeEmail.bind(this);
       this.onChangeJoinedDate = this.onChangeJoinedDate.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
+      this.onChangeRole=this.onChangeRole.bind(this);
 
       this.state = {
         user: [],
@@ -45,7 +48,25 @@ export default withRouter(
         phoneNumber: "",
         email: "",
         joinedDate: "",
+        roles:[],
+        checkedManager:false,
+        checkedSalesperson:false,
       };
+    }
+    onChangeRole(e){
+      if (e.target.value==="6153648ac5809858d4b761f2" ){
+        this.setState({checkedManager:!this.state.checkedManager})
+      }
+      if (e.target.value==="6153648ac5809858d4b761f3" ){
+        this.setState({checkedSalesperson:!this.state.checkedSalesperson})
+      }
+      if (this.state.roles.includes(e.target.value)===true){
+        const index = this.state.roles.indexOf(e.target.value);
+        this.state.roles.splice(index,1)
+      }
+      else{
+        this.state.roles.push(e.target.value);
+      }console.log("roles",this.state.roles)      
     }
 
     componentDidMount() {
@@ -66,7 +87,16 @@ export default withRouter(
             phoneNumber: response.data.phoneNumber,
             email: response.data.email,
             joinedDate: response.data.joinedDate,
+            roles:response.data.roles,
           });
+          this.state.roles.map(e=>{
+            if (e==="6153648ac5809858d4b761f2"){
+              this.setState({checkedManager:true})
+            }
+            if (e==="6153648ac5809858d4b761f3"){
+              this.setState({checkedSalesperson:true})
+            }
+          })
           console.log("response.data");
           console.log(response.data);
         })
@@ -141,6 +171,7 @@ export default withRouter(
     }
     onSubmit(e) {
       e.preventDefault();
+      console.log("before ..",this.state.roles)
 
       const user = {
         firstName: this.state.firstName,
@@ -153,6 +184,7 @@ export default withRouter(
         phoneNumber: this.state.phoneNumber,
         email: this.state.email,
         joinedDate: this.state.user.joinedDate,
+        roles:this.state.roles,
       };
 
       console.log(user);
@@ -178,10 +210,10 @@ export default withRouter(
       return (
         <div className="viewSalesPerson">
           <div className="task">
-            <h1>User</h1>
+            <h1 className="mainHead">User</h1>
           </div>
           <div className="Container">
-            <div className="detailsContainer">
+            <div className="detailsContainerSale">
               <div className="detailMain">
                 <img
                   className="imNewSale"
@@ -214,7 +246,7 @@ export default withRouter(
                     <span className="value">{this.state.user.password}</span>
                   </li>*/}
                 </ul>
-                <br></br>
+
                 <p className="detail">Contact Details:</p>
                 <ul className="instructions">
                   <li className="contact">
@@ -239,89 +271,143 @@ export default withRouter(
               </div>
             </div>
             <div className="editContainer">
-              <h1 className="editTitle">Edit</h1>
+              <h1 className="subTitle">Edit</h1>
+              <br></br>
               <form
                 className="form"
                 onSubmit={this.onSubmit}
                 enctype="multipart/form-data"
               >
                 <div className="editItems">
-                  <div className="leftItemContainer saleSLI">
-                    <label>First Name</label>
+                  <div className="leftItemContainerSale saleSLI">
+                    <div className="form-row">
+                      <div className="col">
+                        <label>First Name</label>
+                        <input
+                          value={this.state.firstName}
+                          onChange={this.onChangeFirstName}
+                          type="text"
+                          required
+                        ></input>
+                      </div>
+                      <div className="col">
+                        <label>Last Name</label>
+                        <br></br>
+                        <input
+                          value={this.state.lastName}
+                          onChange={this.onChangeLastName}
+                          type="text"
+                          required
+                        ></input>
+                      </div>
+                    </div>
                     <br></br>
-                    <input
-                      value={this.state.firstName}
-                      onChange={this.onChangeFirstName}
-                      type="text"
-                      required
-                    ></input>
+                    <div className="form-row">
+                      <div className="col">
+                        <label>ID Number</label>
+                        <input
+                          value={this.state.idNumber}
+                          onChange={this.onChangeIdNumber}
+                          type="text"
+                          required
+                        ></input>
+                      </div>
+                      <div className="col">
+                        <label>Password</label>
+                        <input
+                          onChange={this.onChangePassword}
+                          value={this.state.password}
+                          type="text"
+                          required
+                        ></input>
+                      </div>
+                    </div>
                     <br></br>
-                    <label>Last Name</label>
+                    <div className="form-row">
+                      <div className="col">
+                        <label>Email Address</label>
+                        <input
+                          value={this.state.email}
+                          onChange={this.onChangeEmail}
+                          type="email"
+                          required
+                        ></input>
+                      </div>
+                      <div className="col">
+                        <label>Phone number </label>
+                        <input
+                          required
+                          value={this.state.phoneNumber}
+                          onChange={this.onChangePhoneNumber}
+                          type="Number"
+                        ></input>
+                      </div>
+                    </div>
                     <br></br>
-                    <input
-                      value={this.state.lastName}
-                      onChange={this.onChangeLastName}
-                      type="text"
-                      required
-                    ></input>
-                    <br></br>
-                    <label>ID Number</label>
-                    <br></br>
-                    <input
-                      value={this.state.idNumber}
-                      onChange={this.onChangeIdNumber}
-                      type="text"
-                      required
-                    ></input>
-                    <br></br>
-                    <label>Password</label>
-                    <br></br>
-                    <input
-                      onChange={this.onChangePassword}
-                      value={this.state.password}
-                      type="text"
-                      required
-                    ></input>
-                    <br></br>
-                    <label>Email Address</label>
-                    <br></br>
-                    <input
-                      value={this.state.email}
-                      onChange={this.onChangeEmail}
-                      type="email"
-                      required
-                    ></input>
-                    <br></br>
-                    <label>Phone number </label>
-                    <br></br>
-                    <input
-                      required
-                      value={this.state.phoneNumber}
-                      onChange={this.onChangePhoneNumber}
-                      type="Number"
-                    ></input>
-                    <br></br>
-                    <label>City</label>
-                    <br></br>
-                    <input
-                      required
-                      value={this.state.city}
-                      onChange={this.onChangeCity}
-                      type="text"
-                      required
-                    ></input>
-                    <br></br>
-                    <label>Address</label>
-                    <br></br>
-                    <input
-                      value={this.state.address}
-                      onChange={this.onChangeAddress}
-                      type="text"
-                    ></input>
-                    <br></br>
+                    <div className="form-row">
+                      <div className="col">
+                        <label>City</label>
+                        <input
+                          required
+                          value={this.state.city}
+                          onChange={this.onChangeCity}
+                          type="text"
+                          required
+                        ></input>
+                      </div>
+                      <div className="col">
+                        <label>Address</label>
+                        <br></br>
+                        <input
+                          value={this.state.address}
+                          onChange={this.onChangeAddress}
+                          type="text"
+                        ></input>
+                      </div>
+                    </div>
+                    
+                    <div className="form-outline mt-3">
+                        <label className="form-label" htmlFor="role" style={{marginBottom:"-10px"}}>
+                          Role
+                        </label>
+                        <div className="form-outline row pb-2 px-3">
+                          <div className="col-md-5 form-check mx-3 ">
+                            <input 
+                              className="form-check-input" 
+                              style={{height:"20px",width:"20px"}}
+                              type="checkbox" 
+                              value="6153648ac5809858d4b761f2" 
+                              id="flexCheckManager" 
+                              onChange={this.onChangeRole}
+                              checked={this.state.checkedManager}
+                              //checked={this.state.roles.includes("6153648ac5809858d4b761f2")?true :false}
+                            />
+                            <label className="form-check-label mx-4" style={{marginTop:"-5px"}} for="flexCheckManager">
+                              Manager
+                            </label>
+                          </div>
+                          <div className="col-md-5 form-check mx-3">
+                            <input 
+                              style={{height:"20px",width:"20px"}}
+                              className="form-check-input" 
+                              type="checkbox" 
+                              value="6153648ac5809858d4b761f3" 
+                              id="flexCheckSalesperson" 
+                              onChange={this.onChangeRole}
+                              checked={this.state.checkedSalesperson}
+                              //checked={this.state.roles.includes("6153648ac5809858d4b761f3")?true :false}
+                            />
+                            <label class="form-check-label mx-4" style={{marginTop:"-5px"}} for="flexCheckSalesperson">
+                              Salesperson
+                            </label>
+                          </div>
+                          <small>error</small>
+                        </div>
+                        
+                      </div>
                   </div>
 
-                  <div className="rightItemContainer">
+                  <div className="rightItemContainerSale">
                     <div className="upload">
                       <input
                         onChange={this.onChangeImage}
@@ -332,10 +418,10 @@ export default withRouter(
                       <br></br>
                       <label htmlFor="file">
                         <Publish />
-                        Upload image
+                        Upload Profile
                       </label>
                       <br></br>
-                      <button type="submit" className="btn btn-success btn-lg">
+                      <button type="submit" className="submitSale">
                         Update
                       </button>
                     </div>

@@ -59,6 +59,7 @@ URL.itAdmin="/itAdmin";
 URL.user="/itAdmin/user";
 URL.addUser="/itAdmin/addUser";
 URL.editUser="/itAdmin/editUser/";
+URL.managerCount="/itAdmin/manager/count";
 
 URL.analytics="/management/analytics";
 URL.sales="management/analytics#sales";

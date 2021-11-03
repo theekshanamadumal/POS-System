@@ -36,13 +36,14 @@
   display: flex;
 }
 .addUser {
-  height: 40px;
+  height: 55px;
   width: 200px;
   background-color: rgb(16, 196, 46);
-  border-radius: 10px;
+  border-radius: 20px;
   cursor: pointer;
   margin: 20px;
+  padding: 5px 30px;
   flex: 1;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bolder;
 }
