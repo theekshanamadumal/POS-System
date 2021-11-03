@@ -7,30 +7,30 @@ var multer = require("multer");
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 
-router.route("/management").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isAdmin],s
+router.route("/user").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isAdmin],
   UC.allUsers(res);
  
 });
 
-router.route("/addManager").post(upload.single("image"),(req, res) => {
+router.route("/addUser").post(upload.single("image"),(req, res) => {
   [authJwt.verifyToken, authJwt.isAdmin],
   UC.addUser(req,res);
   //console.log("ser",UC.addUser(req,res));
   
 });
 
-router.route("/management/:id").get((req, res) => {
+router.route("/user/:id").get((req, res) => {
   [authJwt.verifyToken, authJwt.isAdmin],
   UC.getUser(req,res);
 });
 
-router.route("/management/:id").delete((req, res) => {
+router.route("/user/:id").delete((req, res) => {
   [authJwt.verifyToken, authJwt.isAdmin],
   UC.deleteUser(req,res);
   });
 
-router.route("/managerUpdate/:id").post((req, res) => {
+router.route("/userUpdate/:id").post((req, res) => {
   [authJwt.verifyToken, authJwt.isAdmin],
   UC.updateUser(req,res);
   

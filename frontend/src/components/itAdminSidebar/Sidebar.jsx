@@ -36,17 +36,17 @@ export default function ItAdminSidebar() {
         </div>
         <div className="sidebarMenu">
           <ul className="sidebarList">
-            <Link to={URL.manager} className="link">
-              <li className={splitLocation[2] === "management" ? "active sidebarListItem" : "sidebarListItem"}>
+            <Link to={URL.user} className="link">
+              <li className={splitLocation[2] === "user" ? "active sidebarListItem" : "sidebarListItem"}>
                 <PermIdentity className="sidebarIcon" />
-                Management
+                Users
               </li>
             </Link>
 
-            <Link to={URL.addManager} className="link">
-              <li className={splitLocation[2] === "addManager" ? "active sidebarListItem" : "sidebarListItem"}>
+            <Link to={URL.addUser} className="link">
+              <li className={splitLocation[2] === "addUser" ? "active sidebarListItem" : "sidebarListItem"}>
                 <WorkOutline className="sidebarIcon" />
-                Add Manager
+                Add User
               </li>
             </Link>
           </ul>

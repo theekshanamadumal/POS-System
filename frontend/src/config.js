@@ -56,9 +56,9 @@ URL.tasks="/management/tasks";
 URL.addDailyTarget="/management/adddailyTasks";
 
 URL.itAdmin="/itAdmin";
-URL.manager="/itAdmin/management/";
-URL.addManager="/itAdmin/addManager";
-URL.editManager="/itAdmin/editManager/";
+URL.user="/itAdmin/user";
+URL.addUser="/itAdmin/addUser";
+URL.editUser="/itAdmin/editUser/";
 
 URL.analytics="/management/analytics";
 URL.sales="management/analytics#sales";

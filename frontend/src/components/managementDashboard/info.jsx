@@ -58,15 +58,10 @@ export default function Info() {
       <div className="featuredItem1">
         <SalesPieChart />
       </div>
-
-      <div className="featuredUs">
-        <Link to={URL.shops} className="linkTo">
-          <Storefront fontSize="large" className="Icon" />
-          <div className="descript">
-            Total<br></br> Shops{" "}
+      <div className="featuredItem2">
+          <div className="up">
+              <BestPerform bestPerform={bestPerform} />
           </div>
-          <div className="count">{shopCount}</div>
-        </Link>
       </div>
 
       <div className="featuredItem3">

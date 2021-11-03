@@ -24,7 +24,14 @@ module.exports =  class UserController {
     }
 
     allUsers(res) {
-        User.find({roles:this.roleType})
+        let selectType;
+        if (this.roleType==='6153648ac5809858d4b761f4'){
+            selectType=['6153648ac5809858d4b761f2','6153648ac5809858d4b761f3']
+        }
+        else{
+            selectType=['6153648ac5809858d4b761f3']
+        }
+        User.find({roles:{$in:selectType}})
         .then((category) => res.json(category))
         .catch((err) => res.status(400).json("Error: " + err));
     }

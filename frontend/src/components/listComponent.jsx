@@ -72,7 +72,7 @@ export default function listComponent(props) {
       })}
       <TableCell>
         <div className="actions">
-          <Link to={URL.management + "/" + props.urlName + "/" + d._id}>
+          <Link to={URL.itAdmin + "/" + props.urlName + "/" + d._id}>
             <button className="editButt">View / Edit</button>
           </Link>
           <Delete

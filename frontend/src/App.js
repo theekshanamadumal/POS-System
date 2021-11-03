@@ -14,9 +14,9 @@ import Login from "./components/login/login";
 //it admin
 import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
 import ItAdminHome from "./pages/itAdmin/Home/itAdminHome";
-import Management from './pages/itAdmin/management/management';
-import AddManager from './pages/itAdmin/addManager/addManager';
-import ViewManager from './pages/itAdmin/management/viewManager';
+import User from './pages/itAdmin/user/user';
+import AddUser from './pages/itAdmin/addUser/addUser';
+import ViewUser from './pages/itAdmin/user/viewUser';
 
 //management
 import ManagementSidebar from "./components/managementSidebar/Sidebar";
@@ -80,11 +80,11 @@ class App extends Component {
 
         <PrivateAdminRoute exact path="/itAdmin/reports" component={<h1>reports page</h1> }/>
 
-        <PrivateAdminRoute exact path="/itAdmin/management" component={Management}/>
+        <PrivateAdminRoute exact path="/itAdmin/user" component={User}/>
 
-        <PrivateAdminRoute exact path="/itAdmin/addManager" component={AddManager}/>
+        <PrivateAdminRoute exact path="/itAdmin/addUser" component={AddUser}/>
 
-        <PrivateAdminRoute exact path="/itAdmin/editManager/:id" component={ViewManager}/>
+        <PrivateAdminRoute exact path="/itAdmin/user/:id" component={ViewUser}/>
 
           {/*  management routes  */}
           <PrivateManagerRoute exact path="/management" component={ManagementHome}/>

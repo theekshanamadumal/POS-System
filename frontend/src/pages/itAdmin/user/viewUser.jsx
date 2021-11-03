@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./viewManager.css";
+import "./viewUser.css";
 import {
   Publish,
   Email,
@@ -15,7 +15,7 @@ var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
 
 export default withRouter(
-  class ViewManager extends Component {
+  class ViewUser extends Component {
     constructor(props) {
       super(props);
 
@@ -33,7 +33,7 @@ export default withRouter(
       this.onSubmit = this.onSubmit.bind(this);
 
       this.state = {
-        manager: [],
+        user: [],
         dataId: "",
         firstName: "",
         lastName: "",
@@ -52,10 +52,10 @@ export default withRouter(
       this.dataId = this.props.match.params.id;
 
       axios
-        .get("http://localhost:3001/itAdmin/management/" + this.dataId)
+        .get("http://localhost:3001/itAdmin/user/" + this.dataId)
         .then((response) => {
           this.setState({
-            manager: response.data,
+            user: response.data,
             firstName: response.data.firstName,
             lastName: response.data.lastName,
             idNumber: response.data.idNumber,
@@ -75,7 +75,7 @@ export default withRouter(
           alert(
             "Error:",
             error.data,
-            (window.location = "/itAdmin/management")
+            (window.location = "/itAdmin/user")
           );
         });
     }
@@ -152,33 +152,33 @@ export default withRouter(
         city: this.state.city,
         phoneNumber: this.state.phoneNumber,
         email: this.state.email,
-        joinedDate: this.state.manager.joinedDate,
+        joinedDate: this.state.user.joinedDate,
       };
 
       console.log(user);
 
       axios
         .post(
-          "http://localhost:3001/itAdmin/managerUpdate/" + this.dataId,
+          "http://localhost:3001/itAdmin/userUpdate/" + this.dataId,
           user
         )
         .then((res) => {
           console.log(res.data);
-          alert(res.data, (window.location = "/itAdmin/management"));
+          alert(res.data, (window.location = "/itAdmin/user"));
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/itAdmin/management"));
+          alert(error, (window.location = "/itAdmin/user"));
         });
 
-      //window.location = "/itAdmin/editManager/" + this.dataId;
+      //window.location = "/itAdmin/edituser/" + this.dataId;
     }
 
     render() {
       return (
         <div className="viewSalesPerson">
           <div className="task">
-            <h3>Manager</h3>
+            <h1>User</h1>
           </div>
           <div className="Container">
             <div className="detailsContainer">
@@ -190,9 +190,9 @@ export default withRouter(
                 ></img>
                 <div className="idName">
                   <h2 className="name">
-                    {this.state.manager.firstName +
+                    {this.state.user.firstName +
                       " " +
-                      this.state.manager.lastName}
+                      this.state.user.lastName}
                   </h2>
                 </div>
               </div>
@@ -201,39 +201,39 @@ export default withRouter(
                 <ul className="instructions">
                   <li className="contact">
                     ID Number :
-                    <span className="value">{this.state.manager.idNumber}</span>
+                    <span className="value">{this.state.user.idNumber}</span>
                   </li>
                   <li className="contact">
                     Joined Date :
                     <span className="value">
-                      {String(this.state.manager.joinedDate).substr(0, 10)}
+                      {String(this.state.user.joinedDate).substr(0, 10)}
                     </span>
                   </li>
-                  <li className="contact">
+                  {/*<li className="contact">
                     password :
-                    <span className="value">{this.state.manager.password}</span>
-                  </li>
+                    <span className="value">{this.state.user.password}</span>
+                  </li>*/}
                 </ul>
                 <br></br>
                 <p className="detail">Contact Details:</p>
                 <ul className="instructions">
                   <li className="contact">
                     <Email />{" "}
-                    <span className="value"> {this.state.manager.email}</span>
+                    <span className="value"> {this.state.user.email}</span>
                   </li>
                   <li className="contact">
                     <PhoneAndroid />
                     <span className="value">
-                      {this.state.manager.phoneNumber}
+                      {this.state.user.phoneNumber}
                     </span>
                   </li>
                   <li className="contact">
                     <LocationCity />{" "}
-                    <span className="value">{this.state.manager.city} </span>
+                    <span className="value">{this.state.user.city} </span>
                   </li>
                   <li className="contact">
                     <Home />{" "}
-                    <span className="value">{this.state.manager.address}</span>
+                    <span className="value">{this.state.user.address}</span>
                   </li>
                 </ul>
               </div>

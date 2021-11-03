@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import axios from "axios";
-import "./newSalesperson.css";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import "./addUser.css";
 import URL from "../../../config";
+import AuthService from "../../../services/authService";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 var multer = require("multer");
 
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
 
-export default class NewSalesPerson extends Component {
+export default class AddUser extends Component {
   constructor(props) {
     super(props);
+
     this.onChangeLastName = this.onChangeLastName.bind(this);
     this.onChangeFirstName = this.onChangeFirstName.bind(this);
     this.onChangeIdNumber = this.onChangeIdNumber.bind(this);
@@ -43,33 +44,6 @@ export default class NewSalesPerson extends Component {
     };
     this.errorList = [];
   }
-  onChangeImage(e) {
-    const selectedImage = e;
-    upload.single("image");
-    const imgData = toString(selectedImage);
-    console.log(imgData);
-
-    const imgcontentType = "image/jpg";
-    const image = { data: imgData, contentType: imgcontentType };
-    this.setState({
-      image: e.target.value,
-    });
-  }
-
-  handleClickShowPassword = () => {
-    this.setState({
-      showPassword: !this.state.showPassword,
-    });
-  };
-  handleClickShowConPassword = () => {
-    this.setState({
-      showConPassword: !this.state.showConPassword,
-    });
-  };
-
-  handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   onChangeFirstName(e) {
     this.setState({
@@ -87,6 +61,13 @@ export default class NewSalesPerson extends Component {
     });
   }
   onChangeImage(e) {
+    const selectedImage = e;
+    upload.single("image");
+    const imgData = toString(selectedImage);
+    console.log(imgData);
+
+    const imgcontentType = "image/jpg";
+    const image = { data: imgData, contentType: imgcontentType };
     this.setState({
       image: e.target.value,
     });
@@ -215,7 +196,6 @@ export default class NewSalesPerson extends Component {
       }
     }
   }
-
   onSubmit(e) {
     e.preventDefault();
     var arr = this.state;
@@ -248,23 +228,23 @@ export default class NewSalesPerson extends Component {
       };
       console.log(user);
 
-      axios
-        .post(URL.main+URL.addSalesperson, user)
-        .then((res) => {
-          console.log(res.data);
-          alert(res.data, (window.location = URL.salesperson));
-        })
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.salesperson));
-        });
+      AuthService.register(user)
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data, (window.location = URL.user));
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = URL.user));
+      });
     }
   }
+
 
   render() {
     return (
       <div data-testid="newSalesperson" className="newUser">
-        <h1 className="title">Add a New Salesperson</h1>
+        <h1 className="title">Add a New User</h1>
         <form className="addSalespersonForm" onSubmit={this.onSubmit}>
           <section className="h-100 h-custom gradient-custom-2">
             <div className="container py-5 h-100">
@@ -318,7 +298,7 @@ export default class NewSalesPerson extends Component {
                               </div>
                             </div>
                           </div>
-
+                          
                           <div className="mb-2 pb-2">
                             <div className="form-outline">
                               <label className="form-label" htmlFor="idNumber">
@@ -334,6 +314,38 @@ export default class NewSalesPerson extends Component {
                               />
                               <small>error</small>
                             </div>
+                            <div>
+                                <label className="form-label" htmlFor="role">
+                                  Role
+                                </label>
+                                <div className="row pb-2 px-3">
+                                  <div className="col-md-6 form-check">
+                                    <input 
+                                      className="form-check-input" 
+                                      
+                                      type="checkbox" 
+                                      value="" 
+                                      id="flexCheckManager" 
+                                      onChange={this.onChangeRole}
+                                    />
+                                    <label className="form-check-label mt-2" for="flexCheckManager">
+                                      Manager
+                                    </label>
+                                  </div>
+                                  <div className="col-md-6 form-check">
+                                    <input 
+                                      className="form-check-input" 
+                                      type="checkbox" 
+                                      value="" 
+                                      id="flexCheckSalesperson" 
+                                      onChange={this.onChangeRole}
+                                    />
+                                    <label class="form-check-label mt-2" for="flexCheckSalesperson">
+                                      Salesperson
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
                           </div>
 
                           <div className="mb-2 pb-2">

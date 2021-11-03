@@ -6,7 +6,7 @@ export default class QuickAccess extends Component {
   render() {
     return (
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        <Link className="col-md-2 mx-3" to={URL.addProductCategory}>
+        <Link className="col-md-2" to={URL.addProductCategory}>
           <button className=" addUser" style={{ marginRight: "10px" }}>
             Add New Product Category
           </button>

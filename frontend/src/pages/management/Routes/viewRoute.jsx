@@ -14,9 +14,10 @@ export default withRouter(
       this.onChangeOriginLocation = this.onChangeOriginLocation.bind(this);
       this.onChangeDestination = this.onChangeDestination.bind(this);
       this.onChangeDestinationLocation =
-        this.onChangeDestinationLocation.bind(this);
+      this.onChangeDestinationLocation.bind(this);
       this.onChangeCities = this.onChangeCities.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
+      this.loadShops=this.loadShops.bind(this);
 
       this.state = {
         route: [],
@@ -27,7 +28,15 @@ export default withRouter(
         destinationLocation: "",
         cities: [],
         routesDetails:[],
+        shops:[],
+        countShops:0,
       };
+    }
+    loadShops(){
+      console.log("route details",this.state.routesDetails);
+      const li=this.state.routesDetails.filter(e=>e._id===this.dataId);
+      console.log("li",li);
+
     }
 
     componentDidMount() {
@@ -47,14 +56,19 @@ export default withRouter(
             destinationLocation: String(responses[0].data.destinationLocation),
             cities: responses[0].data.cities,
           });
-          this.setState({routesDetails:responses[1].data });
-          console.log("responses[0].data");
-          console.log(responses[0].data);
+          const li=responses[1].data.filter(c=>c._id===this.dataId);
+          if (li.length>0){
+            this.setState({routesDetails:responses[1].data.filter(c=>c._id===this.dataId) });
+            this.setState({shops:li[0].shopsName});
+            this.setState({countShops:li[0].count})
+          }
+          
         }))
         .catch((error) => {
           console.log(error);
           alert(error, (window.location = URL.routes));
         });
+        this.loadShops();
     }
 
     onChangeOrigin(e) {
@@ -113,7 +127,7 @@ export default withRouter(
                 <button className="addUser">Add New Route</button>
               </Link>*/}
             </div>
-
+              {console.log("rou de",this.state.routesDetails)}
             <div className="Container">
               <div className="detailsContainer">
                 <div className="detailMain">
@@ -160,22 +174,15 @@ export default withRouter(
                     Status : <span className="value"> Assigned</span>
                   </p>
                   <p className="detail">
-                    No of Shops : <span className="value"> 4</span>
+                    No of Shops : <span className="value"> {this.state.countShops}</span>
                   </p>
                   <p className="detail"> Shops : </p>
                   <ol className="instructionsRot">
-                    <li className="contactRot">
-                      <span className="value"> Store 1</span>
-                    </li>
-                    <li className="contactRot">
-                      <span className="value">Store 2</span>
-                    </li>
-                    <li className="contactRot">
-                      <span className="value">Store 3 </span>
-                    </li>
-                    <li className="contactRot">
-                      <span className="value">Store 4</span>
-                    </li>
+                    {this.state.shops.map(x=>
+                      <li className="contactRot">
+                        <span className="value"> {x}</span>
+                      </li>
+                    )}
                   </ol>
                 </div>
               </div>
