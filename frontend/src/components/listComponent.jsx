@@ -71,6 +71,9 @@ export default function ListComponent(props) {
       {props.columnName.map((e) => {
         if (e === "_id") {
           return <TableCell>{d._id.substr(19)}</TableCell>;
+        }
+        if (e==="unitPrice"){
+          return <TableCell align="center"> {d.unitPrice.toFixed(2)}{" "}</TableCell>;
         } else if (e === "sName") {
           return (
             <TableCell>

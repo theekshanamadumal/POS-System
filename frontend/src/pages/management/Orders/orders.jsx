@@ -130,6 +130,9 @@ export default function Orders() {
                       <h5>Issued Date</h5>
                     </TableCell>
                     <TableCell className="tbHeader">
+                      <h5>Payment Type</h5>
+                    </TableCell>
+                    <TableCell className="tbHeader">
                       <h5>Action</h5>
                     </TableCell>
                   </TableRow>

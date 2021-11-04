@@ -8,7 +8,7 @@ export default class AssignTasks extends Component {
     constructor(props){
         super(props)
         this.state={
-            inventoryList:[{productId: "", quantity: 0,unitPrice:0,total:0} ],
+            inventoryList:[{productId: "",itemName:"", quantity: 0,unitPrice:0,total:0} ],
             routeList:[],
             dailyRoute: "",
             dailySalesTarget: 0,
@@ -47,7 +47,9 @@ export default class AssignTasks extends Component {
         else{
             list[index][name] = value ;
             const uP=this.state.productList.filter(el=>el._id===value);
+            console.log("up..",uP)
             list[index].unitPrice=uP[0].unitPrice;
+            list[index].itemName=uP[0].itemName;
             if (list[index].quantity!==0){ //or gt 0
                 list[index].total=list[index].quantity*list[index].unitPrice;
                 const old=this.state.tot[index];
@@ -80,7 +82,7 @@ export default class AssignTasks extends Component {
     // handle click event of the Add button
     handleAddInventory = () => {
         const list = this.state.inventoryList;
-        list.push({ productId: "", quantity: 0 ,unitPrice:0,total:0});
+        list.push({ productId: "", itemName:"", quantity: 0 ,unitPrice:0,total:0});
         this.setState({inventoryList:list})
         
     };
@@ -113,12 +115,18 @@ export default class AssignTasks extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const lis=this.state.shopsDetails.filter(det=>det._id===this.state.dailyRoute)[0].shopsID;
-        console.log("lis",lis);
-        lis.map(li=>{
+        const lis=this.state.shopsDetails.filter(det=>det._id===this.state.dailyRoute)[0];
+        console.log("chhhh",lis)
+        const lisShopId=lis.shopsID;
+        
+        const lisShopName=lis.shopsName;
+        console.log("lis",lisShopId,lisShopName);
+        lisShopId.map(li=>{
             console.log("li..",li)
-            this.setState({shopsId:this.state.shopsId.push({shopId:li,isCovered:false})})
+            const index = lisShopId.indexOf(li);
+            this.setState({shopsId:this.state.shopsId.push({shopId:li,isCovered:false,shopName:lisShopName[index]})})
         });
+        console.log("shopd..",this.state.shopsId)
         const dailyTarget = {
             sellerId: this.state.salespersonId,
             dailyRoute: this.state.dailyRoute,
@@ -246,8 +254,6 @@ export default class AssignTasks extends Component {
                                                     onClick={this.handleAddInventory}/>
                                                 }
                                             </span>
-                                            {console.log(typeof this.state.dailySalesTarget,"type")}
-                                            {console.log(this.state)}
                                         </div> 
                                     );
                                 })}

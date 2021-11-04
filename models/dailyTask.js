@@ -12,6 +12,7 @@ const DailyTask = mongoose.model(
                     ref: "Product"
                 },
                 quantity: { type: Number },
+                itemName:{type:String},
             })]
         },
         dailyRoute: {
@@ -24,6 +25,7 @@ const DailyTask = mongoose.model(
             type: [new mongoose.Schema({
                 _id: false,
                 isCovered: { type: Boolean },
+                shopName:{type:String},
                 shopId: {
                     type: mongoose.Schema.ObjectId,
                     ref: "Shops"

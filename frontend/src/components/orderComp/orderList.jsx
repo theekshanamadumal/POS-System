@@ -16,10 +16,11 @@ const OrderList = (props) => {
     <TableRow hover key={d._id}>
       <TableCell>{d._id.substr(19)}</TableCell>
       <TableCell>{d.shopId.shopName}</TableCell>
-      <TableCell>{d.total}</TableCell>
+      <TableCell>{d.total.toFixed(2)}{" "}</TableCell>
       <TableCell>
         {moment(d.dateTime).format("DD/MM/YYYY")}
       </TableCell>
+      <TableCell align="justify">{d.isOnline?"Online":"Cash"}</TableCell>
       <TableCell>
         <div className="actions">
           <Link to={URL.orderComp + d._id}>

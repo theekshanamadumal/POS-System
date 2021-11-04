@@ -142,7 +142,7 @@ export default function Products() {
                     <TableCell className="tbHeader">
                       <h5>Category</h5>
                     </TableCell>
-                    <TableCell className="tbHeader">
+                    <TableCell align="center" className="tbHeader">
                       <h5>Unit Price</h5>
                     </TableCell>
                     <TableCell className="tbHeader">

@@ -4,39 +4,38 @@ import moment from "moment";
 import "./invoiceDetails.css";
 import { parseJSON } from "date-fns/esm";
 
-export default function invoiceDetails({ invoiceData}) {
-  const jsonInvoice=JSON.parse(invoiceData);
+export default function invoiceDetails(props) {
+  //const jsonInvoice=JSON.parse(invoiceData);
+  //const id=props.invoiceData._id;
   return (
     <div className="invoiceDetails">
       <h1 className="invoicehead">Invoice</h1>
       <div className="invoiceContainer">
         <div className="leftCont">
-        {console.log("&&&&&&****")};
-        {console.log((invoiceData))}
-        {console.log(typeof invoiceData)}
-        {console.log(jsonInvoice)}
         
-          {/*<p className="detailInv">
+        
+          <p className="detailInv">
             {" "}
             Invoice ID :
-            <span className="value">{String(JSON.parse(invoiceData)._id).substr(19)}</span>
+            <span className="value">{props.id}</span>
           </p>
           <p className="detailInv">
             {" "}
-            Shop :<span className="value"> {JSON.parse(invoiceData).shopId.shopName}</span>
+            Shop :<span className="value"> {props.shopName}</span>
           </p>
           <p className="detailInv">
             Seller :
             <span className="value">
-              {JSON.parse(invoiceData).sellerId.firstName + " " + JSON.parse(invoiceData).sellerId.firstName.lastName}
+              {props.sellerData.firstName + " " + props.sellerData.lastName}
             </span>
           </p>
           <p className="detailInv">
             Issued Date :
             <span className="value">
-              {moment(invoiceData.sellerId).format("DD/MM/YYYY")}
+            {moment(props.invoiceData.dateTime).format("DD/MM/YYYY")}
+
             </span>
-          </p>*/}
+          </p>
         </div>
         <div className="rightCont">
           <img

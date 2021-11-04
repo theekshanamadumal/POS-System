@@ -1,5 +1,4 @@
 import "./viewTasks.css";
-import { remain, achieved } from "../../../dataCollection";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Box,
@@ -11,11 +10,9 @@ import {
   TableRow,
 } from "@material-ui/core";
 import Percentage from "../../../components/taskComp/percentage";
-//import Maps from "../sellerLocation/Maps";
 import SellerLocation from "../../../pages/management/sellerLocation/sellerLocations";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
-//import MapChart from "../../MapChart";
 import { useLocation } from "react-router-dom";
 import URL from "../../../config";
 
@@ -27,14 +24,14 @@ export default function ViewTasks() {
   const [ID, setID] = useState("");
   const [tasks, setTasks] = useState([]);
   const [seller, setSeller] = useState([]);
+  const [dailyShops, setDailyShops] = useState([]);
+  const [dailyInventory, setDailyInventory] = useState([]);
 
   const loadSalesPerson = (idNum) => {
     axios
       .get(URL.main + URL.salesperson + "/" + idNum)
       .then((response) => {
         setSeller(response.data);
-        console.log("seller.........");
-        console.log(seller._id);
       })
       .catch((error) => {
         console.log(error);
@@ -46,9 +43,9 @@ export default function ViewTasks() {
       .get(URL.main + URL.dailyTasks + "/" + id)
       .then((response) => {
         setTasks(response.data);
-        console.log("dailyTask data");
-        console.log(response.data);
-        console.log(response.data.sellerId);
+        setDailyInventory(response.data.dailyInventory);
+        setDailyShops(response.data.dailyShops);
+        console.log("response.....",response.data);
         loadSalesPerson(response.data.sellerId);
       })
       .catch((error) => {
@@ -58,7 +55,7 @@ export default function ViewTasks() {
   }, []);
   return (
     <div className="viewTasks">
-      <Percentage
+      <Percentage 
         target={tasks.dailySalesTarget}
         achieved={tasks.dailySalesProgression}
         id={seller.idNumber}
@@ -75,7 +72,7 @@ export default function ViewTasks() {
                   <TableHead sx={{ innerHeight: 100 }}>
                     <TableRow>
                       <TableCell align="center" className="tbHeader">
-                        <h5>Product ID</h5>
+                        <h5>Product Name</h5>
                       </TableCell>
                       <TableCell align="right" className="tbHeader">
                         <h5>Quantity</h5>
@@ -83,14 +80,12 @@ export default function ViewTasks() {
                     </TableRow>
                   </TableHead>
                   <TableBody className="tbBody">
-                    {console.log("dailyInventory")}
-                    {console.log(tasks.dailyInventory)}
-                    {/*{tasks.dailyInventory.map((d) => (
+                    {dailyInventory.map((d) => (
                       <TableRow hover key={d.productId}>
-                        <TableCell align="center">{d.productId}</TableCell>
+                        <TableCell align="center">{d.itemName}</TableCell>
                         <TableCell align="right">{d.quantity}</TableCell>
                       </TableRow>
-                    ))}*/}
+                    ))}
                   </TableBody>
                 </Table>
               </Box>
@@ -107,7 +102,7 @@ export default function ViewTasks() {
                   <TableHead sx={{ innerHeight: 100 }}>
                     <TableRow>
                       <TableCell align="center" className="tbHeader">
-                        <h5>Shop Id</h5>
+                        <h5>Shop Name</h5>
                       </TableCell>
                       <TableCell align="center" className="tbHeader">
                         <h5>Status</h5>
@@ -115,13 +110,13 @@ export default function ViewTasks() {
                     </TableRow>
                   </TableHead>
                   <TableBody className="tbBody">
-                    {/*}
-                    {tasks.dailyShops.map((e) => (
+                    {dailyShops.map((e) => (
                       <TableRow hover key={e.shopId}>
-                        <TableCell align="center">{e.shopId}</TableCell>
-                        <TableCell align="center">{e.isCovered.toString()}</TableCell>
+                        <TableCell align="center">{e.shopName}</TableCell>
+                        <TableCell align="center">
+                          {e.isCovered===true?"Covered":"Not Covered"}</TableCell>
                       </TableRow>
-                    ))}*/}
+                    ))}
                   </TableBody>
                 </Table>
               </Box>
