@@ -18,7 +18,7 @@ export default function Home() {
         grid
       />
 
-      <AllSellersLocations style={{width:"80vw"}} />
+      <AllSellersLocations style={{ width: "80vw" }} />
     </div>
   );
 }

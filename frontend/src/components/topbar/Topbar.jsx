@@ -35,15 +35,18 @@ export default function Topbar(props) {
             alt="user"
             className="topAvatar"
           />
+          <div className="topbarIconContainer fw-bolder">
+            {new Date().toDateString()}
+          </div>
 
           <div className="topbarIconContainer mx-4">
-            <button className="btn btn-outline-light text-uppercase" onClick={logout}> Log out</button>
-            {/*<btn
-              href=""
-              target=""
-              rel="noopener noreferrer"
-              onClick={"kjk"}
-            ></btn>*/}
+            <button
+              className="btn btn-outline-light text-uppercase"
+              onClick={logout}
+            >
+              {" "}
+              Log out
+            </button>
           </div>
         </div>
       </div>
