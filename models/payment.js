@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const Payment = mongoose.model(
     "Payment",
     new mongoose.Schema({
-        sellerId: String,
+        sellerId: {
+            type: mongoose.Schema.ObjectId,
+            ref: "users"
+        },
         shopId: {
             type: mongoose.Schema.ObjectId,
             ref: "Shops"
