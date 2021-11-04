@@ -6,6 +6,7 @@ const DailyTask = mongoose.model(
         sellerId: String,
         dailyInventory: {
             type: [new mongoose.Schema({
+                _id: false,
                 productId: {
                     type: mongoose.Schema.ObjectId,
                     ref: "Product"
@@ -21,6 +22,7 @@ const DailyTask = mongoose.model(
         dailySalesTarget: Number,
         dailyShops: {
             type: [new mongoose.Schema({
+                _id: false,
                 isCovered: { type: Boolean },
                 shopId: {
                     type: mongoose.Schema.ObjectId,
