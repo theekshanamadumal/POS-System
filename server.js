@@ -51,6 +51,7 @@ const salesRouteRouter = require('./routes/salesRouteRouter');
 const locationRouter = require('./routes/locationRoute');
 const billRouter = require('./routes/billRoute');
 const dailyTaskRouter = require('./routes/dailyTaskRoute');
+const analyticsRouter = require('./routes/analyticsRoute');
 
 app.use('/itAdmin', itAdminRouter);
 app.use('/management', managementRouter);
@@ -61,6 +62,7 @@ app.use('/management', salesRouteRouter);
 app.use('/management', locationRouter);
 app.use('/management', billRouter);
 app.use('/management', dailyTaskRouter);
+app.use('/management', analyticsRouter);
 
 require('./routes/authRoutes')(app);
 //require('./routes/routes')(app);
