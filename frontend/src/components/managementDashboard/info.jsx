@@ -7,6 +7,7 @@ import { bestPerform } from "..//../dataCollection";
 import { Link } from "react-router-dom";
 import URL from "../../config";
 import axios from "axios";
+import categoryAnalytics from "../../services/analytics/category";
 
 export default function Info() {
   const [salespersonCount, setSalespersonCount] = useState(0);
@@ -56,12 +57,13 @@ export default function Info() {
   return (
     <div className="featured">
       <div className="featuredItem1">
+        <div>{categoryAnalytics.getForDay()}</div>
         <SalesPieChart />
       </div>
       <div className="featuredItem2">
-          <div className="up">
-              <BestPerform bestPerform={bestPerform} />
-          </div>
+        <div className="up">
+          <BestPerform bestPerform={bestPerform} />
+        </div>
       </div>
 
       <div className="featuredItem3">
