@@ -24,3 +24,4 @@ router.route("/analytics/sales").get((req, res) => {
 
 
 module.exports = router;
+   
