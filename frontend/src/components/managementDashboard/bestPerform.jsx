@@ -20,7 +20,7 @@ const BestPerform = ({ bestPerform, ...rest }) => {
     <div style={{ cursor: "pointer" }} className="tableCont">
       <Link to={URL.analyticsSalesperson}>
         <h3 style={{ textAlign: "center" }}>Best Performing Salespersons</h3>
-        <div>{sellerAnalytics.perDay()}</div>
+        <div>{"sellerAnalytics.perDay()"}</div>
 
         <br></br>
         <Container maxWidth="lg">
