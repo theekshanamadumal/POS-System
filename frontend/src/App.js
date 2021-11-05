@@ -96,11 +96,11 @@ class App extends Component {
 
           <PrivateManagerRoute exact path="/management/products" component={Products}/> 
 
+          <PrivateManagerRoute exact path="/management/products/addProduct" component={AddProducts}/> 
+
+          <PrivateManagerRoute exact path="/management/products/addProductCategory" component={AddProductCategory}/> 
+
           <PrivateManagerRoute exact path="/management/products/:id" component={ViewProducts}/> 
-
-          <PrivateManagerRoute exact path="/management/addProduct" component={AddProducts}/> 
-
-          <PrivateManagerRoute exact path="/management/addProductCategory" component={AddProductCategory}/> 
 
           <PrivateManagerRoute exact path="/management/routes" component={Routes}/> 
 
@@ -112,7 +112,7 @@ class App extends Component {
 
           <PrivateManagerRoute exact path="/management/orders" component={Orders}/> 
 
-          <PrivateManagerRoute exact path="/management/Order/:id" component={ViewOrders}/> 
+          <PrivateManagerRoute exact path="/management/Orders/:id" component={ViewOrders}/> 
 
           <PrivateManagerRoute exact path="/management/shops" component={Shops}/> 
 

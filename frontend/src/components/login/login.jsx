@@ -85,7 +85,21 @@ export default class Login extends Component {
     if (errorMsg === false && this.state.errorList.length === 0) {
       AuthService.login(this.state.email, this.state.password).then(
         () => {
-          console.log("----------log done----------");
+          
+          const currentUser = AuthService.getCurrentUser();
+
+          if (currentUser && currentUser.roles.includes("ROLE_ADMIN")) {
+              console.log("----------log done----------");
+              console.log("----------role is a admin----------");
+              window.location = URL.itAdmin;
+          }
+          else if (currentUser && currentUser.roles.includes("ROLE_MANAGER")) {
+            console.log("----------log done----------");
+            console.log("----------role is a MANAGER----------");
+            window.location = URL.management;
+          }else{
+            alert("Salesperson can't Login to the system..")
+          }
 
           //this.props.history.push("/profile");
           //window.location.reload();
@@ -93,7 +107,7 @@ export default class Login extends Component {
           if (condition) {
           } else {
           }*/
-          window.location = URL.management;
+          
         },
         (error) => {
           console.log("----------log failed----------");

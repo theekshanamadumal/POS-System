@@ -13,7 +13,7 @@ router.route("/productCategory/count").get((req, res) => {
   ProductCategoryController.countCategories(res);
 });
 
-router.route("/addProductCategory").post((req, res) => {
+router.route("/products/addProductCategory").post((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   ProductCategoryController.addNewCategory(req,res);
 });

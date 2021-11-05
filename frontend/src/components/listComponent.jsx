@@ -72,6 +72,9 @@ export default function ListComponent(props) {
         if (e === "_id") {
           return <TableCell>{d._id.substr(19)}</TableCell>;
         }
+        if (e === "stock") {
+          return <TableCell>{d.stock<50?<strong className="text-danger">{d.stock}</strong>:<strong className="text-success">{d.stock}</strong>}</TableCell>;
+        }
         if (e==="unitPrice"){
           return <TableCell align="center"> {d.unitPrice.toFixed(2)}{" "}</TableCell>;
         } else if (e === "sName") {

@@ -17,7 +17,7 @@ router.route("/products/productIds").get((req, res) => {
    ProductController.allProductIds(res);
 });
 
-router.route("/addProduct").post((req, res) => {
+router.route("/products/addProduct").post((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   ProductController.addNewProduct(req,res);
  

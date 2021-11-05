@@ -43,7 +43,7 @@ export default class AddRouteComponent extends Component {
     e.preventDefault();
     const route = {
       origin: this.state.origin,
-      originLocation: this.state.LoriginLocation,
+      originLocation: this.state.originLocation,
       destination: this.state.destination,
       destinationLocation: this.state.destinationLocation,
       cities: this.state.cities,
@@ -52,7 +52,7 @@ export default class AddRouteComponent extends Component {
     console.log("before post", route);
 
     axios
-      .post(URL.addSalesRoute, route)
+      .post(URL.main + URL.addSalesRoute, route)
       .then((res) => {
         console.log(res.data);
         alert(res.data, (window.location = this.props.location));

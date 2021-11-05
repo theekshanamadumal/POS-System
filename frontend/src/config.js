@@ -27,9 +27,9 @@ URL.management = "/management";
 
 
 URL.products = "/management/products";
-URL.addProduct = "/management/addProduct";
+URL.addProduct = "/management/products/addProduct";
 URL.productCategory = "/management/productCategory";
-URL.addProductCategory ="/management/addProductCategory";
+URL.addProductCategory ="/management/products/addProductCategory";
 URL.productComp ="/management/product/";
 URL.updateProduct="/management/updateProduct/";
 
@@ -70,7 +70,7 @@ URL.analyticsSalesperson="management/analytics#salesperson";
 URL.analyticsCategory="management/analytics#category";
 
 URL.orders="/management/orders";
-URL.orderComp="/management/order/";
+URL.orderComp="/management/orders/";
 
 URL.dailyTasks="/management/dailyTasks";
 

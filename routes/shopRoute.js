@@ -26,7 +26,7 @@ router.route("/shops/getRoutes/:dailyRoute").get((req, res) => {
   SC.allShopRoute(req,res);
 });
 
-router.route("/addShop").post((req, res) => {
+router.route("/shops/addShop").post((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   SC.addNewShop(req,res);
 

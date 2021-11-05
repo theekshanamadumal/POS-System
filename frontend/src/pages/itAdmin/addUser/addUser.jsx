@@ -27,6 +27,7 @@ export default class AddUser extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.onChangeRole=this.onChangeRole.bind(this);
+    this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
 
     this.state = {
       firstName: "",
@@ -140,6 +141,16 @@ export default class AddUser extends Component {
     }
     
   }
+  handleClickShowPassword = () => {
+    this.setState({
+      showPassword: !this.state.showPassword,
+    });
+  };
+  handleClickShowConPassword= () => {
+    this.setState({
+      showConPassword: !this.state.showConPassword,
+    });
+  };
   handleBlur(input) {
     //check for any input
     const formControl = input.target.parentElement;

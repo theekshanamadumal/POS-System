@@ -89,7 +89,7 @@ class AddShop extends Component {
     console.log(shop);
 
     axios
-      .post(URL.main+URL.addShops, shop)
+      .post(URL.main+ URL.addShops , shop)
       .then((res) => {
         console.log(res.data);
         alert(res.data, (window.location = URL.shops));

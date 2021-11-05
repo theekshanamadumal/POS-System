@@ -29,11 +29,11 @@ class AddProductCategory extends Component {
       .post(URL.main+URL.addProductCategory, Category)
       .then((res) => {
         console.log(res.data);
-        alert(res.data, (window.location = this.props.location));
+        alert(res.data, (window.location = URL.products));
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = this.props.location));
+        alert(error, (window.location = URL.products));
       });
   }
 
