@@ -11,13 +11,14 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import URL from "../../config";
+import categoryAnalytics from "../../services/analytics/category";
 
 const SalesPieChart = (props) => {
   const theme = useTheme();
   const devices = [
     {
       title: "Laptop",
-      value: 28,
+      value: 0,
       color: colors.indigo[500],
     },
     {
@@ -35,6 +36,7 @@ const SalesPieChart = (props) => {
       value: 15,
       color: colors.red[600],
     },
+
     {
       title: "Others",
       value: 10,
@@ -87,6 +89,7 @@ const SalesPieChart = (props) => {
       <Card {...props} sx={{ height: 220 }} style={{ cursor: "pointer" }}>
         <CardHeader title="Income By Catergory" />
         <Divider />
+        <div>{/*categoryAnalytics.perDay()*/}</div>
         <CardContent>
           <Box
             sx={{
