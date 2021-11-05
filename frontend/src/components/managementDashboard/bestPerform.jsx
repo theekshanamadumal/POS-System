@@ -13,12 +13,15 @@ import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 import { Link } from "react-router-dom";
 import URL from "../../config";
+import sellerAnalytics from "../../services/analytics/seller";
 
 const BestPerform = ({ bestPerform, ...rest }) => {
   return (
     <div style={{ cursor: "pointer" }} className="tableCont">
       <Link to={URL.analyticsSalesperson}>
         <h3 style={{ textAlign: "center" }}>Best Performing Salespersons</h3>
+        <div>{sellerAnalytics.perDay()}</div>
+
         <br></br>
         <Container maxWidth="lg">
           <Paper>

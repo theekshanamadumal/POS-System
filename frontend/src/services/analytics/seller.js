@@ -3,14 +3,14 @@ import authHeader from '../authHeader';
 import URL from '../../config';
 
 
-class categoryAnalytics {
+class sellerAnalytics {
 
       
     constructor(){
       
-        axios.get(URL.main + URL.categoryAnalytics)   
+        axios.get(URL.main + URL.sellersAnalytics)   
         .then( (response) => {
-          console.log('-------------------category  analytics',response.data);
+          console.log('-------------------sellers analytics',response.data);
           this.dataList = response.data;
         } )
         .catch((error) => {
@@ -21,42 +21,44 @@ class categoryAnalytics {
     }
 
 
-  mapPayementValues(categoryCount,transactions){
+  mapPayementValues(sales,transactions){
         
     transactions.forEach(function (o) {
         // add the type to the hash if it is missing;
         // set initial count to 0
-        if (!categoryCount.hasOwnProperty(o.id.category)) {
-          categoryCount[o.id.category] = 0;
-          //console.log('----------o.id.category--------------',o.id.category);
+        const seller=o.sellerId.idNumber ;
+        if (!sales.hasOwnProperty(seller)) {
+          sales[seller] ={};
+          sales[seller].sale = 0;
+          sales[seller].name = o.sellerId.firstName + ' '+o.sellerId.lastName;
+          //console.log('----------seller.idNumber--------------',seller);
         }
         // increment the count based on the type
-        categoryCount[o.id.category] += o.id.unitPrice * o.quantity;
+        sales[seller].sale += o.total;
     });
-    //console.log('categoryCount-------------',categoryCount); 
+    //console.log('sales-------------',sales); 
   }
 
 
 
   perDay() {
     //console.log('----------this.dataList--------------',this.dataList);
-    const categoryCount={};
+    const sales={};
 
      {
        if (this.dataList!== undefined) {
-        this.dataList
+        //this.dataList
         //.filter((payment) => payment.dateTime > 0)
         //.sort((a, b) => (a.name > b.productName ? 1 : -1))
-        .map((e)=>{
+        
           //console.log('e.transactions.category-------------------',e.transactions);
-          this.mapPayementValues(categoryCount,e.transactions);
-        });
-      }
+          this.mapPayementValues(sales,this.dataList);
+        }
     }
-    console.log('categoryCount-------------',categoryCount); 
-    return 'categoryCount' ;
+    console.log('sales-------------',sales); 
+    return 'sales' ;
   }
 
 }
 
-export default new categoryAnalytics();
+export default new sellerAnalytics();
