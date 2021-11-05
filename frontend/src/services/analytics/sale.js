@@ -3,14 +3,14 @@ import authHeader from '../authHeader';
 import URL from '../../config';
 
 
-class sellerAnalytics {
+class salesAnalytics {
 
       
     constructor(){
       
-        axios.get(URL.main + URL.sellersAnalytics)   
+        axios.get(URL.main + URL.salesAnalytics)   
         .then( (response) => {
-          console.log('-------------------sellers analytics',response.data);
+          console.log('-------------------sales analytics list',response.data);
           this.dataList = response.data;
         } )
         .catch((error) => {
@@ -22,20 +22,21 @@ class sellerAnalytics {
 
 
   mapPayementValues(sales,transactions){
+    //const date = new Date().toLocaleDateString();
     transactions.forEach(function (o) {
         // add the type to the hash if it is missing;
         // set initial count to 0
-        const seller=o.sellerId.idNumber ;
-        if (!sales.hasOwnProperty(seller)) {
-          sales[seller] ={};
-          sales[seller].sale = 0;
-          sales[seller].name = o.sellerId.firstName + ' '+o.sellerId.lastName;
-          //console.log('----------seller.idNumber--------------',seller);
+        const saleDate=o.dateTime; 
+        console.log('----------sale.saleDate--------------',saleDate);
+
+        if (!sales.hasOwnProperty(saleDate)) {
+          sales[saleDate] =0;
+          console.log('----------sale by saleDate--------------',sales);
         }
         // increment the count based on the type
-        sales[seller].sale += o.total;
+        sales[saleDate] += o.total;
     });
-    //console.log('sales-------------',sales); 
+    console.log('sales by date-------------',sales); 
   }
 
 
@@ -54,10 +55,10 @@ class sellerAnalytics {
           this.mapPayementValues(sales,this.dataList);
         }
     }
-    //console.log('sales-------------',sales); 
-    return sales ;
+    console.log('---------------sales per day-------------',sales); 
+    return 'sales' ;
   }
 
 }
 
-export default new sellerAnalytics();
+export default new salesAnalytics();
