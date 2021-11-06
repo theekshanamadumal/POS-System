@@ -10,7 +10,7 @@ class salesAnalytics {
       
         axios.get(URL.main + URL.salesAnalytics)   
         .then( (response) => {
-          console.log('-------------------sales analytics list',response.data);
+          console.log('-------------------sales analytics',response.data);
           this.dataList = response.data;
         } )
         .catch((error) => {
@@ -56,7 +56,7 @@ class salesAnalytics {
         }
     }
     console.log('---------------sales per day-------------',sales); 
-    return 'sales' ;
+    return 'sales per day' ;
   }
 
 }

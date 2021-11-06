@@ -1,40 +1,47 @@
 const router = require("express").Router();
 const { authJwt } = require("../middlewares");
 let UserController = require("../controllers/userController");
+let AuthController = require("../controllers/authController");
 const UC = new UserController("Admin");
 
 var multer = require("multer");
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 
+router.use(  
+  //[authJwt.verifyToken, authJwt.isAdmin],
+
+  function(req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+  next();
+});
+
 router.route("/user").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isAdmin],
   UC.allUsers(res);
 });
+
 router.route("/manager/count").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isAdmin],
   UC.countManagers(res);
 });
-
-router.route("/addUser").post(upload.single("image"),(req, res) => {
-  [authJwt.verifyToken, authJwt.isAdmin],
-  UC.addUser(req,res);
+//upload.single("image")
+router.route("/addUser").post((req, res) => {
+  console.log("adduser route",require);
+  AuthController.signup(req,res);
   //console.log("ser",UC.addUser(req,res));
-  
 });
 
-router.route("/user/:id").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isAdmin],
-  UC.getUser(req,res);
+router.route("/user/:id").get(  
+  (req, res) => { UC.getUser(req,res);
 });
 
 router.route("/user/:id").delete((req, res) => {
-  [authJwt.verifyToken, authJwt.isAdmin],
   UC.deleteUser(req,res);
   });
 
 router.route("/userUpdate/:id").post((req, res) => {
-  [authJwt.verifyToken, authJwt.isAdmin],
   UC.updateUser(req,res);
   
 });

@@ -26,7 +26,7 @@ export default class AddUser extends Component {
     this.onChangeJoinedDate = this.onChangeJoinedDate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.onChangeRole=this.onChangeRole.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
     this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
 
     this.state = {
@@ -40,7 +40,7 @@ export default class AddUser extends Component {
       city: "",
       phoneNumber: "",
       email: "",
-      roles:[],
+      roles: [],
       joinedDate: new Date(),
       showPassword: false,
       showConPassword: false,
@@ -112,24 +112,22 @@ export default class AddUser extends Component {
       joinedDate: e.target.value,
     });
   }
-  onChangeRole(e){
-    if (this.state.roles.includes(e.target.value)===true){
+  onChangeRole(e) {
+    if (this.state.roles.includes(e.target.value) === true) {
       const index = this.state.roles.indexOf(e.target.value);
-      this.state.roles.splice(index,1)
-    }
-    else{
+      this.state.roles.splice(index, 1);
+    } else {
       this.state.roles.push(e.target.value);
-    }console.log("roles",this.state.roles)
+    }
+    console.log("roles", this.state.roles);
 
-    console.log("process..",typeof this.state.roles,this.state.roles)
-    if (this.state.roles.length===0){
+    console.log("process..", typeof this.state.roles, this.state.roles);
+    if (this.state.roles.length === 0) {
       // set error
       //small.innerText = "Invalid Phone number";
       //formControl.className = "form-outline error";
       this.errorList.push(e.target.type);
-      
-    }
-    else{
+    } else {
       //small.innerText = " ";
       //formControl.className = "form-outline success";
       if (this.errorList.includes(e.target.type) === true) {
@@ -137,16 +135,14 @@ export default class AddUser extends Component {
         this.errorList.splice(index, 1);
       }
       //set success
-
     }
-    
   }
   handleClickShowPassword = () => {
     this.setState({
       showPassword: !this.state.showPassword,
     });
   };
-  handleClickShowConPassword= () => {
+  handleClickShowConPassword = () => {
     this.setState({
       showConPassword: !this.state.showConPassword,
     });
@@ -171,10 +167,13 @@ export default class AddUser extends Component {
         }
       } else if (input.target.value.trim().length === 10) {
         let isnum = /^\d+$/.test(
-          input.target.value.trim().substring(0, input.target.value.trim().length - 1)
+          input.target.value
+            .trim()
+            .substring(0, input.target.value.trim().length - 1)
         );
         let islett =
-          input.target.value.trim()
+          input.target.value
+            .trim()
             .substring(input.target.value.trim().length - 1)
             .toLowerCase() === "v";
         if (isnum === false || islett === false) {
@@ -229,8 +228,7 @@ export default class AddUser extends Component {
           this.errorList.splice(index, 1);
         }
       }
-    }
-     else {
+    } else {
       small.innerText = "   ";
       formControl.className = "form-outline success";
       if (this.errorList.includes(input.target.id) === true) {
@@ -254,13 +252,12 @@ export default class AddUser extends Component {
           formControl.className = "form-outline error";
           errorMsg = true;
         }
-      }else if (val==="roles"){
-        console.log("df")
-        if (val.length===0){
+      } else if (val === "roles") {
+        console.log("df");
+        if (val.length === 0) {
           errorMsg = true;
         }
       }
-      
     }
     if (errorMsg === false && this.errorList.length === 0) {
       const user = {
@@ -274,22 +271,23 @@ export default class AddUser extends Component {
         phoneNumber: this.state.phoneNumber,
         email: this.state.email,
         joinedDate: this.state.joinedDate,
-        roles:this.state.roles,
+        roles: this.state.roles,
       };
-      console.log(user);
+      console.log("user register data to authservicr", user);
 
       AuthService.register(user)
-      .then((res) => {
-        console.log(res.data);
-        alert(res.data, (window.location = URL.user));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.user));
-      });
+        .then((res) => {
+          console.log("user response from authservice", res);
+          alert(res.message);
+          alert(res.data, (window.location = URL.user));
+        })
+        .catch((error) => {
+          console.log("user response error authservicr", error);
+          alert(error);
+          alert(error, (window.location = URL.user));
+        });
     }
   }
-
 
   render() {
     return (
@@ -317,7 +315,10 @@ export default class AddUser extends Component {
                           <div className="row">
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label className="form-label" htmlFor="firstName">
+                                <label
+                                  className="form-label"
+                                  htmlFor="firstName"
+                                >
                                   First Name
                                 </label>
                                 <input
@@ -333,7 +334,10 @@ export default class AddUser extends Component {
                             </div>
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label className="form-label" htmlFor="lastName">
+                                <label
+                                  className="form-label"
+                                  htmlFor="lastName"
+                                >
                                   Last name
                                 </label>
                                 <input
@@ -348,7 +352,7 @@ export default class AddUser extends Component {
                               </div>
                             </div>
                           </div>
-                          
+
                           <div className="mb-2 pb-2">
                             <div className="form-outline">
                               <label className="form-label" htmlFor="idNumber">
@@ -365,40 +369,45 @@ export default class AddUser extends Component {
                               <small>error</small>
                             </div>
                             <div className="form-outline">
-                                <label className="form-label" htmlFor="role">
-                                  Role
-                                </label>
-                                <div className="form-outline row pb-2 px-3">
-                                  <div className="col-md-5 form-check mx-3 ">
-                                    <input 
-                                      className="form-check-input" 
-                                      style={{height:"20px",width:"20px"}}
-                                      type="checkbox" 
-                                      value="6153648ac5809858d4b761f2" 
-                                      id="flexCheckManager" 
-                                      onChange={this.onChangeRole}
-                                    />
-                                    <label className="form-check-label mt-2 mx-2" for="flexCheckManager">
-                                      Manager
-                                    </label>
-                                  </div>
-                                  <div className="col-md-5 form-check">
-                                    <input 
-                                      style={{height:"20px",width:"20px"}}
-                                      className="form-check-input" 
-                                      type="checkbox" 
-                                      value="6153648ac5809858d4b761f3" 
-                                      id="flexCheckSalesperson" 
-                                      onChange={this.onChangeRole}
-                                    />
-                                    <label class="form-check-label mt-2  mx-2" for="flexCheckSalesperson">
-                                      Salesperson
-                                    </label>
-                                  </div>
-                                  <small>error</small>
+                              <label className="form-label" htmlFor="role">
+                                Role
+                              </label>
+                              <div className="form-outline row pb-2 px-3">
+                                <div className="col-md-5 form-check mx-3 ">
+                                  <input
+                                    className="form-check-input"
+                                    style={{ height: "20px", width: "20px" }}
+                                    type="checkbox"
+                                    value="manager"
+                                    id="flexCheckManager"
+                                    onChange={this.onChangeRole}
+                                  />
+                                  <label
+                                    className="form-check-label mt-2 mx-2"
+                                    for="flexCheckManager"
+                                  >
+                                    Manager
+                                  </label>
                                 </div>
-                                
+                                <div className="col-md-5 form-check">
+                                  <input
+                                    style={{ height: "20px", width: "20px" }}
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value="salesperson"
+                                    id="flexCheckSalesperson"
+                                    onChange={this.onChangeRole}
+                                  />
+                                  <label
+                                    class="form-check-label mt-2  mx-2"
+                                    for="flexCheckSalesperson"
+                                  >
+                                    Salesperson
+                                  </label>
+                                </div>
+                                <small>error</small>
                               </div>
+                            </div>
                           </div>
 
                           <div className="mb-2 pb-2">
@@ -421,7 +430,10 @@ export default class AddUser extends Component {
                           <div className="row">
                             <div className="col-md-6 col-sm-12 mb-2 pb-2">
                               <div className="form-outline">
-                                <label className="form-label" htmlFor="password">
+                                <label
+                                  className="form-label"
+                                  htmlFor="password"
+                                >
                                   Enter Password
                                 </label>
                                 <input
@@ -459,7 +471,10 @@ export default class AddUser extends Component {
                             </div>
                             <div className="col-md-6 mb-2 pb-2">
                               <div className="form-outline">
-                                <label className="form-label" htmlFor="conPassword">
+                                <label
+                                  className="form-label"
+                                  htmlFor="conPassword"
+                                >
                                   Confirm Password
                                 </label>
                                 <input
