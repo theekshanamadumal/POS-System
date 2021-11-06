@@ -12,46 +12,29 @@ import {
 import { Link } from "react-router-dom";
 import URL from "../../config";
 import categoryAnalytics from "../../services/analytics/category";
+import { useState,useEffect } from "react";
 
 const SalesPieChart = (props) => {
-  const theme = useTheme();
-  const devices = [
-    {
-      title: "Laptop",
-      value: 0,
-      color: colors.indigo[500],
-    },
-    {
-      title: "Tablet",
-      value: 15,
-      color: colors.grey[500],
-    },
-    {
-      title: "Mobile Phone",
-      value: 32,
-      color: colors.green[500],
-    },
-    {
-      title: "EarPhone",
-      value: 15,
-      color: colors.red[600],
-    },
+  const [productByCategory,setProductByCategory]=useState([]);
+  const [data,setData]=useState([]);
+  const [labels,setLabels]=useState([]);
 
-    {
-      title: "Others",
-      value: 10,
-      color: colors.orange[600],
-    },
-  ];
-  const data = {
+  useEffect(() => {
+    setProductByCategory(categoryAnalytics.perDay().percentageArray); 
+    setData(categoryAnalytics.perDay().data);
+    setLabels(categoryAnalytics.perDay().labels)
+    
+  }, [])
+  const theme = useTheme();
+  const dataSet = {
     datasets: [
       {
-        data: [28, 15, 32, 15, 10],
+        data: data,
         backgroundColor: [
+          colors.red[600],
+          colors.green[500],
           colors.indigo[500],
           colors.grey[500],
-          colors.green[500],
-          colors.red[600],
           colors.orange[600],
         ],
         borderWidth: 6,
@@ -59,7 +42,7 @@ const SalesPieChart = (props) => {
         hoverBorderColor: colors.common.white,
       },
     ],
-    labels: ["Laptop", "Tablet", "Mobile Phone", "EarPhone", "Others"],
+    labels:labels,
   };
 
   const options = {
@@ -89,7 +72,6 @@ const SalesPieChart = (props) => {
       <Card {...props} sx={{ height: 220 }} style={{ cursor: "pointer" }}>
         <CardHeader title="Income By Catergory" />
         <Divider />
-        <div>{/*categoryAnalytics.perDay()*/}</div>
         <CardContent>
           <Box
             sx={{
@@ -97,7 +79,7 @@ const SalesPieChart = (props) => {
               position: "relative",
             }}
           >
-            <Doughnut data={data} options={options} />
+            <Doughnut data={dataSet} options={options} />
           </Box>
           <Box
             sx={{
@@ -106,7 +88,7 @@ const SalesPieChart = (props) => {
               pt: 2,
             }}
           >
-            {devices.map(({ color, title, value }) => (
+            {productByCategory.map(({ color, title, value }) => (
               <Box
                 key={title}
                 sx={{

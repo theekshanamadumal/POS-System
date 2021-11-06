@@ -22,6 +22,7 @@ class sellerAnalytics {
 
 
   mapPayementValues(sales,transactions){
+        
     transactions.forEach(function (o) {
         // add the type to the hash if it is missing;
         // set initial count to 0
@@ -41,7 +42,7 @@ class sellerAnalytics {
 
 
   perDay() {
-    //console.log('----------this.dataList--------------',this.dataList);
+    console.log('ssss----------this.dataList--------------',this.dataList);
     const sales={};
 
      {
@@ -54,8 +55,22 @@ class sellerAnalytics {
           this.mapPayementValues(sales,this.dataList);
         }
     }
-    //console.log('sales-------------',sales); 
-    return sales ;
+    console.log('sales-------------',sales); 
+    return(this.findFinal(sales));
+    //return sales ;
+  }
+  findFinal(sales){
+
+    const sorted=Object.entries(sales).sort((a,b) => b[1].sale-a[1].sale);
+    const salesAll=[]
+    for (var i = 0; i < sorted.length; i++) {
+      salesAll.push({id:sorted[i][0],name:sorted[i][1].name,income:sorted[i][1].sale.toFixed(2)});
+    }
+    console.log("sorted Sellers..",sorted)
+    if (sorted.lenght>6){
+      sorted.slice(0, 7);
+    }
+    return ({sorted:sorted,salesAll:salesAll})
   }
 
 }

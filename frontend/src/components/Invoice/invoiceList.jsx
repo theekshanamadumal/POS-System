@@ -31,7 +31,7 @@ const InvoiceList = ({ invoices, transactions,total, ...rest }) => {
             <TableBody>
               {transactions
                 .filter((im) => im.id.unitPrice > 0)
-                .sort((a, b) => (a.name > b.productName ? 1 : -1))
+                .sort((a, b) => (a.id.itemName > b.id.itemName ? 1 : -1))
                 .map((e,index)=>(
                 <TableRow hover key={e.id._id}>
                   <TableCell align="center">{index + 1}</TableCell>

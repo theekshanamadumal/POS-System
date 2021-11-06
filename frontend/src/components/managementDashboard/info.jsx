@@ -61,7 +61,7 @@ export default function Info() {
       </div>
       <div className="featuredItem2">
         <div className="up">
-          <BestPerform bestPerform={bestPerform} />
+          <BestPerform />
         </div>
       </div>
 

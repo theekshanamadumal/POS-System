@@ -8,19 +8,23 @@ import {
   TableRow,
 } from "@material-ui/core";
 import "../list.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 import { Link } from "react-router-dom";
 import URL from "../../config";
 import sellerAnalytics from "../../services/analytics/seller";
 
-const BestPerform = ({ bestPerform, ...rest }) => {
+const BestPerform = () => {
+  const [performSeller,setPerformSeller]=useState([])
+  useEffect(() => {
+    setPerformSeller(sellerAnalytics.perDay().sorted);
+  }, [])
   return (
-    <div style={{ cursor: "pointer" }} className="tableCont">
-      <Link to={URL.analyticsSalesperson}>
+    <div style={{ cursor: "pointer" , textDecoration:"none"}} className="tableCont">
+      <Link to={URL.analyticsSalesperson} className="linkAnaly">
         <h3 style={{ textAlign: "center" }}>Best Performing Salespersons</h3>
-        <div>{"sellerAnalytics.perDay()"}</div>
+        <div>{console.log("best perform..", sellerAnalytics.perDay())}</div>
 
         <br></br>
         <Container maxWidth="lg">
@@ -36,16 +40,16 @@ const BestPerform = ({ bestPerform, ...rest }) => {
                 </TableHead>
 
                 <TableBody>
-                  {bestPerform.map((item) => {
+                  {performSeller.map((item) => {
                     return (
-                      <TableRow key={item.id}>
+                      <TableRow key={item[0]}>
                         <TableCell align="center">
-                          {item.firstName + " " + item.lastName}
+                          {item[1].name}
                         </TableCell>
-                        <TableCell align="center">{item.id}</TableCell>
+                        <TableCell align="center">{item[0]}</TableCell>
                         <TableCell align="right">
                           {" "}
-                          {item.income.toFixed(2)}{" "}
+                          {item[1].sale.toFixed(2)}{" "}
                         </TableCell>
                       </TableRow>
                     );

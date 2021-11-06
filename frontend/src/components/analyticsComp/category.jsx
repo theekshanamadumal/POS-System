@@ -4,60 +4,41 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import "./category.css";
 import { Button } from 'reactstrap';
 import React from "react";
+import { useState,useEffect } from "react";
+import categoryAnalytics from "../../services/analytics/category";
 
 const Category = (props) => {
-  const theme = useTheme();
-  const devices = [
-    {
-      title: 'Laptop',
-      value: 27,
-      color: colors.indigo[500]
-    },
-    {
-        title: 'Tablet',
-        value: 18,
-        color: colors.grey[500]
-      },
-      {
-        title: 'Desktop',
-        value: 13,
-        color: colors.pink[600]
-      },
-      {
-        title: 'Mobile Phone',
-        value: 28,
-        color: colors.green[500]
-      },
-    {
-      title: 'EarPhone',
-      value: 10,
-      color: colors.red[600]
-    },
+  const [productByCategory,setProductByCategory]=useState([]);
+  const [data,setData]=useState([]);
+  const [labels,setLabels]=useState([]);
+  const [salesArray,setSalesArray]=useState([]);
 
-    {
-      title: 'Others',
-      value: 8,
-      color: colors.orange[600]
-    }
-  ];
-  const data = {
+  useEffect(() => {
+    setProductByCategory(categoryAnalytics.perDay().percentageArray); 
+    setData(categoryAnalytics.perDay().data);
+    setLabels(categoryAnalytics.perDay().labels);
+    setSalesArray(categoryAnalytics.perDay().priceArray);
+  }, [])
+  
+  const theme = useTheme();
+  const dataSet = {
     datasets: [
       {
-        data: [25,18,13,28,10,8],
+        data: data,
         backgroundColor: [
+          colors.red[600],
+          colors.green[500],
           colors.indigo[500],
           colors.grey[500],
+          colors.orange[600],
           colors.pink[600],
-          colors.green[500],
-          colors.red[600],
-          colors.orange[600]
         ],
         borderWidth: 6,
         borderColor: colors.common.white,
         hoverBorderColor: colors.common.white
       }
     ],
-    labels: ['Laptop', 'Tablet','Desktop', 'Mobile Phone','EarPhone','Others']
+    labels: labels,
   };
 
   const options = {
@@ -81,36 +62,9 @@ const Category = (props) => {
     }
   };
 
-  const dataBar = [
-    {
-      name: 'Mobile',
-      sales: 420000,
-    },
-    {
-      name: 'Desktop',
-      sales: 200000,
-    },
-    {
-      name: 'Earphone',
-      sales: 84000,
-    },
-    {
-      name: 'Tablet',
-      sales: 177800,
-    },
-    {
-      name: 'Laptop',
-      sales: 381000,
-    },
-    {
-      name: 'USB pen',
-      sales: 23900,
-    },
-    {
-      name: 'Others',
-      sales: 34900,
-    },
-  ];
+  const dataBar =salesArray;
+
+
   const [selected, setSelected] = React.useState("");
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
@@ -120,7 +74,7 @@ const Category = (props) => {
     "2020",
   ];
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const dataStructure = ["Last week","Last 2 weeks","Last 3 weeks"];
+  const dataStructure = [];
   let type = null;
   let optionsSelect = null;
 
@@ -134,10 +88,13 @@ const Category = (props) => {
   if (type) {
     optionsSelect = type.map((el) => <option key={el}>{el}</option>);
   }
+  
   return (
+    
     <div className="category">
       <Card   {...props} sx={{height:220}}>
         <h1 class="text-center">Income By Catergory </h1>
+        {console.log("price sales ",salesArray)}
         <Divider />
         <br></br>
         <form style={{margin:"0px 60px"}}>
@@ -147,7 +104,7 @@ const Category = (props) => {
               <option>Choose...</option>
               <option>Year</option>
               <option>Month</option>
-              <option>Week</option>
+              <option>Current Day</option>
             </select>
           
             <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
@@ -167,7 +124,7 @@ const Category = (props) => {
             }}
           >
             <Doughnut
-              data={data}
+              data={dataSet}
               options={options}
             />
           </Box>
@@ -178,7 +135,7 @@ const Category = (props) => {
               pt: 2
             }}
           >
-            {devices.map(({
+            {productByCategory.map(({
               color,
               title,
               value
@@ -224,12 +181,13 @@ const Category = (props) => {
           }}
           barCategoryGap={50}
         >
-          <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
+          <XAxis dataKey="name" padding={{ left: 50, right: 30 }} />
+
           <YAxis />
           <Tooltip />
-          <Legend />
+          
           <CartesianGrid strokeDasharray="3 3" />
-          <Bar barGap={10} dataKey="sales" fill="indianred" stroke="#494949" background={{ fill: '#eee' }} />
+          <Bar barGap={10} barSize={500/salesArray.length} dataKey="sales" fill="indianred" stroke="#494949" background={{ fill: '#eee' }} />
         </BarChart>
       </ResponsiveContainer>
 

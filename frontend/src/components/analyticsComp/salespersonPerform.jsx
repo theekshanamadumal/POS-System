@@ -4,7 +4,7 @@ import React from 'react';
 import "./salespersonPerform.css";
 import { Button } from 'reactstrap';
 import { BarChart, Bar, XAxis,YAxis, CartesianGrid, Tooltip,ResponsiveContainer,LabelList } from 'recharts';
-
+import sellerAnalytics from "../../services/analytics/seller"
 
 const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
   const [selected, setSelected] = React.useState("");
@@ -16,7 +16,7 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
     "2020",
   ];
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const dataStructure = ["Last week","Last 2 weeks","Last 3 weeks"];
+  const dataStructure = [];
   let type = null;
   let options = null;
 
@@ -42,7 +42,7 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
             <option>Choose...</option>
             <option>Year</option>
             <option>Month</option>
-            <option>Week</option>
+            <option>Current Day</option>
           </select>
         
           <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
@@ -50,18 +50,21 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
           </select>
         
           <button className="btn btn btn-secondary">View Analysis</button>
+          <div>{console.log("selle Anal...",sellerAnalytics.perDay().salesAll)}</div>
         </div>  
       </form>
       <br></br>
-      <ResponsiveContainer width="100%" aspect={1.5 / 1}>
+      <ResponsiveContainer width="100%" height={75*sellerAnalytics.perDay().salesAll.length}>
+      
         <BarChart
-          data={salespersonPerform}
+          data={sellerAnalytics.perDay().salesAll}
           margin={{top: 5, right: 3, left: 2, bottom: 5}}
           margin={{left:59,right:59}}
           layout="vertical">
           <XAxis type="number" orientation="bottom" stroke="black"/>
-          <YAxis type="category" dataKey="lastName" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
+          <YAxis type="category" dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
           <Bar background dataKey="income" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
+
               <LabelList dataKey="income"  position="right" style={{ fill: "#0004ff" }} />
           </Bar>
           <Tooltip cursor={{fill: 'transparent'}}  contentStyle={{width:"150px", height:"80px"}}/>

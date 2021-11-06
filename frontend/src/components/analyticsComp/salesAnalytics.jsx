@@ -26,7 +26,7 @@ export default function SalesAnalytics({ title, data, dataKey, grid }) {
     "2020",
   ];
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const dataStructure = ["Last week","Last 2 weeks","Last 3 weeks"];
+  const dataStructure = [];
   
   /** Type variable to store different array for different dropdown */
   let type = null;
@@ -67,7 +67,7 @@ export default function SalesAnalytics({ title, data, dataKey, grid }) {
             <option>Choose...</option>
             <option>Year</option>
             <option>Month</option>
-            <option>Week</option>
+            <option>Current Day</option>
           </select>
         
           <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
