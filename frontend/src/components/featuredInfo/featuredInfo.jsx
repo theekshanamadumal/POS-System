@@ -15,18 +15,16 @@ export default function FeaturedInfo() {
       .all([
         axios.get(URL.main + URL.salesperson + "/count"),
         axios.get(URL.main + URL.managerCount),
-        
       ])
       .then(
         axios.spread((...responses) => {
           setSalespersonCount(responses[0].data);
           setManagersCount(responses[1].data);
-          
         })
       )
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.management));
+        alert(error, (window.location = URL.itAdmin));
       });
   }, []);
   return (
@@ -44,22 +42,20 @@ export default function FeaturedInfo() {
       </div>*/}
       <div className="featuredItem d-flex">
         <div className="featuredUs">
-              <Link to={URL.user} className="linkTo">
-                <PeopleAlt fontSize="large" className="Icon" />
-                <div className="descript">Total<br></br> Managers{" "}</div>
-                <div className="count">{managersCount}</div>
-              </Link>
-            </div>
+          <Link to={URL.user} className="linkTo">
+            <PeopleAlt fontSize="large" className="Icon" />
+            <h3 className="descript">Total Managers </h3>
+            <h2 className="count">{managersCount}</h2>
+          </Link>
+        </div>
 
-            <div className="featuredUs">
-              <Link to={URL.user} className="linkTo">
-                <Storefront fontSize="large" className="Icon" />
-                <div className="descript">
-                  Total Salespersons
-                </div>
-                <div className="count">{salespersonCount}</div>
-              </Link>
-            </div>
+        <div className="featuredUs">
+          <Link to={URL.user} className="linkTo">
+            <Storefront fontSize="large" className="Icon" />
+            <h3 className="descript">Total Salespersons</h3>
+            <h3 className="count">{salespersonCount}</h3>
+          </Link>
+        </div>
       </div>
 
       <div className="featuredItem">

@@ -2,6 +2,7 @@ const { SECRET } = require("../config");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
+const LogHistory = db.logHistory;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -101,6 +102,18 @@ exports.signin = (req, res) => {
             for (let i = 0; i < user.roles.length; i++) {
                 authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
             }
+
+            const logHistory = new LogHistory({
+                useID:user._id,
+                dateTime:new Date().toLocaleDateString(),
+            })
+
+            logHistory.save()
+            .then(() => {console.log("--------user log  added to log history");})
+            .catch((err) => {
+                //res.status(400).json("DataBase Error " +err);
+                console.log("user log history Error:", err);});
+
             res.status(200).send({
                 id: user._id,
                 username: user.firstName ,
