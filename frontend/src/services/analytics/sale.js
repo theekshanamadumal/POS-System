@@ -56,7 +56,7 @@ class salesAnalytics {
         }
     }
     console.log('---------------sales per day-------------',sales); 
-    return 'sales per day' ;
+    return this.dataList ;
   }
 
 }
