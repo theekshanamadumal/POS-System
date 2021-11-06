@@ -35,18 +35,13 @@ module.exports =  class UserController {
         .then((category) => res.json(category))
         .catch((err) => res.status(400).json("Error: " + err));
     }
-    countUsers(res) {
-        User.countDocuments({roles:'6153648ac5809858d4b761f3'})
-        .then((category) => res.json(category))
-        .catch((err) => res.status(400).json("Error: " + err));
-    }
     countManagers(res) {
         User.countDocuments({roles:'6153648ac5809858d4b761f2'})
         .then((category) => res.json(category))
         .catch((err) => res.status(400).json("Error: " + err));
     }
 
-    userCount(res) {
+    countUsers(res) {
         User.countDocuments({roles:'6153648ac5809858d4b761f3'})
         .then((count) => res.json(count))
         .catch((err) => res.status(400).json("Error: " + err));

@@ -9,7 +9,6 @@ const bcrypt = require("bcrypt");
 
 //Signup ad save hashed password on the DB
 exports.signup = (req, res) => {
-    console.log("requested for signup...")
     const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -20,11 +19,13 @@ exports.signup = (req, res) => {
         phoneNumber: Number(req.body.phoneNumber),
         joinedDate: Date(req.body.joinedDate),
         password: bcrypt.hashSync(req.body.password, 8),
-        roles:req.body.roles,
+        roles:[]//req.body.roles,
     });
+    console.log("requested for signup controller...",user);
 
     user.save((err, user) => {
         if (err) {
+            console.log("request error for signup controller...",err);
             res.status(500).send({ message: err });
             return;
         }
@@ -42,11 +43,14 @@ exports.signup = (req, res) => {
                 user.roles = roles.map(role => role._id);
                 user.save(err => {
                     if (err) {
+                        console.log("request role error for signup controller...",err);
                         res.status(500).send({ message: err });
                         return;
                     }
 
                     res.send({ message: "User was registered successfully!" });
+                    console.log("requested for signup successfull...",res)
+
                 });
             }
         );

@@ -1,5 +1,6 @@
 import axios from "axios";
 import URL from "../config";
+import authHeader from './authHeader';
 
 const API_URL = "http://localhost:3001/api/auth/";
 
@@ -33,7 +34,12 @@ class AuthService {
 
 
   register(user) {
-    return axios.post(API_URL + "signup", user);
+    console.log("user request recieved to authservice",user);
+    return axios.post('http://localhost:3001/itAdmin/addUser', user,{ headers: authHeader() })
+      .then(response => {
+      //    console.log("response",response);
+        return response.data;
+      });
   }
 
   getCurrentUser() {
