@@ -27,11 +27,11 @@ class salesAnalytics {
         // add the type to the hash if it is missing;
         // set initial count to 0
         const saleDate=o.dateTime; 
-        console.log('----------sale.saleDate--------------',saleDate);
+        //console.log('----------sale.saleDate--------------',saleDate);
 
         if (!sales.hasOwnProperty(saleDate)) {
           sales[saleDate] =0;
-          console.log('----------sale by saleDate--------------',sales);
+          //console.log('----------sale by saleDate--------------',sales);
         }
         // increment the count based on the type
         sales[saleDate] += o.total;
@@ -56,7 +56,15 @@ class salesAnalytics {
         }
     }
     console.log('---------------sales per day-------------',sales); 
-    return 'sales per day' ;
+    const salesDays=[];
+    Object.entries(sales)
+    .sort((a,b)=>a[0]>b[0]?1:-1)
+    .slice(0, 7)
+    .map(e=>{
+      salesDays.push({"date":e[0].substring(0,10),"sales":e[1].toFixed(2)})
+    }
+    );    
+    return salesDays;
   }
 
 }

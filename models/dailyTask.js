@@ -31,9 +31,9 @@ const DailyTask = mongoose.model(
                     ref: "Shops"
                 }
             })]
-        },
-        
-    })
+        },  
+    },
+    { timestamps: true },)
 );
 
 module.exports = DailyTask;

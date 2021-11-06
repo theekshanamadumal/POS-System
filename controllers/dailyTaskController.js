@@ -10,7 +10,9 @@ module.exports =  class dailyTaskController {
     }
 
     static alldailyTasks(req,res) {
-        dailyTask.find()
+        const today= new Date().setHours(0,0,0,0);
+        console.log("today...",today)
+        dailyTask.find({"createdAt":today})
         .populate('sellerId',null,"users")
         .then((dailyTask) =>{ res.json(dailyTask);    
             console.log("dailyTasks :",dailyTask)

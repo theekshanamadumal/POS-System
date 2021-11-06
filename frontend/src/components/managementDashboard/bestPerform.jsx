@@ -24,8 +24,6 @@ const BestPerform = () => {
     <div style={{ cursor: "pointer" , textDecoration:"none"}} className="tableCont">
       <Link to={URL.analyticsSalesperson} className="linkAnaly">
         <h3 style={{ textAlign: "center" }}>Best Performing Salespersons</h3>
-        <div>{console.log("best perform..", sellerAnalytics.perDay())}</div>
-
         <br></br>
         <Container maxWidth="lg">
           <Paper>
