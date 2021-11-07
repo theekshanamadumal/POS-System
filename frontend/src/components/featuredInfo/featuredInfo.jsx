@@ -44,7 +44,7 @@ export default function FeaturedInfo() {
         <div className="featuredUs">
           <Link to={URL.user} className="linkTo">
             <PeopleAlt fontSize="large" className="Icon" />
-            <h3 className="descript">Total Managers </h3>
+            <h3 className="descript">Managers Count</h3>
             <h2 className="count">{managersCount}</h2>
           </Link>
         </div>
@@ -52,12 +52,12 @@ export default function FeaturedInfo() {
         <div className="featuredUs">
           <Link to={URL.user} className="linkTo">
             <Storefront fontSize="large" className="Icon" />
-            <h3 className="descript">Total Salespersons</h3>
+            <h3 className="descript">Salesperson Count</h3>
             <h3 className="count">{salespersonCount}</h3>
           </Link>
         </div>
       </div>
-
+      {/* 
       <div className="featuredItem">
         <span className="featuredTitle">Sales</span>
         <div className="featuredMoneyContainer">
@@ -68,19 +68,7 @@ export default function FeaturedInfo() {
           </span>
         </div>
         <span className="featuredSub">Compared to last Month</span>
-      </div>
-
-      <div className="featuredItem">
-        <span className="featuredTitle">Cost</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">$2,215</span>
-          <span className="featuredMoneyRate">
-            -11.4
-            <ArrowUpward className="featuredIcon positive" />
-          </span>
-        </div>
-        <span className="featuredSub">Compared to last Month</span>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const logHistorySchema= new Schema(
   {
-    useID: {type: mongoose.Schema.ObjectId,ref: "Product",required: true },
+    userID: {type: mongoose.Schema.ObjectId,ref: "users",required: true },
     dateTime: Date,
 
   }
