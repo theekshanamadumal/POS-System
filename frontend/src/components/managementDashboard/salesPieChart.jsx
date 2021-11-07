@@ -70,7 +70,7 @@ const SalesPieChart = (props) => {
   return (
     <Link to={URL.analyticsCategory} className="linkAnaly">
       <Card {...props} sx={{ height: 220 }} style={{ cursor: "pointer" }}>
-        <CardHeader title="Income By Catergory" />
+        <CardHeader title="Sales By Catergory" />
         <Divider />
         <CardContent>
           <Box
