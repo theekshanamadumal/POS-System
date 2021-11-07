@@ -27,7 +27,13 @@ export default function ItAdminSidebar() {
 
           <ul className="sidebarList">
             <Link to={URL.itAdmin} className="link">
-              <li className={(splitLocation).length=== 2 ? "active sidebarListItem" : "sidebarListItem"}>
+              <li
+                className={
+                  splitLocation.length === 2
+                    ? "active sidebarListItem"
+                    : "sidebarListItem"
+                }
+              >
                 <LineStyle className="sidebarIcon" />
                 Home
               </li>
@@ -37,14 +43,26 @@ export default function ItAdminSidebar() {
         <div className="sidebarMenu">
           <ul className="sidebarList">
             <Link to={URL.user} className="link">
-              <li className={splitLocation[2] === "user" ? "active sidebarListItem" : "sidebarListItem"}>
+              <li
+                className={
+                  splitLocation[2] === "user"
+                    ? "active sidebarListItem"
+                    : "sidebarListItem"
+                }
+              >
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>
             </Link>
 
             <Link to={URL.addUser} className="link">
-              <li className={splitLocation[2] === "addUser" ? "active sidebarListItem" : "sidebarListItem"}>
+              <li
+                className={
+                  splitLocation[2] === "addUser"
+                    ? "active sidebarListItem"
+                    : "sidebarListItem"
+                }
+              >
                 <WorkOutline className="sidebarIcon" />
                 Add User
               </li>
@@ -54,8 +72,14 @@ export default function ItAdminSidebar() {
 
         <div className="sidebarMenu">
           <ul className="sidebarList">
-            <Link to={URL.itAdmin} className="link">
-              <li className={splitLocation[2] === "analytics" ? "active sidebarListItem" : "sidebarListItem"}>
+            <Link to={URL.adminAnalytics} className="link">
+              <li
+                className={
+                  splitLocation[2] === "analytics"
+                    ? "active sidebarListItem"
+                    : "sidebarListItem"
+                }
+              >
                 <Timeline className="sidebarIcon" />
                 Analytics
               </li>

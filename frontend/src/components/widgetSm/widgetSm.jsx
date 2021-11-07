@@ -10,51 +10,55 @@ export default function WidgetSm() {
   useEffect(() => {
     setsignups(signupHistory.recent());
   }, []);
+  if (signups) {
+    return (
+      <div className="widgetSm">
+        <span className="widgetSmTitle">
+          <Link to={URL.adminAnalytics}>
+            <h3 className="widgetLgTitle">Recent User SignUps </h3>
+          </Link>
+          <ul className="widgetSmList">
+            {signups.map((val) => {
+              console.log("------signup value----", val);
+              const date = new Date(val.createdAt);
 
-  return (
-    <div className="widgetSm">
-      <span className="widgetSmTitle">
-        <h3 className="widgetLgTitle">Recent User SignUps </h3>
+              return (
+                <li className="widgetSmListItem">
+                  <div className="widgetSmUser">
+                    <span className="widgetSmUserName">
+                      {val.firstName + " " + val.lastName}
+                    </span>
+                    <span className="widgetSmUserTitle">
+                      ID: {val.idNumber}
+                    </span>
+                    <span className="widgetSmUserTitle">
+                      Roles :
+                      {val.roles.map((role) => {
+                        return role.name + " ";
+                      })}
+                    </span>
+                  </div>
+                  <div className="widgetSmUser">
+                    <span className="widgetSmUserTitle">
+                      Date : {date.toLocaleDateString()}
+                    </span>
+                    <span className="widgetSmUserTitle">
+                      Time : {date.toLocaleTimeString()}
+                    </span>
+                  </div>
 
-        <ul className="widgetSmList">
-          {signups.map((val) => {
-            console.log("------signup value----", val);
-            const date = new Date(val.createdAt);
-
-            return (
-              <li className="widgetSmListItem">
-                <div className="widgetSmUser">
-                  <span className="widgetSmUserName">
-                    {val.firstName + " " + val.lastName}
-                  </span>
-                  <span className="widgetSmUserTitle">ID: {val.idNumber}</span>
-                  <span className="widgetSmUserTitle">
-                    Roles :
-                    {val.roles.map((role) => {
-                      return role.name + " ";
-                    })}
-                  </span>
-                </div>
-                <div className="widgetSmUser">
-                  <span className="widgetSmUserTitle">
-                    Date : {date.toLocaleDateString()}
-                  </span>
-                  <span className="widgetSmUserTitle">
-                    Time : {date.toLocaleTimeString()}
-                  </span>
-                </div>
-
-                <Link to={URL.user + "/" + val._id} className="linkAnaly">
-                  <button className="widgetSmButton">
-                    <Visibility className="widgetSmIcon" />
-                    View User
-                  </button>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </span>
-    </div>
-  );
+                  <Link to={URL.user + "/" + val._id} className="linkAnaly">
+                    <button className="widgetSmButton">
+                      <Visibility className="widgetSmIcon" />
+                      View User
+                    </button>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </span>
+      </div>
+    );
+  }
 }

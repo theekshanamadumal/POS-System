@@ -7,19 +7,22 @@ import URL from "../../config";
 import axios from "axios";
 
 export default function FeaturedInfo() {
+  const [userCount, setUserCount] = useState(0);
   const [salespersonCount, setSalespersonCount] = useState(0);
   const [managersCount, setManagersCount] = useState(0);
 
   useEffect(() => {
     axios
       .all([
-        axios.get(URL.main + URL.salesperson + "/count"),
+        axios.get(URL.main + URL.userCount),
+        axios.get(URL.main + URL.salespersonCount),
         axios.get(URL.main + URL.managerCount),
       ])
       .then(
         axios.spread((...responses) => {
-          setSalespersonCount(responses[0].data);
-          setManagersCount(responses[1].data);
+          setUserCount(responses[0].data);
+          setSalespersonCount(responses[1].data);
+          setManagersCount(responses[2].data);
         })
       )
       .catch((error) => {
@@ -44,15 +47,23 @@ export default function FeaturedInfo() {
         <div className="featuredUs">
           <Link to={URL.user} className="linkTo">
             <PeopleAlt fontSize="large" className="Icon" />
-            <h3 className="descript">Managers Count</h3>
-            <h2 className="count">{managersCount}</h2>
+            <h3 className="descript">Total Users</h3>
+            <h2 className="count">{userCount}</h2>
           </Link>
         </div>
 
         <div className="featuredUs">
           <Link to={URL.user} className="linkTo">
             <Storefront fontSize="large" className="Icon" />
-            <h3 className="descript">Salesperson Count</h3>
+            <h3 className="descript">Managers</h3>
+            <h3 className="count">{managersCount}</h3>
+          </Link>
+        </div>
+
+        <div className="featuredUs">
+          <Link to={URL.user} className="linkTo">
+            <Storefront fontSize="large" className="Icon" />
+            <h3 className="descript">Salespersons</h3>
             <h3 className="count">{salespersonCount}</h3>
           </Link>
         </div>

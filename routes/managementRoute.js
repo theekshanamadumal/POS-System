@@ -10,12 +10,12 @@ router.route("/salesperson").get((req, res) => {
 });
 router.route("/salesperson/count").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
-  UC.countUsers(res);
+  UC.countSellers(res);
 });
 
 router.route("/salespersonCount").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
-  UC.userCount(res);
+  UC.countSellers(res);
  
 });
 
