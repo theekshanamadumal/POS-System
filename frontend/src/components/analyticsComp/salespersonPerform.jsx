@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import "../list.css";
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import "./salespersonPerform.css";
 import { Button } from 'reactstrap';
 import { BarChart, Bar, XAxis,YAxis, CartesianGrid, Tooltip,ResponsiveContainer,LabelList } from 'recharts';
 import sellerAnalytics from "../../services/analytics/seller"
 
 const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
-  const [selected, setSelected] = React.useState("");
+  const [selected, setSelected] = React.useState("Day");
+  
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
   };
@@ -24,8 +25,8 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
     type = year;
   } else if (selected === "Month") {
     type = month;
-  } else if (selected === "Week") {
-    type = dataStructure;
+  } else if (selected === "Day") {
+    type = ["Last 7 days"];
   }
   if (type) {
     options = type.map((el) => <option key={el}>{el}</option>);
@@ -39,10 +40,10 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
         <div className="row">
            <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
           <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
-            <option>Choose...</option>
+          <option>Day</option>
             <option>Year</option>
             <option>Month</option>
-            <option>Current Day</option>
+            
           </select>
         
           <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
@@ -60,8 +61,8 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
           margin={{top: 5, right: 3, left: 2, bottom: 5}}
           margin={{left:59,right:59}}
           layout="vertical">
-          <XAxis type="number" orientation="bottom" stroke="black"/>
-          <YAxis type="category" dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
+          <XAxis type="number" domain={[0, dataMax => sellerAnalytics.perDay().salesAll[0].income]}  orientation="bottom" stroke="black"/>
+          <YAxis type="category"  dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
           <Bar background dataKey="income" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
 
               <LabelList dataKey="income"  position="right" style={{ fill: "#0004ff" }} />

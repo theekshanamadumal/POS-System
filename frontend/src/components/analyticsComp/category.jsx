@@ -65,7 +65,7 @@ const Category = (props) => {
   const dataBar =salesArray;
 
 
-  const [selected, setSelected] = React.useState("");
+  const [selected, setSelected] = React.useState("Day");
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
   };
@@ -82,8 +82,8 @@ const Category = (props) => {
     type = year;
   } else if (selected === "Month") {
     type = month;
-  } else if (selected === "Week") {
-    type = dataStructure;
+  } else if (selected === "Day") {
+    type = ["Last 7 Days"];
   }
   if (type) {
     optionsSelect = type.map((el) => <option key={el}>{el}</option>);
@@ -93,7 +93,7 @@ const Category = (props) => {
     
     <div className="category">
       <Card   {...props} sx={{height:220}}>
-        <h1 class="text-center">Income By Catergory </h1>
+        <h1 class="text-center">Sales By Catergory </h1>
         {console.log("price sales ",salesArray)}
         <Divider />
         <br></br>
@@ -101,10 +101,10 @@ const Category = (props) => {
           <div className="row">
             <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
             <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}}  onChange={changeSelectOptionHandler}>
-              <option>Choose...</option>
+            <option>Day</option>
               <option>Year</option>
               <option>Month</option>
-              <option>Current Day</option>
+              
             </select>
           
             <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >

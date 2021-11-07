@@ -34,9 +34,7 @@ class Analytics extends Component {
             </a>
           </li>
         </ul>
-        
-        <AllSellersLocations />
-        <br></br>
+
         <a name="sales"></a>
         <SalesAnalytics data={chartData} dataKey="month" grid />
         <br></br>
