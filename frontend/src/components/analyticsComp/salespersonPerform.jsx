@@ -50,7 +50,6 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
           </select>
         
           <button className="btn btn btn-secondary">View Analysis</button>
-          <div>{console.log("selle Anal...",sellerAnalytics.perDay().salesAll)}</div>
         </div>  
       </form>
       <br></br>

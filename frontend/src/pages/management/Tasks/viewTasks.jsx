@@ -114,7 +114,7 @@ export default function ViewTasks() {
                       <TableRow hover key={e.shopId}>
                         <TableCell align="center">{e.shopName}</TableCell>
                         <TableCell align="center">
-                          {e.isCovered===true?"Covered":"Not Covered"}</TableCell>
+                          {e.isCovered===true?<strong className="text-success">Covered</strong>:<strong className="text-danger">Not Covered</strong>}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

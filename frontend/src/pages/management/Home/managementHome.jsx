@@ -11,13 +11,7 @@ export default function Home() {
     <div className="home">
       <QuickAccess />
       <Info />
-      <Chart
-        data={chartData}
-        title="Total Profit Analysis"
-        dataKey="month"
-        grid
-      />
-
+      <Chart/>
       <AllSellersLocations style={{ width: "80vw" }} />
     </div>
   );

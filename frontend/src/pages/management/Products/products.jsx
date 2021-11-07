@@ -169,6 +169,7 @@ export default function Products() {
                         }
                       }
                     })
+                    .sort((a,b)=>a.stock > b.stock ? 1 : -1)
                     .map((val) => {
                       return (
                         console.log(val),

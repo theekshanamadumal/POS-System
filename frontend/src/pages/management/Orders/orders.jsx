@@ -139,6 +139,7 @@ export default function Orders() {
                 </TableHead>
                 <TableBody className="tbBody">
                   {paymentsData
+                    .sort((a,b)=>a.dateTime<b.dateTime?1:-1)
                     .filter((val) => {
                       if (word === "") {
                         return val;

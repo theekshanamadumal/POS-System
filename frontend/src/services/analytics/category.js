@@ -88,7 +88,7 @@ class categoryAnalytics {
         labels.push(sorted[i][0])
       }
     }
-    console.log("price..",priceArray)
+    //console.log("price..",priceArray)
     return ({percentageArray:percentageArray,priceArray:priceArray,data:data,labels:labels});
   }
 

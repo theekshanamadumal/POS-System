@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 import { Button } from "reactstrap";
 import {
   XAxis,
@@ -9,8 +9,15 @@ import {
   ResponsiveContainer,
   AreaChart
 } from "recharts";
+import salesAnalytics from "../../services/analytics/sale";
 
-export default function SalesAnalytics({ title, data, dataKey, grid }) {
+export default function SalesAnalytics() {
+  const [salesLast,setSalesLast]=useState([]);
+  useEffect(() => {
+    setSalesLast(salesAnalytics.perDay())
+    
+  }, [])
+
   const [selected, setSelected] = React.useState("");
   
   /** Function that will set different values to state variable
@@ -53,7 +60,7 @@ export default function SalesAnalytics({ title, data, dataKey, grid }) {
     <div className="chart">
       
     <h1>Sales Analytics</h1>
-    <span className="chartTitle">{title}</span>
+    <span className="chartTitle">Sales Analysis</span>
     <br></br>
 
     <form style={{margin:"0px 60px"}}>
@@ -85,7 +92,7 @@ export default function SalesAnalytics({ title, data, dataKey, grid }) {
     <br></br>
 
     <ResponsiveContainer width="100%" aspect={3 / 1}>
-        <AreaChart data= {data} margin={{bottom:59}}>
+        <AreaChart data= {salesLast} margin={{bottom:59}}>
         <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="mediumseagreen" stopOpacity={0.8} />
@@ -95,8 +102,8 @@ export default function SalesAnalytics({ title, data, dataKey, grid }) {
         <CartesianGrid strokeDasharray="2 2"/>
         <Tooltip contentStyle={{backgroundColor:"moccasin"}}/>
         
-        <Area type="monotone" dataKey="income" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-        <XAxis dataKey={dataKey} stroke="royalblue" />
+        <Area type="monotone" dataKey="sales" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+        <XAxis dataKey="date" stroke="royalblue" />
         <YAxis stroke="royalblue" />
         
         </AreaChart>
