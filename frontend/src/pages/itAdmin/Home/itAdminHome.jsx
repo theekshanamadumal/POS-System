@@ -12,12 +12,12 @@ export default function ItAdminHome() {
   return (
     <div className="home">
       <FeaturedInfo />
-      <Chart
+      {/* <Chart
         title="User Analytics"
         data={userData}
         dataKey="Active User"
         grid
-      />
+      /> */}
       <div className="homeWIdgets">
         <WidgetSm />
         <WidgetLg />

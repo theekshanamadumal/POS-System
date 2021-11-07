@@ -1,87 +1,58 @@
 import { Visibility } from "@material-ui/icons";
-import React from "react";
+import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import URL from "../../config";
 import "./widgetSm.css";
+import signupHistory from "../../services/admin/signupHistory";
 
 export default function WidgetSm() {
+  const [signups, setsignups] = useState([]);
+  useEffect(() => {
+    setsignups(signupHistory.recent());
+  }, []);
+
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">
+        <h3 className="widgetLgTitle">Recent User SignUps </h3>
+
         <ul className="widgetSmList">
-          <li className="widgetSmListItem">
-            <img
-              className="widgetSmImg"
-              src={process.env.PUBLIC_URL + "/images/user2.jpg"}
-              alt=""
-            />
-            <div className="widgetSmUser">
-              <span className="widgetSmUserName">Anna Keller</span>
-              <span className="widgetSmUserTitle">Software Engineer</span>
-            </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
-          </li>
-          <li className="widgetSmListItem">
-            <img
-              className="widgetSmImg"
-              src={process.env.PUBLIC_URL + "/images/user2.jpg"}
-              alt=""
-            />
-            <div className="widgetSmUser">
-              <span className="widgetSmUserName">Anna Keller</span>
-              <span className="widgetSmUserTitle">Software Engineer</span>
-            </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
-          </li>
-          <li className="widgetSmListItem">
-            <img
-              className="widgetSmImg"
-              src={process.env.PUBLIC_URL + "/images/user2.jpg"}
-              alt=""
-            />
-            <div className="widgetSmUser">
-              <span className="widgetSmUserName">Anna Keller</span>
-              <span className="widgetSmUserTitle">Software Engineer</span>
-            </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
-          </li>
-          <li className="widgetSmListItem">
-            <img
-              className="widgetSmImg"
-              src={process.env.PUBLIC_URL + "/images/user2.jpg"}
-              alt=""
-            />
-            <div className="widgetSmUser">
-              <span className="widgetSmUserName">Anna Keller</span>
-              <span className="widgetSmUserTitle">Software Engineer</span>
-            </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
-          </li>
-          <li className="widgetSmListItem">
-            <img
-              className="widgetSmImg"
-              src={process.env.PUBLIC_URL + "/images/user2.jpg"}
-              alt=""
-            />
-            <div className="widgetSmUser">
-              <span className="widgetSmUserName">Anna Keller</span>
-              <span className="widgetSmUserTitle">Software Engineer</span>
-            </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
-          </li>
+          {signups.map((val) => {
+            console.log("------signup value----", val);
+            const date = new Date(val.createdAt);
+
+            return (
+              <li className="widgetSmListItem">
+                <div className="widgetSmUser">
+                  <span className="widgetSmUserName">
+                    {val.firstName + " " + val.lastName}
+                  </span>
+                  <span className="widgetSmUserTitle">ID: {val.idNumber}</span>
+                  <span className="widgetSmUserTitle">
+                    Roles :
+                    {val.roles.map((role) => {
+                      return role.name + " ";
+                    })}
+                  </span>
+                </div>
+                <div className="widgetSmUser">
+                  <span className="widgetSmUserTitle">
+                    Date : {date.toLocaleDateString()}
+                  </span>
+                  <span className="widgetSmUserTitle">
+                    Time : {date.toLocaleTimeString()}
+                  </span>
+                </div>
+
+                <Link to={URL.user + "/" + val._id} className="linkAnaly">
+                  <button className="widgetSmButton">
+                    <Visibility className="widgetSmIcon" />
+                    View User
+                  </button>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </span>
     </div>

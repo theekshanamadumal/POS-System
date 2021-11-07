@@ -46,4 +46,9 @@ router.route("/userUpdate/:id").post((req, res) => {
   
 });
 
+router.route("/userUpdate/:id").post((req, res) => {
+  UC.updateUser(req,res);
+  
+});
+
 module.exports = router;

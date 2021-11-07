@@ -43,6 +43,8 @@ app.listen(PORT, () => {
 })
 
 const itAdminRouter = require('./routes/itAdminRoute');
+const adminAnalyticsRoute = require('./routes/adminAnalyticsRoute');
+
 const managementRouter = require('./routes/managementRoute');
 const productRouter = require('./routes/productRoute');
 const productCategoryRouter = require('./routes/productCategoryRoute');
@@ -54,6 +56,7 @@ const dailyTaskRouter = require('./routes/dailyTaskRoute');
 const analyticsRouter = require('./routes/analyticsRoute');
 
 app.use('/itAdmin', itAdminRouter);
+app.use('/itAdmin', adminAnalyticsRoute);
 app.use('/management', managementRouter);
 app.use('/management', productRouter);
 app.use('/management', productCategoryRouter);
