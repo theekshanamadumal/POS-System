@@ -42,6 +42,11 @@ module.exports =  class UserController {
     }
 
     countUsers(res) {
+        User.countDocuments()
+        .then((count) => res.json(count))
+        .catch((err) => res.status(400).json("Error: " + err));
+    }
+    countSellers(res) {
         User.countDocuments({roles:'6153648ac5809858d4b761f3'})
         .then((count) => res.json(count))
         .catch((err) => res.status(400).json("Error: " + err));
