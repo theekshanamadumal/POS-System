@@ -14,6 +14,7 @@ db.role = require("./role");
 db.route = require("./route"); 
 db.shop = require("./shop");
 db.user = require("./user");
+db.logHistory = require("./userLog");
 
 db.ROLES = ["admin", "manager", "salesperson"];
 

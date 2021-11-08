@@ -18,7 +18,10 @@
   width: 100%;
   border-spacing: 20px;
 }
-
+.widgetLgName {
+  color: rgb(11, 133, 70);
+  border-spacing: 20px;
+}
 .widgetLgImg {
   width: 40px;
   height: 40px;
@@ -31,7 +34,10 @@
   border: none;
   border-radius: 10px;
 }
-
+.Approved {
+  background-color: #e5faf2;
+  color: #3bb077;
+}
 .widgetLgButton.Approved {
   background-color: #e5faf2;
   color: #3bb077;
@@ -45,4 +51,8 @@
 .widgetLgButton.Pending {
   background-color: #ebf1fe;
   color: #2a7ade;
+}
+
+table {
+  padding-top: 30px;
 }

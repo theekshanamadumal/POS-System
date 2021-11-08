@@ -11,13 +11,14 @@ import WidgetLg from "../../../components/widgetLg/widgetLg";
 export default function ItAdminHome() {
   return (
     <div className="home">
+      <h2 className="homeWIdgets">Admin HomePage</h2>
       <FeaturedInfo />
-      <Chart
+      {/* <Chart
         title="User Analytics"
         data={userData}
         dataKey="Active User"
         grid
-      />
+      /> */}
       <div className="homeWIdgets">
         <WidgetSm />
         <WidgetLg />
