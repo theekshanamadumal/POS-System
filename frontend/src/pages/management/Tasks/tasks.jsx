@@ -2,6 +2,7 @@ import "./tasks.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
+import moment from "moment";
 import {
   Box,
   Card,
@@ -140,6 +141,8 @@ export default function Tasks() {
                 </TableHead>
                 <TableBody className="tbBody">
                   {dailyTasks
+                    //.filter(dt=>moment(dt.createdAt).format("DD/MM/YYYY")==="07/11/2021")
+                    
                     .filter((val) => {
                       if (word === "") {
                         return val;

@@ -211,7 +211,7 @@ export default class AssignTasks extends Component {
                                 <h3 className="col-md-3 text-right">Select product</h3>
                                 <h3 className="col-md-3 text-right">Select Amount</h3>
                                 <h3 className="col-md-2 text-right">Unit Price</h3>
-                                <h3 className="col-md-2 text-right">Total</h3>
+                                <h3 className="col-md-2 text-right">Sub-total</h3>
                             </div>
                             <div className="card-body row"><br></br><br></br>
                                 {this.state.inventoryList.map((x, i) => {

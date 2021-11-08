@@ -154,7 +154,7 @@ class AddProduct extends Component {
                 <div className="rightItemContainer">
                   <div className="upload">
                     <button type="submit" className="update">
-                      Submit
+                      Add
                     </button>
                   </div>
                 </div>

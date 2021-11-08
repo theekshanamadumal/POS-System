@@ -2,7 +2,6 @@ const db = require("../models");
 const dailyTask = db.dailyTask;
 let ShopController = require("../controllers/shopController");
 const SC = ShopController;
-
 module.exports =  class dailyTaskController {
   
     // Constructor
@@ -10,9 +9,20 @@ module.exports =  class dailyTaskController {
     }
 
     static alldailyTasks(req,res) {
-        const today= new Date().setHours(0,0,0,0);
-        console.log("today...",today)
-        dailyTask.find({"createdAt":today})
+        const li=new Date().toLocaleDateString().split("/");
+        let local;
+        if (li[1]>9){
+            local=li[2]+"-"+li[0]+"-"+li[1]
+        }
+        else{
+            local=li[2]+"-"+li[0]+"-0"+li[1]
+        }
+        const lessDate=local+"T00:00:00Z"
+        const highDate=local+"T23:59:59Z"
+        
+        dailyTask.find({createdAt:{
+            "$gte":lessDate,
+            "$lt":highDate}})
         .populate('sellerId',null,"users")
         .then((dailyTask) =>{ res.json(dailyTask);    
             console.log("dailyTasks :",dailyTask)

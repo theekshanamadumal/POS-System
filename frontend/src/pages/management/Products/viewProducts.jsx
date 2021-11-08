@@ -231,7 +231,7 @@ export default withRouter(
                   <div className="rightItemContainer">
                     <div className="upload">
                       <button type="submit" className="update">
-                        Submit
+                        Update
                       </button>
                     </div>
                   </div>

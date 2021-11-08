@@ -46,7 +46,7 @@ export const PrivateManagerRoute =  ({component: Component, ...rest}) => (
             // authorised so return component
             return (
             <div>
-              <Topbar name={"Management"}/>
+              <Topbar name={"Manager"}/>
             <div className="contain">
               <ManagementSidebar/>
               <Component {...props}/>
