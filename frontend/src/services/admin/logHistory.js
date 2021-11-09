@@ -5,21 +5,9 @@ import URL from '../../config';
 
 class logHistory {
 
-      
     constructor(){
       
-        axios.get(URL.main + URL.signinHistory)   
-        .then( (response) => {
-          console.log('-------------------signins analytics',response.data);
-          this.dataList = response.data;
-        } )
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.itAdmin));
-        });
-    
     }
-
 
   mapValues(signups,transactions){
     //const date = new Date().toLocaleDateString();
@@ -41,12 +29,12 @@ class logHistory {
 
 
 
-  recent() {
+  recent(dataList) {
     //console.log('----------this.dataList--------------',this.dataList);
     const signins={};
 
      {
-       if (this.dataList!== undefined) {
+       if (dataList!== undefined) {
         //this.dataList
         //.filter((payment) => payment.dateTime > 0)
         //.sort((a, b) => (a.name > b.productName ? 1 : -1))
@@ -55,8 +43,8 @@ class logHistory {
           //this.mapValues(signups,this.dataList);
         }
     }
-    console.log('---------------recent signins-------------',signins); 
-    return this.dataList ;
+    console.log('---------------recent signins-------------',dataList); 
+    return dataList ;
   }
 
 }

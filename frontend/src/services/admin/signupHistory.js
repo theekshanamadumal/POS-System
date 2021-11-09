@@ -8,15 +8,7 @@ class signupHistory {
       
     constructor(){
       
-        axios.get(URL.main + URL.signupHistory)   
-        .then( (response) => {
-          console.log('-------------------signups analytics',response.data);
-          this.dataList = response.data;
-        } )
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.itAdmin));
-        });
+        
     
     }
 
@@ -41,12 +33,12 @@ class signupHistory {
 
 
 
-  recent() {
+  recent(dataList) {
     //console.log('----------this.dataList--------------',this.dataList);
     const signups={};
 
      {
-       if (this.dataList!== undefined) {
+       if (dataList!== undefined) {
         //this.dataList
         //.filter((payment) => payment.dateTime > 0)
         //.sort((a, b) => (a.name > b.productName ? 1 : -1))
@@ -56,7 +48,7 @@ class signupHistory {
         }
     }
     console.log('---------------recent signups-------------',signups); 
-    return this.dataList ;
+    return dataList ;
   }
 
 }

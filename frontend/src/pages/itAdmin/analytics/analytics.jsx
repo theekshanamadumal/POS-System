@@ -23,7 +23,7 @@ import { Search as SearchIcon } from "react-feather";
 import { Link } from "react-router-dom";
 import "../../toolbar.css";
 import ListComponent from "../../../components/listComponent";
-import URL from "../../../config";
+import URL, { signin } from "../../../config";
 //import moment from "moment";
 
 export default function AdminAnalytics(props) {
@@ -33,7 +33,16 @@ export default function AdminAnalytics(props) {
   const [signins, setsignins] = useState([]);
 
   useEffect(() => {
-    setsignins(logHistory.recent());
+    axios
+      .get(URL.main + URL.signinHistory)
+      .then((response) => {
+        console.log("-------------------signups analytics", response.data);
+        setsignins(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = URL.itAdmin));
+      });
   }, []);
 
   const [disabled, seTableCellisabled] = useState(true);
