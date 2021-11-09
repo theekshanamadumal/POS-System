@@ -5,7 +5,7 @@ let AnalyticsController = require("../../controllers/analyticsController");
 const AC = AnalyticsController;
 
 router.use(  
- [authJwt.verifyToken, authJwt.isManager],
+ //[authJwt.verifyToken, authJwt.isManager],
   function(req, res, next) {
   res.header(
     "Access-Control-Allow-Headers",
