@@ -1,6 +1,6 @@
 import axios from "axios";
 import { React, useState, useEffect } from "react";
-import logHistory from "../../../services/admin/logHistory";
+//import logHistory from "../../../services/admin/logHistory";
 import {
   Box,
   Card,
@@ -22,12 +22,12 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { Search as SearchIcon } from "react-feather";
 import { Link } from "react-router-dom";
 import "../../toolbar.css";
-import ListComponent from "../../../components/listComponent";
+//import ListComponent from "../../../components/listComponent";
 import URL, { signin } from "../../../config";
 //import moment from "moment";
 
 export default function AdminAnalytics(props) {
-  const columnName = ["IDNumber", "Name", "Date", "Time", "Action"];
+  //const columnName = ["IDNumber", "Name", "Date", "Time", "Action"];
   const [word, setWord] = useState("");
 
   const [signins, setsignins] = useState([]);
@@ -79,10 +79,10 @@ export default function AdminAnalytics(props) {
                     label="Age"
                     onChange={handleChange}
                   >
-                    <MenuItem value="idNumber">ID Number</MenuItem>
+                    <MenuItem value="id">ID Number</MenuItem>
                     <MenuItem value="name">Name</MenuItem>
-                    <MenuItem value="email">Date</MenuItem>
-                    <MenuItem value="phoneNumber">Time</MenuItem>
+                    <MenuItem value="Date">Date</MenuItem>
+                    <MenuItem value="Time">Time</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
@@ -136,6 +136,7 @@ export default function AdminAnalytics(props) {
                 </TableHead>
                 <TableBody className="tbBody">
                   {signins
+                    .sort((a, b) => (a.dateTime < b.dateTime ? 1 : -1))
                     .filter((val) => {
                       const date = new Date(val.dateTime);
                       const user = val.userID;
@@ -162,7 +163,7 @@ export default function AdminAnalytics(props) {
                           }
                         } else {
                           if (
-                            val[searchBy]
+                            user.idNumber
                               .toLowerCase()
                               .trim()
                               .includes(word.toLowerCase().trim())
@@ -176,7 +177,7 @@ export default function AdminAnalytics(props) {
                       const date = new Date(val.dateTime);
                       const user = val.userID;
                       return (
-                        <TableRow className="">
+                        <TableRow className="" key={val._id}>
                           <TableCell className="">{user.idNumber}</TableCell>
 
                           <TableCell className="">

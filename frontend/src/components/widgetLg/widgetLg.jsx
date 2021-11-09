@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import URL from "../../config";
-import logHistory from "../../services/admin/logHistory";
+//import logHistory from "../../services/admin/logHistory";
 import "./widgetLg.css";
 //import { Visibility } from "@material-ui/icons";
 
@@ -50,34 +50,42 @@ export default class WidgetLg extends Component {
               {/* <th className="widgetLgTh">Roles</th> */}
             </tr>
 
-            {logHistory.recent(this.state.signins).map((val) => {
-              console.log("------signin value----", val);
-              const date = new Date(val.dateTime);
-              const user = val.userID;
+            {this.state.signins
+              .sort((a, b) => (a.dateTime < b.dateTime ? 1 : -1))
+              .slice(0, 5)
+              .map((val) => {
+                console.log("------signin value----", val);
+                const date = new Date(val.dateTime);
+                const user = val.userID;
 
-              return (
-                <tr className="widgetLgTr">
-                  <td className="widgetLgUser">
-                    <div className="widgetLgName">
-                      {user.firstName + " " + user.lastName}
-                    </div>
-                    {/* <div className="widgetLgTr">{user.idNumber}</div> */}
-                  </td>
-                  <td className="widgetLgDate">{date.toLocaleDateString()}</td>
-                  <td className="widgetLgAmount">
-                    {date.toLocaleTimeString()}
-                  </td>
-                  <td className="widgetLgStatus">
-                    <Link to={URL.user + "/" + user._id} className="linkAnaly">
-                      <button className="widgetSmButton Approved">
-                        View User
-                      </button>
-                    </Link>
-                    {/* <Button type="Approved" /> */}
-                  </td>
-                </tr>
-              );
-            })}
+                return (
+                  <tr className="widgetLgTr">
+                    <td className="widgetLgUser">
+                      <div className="widgetLgName">
+                        {user.firstName + " " + user.lastName}
+                      </div>
+                      {/* <div className="widgetLgTr">{user.idNumber}</div> */}
+                    </td>
+                    <td className="widgetLgDate">
+                      {date.toLocaleDateString()}
+                    </td>
+                    <td className="widgetLgAmount">
+                      {date.toLocaleTimeString()}
+                    </td>
+                    <td className="widgetLgStatus">
+                      <Link
+                        to={URL.user + "/" + user._id}
+                        className="linkAnaly"
+                      >
+                        <button className="widgetSmButton Approved">
+                          View User
+                        </button>
+                      </Link>
+                      {/* <Button type="Approved" /> */}
+                    </td>
+                  </tr>
+                );
+              })}
           </table>
         </div>
       );
