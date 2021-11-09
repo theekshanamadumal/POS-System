@@ -3,6 +3,8 @@ import axios from "axios";
 import "./addProduct.css";
 import AddProductCategory from "./addProductCategory";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
+
 class AddProduct extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,7 @@ class AddProduct extends Component {
 
   loadCategories() {
     axios
-      .get(URL.main+URL.productCategory)
+      .get(URL.main+URL.productCategory,{ headers: authHeader() })
       .then((response) => {
         this.setState({
           categoryList: response.data,
@@ -74,7 +76,7 @@ class AddProduct extends Component {
     console.log(product);
 
     axios
-      .post(URL.main+URL.addProduct , product)
+      .post(URL.main+URL.addProduct , product,{ headers: authHeader() })
       .then((res) => {
         console.log(res.data);
         alert(res.data, (window.location = URL.products ));

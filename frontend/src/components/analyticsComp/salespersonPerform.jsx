@@ -7,6 +7,7 @@ import { BarChart, Bar, XAxis,YAxis, CartesianGrid, Tooltip,ResponsiveContainer,
 import sellerAnalytics from "../../services/analytics/seller";
 import axios from 'axios';
 import URL from "../../config";
+import authHeader from '../../services/authHeader';
 
 const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
   const [selected, setSelected] = React.useState("Day");
@@ -14,10 +15,11 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
   const [sellerPerform,setSellerPerform]=useState([]);
 
   useEffect(() => {
-    axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+"Day-7")  
+    axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+"Day-7",{ headers: authHeader() })  
         .then((response)=>{
-              console.log('-------------------salesperson,,,, analytics',response.data);
-              setSellerPerform(response.data);
+              console.log('-------------------salesperson analytics',response.data);
+              const nameList=sellerAnalytics.getName(response.data)
+              setSellerPerform(nameList);
         })
         .catch((error) => {
           console.log(error);
@@ -55,23 +57,11 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
   }
   const changeRenderComp=(dur)=>{
     console.log("button clicked...",dur);
-    axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+dur)  
+    axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+dur,{ headers: authHeader() })  
         .then((response)=>{
               console.log('-------------------sales analytics',response.data);
-              var maxi;
-              var saArr;
-              /*if (dur.includes("Day")){
-                maxi=sellerAnalytics.mapDays(response.data).maximum;
-                saArr=sellerAnalytics.mapDays(response.data).salesArray;
-              }else if (dur.includes("Month")){
-                maxi=sellerAnalytics.mapMonth(response.data,dur).maximum;
-                saArr=sellerAnalytics.mapMonth(response.data,dur).salesArray;
-              }else{
-                maxi=sellerAnalytics.mapYear(response.data).maximum;
-                saArr=sellerAnalytics.mapYear(response.data).salesArray;
-              }*/
-              //setMaximum(maxi);
-              setSellerPerform(response.data)  
+              const nameList=sellerAnalytics.getName(response.data)
+              setSellerPerform(nameList);
         })
         .catch((error) => {
           console.log(error);
@@ -106,18 +96,18 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
         </div>  
       </form>
       <br></br>
-      <ResponsiveContainer width="100%" height={75*sellerPerform.length}>
+     <ResponsiveContainer width="100%" height={75*sellerPerform.length}>
       
         <BarChart
           data={sellerPerform}
           margin={{top: 5, right: 3, left: 2, bottom: 5}}
           margin={{left:59,right:59}}
           layout="vertical">
-          <XAxis type="number" domain={[0, dataMax => sellerPerform[0].total]}  orientation="bottom" stroke="black"/>
-          <YAxis type="category"  dataKey="_id" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
-          <Bar background dataKey="total" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
+          <XAxis type="number" domain={[0, dataMax => sellerPerform[0].sales]}  orientation="bottom" stroke="black"/>
+          <YAxis type="category"  dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
+          <Bar background dataKey="sales" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
 
-              <LabelList dataKey="total"  position="right" style={{ fill: "#0004ff" }} />
+              <LabelList dataKey="sales"  position="right" style={{ fill: "#0004ff" }} />
           </Bar>
           <Tooltip cursor={{fill: 'transparent'}}  contentStyle={{width:"150px", height:"80px"}}/>
           <CartesianGrid strokeDasharray="1 1"/>

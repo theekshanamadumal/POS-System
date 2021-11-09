@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import URL from "../../../config";
 import "./viewRoute.css";
 import { Link } from "react-router-dom";
+import authHeader from "../../../services/authHeader";
 
 export default withRouter(
   class ViewRoute extends Component {
@@ -44,8 +45,8 @@ export default withRouter(
 
       console.log("dataId: ", this.dataId);
       axios.all(
-        [axios.get(URL.main+URL.salesRouteComp+ this.dataId),
-          axios.get(URL.main + URL.shops+"/groupByRoute")
+        [axios.get(URL.main+URL.salesRouteComp+ this.dataId,{ headers: authHeader() }),
+          axios.get(URL.main + URL.shops+"/groupByRoute",{ headers: authHeader() })
         ])
         .then(axios.spread((...responses) => {
           this.setState({
@@ -102,7 +103,8 @@ export default withRouter(
       axios
         .post(
           URL.main+URL.updateSaleRoute+ this.dataId,
-          route
+          route,
+          { headers: authHeader() }
         )
         .then((res) => {
           console.log(res.data);

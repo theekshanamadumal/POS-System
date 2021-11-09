@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./viewSalesPerson.css";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
 
 import {
   Publish,
@@ -54,7 +55,7 @@ export default withRouter(
       this.dataId = this.props.match.params.id;
 
       axios
-        .get(URL.main+URL.salesperson+"/" + this.dataId)
+        .get(URL.main+URL.salesperson+"/" + this.dataId,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             manager: response.data,
@@ -158,7 +159,8 @@ export default withRouter(
       axios
         .post(
           URL.main=URL.updateSalesperson+ this.dataId,
-          user
+          user,
+          { headers: authHeader() }
         )
         .then((res) => {
           console.log(res.data);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
 
 class AddProductCategory extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class AddProductCategory extends Component {
     console.log(Category);
 
     axios
-      .post(URL.main+URL.addProductCategory, Category)
+      .post(URL.main+URL.addProductCategory, Category,{ headers: authHeader() })
       .then((res) => {
         console.log(res.data);
         alert(res.data, (window.location = URL.products));

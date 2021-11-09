@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import URL from "../../../config";
-
+import authHeader from "../../../services/authHeader";
 export default class AddRouteComponent extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +52,7 @@ export default class AddRouteComponent extends Component {
     console.log("before post", route);
 
     axios
-      .post(URL.main + URL.addSalesRoute, route)
+      .post(URL.main + URL.addSalesRoute, route,{ headers: authHeader() })
       .then((res) => {
         console.log(res.data);
         alert(res.data, (window.location = this.props.location));

@@ -14,14 +14,17 @@ import TableContainer from "@material-ui/core/TableContainer";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import URL from "../../config";
+import sellerAnalytics from "../../services/analytics/seller";
+import authHeader from '../../services/authHeader';
 
 const BestPerform = () => {
   const [sellerPerform,setSellerPerform]=useState([]);
   useEffect(() => {
-    axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+"Day-7")  
+    axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+"Day-7",{ headers: authHeader() })  
         .then((response)=>{
-              console.log('-------------------salesperson,,,, analytics',response.data);
-              setSellerPerform(response.data);
+              console.log('-------------------salesperson, analytics',response.data);
+              const nameList=sellerAnalytics.getName(response.data)
+              setSellerPerform(nameList);
         })
         .catch((error) => {
           console.log(error);
@@ -39,7 +42,7 @@ const BestPerform = () => {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    {/*<TableCell align="center">Name</TableCell>*/}
+                    <TableCell align="center">Name</TableCell>
                     <TableCell align="center">ID</TableCell>
                     <TableCell align="right">Sales</TableCell>
                   </TableRow>
@@ -49,13 +52,13 @@ const BestPerform = () => {
                   {sellerPerform.map((item) => {
                     return (
                       <TableRow key={item[0]}>
-                        {/*<TableCell align="center">
-                          {item[1].name}
-                        </TableCell>*/}
-                        <TableCell align="center">{item._id}</TableCell>
+                        <TableCell align="center">
+                          {item.name}
+                        </TableCell>
+                        <TableCell align="center">{item.id}</TableCell>
                         <TableCell align="right">
                           {" "}
-                          {item.total.toFixed(2)}{" "}
+                          {item.sales.toFixed(2)}{" "}
                         </TableCell>
                       </TableRow>
                     );

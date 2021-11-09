@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import URL from "../../config";
 import categoryAnalytics from "../../services/analytics/category";
 import { useState,useEffect } from "react";
+import axios from 'axios';
+import authHeader from '../../services/authHeader';
 
 const SalesPieChart = (props) => {
   const [productByCategory,setProductByCategory]=useState([]);
@@ -20,10 +22,18 @@ const SalesPieChart = (props) => {
   const [labels,setLabels]=useState([]);
 
   useEffect(() => {
-    setProductByCategory(categoryAnalytics.perDay().percentageArray); 
-    setData(categoryAnalytics.perDay().data);
-    setLabels(categoryAnalytics.perDay().labels)
-    
+    axios.get(URL.main + URL.categoryAnalyticsDuration+"/Day-7",{ headers: authHeader() }) 
+    .then( (response) => {
+      console.log('-------------------this.response category',response.data);
+      const x=categoryAnalytics.findFinalArray(response.data);
+      setData(x.data);
+      setLabels(x.labels);
+      setProductByCategory(x.percentageArray)
+    } )
+    .catch((error) => {
+      console.log(error);
+      alert(error, (window.location = URL.management));
+    });
   }, [])
   const theme = useTheme();
   const dataSet = {

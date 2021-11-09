@@ -3,6 +3,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
 import moment from "moment";
+import authHeader from "../../../services/authHeader";
 import {
   Box,
   Card,
@@ -39,7 +40,7 @@ export default function Tasks() {
 
   useEffect(() => {
     axios
-      .get(URL.main + URL.dailyTasks)
+      .get(URL.main + URL.dailyTasks,{ headers: authHeader() })
       .then((response) => {
         setDailyTasks(response.data);
         console.log(response.data);

@@ -22,6 +22,7 @@ import "../../toolbar.css";
 import ListComponent from "../../../components/listComponent";
 import URL from "../../../config";
 import moment from "moment";
+import authHeader from "../../../services/authHeader";
 
 export default function SalesPerson(props) {
   const [salespersons, setSalespersons]=useState([]);
@@ -32,7 +33,7 @@ export default function SalesPerson(props) {
     const handleDelete = (id) => {
         //setData(data.filter((item) => item.id !== id));
         axios
-          .delete(URL.main+URL.salesperson+"/"+ id)
+          .delete(URL.main+URL.salesperson+"/"+ id,{ headers: authHeader() })
           .then((response) => {
             console.log(response.data);
             alert(response.data, (window.location = URL.salesperson));
@@ -53,7 +54,7 @@ export default function SalesPerson(props) {
     };
     useEffect(() => {
       axios
-        .get(URL.main+URL.salesperson)
+        .get(URL.main+URL.salesperson,{ headers: authHeader() })
         .then((response) => {
           setSalespersons(response.data);
           console.log(response.data);

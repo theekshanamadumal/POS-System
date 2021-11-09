@@ -23,6 +23,7 @@ import { Search as SearchIcon } from "react-feather";
 import "../../toolbar.css";
 import URL from "../../../config";
 import axios from "axios";
+import authHeader from "../../../services/authHeader";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import OrderListComponent from "../../../components/orderComp/orderList";
 
@@ -41,7 +42,7 @@ export default function Orders() {
   const loadInvoices = () => {
     console.log("finded..........");
     axios
-      .get(URL.invoice)
+      .get(URL.invoice,{ headers: authHeader() })
       .then((response) => {
         setPaymentsData(response.data);
       })

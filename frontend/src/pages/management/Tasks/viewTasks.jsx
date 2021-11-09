@@ -1,5 +1,6 @@
 import "./viewTasks.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import authHeader from "../../../services/authHeader";
 import {
   Box,
   Card,
@@ -29,7 +30,7 @@ export default function ViewTasks() {
 
   const loadSalesPerson = (idNum) => {
     axios
-      .get(URL.main + URL.salesperson + "/" + idNum)
+      .get(URL.main + URL.salesperson + "/" + idNum,{ headers: authHeader() })
       .then((response) => {
         setSeller(response.data);
       })
@@ -40,7 +41,7 @@ export default function ViewTasks() {
   };
   useEffect(() => {
     axios
-      .get(URL.main + URL.dailyTasks + "/" + id)
+      .get(URL.main + URL.dailyTasks + "/" + id,{ headers: authHeader() })
       .then((response) => {
         setTasks(response.data);
         setDailyInventory(response.data.dailyInventory);

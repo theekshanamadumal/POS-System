@@ -6,14 +6,11 @@ import {
 } from "@material-ui/core";
 
 class categoryAnalytics {
-  
-
-      
-    constructor(){
+    /*constructor(){
       
         axios.get(URL.main + URL.categoryAnalytics)   
         .then( (response) => {
-          console.log('-------------------this.response',response.data);
+          console.log('-------------------this.response category',response.data);
           this.dataList = response.data;
         } )
         .catch((error) => {
@@ -21,7 +18,7 @@ class categoryAnalytics {
           alert(error, (window.location = URL.management));
         });
     
-    }
+    }*/
 
 
   mapPayementValues(categoryCount,transactions,total){
@@ -64,14 +61,23 @@ class categoryAnalytics {
     //this.findFinalArray(categoryCount,total);
    return (this.findFinalArray(categoryCount,total));
   }
-  findFinalArray(categoryCount,total){
-    const sorted=Object.entries(categoryCount).sort((a,b) => b[1]-a[1]);
+  findFinalArray(arr){
+    console.log("arr...",arr);
+    var total=0;
+    var sorted=[]
+    arr.map(xy=>{
+      total+=xy.cTotal
+      sorted.push([xy._id,xy.cTotal])
+    })
+    console.log("total",total,sorted)
+    //const sorted=Object.entries(arr);
     const colorType=[colors.red[600],colors.green[500],colors.indigo[500],colors.grey[500],colors.orange[600]]
     var highTotal=0;
     const percentageArray=[]
     const priceArray=[]
     const data=[]
     const labels=[]
+    console.log("sorted",sorted)
     for (var i = 0; i < sorted.length; i++) {
       if (sorted.indexOf(sorted[i])>=4 || Math.floor(sorted[i][1]/total*100)===0){
         percentageArray.push({title:"others",value:((total-highTotal)/total*100).toFixed(2),color:colorType[sorted.indexOf(sorted[i])]});

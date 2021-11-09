@@ -3,6 +3,7 @@ import "./assignTasks/assignTasks.css";
 import {Delete,Add} from '@material-ui/icons';
 import axios from "axios";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
 
 export default class AssignTasks extends Component {
     constructor(props){
@@ -95,10 +96,10 @@ export default class AssignTasks extends Component {
 
     componentDidMount() {
         axios.all(
-            [axios.get(URL.main+URL.salesRoutes),
-            axios.get(URL.main+URL.salesperson),
-            axios.get(URL.main + URL.products+"/productIds"),
-            axios.get(URL.main + URL.shops+"/groupByRoute"),
+            [axios.get(URL.main+URL.salesRoutes,{ headers: authHeader() }),
+            axios.get(URL.main+URL.salesperson,{ headers: authHeader() }),
+            axios.get(URL.main + URL.products+"/productIds",{ headers: authHeader() }),
+            axios.get(URL.main + URL.shops+"/groupByRoute",{ headers: authHeader() }),
         ]
         ).then(axios.spread((...responses) => {
             this.setState({routeList: responses[0].data});
@@ -136,7 +137,7 @@ export default class AssignTasks extends Component {
         };
         console.log(dailyTarget);
         axios
-            .post(URL.main+URL.addDailyTarget, dailyTarget)
+            .post(URL.main+URL.addDailyTarget, dailyTarget,{ headers: authHeader() })
             .then((res) => {
             alert(res.data, (window.location = URL.tasks));
             })

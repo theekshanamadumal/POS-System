@@ -22,6 +22,7 @@ import "../../toolbar.css";
 import axios from "axios";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import ListComponent from "../../../components/listComponent";
+import authHeader from "../../../services/authHeader";
 
 export default function Route() {
   const [shops, setShops]=useState([]);
@@ -33,7 +34,7 @@ export default function Route() {
     console.log("data send to back");
     console.log(id);
     axios
-      .delete(URL.main+URL.salesRouteComp + id)
+      .delete(URL.main+URL.salesRouteComp + id,{ headers: authHeader() })
       .then((response) => {
         console.log(response.data);
         alert(response.data, (window.location = URL.routes));
@@ -64,8 +65,8 @@ export default function Route() {
   useEffect(() => {
     axios.all(
         [
-            axios.get(URL.main+URL.salesRoutes),
-            axios.get(URL.main + URL.shops+"/groupByRoute")
+            axios.get(URL.main+URL.salesRoutes,{ headers: authHeader() }),
+            axios.get(URL.main + URL.shops+"/groupByRoute",{ headers: authHeader() })
         ])
         .then(axios.spread((...responses) => {
             setRouteList(responses[0].data );

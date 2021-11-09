@@ -3,7 +3,7 @@ import "./viewShop.css";
 import { withRouter } from "react-router";
 import axios from "axios";
 import URL from "../../../config";
-
+import authHeader from "../../../services/authHeader";
 import { Email, PhoneAndroid, LocationCity, Home } from "@material-ui/icons";
 
 export default withRouter(
@@ -38,7 +38,7 @@ export default withRouter(
 
     loadRoutes() {
       axios
-        .get(URL.main+URL.salesRoutes)
+        .get(URL.main+URL.salesRoutes,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             routeList: response.data,
@@ -58,7 +58,7 @@ export default withRouter(
       this.dataId = this.props.match.params.id;
       console.log("dataId: ", this.dataId);
       axios
-        .get(URL.main+URL.shopComp + this.dataId)
+        .get(URL.main+URL.shopComp + this.dataId,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             shop: response.data,
@@ -120,7 +120,8 @@ export default withRouter(
       axios
         .post(
           URL.main+URL.updateShop + this.dataId,
-          shop
+          shop,
+          { headers: authHeader() }
         )
         .then((res) => {
           console.log(res.data);

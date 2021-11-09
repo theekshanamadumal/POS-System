@@ -5,7 +5,10 @@ import "./category.css";
 import { Button } from 'reactstrap';
 import React from "react";
 import { useState,useEffect } from "react";
+import URL from "../../config";
 import categoryAnalytics from "../../services/analytics/category";
+import axios from 'axios';
+import authHeader from '../../services/authHeader';
 
 const Category = (props) => {
   const [productByCategory,setProductByCategory]=useState([]);
@@ -14,10 +17,19 @@ const Category = (props) => {
   const [salesArray,setSalesArray]=useState([]);
 
   useEffect(() => {
-    setProductByCategory(categoryAnalytics.perDay().percentageArray); 
-    setData(categoryAnalytics.perDay().data);
-    setLabels(categoryAnalytics.perDay().labels);
-    setSalesArray(categoryAnalytics.perDay().priceArray);
+    axios.get(URL.main + URL.categoryAnalyticsDuration+"/Day-7",{ headers: authHeader() }) 
+    .then( (response) => {
+      console.log('-------------------this.response category',response.data);
+      const x=categoryAnalytics.findFinalArray(response.data);
+      setData(x.data);
+      setLabels(x.labels);
+      setSalesArray(x.priceArray);
+      setProductByCategory(x.percentageArray)
+    } )
+    .catch((error) => {
+      console.log(error);
+      alert(error, (window.location = URL.management));
+    });
   }, [])
   
   const theme = useTheme();
@@ -66,8 +78,15 @@ const Category = (props) => {
 
 
   const [selected, setSelected] = React.useState("Day");
+  const [selectedValue,setSelectedValue]=useState("7");
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
+    {event.target.value==="Month"?setSelectedValue("January")
+      :event.target.value==="Day"?setSelectedValue("Last 7 Days")
+      :setSelectedValue("2021")}
+  };
+  const changeValueHandler = (event) => {
+    setSelectedValue(event.target.value);
   };
   const year= [
     "2021",
@@ -86,7 +105,27 @@ const Category = (props) => {
     type = ["Last 7 Days"];
   }
   if (type) {
-    optionsSelect = type.map((el) => <option key={el}>{el}</option>);
+    optionsSelect = type.map((el) => <option key={el} value={selected==="Month"?type.indexOf(el)+1:el}>{el}</option>);
+  }
+  const changeRenderComp=(dur)=>{
+    console.log("button clicked...",dur);
+    axios.get(URL.main +URL.categoryAnalyticsDuration+"/"+dur,{ headers: authHeader() })  
+        .then((response)=>{
+          const x=categoryAnalytics.findFinalArray(response.data);
+          setData(x.data);
+          setLabels(x.labels);
+          setSalesArray(x.priceArray);
+          setProductByCategory(x.percentageArray)
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
+  }
+  const onSubmitDuration=(e)=>{
+    e.preventDefault();
+    console.log(selected+"-"+selectedValue);
+    changeRenderComp(selected+"-"+selectedValue) 
   }
   
   return (
@@ -97,7 +136,7 @@ const Category = (props) => {
         {console.log("price sales ",salesArray)}
         <Divider />
         <br></br>
-        <form style={{margin:"0px 60px"}}>
+        <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
           <div className="row">
             <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
             <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}}  onChange={changeSelectOptionHandler}>
@@ -107,7 +146,7 @@ const Category = (props) => {
               
             </select>
           
-            <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+            <select className="form-select form-control col" onChange={changeValueHandler} style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
               {optionsSelect}
             </select>
           

@@ -4,6 +4,7 @@ import "./viewOrder.css";
 import InvoiceDetails from "../../../components/Invoice/invoiceDetails";
 import InvoiceList from "../../../components/Invoice/invoiceList";
 import {React,useState,useEffect} from 'react';
+import authHeader from "../../../services/authHeader";
 
 export default function ViewOrder({match}) {
   const [invoiceData,setInvoiceData]=useState([]);
@@ -15,7 +16,7 @@ export default function ViewOrder({match}) {
 
   useEffect(() => {
       axios
-        .get(URL.invoice + "/" + match.params.id)
+        .get(URL.invoice + "/" + match.params.id,{ headers: authHeader() })
         .then((response) => {
           console.log("response...",response.data)
           setTransactions(response.data.transactions);

@@ -5,21 +5,11 @@ let AnalyticsController = require("../../controllers/analyticsController");
 const AC = AnalyticsController;
 
 
-router.route("/analytics/category").get((req, res) => {
+router.route("/analytics/categoryDuration/:duration").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   console.log("requested for group by routes..");
-  AC.categoryAnalytics(req,res);
+  AC.categoryAnalyticsDuration(req,res);
 });
-
-/*router.route("/analytics/sellers").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
-  AC.sellersAnalytics(req,res);
-});
-
-router.route("/analytics/sales").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
-  AC.salesAnalytics(req,res);
-});*/
 
 router.route("/analytics/salesPersonDuration/:duration").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],

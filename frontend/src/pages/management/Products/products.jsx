@@ -24,6 +24,7 @@ import "../../toolbar.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import ListComponent from "../../../components/listComponent";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
 
 export default function Products() {
   const columnName = ["_id", "itemName", "category", "unitPrice", "stock"];
@@ -32,7 +33,7 @@ export default function Products() {
     console.log("data send to back");
     console.log(id);
     axios
-      .delete(URL.main + URL.productComp + id)
+      .delete(URL.main + URL.productComp + id,{ headers: authHeader() })
       .then((response) => {
         console.log(response.data);
         alert(response.data, (window.location = URL.products));
@@ -53,7 +54,7 @@ export default function Products() {
 
   useEffect(() => {
     axios
-      .get(URL.main + URL.products)
+      .get(URL.main + URL.products,{ headers: authHeader() })
       .then((response) => {
         setProducts(response.data);
         console.log(response.data);

@@ -7,7 +7,7 @@ import { bestPerform } from "..//../dataCollection";
 import { Link } from "react-router-dom";
 import URL from "../../config";
 import axios from "axios";
-//import categoryAnalytics from "../../services/analytics/category";
+import authHeader from '../../services/authHeader';
 
 export default function Info() {
   const [salespersonCount, setSalespersonCount] = useState(0);
@@ -19,26 +19,16 @@ export default function Info() {
   useEffect(() => {
     axios
       .all([
-        axios.get(URL.main + URL.salesperson + "/count"),
-        axios.get(URL.main + URL.shops + "/count"),
-        axios.get(URL.main + URL.products),
-        axios.get(URL.main + URL.productCategory + "/count"),
-        axios.get(URL.main + URL.products + "/total"),
+        axios.get(URL.main + URL.salesperson + "/count",{ headers: authHeader() }),
+        axios.get(URL.main + URL.shops + "/count",{ headers: authHeader() }),
+        axios.get(URL.main + URL.products,{ headers: authHeader() }),
+        axios.get(URL.main + URL.productCategory + "/count",{ headers: authHeader() }),
+        axios.get(URL.main + URL.products + "/total",{ headers: authHeader() }),
       ])
       .then(
         axios.spread((...responses) => {
           setSalespersonCount(responses[0].data);
           setShopCount(responses[1].data);
-          {
-            /*responses[2].data.map(e=>{
-                setTotalStock(totalStock+e.stock)
-                if(e.stock===0){
-                    setOutProductsCount(outProductsCount+1)
-                }else if (e.stock<50){
-                    setLowProductsCount(lowProductsCount+1)
-                }
-            })*/
-          }
           setLowProductsCount(
             responses[2].data.filter((e) => e.stock < 50).length
           );

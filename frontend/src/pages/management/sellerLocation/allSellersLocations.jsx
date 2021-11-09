@@ -2,6 +2,7 @@ import MapGL from "./MapGL";
 import React, { Component } from "react";
 import axios from "axios";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
 
 class AllSellersLocations extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class AllSellersLocations extends Component {
 
   loadSellerLocations() {
     axios
-      .get(URL.sellerLocation)
+      .get(URL.sellerLocation,{ headers: authHeader() })
       .then((response) => {
         this.setState({
           sellersData: response.data,

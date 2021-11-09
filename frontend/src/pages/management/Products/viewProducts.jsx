@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import URL from "../../../config";
-
+import authHeader from "../../../services/authHeader";
 import "./viewProducts.css";
 import { withRouter } from "react-router";
 
@@ -32,7 +32,7 @@ export default withRouter(
     }
     loadCategories() {
       axios
-        .get(URL.main+URL.productCategory)
+        .get(URL.main+URL.productCategory,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             categoryList: response.data,
@@ -50,7 +50,7 @@ export default withRouter(
 
       console.log("dataId: ", this.dataId);
       axios
-        .get(URL.main+URL.productComp+this.dataId)
+        .get(URL.main+URL.productComp+this.dataId,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             product: response.data,
@@ -114,7 +114,8 @@ export default withRouter(
       axios
         .post(
           URL.main+URL.updateProduct+ this.dataId,
-          product
+          product,
+          { headers: authHeader() }
         )
         .then((res) => {
           console.log(res.data);

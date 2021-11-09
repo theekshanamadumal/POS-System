@@ -13,12 +13,13 @@ import {
 import { Link } from "react-router-dom";
 import URL from "../../config";
 import salesAnalytics from "../../services/analytics/sale";
+import authHeader from '../../services/authHeader';
 
 export default function Chart() {
   const [salesLast,setSalesLast]=useState([]);
   const [maximum,setMaximum]=useState(0);
   useEffect(() => {
-    axios.get(URL.main + URL.salesAnalyticsDuration+"/"+"Day-7")  
+    axios.get(URL.main + URL.salesAnalyticsDuration+"/"+"Day-7",{ headers: authHeader() })  
         .then((response)=>{
               console.log('-------------------sales analytics',response.data);
               const maxi=salesAnalytics.mapDays(response.data).maximum;

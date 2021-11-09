@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import AddRouteComponent from "../Routes/addRouteComponent";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
 
 class AddShop extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class AddShop extends Component {
 
   loadRoutes() {
     axios
-      .get(URL.main+URL.salesRoutes)
+      .get(URL.main+URL.salesRoutes,{ headers: authHeader() })
       .then((response) => {
         this.setState({
           routeList: response.data,
@@ -89,7 +90,7 @@ class AddShop extends Component {
     console.log(shop);
 
     axios
-      .post(URL.main+ URL.addShops , shop)
+      .post(URL.main+ URL.addShops , shop,{ headers: authHeader() })
       .then((res) => {
         console.log(res.data);
         alert(res.data, (window.location = URL.shops));
