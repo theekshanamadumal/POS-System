@@ -7,6 +7,11 @@ module.exports =  class analyticsController {
     // Constructor
     constructor() {
     }
+    static findMonth(mon){
+        if (mon<10){
+            return "0"+mon
+        }return mon
+    }
     
     static categoryAnalytics(req,res){
        console.log("requested for category analytics by routes..");
@@ -21,7 +26,7 @@ module.exports =  class analyticsController {
        .catch((err) => res.status(400).json("Database Error: try later "));
    
     }
-    static salesAnalytics(req,res){
+    /*static salesAnalytics(req,res){
         console.log("requested for category analytics by routes..");
         Payment.find()
         .select(('dateTime total -_id'))
@@ -31,9 +36,97 @@ module.exports =  class analyticsController {
         })
         .catch((err) => res.status(400).json("Database Error: try later "));
     
+     }*/
+     static salesAnalyticsDuration(req,res){
+         const duration=req.params.duration;
+         const type=duration.split("-")[0];
+         if (type==="Year"){
+             const y=duration.split("-")[1];
+             const y1=parseInt(y)+1
+             const start=y+"-01-01T00:00:00Z"
+             const end=y1+"-01-01T00:00:00Z"
+            Payment.aggregate([
+                { $match: { dateTime :{$gte:new Date(start), $lte:new Date(end)} }},
+                {$group: {
+                    _id: {$month: "$dateTime" }, 
+                    total: {$sum: "$total"} ,
+                    
+                }}, 
+                { "$sort": { "_id": 1 } }                         
+            ]).then((Payment) =>{     
+                console.log("Payments :",Payment);
+                res.json(Payment);
+            })
+            .catch((err) => res.status(400).json("Database Error: try later "));
+         }
+         else if (type==="Day"){
+            var lastWeek = new Date();
+            lastWeek.setDate(lastWeek.getDate() -6);
+            const startDay=lastWeek;
+            const endDay=new Date();
+            Payment.aggregate([
+                { 
+                    $match : {dateTime:{ $gte:startDay}}
+                },
+                { $project : { 
+                    _id : 1,total:1, dateTime : 1,sellerId:1
+                 } },
+                {$group: {
+                    _id: {$dayOfMonth: "$dateTime" },  
+                    total: {$sum: "$total"} ,
+                }},
+                { "$sort": { "_id": 1 } }                        
+            ]).then((Payment) =>{     
+                console.log("Payments :",Payment);
+                res.json(Payment);
+            })
+            .catch((err) => res.status(400).json("Database Error: try later "));
+
+
+         }else if (type==="Month"){
+            const month=duration.split("-")[1];
+            const currentMonth=new Date().getMonth()+1;
+            var yearM=""
+            if (currentMonth>=month && month!=12){
+                yearM=new Date().getFullYear();
+            }else if (month!=12){
+                console.log("first...")
+                yearM=new Date().getFullYear()-1;
+            }var m=this.findMonth(month);
+            const endM=this.findMonth(parseInt(m)+1);
+            let startDay="";
+            let endDay="";
+            if (month==12 && currentMonth!=12){
+                startDay=new Date().getFullYear()-1+"-12-01T00:00:00Z"
+                endDay=new Date().getFullYear()+"-"+"01-01T00:00:00Z"
+            }else if (month==12 ){
+                startDay=new Date().getFullYear()+"-12-01T00:00:00Z"
+                endDay=new Date().getFullYear()+1+"-"+"01-01T00:00:00Z"
+            }else{
+                startDay=yearM+"-"+m+"-01T00:00:00Z"
+                endDay=yearM+"-"+endM+"-01T00:00:00Z"
+            }  
+
+            Payment.aggregate([
+                { $match: { dateTime :{$gte:new Date(startDay), $lte:new Date(endDay)} }},
+                 
+                {$group: {
+                    _id: {$dayOfMonth: "$dateTime" },  
+                    total: {$sum: "$total"} ,
+                    
+                }}, 
+                { "$sort": { "_id": 1 } }               
+            ]).then((Payment) =>{     
+                console.log("Payments ...:",Payment);
+                res.json(Payment);
+            })
+            .catch((err) => res.status(400).json("Database Error: try later "));   
+        }       
+    
      }
+     //salesperson analytics.....
      static sellersAnalytics(req,res){
-        console.log("requested for category analytics by routes..");
+        console.log("requested for salesperon analytics..");
         Payment.find()
         .populate('sellerId')
         .select(('sellerId total dateTime -_id'))
@@ -44,5 +137,103 @@ module.exports =  class analyticsController {
         })
         .catch((err) => res.status(400).json("Database Error: try later "));
     
+     }static sellersAnalyticsDuration(req,res){
+        const duration=req.params.duration;
+        const type=duration.split("-")[0];
+        console.log(type)
+        if (type==="Year"){
+            const y=duration.split("-")[1];
+            const y1=parseInt(y)+1
+            const start=y+"-01-01T00:00:00Z"
+            const end=y1+"-01-01T00:00:00Z"
+           Payment.aggregate([
+               { $match: { dateTime :{$gte:new Date(start), $lte:new Date(end)} }},
+               {$group: {
+                   _id: "$sellerId", 
+                   total: {$sum: "$total"} ,
+                   
+               }}, 
+               { "$sort": { "total": -1 } }                         
+           ]).then((Payment) =>{     
+               console.log("Payments :",Payment);
+               res.json(Payment);
+           })
+           .catch((err) => res.status(400).json("Database Error: try later "));
+        }
+        else if (type==="Day"){
+           var lastWeek = new Date();
+           lastWeek.setDate(lastWeek.getDate() -6);
+           const startDay=lastWeek;
+           const endDay=new Date();
+           Payment.aggregate([
+               { 
+                   $match : {dateTime:{ $gte:startDay}}
+               },
+               { $project : { 
+                   _id : 1,total:1, dateTime : 1,sellerId:1
+                } },
+               {$group: {
+                    _id: "$sellerId", 
+                   total: {$sum: "$total"} ,
+               }},
+               { "$sort": { "total": -1 } }                        
+           ])
+           .then((Payment) =>{     
+               console.log("Payments :",Payment);
+               res.json(Payment);
+           })
+           .catch((err) => res.status(400).json("Database Error: try later "));
+
+
+        }else if (type==="Month"){
+           const month=duration.split("-")[1];
+           console.log("nnnn",month)
+           const currentMonth=new Date().getMonth()+1;
+           var yearM=""
+           if (currentMonth>=month && month!=12){
+               yearM=new Date().getFullYear();
+           }else if (month!=12){
+               console.log("first...")
+               yearM=new Date().getFullYear()-1;
+           }var m=this.findMonth(month);
+           const endM=this.findMonth(parseInt(m)+1);
+           let startDay="";
+           let endDay="";
+           if (month==12 && currentMonth!=12){
+               startDay=new Date().getFullYear()-1+"-12-01T00:00:00Z"
+               endDay=new Date().getFullYear()+"-"+"01-01T00:00:00Z"
+           }else if (month==12 ){
+               startDay=new Date().getFullYear()+"-12-01T00:00:00Z"
+               endDay=new Date().getFullYear()+1+"-"+"01-01T00:00:00Z"
+           }else{
+               startDay=yearM+"-"+m+"-01T00:00:00Z"
+               endDay=yearM+"-"+endM+"-01T00:00:00Z"
+           }  
+
+           Payment.aggregate([
+               { $match: { dateTime :{$gte:new Date(startDay), $lte:new Date(endDay)} }},
+                
+               {$group: {
+                    _id: "$sellerId", 
+                   total: {$sum: "$total"} ,
+                   
+               }}, 
+               { "$sort": { "total": -1 } }               
+           ]).then((Payment) =>{     
+               console.log("Payments ...:",Payment);
+               res.json(Payment);
+           })
+           .catch((err) => res.status(400).json("Database Error: try later "));   
+       }       
+        /*console.log("requested for category analytics by routes..");
+        Payment.find()
+        .populate('sellerId')
+        .select(('sellerId total dateTime -_id'))
+        .then((Payment) =>{     
+            console.log("Payments :",Payment);
+ 
+            res.json(Payment);
+        })
+        .catch((err) => res.status(400).json("Database Error: try later "));*/
      }
 }

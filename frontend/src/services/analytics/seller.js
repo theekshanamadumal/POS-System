@@ -4,9 +4,10 @@ import URL from '../../config';
 
 
 class sellerAnalytics {
+  
 
       
-    constructor(){
+    /*constructor(){
       
         axios.get(URL.main + URL.sellersAnalytics)   
         .then( (response) => {
@@ -18,10 +19,10 @@ class sellerAnalytics {
           alert(error, (window.location = URL.management));
         });
     
-    }
+    }*/
 
 
-  mapPayementValues(sales,transactions){
+ /*} mapPayementValues(sales,transactions){
         
     transactions.forEach(function (o) {
         // add the type to the hash if it is missing;
@@ -71,7 +72,7 @@ class sellerAnalytics {
       sorted.slice(0, 7);
     }
     return ({sorted:sorted,salesAll:salesAll})
-  }
+  }*/
 
 }
 

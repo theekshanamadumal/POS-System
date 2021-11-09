@@ -4,13 +4,35 @@ import React,{useEffect, useState} from 'react';
 import "./salespersonPerform.css";
 import { Button } from 'reactstrap';
 import { BarChart, Bar, XAxis,YAxis, CartesianGrid, Tooltip,ResponsiveContainer,LabelList } from 'recharts';
-import sellerAnalytics from "../../services/analytics/seller"
+import sellerAnalytics from "../../services/analytics/seller";
+import axios from 'axios';
+import URL from "../../config";
 
 const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
   const [selected, setSelected] = React.useState("Day");
+  const [selectedValue,setSelectedValue]=useState("7");
+  const [sellerPerform,setSellerPerform]=useState([]);
+
+  useEffect(() => {
+    axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+"Day-7")  
+        .then((response)=>{
+              console.log('-------------------salesperson,,,, analytics',response.data);
+              setSellerPerform(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
+  }, [])
   
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
+    {event.target.value==="Month"?setSelectedValue("January")
+      :event.target.value==="Day"?setSelectedValue("Last 7 Days")
+      :setSelectedValue("2021")}
+  };
+  const changeValueHandler = (event) => {
+    setSelectedValue(event.target.value);
   };
   const year= [
     "2021",
@@ -29,14 +51,44 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
     type = ["Last 7 days"];
   }
   if (type) {
-    options = type.map((el) => <option key={el}>{el}</option>);
+    options = type.map((el) => <option key={el} value={selected==="Month"?type.indexOf(el)+1:el}>{el}</option>);
+  }
+  const changeRenderComp=(dur)=>{
+    console.log("button clicked...",dur);
+    axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+dur)  
+        .then((response)=>{
+              console.log('-------------------sales analytics',response.data);
+              var maxi;
+              var saArr;
+              /*if (dur.includes("Day")){
+                maxi=sellerAnalytics.mapDays(response.data).maximum;
+                saArr=sellerAnalytics.mapDays(response.data).salesArray;
+              }else if (dur.includes("Month")){
+                maxi=sellerAnalytics.mapMonth(response.data,dur).maximum;
+                saArr=sellerAnalytics.mapMonth(response.data,dur).salesArray;
+              }else{
+                maxi=sellerAnalytics.mapYear(response.data).maximum;
+                saArr=sellerAnalytics.mapYear(response.data).salesArray;
+              }*/
+              //setMaximum(maxi);
+              setSellerPerform(response.data)  
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
+  }
+  const onSubmitDuration=(e)=>{
+    e.preventDefault();
+    console.log(selected+"-"+selectedValue);
+    changeRenderComp(selected+"-"+selectedValue) 
   }
     
   return (
     <div className="tablePerson">
       <h1 style={{textAlign:"center"}}>Sales By Salespersons</h1>
       <br></br>
-      <form style={{margin:"0px 60px"}}>
+      <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
         <div className="row">
            <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
           <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
@@ -46,7 +98,7 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
             
           </select>
         
-          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+          <select className="form-select form-control col" onChange={changeValueHandler}  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
             {options}
           </select>
         
@@ -54,18 +106,18 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
         </div>  
       </form>
       <br></br>
-      <ResponsiveContainer width="100%" height={75*sellerAnalytics.perDay().salesAll.length}>
+      <ResponsiveContainer width="100%" height={75*sellerPerform.length}>
       
         <BarChart
-          data={sellerAnalytics.perDay().salesAll}
+          data={sellerPerform}
           margin={{top: 5, right: 3, left: 2, bottom: 5}}
           margin={{left:59,right:59}}
           layout="vertical">
-          <XAxis type="number" domain={[0, dataMax => sellerAnalytics.perDay().salesAll[0].income]}  orientation="bottom" stroke="black"/>
-          <YAxis type="category"  dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
-          <Bar background dataKey="income" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
+          <XAxis type="number" domain={[0, dataMax => sellerPerform[0].total]}  orientation="bottom" stroke="black"/>
+          <YAxis type="category"  dataKey="_id" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
+          <Bar background dataKey="total" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
 
-              <LabelList dataKey="income"  position="right" style={{ fill: "#0004ff" }} />
+              <LabelList dataKey="total"  position="right" style={{ fill: "#0004ff" }} />
           </Bar>
           <Tooltip cursor={{fill: 'transparent'}}  contentStyle={{width:"150px", height:"80px"}}/>
           <CartesianGrid strokeDasharray="1 1"/>

@@ -75,6 +75,8 @@ URL.sellersAnalytics="/management/analytics/sellers";
 URL.sales="management/analytics#sales";
 URL.analyticsSalesperson="management/analytics#salesperson";
 URL.analyticsCategory="management/analytics#category";
+URL.salesAnalyticsDuration="/management/analytics/salesDuration"
+URL.salesPersonAnalyticsDuration="/management/analytics/salesPersonDuration"
 
 URL.orders="/management/orders";
 URL.orderComp="/management/orders/";

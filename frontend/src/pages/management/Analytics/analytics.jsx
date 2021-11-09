@@ -36,10 +36,10 @@ class Analytics extends Component {
         </ul>
 
         <a name="sales"></a>
-        <SalesAnalytics data={chartData} dataKey="month" grid />
+        <SalesAnalytics durSelected="Day-7" />
         <br></br>
         <a name="salesperson"></a>
-        <SalespersonPerform salespersonPerform={personPerform} />
+        <SalespersonPerform  />
         <br></br>
         <a name="category"></a>
         <Category />

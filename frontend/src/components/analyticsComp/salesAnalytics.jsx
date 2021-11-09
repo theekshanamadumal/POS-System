@@ -9,22 +9,42 @@ import {
   ResponsiveContainer,
   AreaChart
 } from "recharts";
+import axios from 'axios';
+import URL from "../../config";
 import salesAnalytics from "../../services/analytics/sale";
 
-export default function SalesAnalytics() {
+export default function SalesAnalytics(props) {
   const [salesLast,setSalesLast]=useState([]);
+  const [maximum,setMaximum]=useState(0);
   useEffect(() => {
-    setSalesLast(salesAnalytics.perDay())
-    
+    axios.get(URL.main + URL.salesAnalyticsDuration+"/"+"Day-7")  
+        .then((response)=>{
+              console.log('-------------------sales analytics',response.data);
+              const maxi=salesAnalytics.mapDays(response.data).maximum;
+              const saArr=salesAnalytics.mapDays(response.data).salesArray;
+              setMaximum(maxi);
+              setSalesLast(saArr)
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
   }, [])
 
   const [selected, setSelected] = React.useState("Day");
+  const [selectedValue,setSelectedValue]=useState("7");
   
   /** Function that will set different values to state variable
    * based on which dropdown is selected
    */
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
+    {event.target.value==="Month"?setSelectedValue("January")
+      :event.target.value==="Day"?setSelectedValue("Last 7 Days")
+      :setSelectedValue("2021")}
+  };
+  const changeValueHandler = (event) => {
+    setSelectedValue(event.target.value);
   };
   
   /** Different arrays for different dropdowns */
@@ -33,7 +53,7 @@ export default function SalesAnalytics() {
     "2020",
   ];
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const dataStructure = [];
+  const day = ["Last 7 Days"];
   
   /** Type variable to store different array for different dropdown */
   let type = null;
@@ -47,14 +67,44 @@ export default function SalesAnalytics() {
   } else if (selected === "Month") {
     type = month;
   } else if (selected === "Day") {
-    type = ["Last 7 Days"];
+    type = day;
   }
   
   /** If "Type" is null or undefined then options will be null,
    * otherwise it will create a options iterable based on our array
    */
   if (type) {
-    options = type.map((el) => <option key={el}>{el}</option>);
+    options = type.map((el) => <option value={selected==="Month"?type.indexOf(el)+1:el} key={el}>{el}</option>);
+  }
+  const changeRenderComp=(dur)=>{
+    console.log("button clicked...",dur);
+    axios.get(URL.main + URL.salesAnalyticsDuration+"/"+dur)  
+        .then((response)=>{
+              console.log('-------------------sales analytics',response.data);
+              var maxi;
+              var saArr;
+              if (dur.includes("Day")){
+                maxi=salesAnalytics.mapDays(response.data).maximum;
+                saArr=salesAnalytics.mapDays(response.data).salesArray;
+              }else if (dur.includes("Month")){
+                maxi=salesAnalytics.mapMonth(response.data,dur).maximum;
+                saArr=salesAnalytics.mapMonth(response.data,dur).salesArray;
+              }else{
+                maxi=salesAnalytics.mapYear(response.data).maximum;
+                saArr=salesAnalytics.mapYear(response.data).salesArray;
+              }
+              setMaximum(maxi);
+              setSalesLast(saArr)   
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
+  }
+  const onSubmitDuration=(e)=>{
+    e.preventDefault();
+    console.log(selected+"-"+selectedValue)
+    changeRenderComp(selected+"-"+selectedValue) 
   }
   return (
     <div className="chart">
@@ -63,7 +113,7 @@ export default function SalesAnalytics() {
     <span className="chartTitle"></span>
     <br></br>
 
-    <form style={{margin:"0px 60px"}}>
+    <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
         <div className="row">
           {/** Bind changeSelectOptionHandler to onChange method of select.
            * This method will trigger every time different
@@ -77,7 +127,7 @@ export default function SalesAnalytics() {
             
           </select>
         
-          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+          <select className="form-select form-control col" onChange={changeValueHandler} style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
             {
               /** This is where we have used our options variable */
               options
@@ -103,8 +153,8 @@ export default function SalesAnalytics() {
         <Tooltip contentStyle={{backgroundColor:"moccasin"}}/>
         
         <Area type="monotone" dataKey="sales" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-        <XAxis dataKey="date" stroke="royalblue" />
-        <YAxis stroke="royalblue" />
+        <XAxis dataKey="_id" stroke="royalblue" />
+        <YAxis stroke="royalblue"  domain={[0, dataMax => maximum]} />
         
         </AreaChart>
     </ResponsiveContainer>
