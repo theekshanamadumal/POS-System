@@ -26,7 +26,7 @@ router.route("/analytics/sellers").get((req, res) => {
 
 router.route("/analytics/sales").get((req, res) => {
   AC.salesAnalytics(req,res);
-});*/
+});
 
 router.route("/analytics/salesPersonDuration/:duration").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
