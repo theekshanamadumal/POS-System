@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { authJwt } = require("../../middlewares");
+//const { authJwt } = require("../../middlewares");
 let UserController = require("../../controllers/userController");
 let AuthController = require("../../controllers/authController");
 const UC = new UserController("Admin");
@@ -8,15 +8,6 @@ var multer = require("multer");
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 
-router.use(  
-  //[authJwt.verifyToken, authJwt.isAdmin],
-  function(req, res, next) {
-  res.header(
-    "Access-Control-Allow-Headers",
-    "x-access-token, Origin, Content-Type, Accept"
-  );
-  next();
-});
 
 router.route("/user").get((req, res) => {
   UC.allUsers(res);
