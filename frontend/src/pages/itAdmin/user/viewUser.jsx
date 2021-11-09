@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import authHeader from "../../../services/authHeader";
 import "./viewUser.css";
 import URL from "../../../config";
 
@@ -33,7 +34,7 @@ export default withRouter(
       this.onChangeEmail = this.onChangeEmail.bind(this);
       this.onChangeJoinedDate = this.onChangeJoinedDate.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
-      this.onChangeRole=this.onChangeRole.bind(this);
+      this.onChangeRole = this.onChangeRole.bind(this);
 
       this.state = {
         user: [],
@@ -48,32 +49,34 @@ export default withRouter(
         phoneNumber: "",
         email: "",
         joinedDate: "",
-        roles:[],
-        checkedManager:false,
-        checkedSalesperson:false,
+        roles: [],
+        checkedManager: false,
+        checkedSalesperson: false,
       };
     }
-    onChangeRole(e){
-      if (e.target.value==="6153648ac5809858d4b761f2" ){
-        this.setState({checkedManager:!this.state.checkedManager})
+    onChangeRole(e) {
+      if (e.target.value === "manager") {
+        this.setState({ checkedManager: !this.state.checkedManager });
       }
-      if (e.target.value==="6153648ac5809858d4b761f3" ){
-        this.setState({checkedSalesperson:!this.state.checkedSalesperson})
+      if (e.target.value === "salesperson") {
+        this.setState({ checkedSalesperson: !this.state.checkedSalesperson });
       }
-      if (this.state.roles.includes(e.target.value)===true){
+      if (this.state.roles.includes(e.target.value) === true) {
         const index = this.state.roles.indexOf(e.target.value);
-        this.state.roles.splice(index,1)
-      }
-      else{
+        this.state.roles.splice(index, 1);
+      } else {
         this.state.roles.push(e.target.value);
-      }console.log("roles",this.state.roles)      
+      }
+      console.log("roles", this.state.roles);
     }
 
     componentDidMount() {
       this.dataId = this.props.match.params.id;
 
       axios
-        .get("http://localhost:3001/itAdmin/user/" + this.dataId)
+        .get(URL.main + URL.user + this.dataId, {
+          headers: authHeader(),
+        })
         .then((response) => {
           this.setState({
             user: response.data,
@@ -87,26 +90,22 @@ export default withRouter(
             phoneNumber: response.data.phoneNumber,
             email: response.data.email,
             joinedDate: response.data.joinedDate,
-            roles:response.data.roles,
+            roles: response.data.roles,
           });
-          this.state.roles.map(e=>{
-            if (e==="6153648ac5809858d4b761f2"){
-              this.setState({checkedManager:true})
+          this.state.roles.map((e) => {
+            if (e === "manager") {
+              this.setState({ checkedManager: true });
             }
-            if (e==="6153648ac5809858d4b761f3"){
-              this.setState({checkedSalesperson:true})
+            if (e === "salesperson") {
+              this.setState({ checkedSalesperson: true });
             }
-          })
+          });
           console.log("response.data");
           console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
-          alert(
-            "Error:",
-            error.data,
-            (window.location = "/itAdmin/user")
-          );
+          alert("Error:", error.data, (window.location = URL.user));
         });
     }
 
@@ -171,7 +170,7 @@ export default withRouter(
     }
     onSubmit(e) {
       e.preventDefault();
-      console.log("before ..",this.state.roles)
+      console.log("before ..", this.state.roles);
 
       const user = {
         firstName: this.state.firstName,
@@ -184,23 +183,22 @@ export default withRouter(
         phoneNumber: this.state.phoneNumber,
         email: this.state.email,
         joinedDate: this.state.user.joinedDate,
-        roles:this.state.roles,
+        roles: this.state.roles,
       };
 
       console.log(user);
 
       axios
-        .post(
-          "http://localhost:3001/itAdmin/userUpdate/" + this.dataId,
-          user
-        )
+        .post(URL.main + URL.userUpdate + this.dataId, user, {
+          headers: authHeader(),
+        })
         .then((res) => {
           console.log(res.data);
-          alert(res.data, (window.location = "/itAdmin/user"));
+          alert(res.data, (window.location = URL.user));
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = "/itAdmin/user"));
+          alert(error, (window.location = URL.user));
         });
 
       //window.location = "/itAdmin/edituser/" + this.dataId;
@@ -222,9 +220,7 @@ export default withRouter(
                 ></img>
                 <div className="idName">
                   <h2 className="name">
-                    {this.state.user.firstName +
-                      " " +
-                      this.state.user.lastName}
+                    {this.state.user.firstName + " " + this.state.user.lastName}
                   </h2>
                 </div>
               </div>
@@ -255,9 +251,7 @@ export default withRouter(
                   </li>
                   <li className="contact">
                     <PhoneAndroid />
-                    <span className="value">
-                      {this.state.user.phoneNumber}
-                    </span>
+                    <span className="value">{this.state.user.phoneNumber}</span>
                   </li>
                   <li className="contact">
                     <LocationCity />{" "}
@@ -365,46 +359,57 @@ export default withRouter(
                         ></input>
                       </div>
                     </div>
-                    
+
                     <div className="form-outline mt-3">
-                        <label className="form-label" htmlFor="role" style={{marginBottom:"-10px"}}>
-                          Role
-                        </label>
-                        <div className="form-outline row pb-2 px-3">
-                          <div className="col-md-5 form-check mx-3 ">
-                            <input 
-                              className="form-check-input" 
-                              style={{height:"20px",width:"20px"}}
-                              type="checkbox" 
-                              value="6153648ac5809858d4b761f2" 
-                              id="flexCheckManager" 
-                              onChange={this.onChangeRole}
-                              checked={this.state.checkedManager}
-                              //checked={this.state.roles.includes("6153648ac5809858d4b761f2")?true :false}
-                            />
-                            <label className="form-check-label mx-4" style={{marginTop:"-5px"}} for="flexCheckManager">
-                              Manager
-                            </label>
-                          </div>
-                          <div className="col-md-5 form-check mx-3">
-                            <input 
-                              style={{height:"20px",width:"20px"}}
-                              className="form-check-input" 
-                              type="checkbox" 
-                              value="6153648ac5809858d4b761f3" 
-                              id="flexCheckSalesperson" 
-                              onChange={this.onChangeRole}
-                              checked={this.state.checkedSalesperson}
-                              //checked={this.state.roles.includes("6153648ac5809858d4b761f3")?true :false}
-                            />
-                            <label class="form-check-label mx-4" style={{marginTop:"-5px"}} for="flexCheckSalesperson">
-                              Salesperson
-                            </label>
-                          </div>
-                          <small>error</small>
+                      <label
+                        className="form-label"
+                        htmlFor="role"
+                        style={{ marginBottom: "-10px" }}
+                      >
+                        Role
+                      </label>
+                      <div className="form-outline row pb-2 px-3">
+                        <div className="col-md-5 form-check mx-3 ">
+                          <input
+                            className="form-check-input"
+                            style={{ height: "20px", width: "20px" }}
+                            type="checkbox"
+                            value="manager"
+                            id="flexCheckManager"
+                            onChange={this.onChangeRole}
+                            checked={this.state.checkedManager}
+                            //checked={this.state.roles.includes("manager")?true :false}
+                          />
+                          <label
+                            className="form-check-label mx-4"
+                            style={{ marginTop: "-5px" }}
+                            for="flexCheckManager"
+                          >
+                            Manager
+                          </label>
                         </div>
-                        
+                        <div className="col-md-5 form-check mx-3">
+                          <input
+                            style={{ height: "20px", width: "20px" }}
+                            className="form-check-input"
+                            type="checkbox"
+                            value="salesperson"
+                            id="flexCheckSalesperson"
+                            onChange={this.onChangeRole}
+                            checked={this.state.checkedSalesperson}
+                            //checked={this.state.roles.includes("salesperson")?true :false}
+                          />
+                          <label
+                            class="form-check-label mx-4"
+                            style={{ marginTop: "-5px" }}
+                            for="flexCheckSalesperson"
+                          >
+                            Salesperson
+                          </label>
+                        </div>
+                        <small>error</small>
                       </div>
+                    </div>
                   </div>
 
                   <div className="rightItemContainerSale">

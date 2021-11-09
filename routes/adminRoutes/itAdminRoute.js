@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { authJwt } = require("../middlewares");
-let UserController = require("../controllers/userController");
-let AuthController = require("../controllers/authController");
+const { authJwt } = require("../../middlewares");
+let UserController = require("../../controllers/userController");
+let AuthController = require("../../controllers/authController");
 const UC = new UserController("Admin");
 
 var multer = require("multer");

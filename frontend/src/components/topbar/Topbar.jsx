@@ -1,6 +1,6 @@
 import React from "react";
 import "./topbar.css";
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+//import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import AuthService from "../../services/authService";
 
 export default function Topbar(props) {

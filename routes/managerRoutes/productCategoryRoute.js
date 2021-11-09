@@ -1,6 +1,6 @@
 const router = require("express").Router();
-let ProductCategoryController = require("../controllers/productCategoryController");
-const { authJwt } = require("../middlewares");
+let ProductCategoryController = require("../../controllers/productCategoryController");
+const { authJwt } = require("../../middlewares");
 
 
 router.route("/productCategory").get((req, res) => {

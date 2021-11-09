@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import authHeader from "../../services/authHeader";
 import axios from "axios";
 import URL from "../../config";
 //import logHistory from "../../services/admin/logHistory";
@@ -20,7 +21,7 @@ export default class WidgetLg extends Component {
 
   componentDidMount() {
     axios
-      .get(URL.main + URL.signinHistory)
+      .get(URL.main + URL.signinHistory, { headers: authHeader() })
       .then((response) => {
         console.log("-------------------signins analytics", response.data);
         this.setState({
