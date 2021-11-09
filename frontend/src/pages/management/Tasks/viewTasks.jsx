@@ -21,7 +21,7 @@ export default function ViewTasks() {
   const { pathname } = location;
   const splitLocation = pathname.split("/");
   const id = splitLocation[3];
-  const [ID, setID] = useState("");
+  const [user_ID, setUser_ID] = useState();
   const [tasks, setTasks] = useState([]);
   const [seller, setSeller] = useState([]);
   const [dailyShops, setDailyShops] = useState([]);
@@ -45,7 +45,8 @@ export default function ViewTasks() {
         setTasks(response.data);
         setDailyInventory(response.data.dailyInventory);
         setDailyShops(response.data.dailyShops);
-        console.log("response.....",response.data);
+        console.log("response.....", response.data);
+        setUser_ID(response.data.sellerId);
         loadSalesPerson(response.data.sellerId);
       })
       .catch((error) => {
@@ -55,7 +56,7 @@ export default function ViewTasks() {
   }, []);
   return (
     <div className="viewTasks">
-      <Percentage 
+      <Percentage
         target={tasks.dailySalesTarget}
         achieved={tasks.dailySalesProgression}
         id={seller.idNumber}
@@ -114,7 +115,12 @@ export default function ViewTasks() {
                       <TableRow hover key={e.shopId}>
                         <TableCell align="center">{e.shopName}</TableCell>
                         <TableCell align="center">
-                          {e.isCovered===true?<strong className="text-success">Covered</strong>:<strong className="text-danger">Not Covered</strong>}</TableCell>
+                          {e.isCovered === true ? (
+                            <strong className="text-success">Covered</strong>
+                          ) : (
+                            <strong className="text-danger">Not Covered</strong>
+                          )}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -125,8 +131,9 @@ export default function ViewTasks() {
         </div>
       </div>
 
-      {console.log("---------aaaaa----------", seller._id)}
-      <SellerLocation sellerID={"61671c22346f6b3724faef50"} />
+      {console.log("---------seller._id----------", user_ID)}
+      {user_ID && <SellerLocation sellerID={user_ID} />}
+      {/* <SellerLocation sellerID={"61671c22346f6b3724faef50"} /> */}
     </div>
   );
 }

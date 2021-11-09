@@ -8,7 +8,7 @@ export default function MapGL({sellersData}) {
     longitude: 80.36274774593174,
     width: "72vw",
     height: "80vh",
-    zoom: 8
+    zoom: 7
   });
   const [selectedseller, setSelectedseller] = useState(null);
 
