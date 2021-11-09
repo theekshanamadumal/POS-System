@@ -22,10 +22,4 @@ router.route("/analytics/signups").get((req, res) => {
 router.route("/analytics/signins").get((req, res) => {
   AC.signins(req,res);
 });
-
-
-
-
-
 module.exports = router;
-   
