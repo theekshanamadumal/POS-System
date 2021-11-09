@@ -2,39 +2,43 @@ const router = require("express").Router();
 const { authJwt } = require("../../middlewares");
 let ProductController = require("../../controllers/productController");
 
+router.use(  
+ // [authJwt.verifyToken, authJwt.isManager],
+  function(req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+  next();
+});
+
+
 router.route("/products").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
    ProductController.allProducts(res);
 });
 
 router.route("/products/total").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
    ProductController.totalStock(res);
 });
 
 router.route("/products/productIds").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
    ProductController.allProductIds(res);
 });
 
 router.route("/products/addProduct").post((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
   ProductController.addNewProduct(req,res);
  
 });
 
 router.route("/product/:id").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
   ProductController.getProduct(req,res);
 });
 
 router.route("/product/:id").delete((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
   ProductController.deleteProduct(req,res );
 });
 
 router.route("/updateProduct/:id").post((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
   ProductController.updateProduct(req,res );
 });
 

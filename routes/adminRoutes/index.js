@@ -1,3 +1,4 @@
+const router = require("express").Router();
 
 const itAdminRouter = require('./itAdminRoute');
 const adminAnalyticsRoute = require('./adminAnalyticsRoute');

@@ -10,7 +10,6 @@ var upload = multer({ storage: storage })
 
 router.use(  
   //[authJwt.verifyToken, authJwt.isAdmin],
-
   function(req, res, next) {
   res.header(
     "Access-Control-Allow-Headers",
