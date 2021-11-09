@@ -1,20 +1,25 @@
+const router = require("express").Router();
+const { authJwt } = require("../../middlewares");
+
+
 
 const itAdminRouter = require('./itAdminRoute');
 const adminAnalyticsRoute = require('./adminAnalyticsRoute');
 
-module.exports = function (app) {
+    
+router.use(  '/itAdmin',
+    [authJwt.verifyToken, authJwt.isAdmin],
+    function(req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+ });
   
-    app.use('/itAdmin',itAdminRouter);
-    app.use('/itAdmin', adminAnalyticsRoute);
+router.use('/itAdmin', itAdminRouter);
+router.use('/itAdmin', adminAnalyticsRoute);
       
-}
 
+module.exports = router;
 
-// function f1(req, res, next) {
-//     res.header(
-//       "Access-Control-Allow-Headers",
-//       "x-access-token, Origin, Content-Type, Accept"
-//     )
-
-// router.use(itAdminRouter);
-// router.use(adminAnalyticsRoute);
