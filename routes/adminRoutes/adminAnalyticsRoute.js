@@ -1,7 +1,7 @@
 const router = require("express").Router();
 //let Shop = require("../models/shop");
-const { authJwt } = require("../middlewares");
-let AnalyticsController = require("../controllers/adminAnalyticsController");
+const { authJwt } = require("../../middlewares");
+let AnalyticsController = require("../../controllers/adminAnalyticsController");
 const AC = AnalyticsController;
 
 

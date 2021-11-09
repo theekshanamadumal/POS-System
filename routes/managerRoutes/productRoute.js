@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { authJwt } = require("../middlewares");
-let ProductController = require("../controllers/productController");
+const { authJwt } = require("../../middlewares");
+let ProductController = require("../../controllers/productController");
 
 router.route("/products").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],

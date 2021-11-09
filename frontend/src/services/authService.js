@@ -2,13 +2,12 @@ import axios from "axios";
 import URL from "../config";
 import authHeader from './authHeader';
 
-const API_URL = "http://localhost:3001/api/auth/";
 
 class AuthService {
   
   login(email, password) {
     return axios
-      .post(API_URL + "signin", {
+      .post(URL.API_URL + "signin", {
         email,
         password
       })
@@ -35,7 +34,7 @@ class AuthService {
 
   register(user) {
     console.log("user request recieved to authservice",user);
-    return axios.post('http://localhost:3001/itAdmin/addUser', user,{ headers: authHeader() })
+    return axios.post(URL.main+ URL.addUser, user,{ headers: authHeader() })
       .then(response => {
       //    console.log("response",response);
         return response.data;

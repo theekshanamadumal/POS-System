@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { authJwt } = require("../middlewares");
-let UserController = require("../controllers/userController");
+const { authJwt } = require("../../middlewares");
+let UserController = require("../../controllers/userController");
 const UC = new UserController("Manager");
 
 

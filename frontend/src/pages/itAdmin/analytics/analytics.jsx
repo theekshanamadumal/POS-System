@@ -1,4 +1,6 @@
 import axios from "axios";
+import authHeader from "../../../services/authHeader";
+
 import { React, useState, useEffect } from "react";
 //import logHistory from "../../../services/admin/logHistory";
 import {
@@ -23,7 +25,7 @@ import { Search as SearchIcon } from "react-feather";
 import { Link } from "react-router-dom";
 import "../../toolbar.css";
 //import ListComponent from "../../../components/listComponent";
-import URL, { signin } from "../../../config";
+import URL from "../../../config";
 //import moment from "moment";
 
 export default function AdminAnalytics(props) {
@@ -34,7 +36,7 @@ export default function AdminAnalytics(props) {
 
   useEffect(() => {
     axios
-      .get(URL.main + URL.signinHistory)
+      .get(URL.main + URL.signinHistory, { headers: authHeader() })
       .then((response) => {
         console.log("-------------------signups analytics", response.data);
         setsignins(response.data);

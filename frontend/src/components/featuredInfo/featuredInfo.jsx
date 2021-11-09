@@ -1,10 +1,11 @@
 import { React, useState, useEffect } from "react";
 import "./featuredInfo.css";
-import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
+//import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { Storefront, PeopleAlt } from "@material-ui/icons";
 import URL from "../../config";
 import axios from "axios";
+import authHeader from "../../services/authHeader";
 
 export default function FeaturedInfo() {
   const [userCount, setUserCount] = useState(0);
@@ -14,9 +15,9 @@ export default function FeaturedInfo() {
   useEffect(() => {
     axios
       .all([
-        axios.get(URL.main + URL.userCount),
-        axios.get(URL.main + URL.salespersonCount),
-        axios.get(URL.main + URL.managerCount),
+        axios.get(URL.main + URL.userCount, { headers: authHeader() }),
+        axios.get(URL.main + URL.salespersonCount, { headers: authHeader() }),
+        axios.get(URL.main + URL.managerCount, { headers: authHeader() }),
       ])
       .then(
         axios.spread((...responses) => {

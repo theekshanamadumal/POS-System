@@ -12,7 +12,7 @@ export default function WidgetSm() {
 
   useEffect(() => {
     axios
-      .get(URL.main + URL.signupHistory)
+      .get(URL.main + URL.signupHistory, { headers: authHeader() })
       .then((response) => {
         console.log("-------------------signups analytics", response.data);
         setsignups(response.data);

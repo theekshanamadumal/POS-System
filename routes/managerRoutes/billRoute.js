@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { authJwt } = require("../middlewares");
-let billController = require("../controllers/billController");
+const { authJwt } = require("../../middlewares");
+let billController = require("../../controllers/billController");
 
 router.route("/invoice").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],

@@ -10,6 +10,7 @@ URL.GoogleMapsAPI = 'AIzaSyBNQsYuKSBIV1GWz8O3t0HKjMkGD_k5fsM';
 
 
 URL.main="http://localhost:3001";
+URL.API_URL = "http://localhost:3001/api/auth/";
 
 URL.sellerLocation = URL.main+ "/management/sellerLocation";
 URL.invoice = URL.main+ "/management/invoice";
@@ -56,9 +57,10 @@ URL.tasks="/management/tasks";
 URL.addDailyTarget="/management/adddailyTasks";
 
 URL.itAdmin="/itAdmin";
-URL.user="/itAdmin/user";
+URL.user="/itAdmin/user/";
 URL.addUser="/itAdmin/addUser";
 URL.editUser="/itAdmin/editUser/";
+URL.userUpdate="/itAdmin/userUpdate/";
 URL.userCount="/itAdmin/userCount";
 URL.managerCount="/itAdmin/managerCount";
 URL.signupHistory="/itAdmin/analytics/signups";
