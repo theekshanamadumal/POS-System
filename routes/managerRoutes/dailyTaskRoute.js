@@ -4,21 +4,28 @@ const { authJwt } = require("../../middlewares");
 let dailyTaskController = require("../../controllers/dailyTaskController");
 const DT = dailyTaskController;
 
+router.use(  
+ // [authJwt.verifyToken, authJwt.isManager],
+  function(req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+  next();
+});
+
 
 router.route("/dailyTasks").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
   DT.alldailyTasks(req,res);
 });
 
 router.route("/dailyTasks/:id").get((req, res) => {
-  [authJwt.verifyToken, authJwt.isManager],
   DT.getdailyTask(req,res);
 
 });
 
 router.route("/adddailyTasks").post((req, res) => {
   console.log("get ti done...")
-  //[authJwt.verifyToken, authJwt.isManager],
   DT.addNewdailyTask(req,res);
 });
 
