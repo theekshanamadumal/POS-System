@@ -11,7 +11,7 @@ router.route("/analytics/category").get((req, res) => {
   AC.categoryAnalytics(req,res);
 });
 
-router.route("/analytics/sellers").get((req, res) => {
+/*router.route("/analytics/sellers").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   AC.sellersAnalytics(req,res);
 });
@@ -19,9 +19,17 @@ router.route("/analytics/sellers").get((req, res) => {
 router.route("/analytics/sales").get((req, res) => {
   [authJwt.verifyToken, authJwt.isManager],
   AC.salesAnalytics(req,res);
+});*/
+
+router.route("/analytics/salesPersonDuration/:duration").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isManager],
+  AC.sellersAnalyticsDuration(req,res);
 });
 
-
+router.route("/analytics/salesDuration/:duration").get((req, res) => {
+  [authJwt.verifyToken, authJwt.isManager],
+  AC.salesAnalyticsDuration(req,res);
+});
 
 module.exports = router;
    

@@ -4,6 +4,9 @@ const User = db.user;
 const Role = db.role;
 const LogHistory = db.logHistory;
 
+//var fs = require('fs');
+//var path = require('path');
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -20,7 +23,11 @@ exports.signup = (req, res) => {
         phoneNumber: Number(req.body.phoneNumber),
         joinedDate: Date(req.body.joinedDate),
         password: bcrypt.hashSync(req.body.password, 8),
-        roles:[]//req.body.roles,
+        roles:[],//req.body.roles,
+        /*img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.image)),
+            contentType: 'image/png'
+        }*/
     });
     console.log("requested for signup controller...",user);
 

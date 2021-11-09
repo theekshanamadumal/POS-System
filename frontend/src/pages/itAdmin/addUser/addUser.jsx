@@ -293,7 +293,7 @@ export default class AddUser extends Component {
     return (
       <div data-testid="newSalesperson" className="newUser">
         <h1 className="title">Add a New User</h1>
-        <form className="addSalespersonForm" onSubmit={this.onSubmit}>
+        <form className="addSalespersonForm" onSubmit={this.onSubmit} enctype="multipart/form-data">
           <section className="h-100 h-custom gradient-custom-2">
             <div className="container py-5 h-100">
               <div className="col-12">

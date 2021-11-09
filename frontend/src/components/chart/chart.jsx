@@ -1,5 +1,6 @@
 import React, { useState ,useEffect} from "react";
 import "./chart.css";
+import axios from 'axios';
 import {
   XAxis,
   YAxis,
@@ -15,15 +16,27 @@ import salesAnalytics from "../../services/analytics/sale";
 
 export default function Chart() {
   const [salesLast,setSalesLast]=useState([]);
+  const [maximum,setMaximum]=useState(0);
   useEffect(() => {
-    setSalesLast(salesAnalytics.perDay())
-    
+    axios.get(URL.main + URL.salesAnalyticsDuration+"/"+"Day-7")  
+        .then((response)=>{
+              console.log('-------------------sales analytics',response.data);
+              const maxi=salesAnalytics.mapDays(response.data).maximum;
+              const saArr=salesAnalytics.mapDays(response.data).salesArray;
+              setMaximum(maxi);
+              setSalesLast(saArr)
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
   }, [])
+  
   return (
     <div className="chart" style={{ cursor: "pointer" }}>
       <Link to={URL.sales} className="linkAnaly">
         <span className="chartTitle">Sales Analysis</span>
-        <br></br> <div>{console.log("daily sales.....",salesAnalytics.perDay())}</div>
+        
         <br></br>
         <ResponsiveContainer width="100%" aspect={3 / 1}>
           <AreaChart data={salesLast} margin={{ bottom: 59 }}>
@@ -43,8 +56,8 @@ export default function Chart() {
               fillOpacity={1}
               fill="url(#colorUv)"
             />
-            <XAxis dataKey="date" stroke="royalblue" />
-            <YAxis stroke="royalblue" />
+            <XAxis dataKey="_id" stroke="royalblue" />
+            <YAxis stroke="royalblue" domain={[0, dataMax => maximum]}/>
           </AreaChart>
         </ResponsiveContainer>
       </Link>
