@@ -57,6 +57,34 @@ export default function ManagementSidebar() {
         </div>
         <div className="sidebarMenu">
           <ul className="sidebarList">
+            <Link to={URL.tasks} className="link">
+              <li
+                className={
+                  splitLocation[2] === "tasks"
+                    ? "active sidebarListItem"
+                    : "sidebarListItem"
+                }
+              >
+                <LocalOffer className="sidebarIcon" />
+                Daily Tasks
+              </li>
+            </Link>
+            <Link to={URL.orders} className="link">
+              <li
+                className={
+                  splitLocation[2] === "orders"
+                    ? "active sidebarListItem"
+                    : "sidebarListItem"
+                }
+              >
+                <ShoppingCart className="sidebarIcon" />
+                Invoices
+              </li>
+            </Link>
+          </ul>
+        </div>
+        <div className="sidebarMenu">
+          <ul className="sidebarList">
             <Link to={URL.salesperson} className="link">
               <li
                 className={
@@ -83,19 +111,6 @@ export default function ManagementSidebar() {
               </li>
             </Link>
 
-            <Link to={URL.orders} className="link">
-              <li
-                className={
-                  splitLocation[2] === "orders"
-                    ? "active sidebarListItem"
-                    : "sidebarListItem"
-                }
-              >
-                <ShoppingCart className="sidebarIcon" />
-                Invoices
-              </li>
-            </Link>
-
             <Link to={URL.shops} className="link">
               <li
                 className={
@@ -119,19 +134,6 @@ export default function ManagementSidebar() {
               >
                 <LocationOn className="sidebarIcon" />
                 Routes
-              </li>
-            </Link>
-
-            <Link to={URL.tasks} className="link">
-              <li
-                className={
-                  splitLocation[2] === "tasks"
-                    ? "active sidebarListItem"
-                    : "sidebarListItem"
-                }
-              >
-                <LocalOffer className="sidebarIcon" />
-                Daily Tasks
               </li>
             </Link>
           </ul>
