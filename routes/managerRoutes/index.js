@@ -1,4 +1,5 @@
-//const router = require("express").Router();
+const router = require("express").Router();
+const { authJwt } = require("../../middlewares");
 
 
 const managementRouter = require('./managementRoute');
@@ -12,27 +13,28 @@ const dailyTaskRouter = require('./dailyTaskRoute');
 const analyticsRouter = require('./analyticsRoute');
 
 
-module.exports = function (app) {
+router.use(  '/management',
+    //[authJwt.verifyToken, authJwt.isAdmin],
+    function(req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+ });
   
-    app.use('/management',managementRouter);
-    app.use('/management',productRouter);
-    app.use('/management',productCategoryRouter);
-    app.use('/management',shopRouter);
-    app.use('/management',salesRouteRouter);
-    app.use('/management',locationRouter);
-    app.use('/management',billRouter);
-    app.use('/management',dailyTaskRouter);
-    app.use('/management',analyticsRouter);
-}
 
+router.use('/management',managementRouter);
+router.use('/management',productRouter);
+router.use('/management',productCategoryRouter);
+router.use('/management',shopRouter);
+router.use('/management',salesRouteRouter);
+router.use('/management',locationRouter);
+router.use('/management',billRouter);
+router.use('/management',dailyTaskRouter);
+router.use('/management',analyticsRouter);
+  
 
-// router.use(managementRouter);
-// router.use(productRouter);
-// router.use(productCategoryRouter);
-// router.use(shopRouter);
-// router.use(salesRouteRouter);
-// router.use(locationRouter);
-// router.use(billRouter);
-// router.use(dailyTaskRouter);
-// router.use(analyticsRouter);
+module.exports = router;
+
 

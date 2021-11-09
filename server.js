@@ -42,19 +42,15 @@ app.listen(PORT, () => {
     console.log("Server started on port:" + PORT);
 })
 
-//const adminRoutes = require('./routes/adminRoutes');
-//const managerRoutes = require('./routes/managerRoutes');
+///////////////// web application /////////
+app.use(require('./routes/adminRoutes/index')) ;
+app.use(require('./routes/managerRoutes/index'));
 
-//app.use('/itAdmin', adminRoutes);
-//app.use('/management', managerRoutes);
 //require('./routes/routes')(app);  
 require('./routes/authRoutes')(app);
 require('./routes/dataRoutes')(app);
 
 
-///////////////// web application /////////
-require('./routes/adminRoutes/index')(app);
-require('./routes/managerRoutes/index')(app);
 //Initialize auth details on the DB when the server runs for the first time
 function initialDbSetup() {
     Role.estimatedDocumentCount((err, count) => {
