@@ -1,5 +1,5 @@
 import "./order.css";
-import { orderRows } from "../../../dataCollection";
+//import { orderRows } from "../../../dataCollection";
 import { React, useState, useEffect } from "react";
 import moment from "moment";
 import {
@@ -42,7 +42,7 @@ export default function Orders() {
   const loadInvoices = () => {
     console.log("finded..........");
     axios
-      .get(URL.invoice,{ headers: authHeader() })
+      .get(URL.invoice, { headers: authHeader() })
       .then((response) => {
         setPaymentsData(response.data);
       })
@@ -140,7 +140,7 @@ export default function Orders() {
                 </TableHead>
                 <TableBody className="tbBody">
                   {paymentsData
-                    .sort((a,b)=>a.dateTime<b.dateTime?1:-1)
+                    .sort((a, b) => (a.dateTime < b.dateTime ? 1 : -1))
                     .filter((val) => {
                       if (word === "") {
                         return val;

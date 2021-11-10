@@ -3,11 +3,11 @@ import { React, useState, useEffect } from "react";
 import { Storefront, PeopleAlt } from "@material-ui/icons";
 import SalesPieChart from "./salesPieChart";
 import BestPerform from "./bestPerform";
-import { bestPerform } from "..//../dataCollection";
+//import { bestPerform } from "..//../dataCollection";
 import { Link } from "react-router-dom";
 import URL from "../../config";
 import axios from "axios";
-import authHeader from '../../services/authHeader';
+import authHeader from "../../services/authHeader";
 
 export default function Info() {
   const [salespersonCount, setSalespersonCount] = useState(0);
@@ -19,11 +19,17 @@ export default function Info() {
   useEffect(() => {
     axios
       .all([
-        axios.get(URL.main + URL.salesperson + "/count",{ headers: authHeader() }),
-        axios.get(URL.main + URL.shops + "/count",{ headers: authHeader() }),
-        axios.get(URL.main + URL.products,{ headers: authHeader() }),
-        axios.get(URL.main + URL.productCategory + "/count",{ headers: authHeader() }),
-        axios.get(URL.main + URL.products + "/total",{ headers: authHeader() }),
+        axios.get(URL.main + URL.salesperson + "/count", {
+          headers: authHeader(),
+        }),
+        axios.get(URL.main + URL.shops + "/count", { headers: authHeader() }),
+        axios.get(URL.main + URL.products, { headers: authHeader() }),
+        axios.get(URL.main + URL.productCategory + "/count", {
+          headers: authHeader(),
+        }),
+        axios.get(URL.main + URL.products + "/total", {
+          headers: authHeader(),
+        }),
       ])
       .then(
         axios.spread((...responses) => {

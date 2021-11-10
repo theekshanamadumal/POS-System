@@ -63,18 +63,23 @@ export default class AddUser extends Component {
       idNumber: e.target.value,
     });
   }
+  ////////////////////////////////////
+  ///////////////////////////////////
   onChangeImage(e) {
-    const selectedImage = e;
+    const selectedImage = e.target.files[0];
     upload.single("image");
     const imgData = toString(selectedImage);
-    console.log(imgData);
+    console.log("image_________________", selectedImage);
+    console.log("image__ imgData_______________", imgData);
 
     const imgcontentType = "image/jpg";
     const image = { data: imgData, contentType: imgcontentType };
     this.setState({
-      image: e.target.value,
+      image: selectedImage,
     });
   }
+  /////////////////////////////////////
+  ///////////////////////////////////
   onChangePassword(e) {
     this.setState({
       password: e.target.value,
@@ -293,7 +298,11 @@ export default class AddUser extends Component {
     return (
       <div data-testid="newSalesperson" className="newUser">
         <h1 className="title">Add a New User</h1>
-        <form className="addSalespersonForm" onSubmit={this.onSubmit} enctype="multipart/form-data">
+        <form
+          className="addSalespersonForm"
+          onSubmit={this.onSubmit}
+          enctype="multipart/form-data"
+        >
           <section className="h-100 h-custom gradient-custom-2">
             <div className="container py-5 h-100">
               <div className="col-12">
@@ -411,6 +420,8 @@ export default class AddUser extends Component {
                           </div>
 
                           <div className="mb-2 pb-2">
+                            image
+                            <img src={this.state.image} />
                             <div className="form-outline">
                               <label className="form-label" htmlFor="image">
                                 Add Image
