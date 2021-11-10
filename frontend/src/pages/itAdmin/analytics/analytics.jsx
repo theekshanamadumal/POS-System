@@ -195,7 +195,7 @@ export default function AdminAnalytics(props) {
                             {date.toLocaleTimeString()}
                           </TableCell>
                           <TableCell className="">
-                            <Link to={URL.user + "/" + user._id} className="">
+                            <Link to={URL.user + user._id} className="">
                               <button className="editButt">View User</button>
                             </Link>
                             {/* <Button type="Approved" /> */}

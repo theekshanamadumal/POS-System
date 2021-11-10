@@ -171,36 +171,36 @@ export default withRouter(
     onSubmit(e) {
       e.preventDefault();
       console.log("before ..", this.state.roles);
-
-      const user = {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        idNumber: this.state.idNumber,
-        image: this.state.image,
-        password: this.state.password,
-        address: this.state.address,
-        city: this.state.city,
-        phoneNumber: this.state.phoneNumber,
-        email: this.state.email,
-        joinedDate: this.state.user.joinedDate,
-        roles: this.state.roles,
-      };
-
-      console.log(user);
-
-      axios
-        .post(URL.main + URL.userUpdate + this.dataId, user, {
-          headers: authHeader(),
-        })
-        .then((res) => {
-          console.log(res.data);
-          alert(res.data, (window.location = URL.user));
-        })
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.user));
-        });
-
+      if (window.confirm("Confirm to save?")) {
+        const user = {
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          idNumber: this.state.idNumber,
+          image: this.state.image,
+          password: this.state.password,
+          address: this.state.address,
+          city: this.state.city,
+          phoneNumber: this.state.phoneNumber,
+          email: this.state.email,
+          joinedDate: this.state.user.joinedDate,
+          roles: this.state.roles,
+        };
+  
+        console.log(user);
+  
+        axios
+          .post(URL.main + URL.userUpdate + this.dataId, user, {
+            headers: authHeader(),
+          })
+          .then((res) => {
+            console.log(res.data);
+            alert(res.data, (window.location = URL.user));
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error, (window.location = URL.user));
+          });
+      }
       //window.location = "/itAdmin/edituser/" + this.dataId;
     }
 

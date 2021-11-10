@@ -35,7 +35,8 @@ export default function User(props) {
 
   const handleDelete = (id) => {
     //setData(data.filter((item) => item.id !== id));
-    axios
+    if (window.confirm("Confirm to Delete User?")) {
+      axios
       .delete(URL.main + URL.user + "/" + id, { headers: authHeader() })
       .then((response) => {
         console.log(response.data);
@@ -45,6 +46,7 @@ export default function User(props) {
         console.log(error);
         alert(error, (window.location = URL.user));
       });
+    }
 
     //setData(data.filter((el) => el._id !== id));
   };

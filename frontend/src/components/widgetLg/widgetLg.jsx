@@ -75,7 +75,7 @@ export default class WidgetLg extends Component {
                     </td>
                     <td className="widgetLgStatus">
                       <Link
-                        to={URL.user + "/" + user._id}
+                        to={URL.user  + user._id}
                         className="linkAnaly"
                       >
                         <button className="widgetSmButton Approved">

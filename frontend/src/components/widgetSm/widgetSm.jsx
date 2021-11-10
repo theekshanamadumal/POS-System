@@ -63,7 +63,7 @@ export default function WidgetSm() {
                       </span>
                     </div>
 
-                    <Link to={URL.user + "/" + val._id} className="linkAnaly">
+                    <Link to={URL.user + val._id} className="linkAnaly">
                       <button className="widgetSmButton">
                         <Visibility className="widgetSmIcon" />
                         View User

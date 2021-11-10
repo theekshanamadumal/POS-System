@@ -280,6 +280,7 @@ export default class AddUser extends Component {
       };
       console.log("user register data to authservicr", user);
 
+    if (window.confirm("Confirm to Create user?")) {
       AuthService.register(user)
         .then((res) => {
           console.log("user response from authservice", res);
@@ -291,6 +292,7 @@ export default class AddUser extends Component {
           alert(error);
           alert(error, (window.location = URL.user));
         });
+    }
     }
   }
 
