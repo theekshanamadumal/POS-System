@@ -13,8 +13,19 @@ import axios from 'axios';
 import URL from "../../config";
 import salesAnalytics from "../../services/analytics/sale";
 import authHeader from '../../services/authHeader';
+import html2pdf from "html2pdf.js"
 
 export default function SalesAnalytics(props) {
+  const printDocument=()=> {
+    const element = document.getElementById('salesPdf');
+		var opt = {
+      margin:       0.2,
+      filename:     'Analysis.pdf',
+      jsPDF:        { unit: 'mm', format: 'a3', orientation: 'portrait' }
+    };
+		html2pdf().set(opt).from(element).save();
+  }
+
   const [salesLast,setSalesLast]=useState([]);
   const [maximum,setMaximum]=useState(0);
   useEffect(() => {
@@ -109,73 +120,79 @@ export default function SalesAnalytics(props) {
   }
   return (
     <div className="chart">
-      
-    <h1>Sales Analytics</h1>
-    <span className="chartTitle"></span>
-    <br></br>
+      <div id="salesPdf">
+        <h1>Sales Analytics</h1>
+        <span className="chartTitle"></span>
+        <br></br>
 
-    <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
-        <div className="row">
-          {/** Bind changeSelectOptionHandler to onChange method of select.
-           * This method will trigger every time different
-           * option is selected.
-           */}
-           <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
-          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
-          <option>Day</option>
-            <option>Year</option>
-            <option>Month</option>
+        <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
+            <div className="row">
+              {/** Bind changeSelectOptionHandler to onChange method of select.
+              * This method will trigger every time different
+              * option is selected.
+              */}
+              <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
+              <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
+              <option>Day</option>
+                <option>Year</option>
+                <option>Month</option>
+                
+              </select>
             
-          </select>
+              <select className="form-select form-control col" onChange={changeValueHandler} style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+                {
+                  /** This is where we have used our options variable */
+                  options
+                }
+              </select>
+            
+              <button className="btn btn btn-secondary">View Analysis</button>
+            </div>
+            
+          </form>
         
-          <select className="form-select form-control col" onChange={changeValueHandler} style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
-            {
-              /** This is where we have used our options variable */
-              options
-            }
-          </select>
+        <br></br>
+        {salesLast.length>0?
+          <div>
+            <ResponsiveContainer width="100%" aspect={3 / 1}>
+                <AreaChart data= {salesLast} margin={{bottom:59}}>
+                <defs>
+                    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="mediumseagreen" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="mediumseagreen" stopOpacity={0} />
+                    </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="2 2"/>
+                <Tooltip contentStyle={{backgroundColor:"moccasin"}}/>
+                
+                <Area type="monotone" dataKey="sales" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                <XAxis dataKey="_id" stroke="royalblue" />
+                <YAxis stroke="royalblue"  domain={[0, dataMax => maximum]} />
+                
+                </AreaChart>
+            </ResponsiveContainer>
+            </div>
         
-          <button className="btn btn btn-secondary">View Analysis</button>
+        
+        :<div
+            className="d-flex flex-column align-items-center justify-content-center"
+            style={{height: "56vh"}}
+          >
+            <img 
+                className="align-center mb-3" 
+                style={{height:"200px", width:"200px"}}
+                src="/images/no_sales.png">
+              </img>
+            <p className="h2 text-secondary">No Sales In This Duration</p>
+          </div>
+          
+        }
         </div>
-        
-      </form>
-    
-    <br></br>
-    {salesLast.length>0?
-      <div>
-        <ResponsiveContainer width="100%" aspect={3 / 1}>
-            <AreaChart data= {salesLast} margin={{bottom:59}}>
-            <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="mediumseagreen" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="mediumseagreen" stopOpacity={0} />
-                </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="2 2"/>
-            <Tooltip contentStyle={{backgroundColor:"moccasin"}}/>
-            
-            <Area type="monotone" dataKey="sales" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-            <XAxis dataKey="_id" stroke="royalblue" />
-            <YAxis stroke="royalblue"  domain={[0, dataMax => maximum]} />
-            
-            </AreaChart>
-        </ResponsiveContainer>
-        <Button class="float-right">Download</Button>
-    </div>
-    
-    :<div
-        className="d-flex flex-column align-items-center justify-content-center"
-        style={{height: "56vh"}}
-      >
-        <img 
-            className="align-center mb-3" 
-            style={{height:"200px", width:"200px"}}
-            src="/images/no_sales.png">
-          </img>
-        <p className="h2 text-secondary">No Sales In This Duration</p>
-      </div>
-    }
+        {salesLast.length>0?
+            <Button onClick={printDocument}>Download</Button>
+          :<p></p>}
       
     </div>
+
   );
 }

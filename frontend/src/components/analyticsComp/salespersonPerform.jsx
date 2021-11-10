@@ -8,11 +8,22 @@ import sellerAnalytics from "../../services/analytics/seller";
 import axios from 'axios';
 import URL from "../../config";
 import authHeader from '../../services/authHeader';
+import html2pdf from "html2pdf.js"
 
 const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
   const [selected, setSelected] = React.useState("Day");
   const [selectedValue,setSelectedValue]=useState("7");
   const [sellerPerform,setSellerPerform]=useState([]);
+
+  const printDocument=()=> {
+    const element = document.getElementById('salespersonPdf');
+    var opt = {
+      margin:       0.2,
+      filename:     'Analysis.pdf',
+      jsPDF:        { unit: 'mm', format: 'a3', orientation: 'portrait' }
+    };
+		html2pdf().set(opt).from(element).save();
+  }
 
   useEffect(() => {
     axios.get(URL.main + URL.salesPersonAnalyticsDuration+"/"+"Day-7",{ headers: authHeader() })  
@@ -76,51 +87,49 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
     
   return (
     <div className="tablePerson">
-      <h1 style={{textAlign:"center"}}>Sales By Salespersons</h1>
-      <br></br>
-      <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
-        <div className="row">
-           <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
-          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
-          <option>Day</option>
-            <option>Year</option>
-            <option>Month</option>
-            
-          </select>
-        
-          <select className="form-select form-control col" onChange={changeValueHandler}  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
-            {options}
-          </select>
-        
-          <button className="btn btn btn-secondary">View Analysis</button>
-        </div>  
-      </form>
-      <br></br>
+      <div id="salespersonPdf">
+        <h1 style={{textAlign:"center"}}>Sales By Salespersons</h1>
+        <br></br>
+        <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
+          <div className="row">
+            <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
+            <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
+            <option>Day</option>
+              <option>Year</option>
+              <option>Month</option>
+              
+            </select>
+          
+            <select className="form-select form-control col" onChange={changeValueHandler}  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+              {options}
+            </select>
+          
+            <button className="btn btn btn-secondary">View Analysis</button>
+          </div>  
+        </form>
+        <br></br>
 
-      {sellerPerform.length>0?
-        <div>
-          <ResponsiveContainer width="100%" height={75*sellerPerform.length}>
-            <BarChart
-              data={sellerPerform}
-              margin={{top: 5, right: 3, left: 2, bottom: 5}}
-              margin={{left:59,right:59}}
-              layout="vertical">
-              <XAxis type="number" domain={[0, dataMax => sellerPerform[0].sales]}  orientation="bottom" stroke="black"/>
-              <YAxis type="category"  dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
-              <Bar background dataKey="sales" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
+        {sellerPerform.length>0?
+          <div>
+            <ResponsiveContainer width="100%" height={75*sellerPerform.length}>
+              <BarChart
+                data={sellerPerform}
+                margin={{top: 5, right: 3, left: 2, bottom: 5}}
+                margin={{left:59,right:59}}
+                layout="vertical">
+                <XAxis type="number" domain={[0, dataMax => sellerPerform[0].sales]}  orientation="bottom" stroke="black"/>
+                <YAxis type="category"  dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
+                <Bar background dataKey="sales" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
 
-                  <LabelList dataKey="sales"  position="right" style={{ fill: "#0004ff" }} />
-              </Bar>
-              <Tooltip cursor={{fill: 'transparent'}}  contentStyle={{width:"150px", height:"80px"}}/>
-              <CartesianGrid strokeDasharray="1 1"/>
-            </BarChart>
-          </ResponsiveContainer>
-          <br></br>
-          <br></br>
-          <a href="" download rel="noopener noreferrer" target="_blank">
-              <Button>Download</Button>
-          </a>
-        </div>
+                    <LabelList dataKey="sales"  position="right" style={{ fill: "#0004ff" }} />
+                </Bar>
+                <Tooltip cursor={{fill: 'transparent'}}  contentStyle={{width:"150px", height:"80px"}}/>
+                <CartesianGrid strokeDasharray="1 1"/>
+              </BarChart>
+            </ResponsiveContainer>
+            <br></br>
+            <br></br>
+          </div>
 
         :<div
           className="d-flex flex-column align-items-center justify-content-center"
@@ -134,7 +143,10 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
           <p className="h2 text-secondary">No Sales In This Duration</p>
         </div>
       }
-
+      </div>
+      {sellerPerform.length>0?
+            <Button onClick={printDocument}>Download</Button>
+          :<p></p>}
     </div>
   );
 };
