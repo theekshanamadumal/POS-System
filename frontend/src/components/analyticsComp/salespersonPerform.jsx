@@ -28,8 +28,8 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
     const element = document.getElementById("salespersonPdf");
     var opt = {
       margin: 0.2,
-      filename: "Analysis.pdf",
-      jsPDF: { unit: "mm", format: "a3", orientation: "portrait" },
+      filename: "AnalysisBySalesperson.pdf",
+      jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
     };
     if (window.confirm("Confirm to save?")) {
       // Save it!
