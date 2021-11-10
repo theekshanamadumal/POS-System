@@ -39,8 +39,8 @@ const BestPerform = () => {
         <Container maxWidth="lg">
           <Paper>
             <TableContainer>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
+              <Table  aria-label="sticky table">
+                <TableHead style={{backgroundColor:"rgb(170, 170, 170)"}}>
                   <TableRow>
                     <TableCell align="center">Name</TableCell>
                     <TableCell align="center">ID</TableCell>

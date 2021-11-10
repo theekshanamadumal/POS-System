@@ -155,80 +155,97 @@ const Category = (props) => {
         </form>
         <br></br>
 
-        <CardContent>
-          <Box
-            sx={{
-              height: 280,
-              position: 'relative'
-            }}
-          >
-            <Doughnut
-              data={dataSet}
-              options={options}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              pt: 2
-            }}
-          >
-            {productByCategory.map(({
-              color,
-              title,
-              value
-            }) => (
-              <Box
-                key={title}
-                sx={{
-                  p: 1,
-                  textAlign: 'center'
-                }}
-              >
-                
-                <Typography
-                  color="textPrimary"
-                  variant="body1"
+      {salesArray.length>0?
+        <div>
+          <CardContent>
+            <Box
+              sx={{
+                height: 280,
+                position: 'relative'
+              }}
+            >
+              <Doughnut
+                data={dataSet}
+                options={options}
+              />
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                pt: 2
+              }}
+            >
+              {productByCategory.map(({
+                color,
+                title,
+                value
+              }) => (
+                <Box
+                  key={title}
+                  sx={{
+                    p: 1,
+                    textAlign: 'center'
+                  }}
                 >
-                  {title}
-                </Typography>
-                <Typography
-                  style={{ color }}
-                  variant="h6" mx="2"
-                >
-                  {value}
-                  %
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </CardContent>
-      </Card><br></br>
+                  
+                  <Typography
+                    color="textPrimary"
+                    variant="body1"
+                  >
+                    {title}
+                  </Typography>
+                  <Typography
+                    style={{ color }}
+                    variant="h6" mx="2"
+                  >
+                    {value}
+                    %
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </CardContent>
+      
 
-      <ResponsiveContainer width="100%" aspect={3 / 1}>
-        <BarChart
-          width={500}
-          height={300}
-          data={dataBar}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
+        <ResponsiveContainer width="100%" aspect={3 / 1}>
+          <BarChart
+            width={500}
+            height={300}
+            data={dataBar}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+              
+            }}
+            barCategoryGap={50}
+          >
+            <XAxis dataKey="name" padding={{ left: 50, right: 30 }} />
+
+            <YAxis />
+            <Tooltip />
             
-          }}
-          barCategoryGap={50}
+            <CartesianGrid strokeDasharray="3 3" />
+            <Bar barGap={10} barSize={500/salesArray.length} dataKey="sales" fill="indianred" stroke="#494949" background={{ fill: '#eee' }} />
+          </BarChart>
+        </ResponsiveContainer>
+        </div>
+        
+        :<div
+          className="d-flex flex-column align-items-center justify-content-center"
+          style={{height: "56vh"}}
         >
-          <XAxis dataKey="name" padding={{ left: 50, right: 30 }} />
-
-          <YAxis />
-          <Tooltip />
-          
-          <CartesianGrid strokeDasharray="3 3" />
-          <Bar barGap={10} barSize={500/salesArray.length} dataKey="sales" fill="indianred" stroke="#494949" background={{ fill: '#eee' }} />
-        </BarChart>
-      </ResponsiveContainer>
+          <img 
+            className="align-center mb-3" 
+            style={{height:"200px", width:"200px"}}
+            src="/images/no_sales.png">
+          </img>
+          <p type="button" className="h2 text-secondary">No Sales In This Duration</p>
+        </div>
+    }
+    </Card><br></br>
 
                 
 

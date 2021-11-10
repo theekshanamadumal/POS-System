@@ -96,28 +96,45 @@ const SalespersonPerform = ({ salespersonPerform, ...rest }) => {
         </div>  
       </form>
       <br></br>
-     <ResponsiveContainer width="100%" height={75*sellerPerform.length}>
-      
-        <BarChart
-          data={sellerPerform}
-          margin={{top: 5, right: 3, left: 2, bottom: 5}}
-          margin={{left:59,right:59}}
-          layout="vertical">
-          <XAxis type="number" domain={[0, dataMax => sellerPerform[0].sales]}  orientation="bottom" stroke="black"/>
-          <YAxis type="category"  dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
-          <Bar background dataKey="sales" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
 
-              <LabelList dataKey="sales"  position="right" style={{ fill: "#0004ff" }} />
-          </Bar>
-          <Tooltip cursor={{fill: 'transparent'}}  contentStyle={{width:"150px", height:"80px"}}/>
-          <CartesianGrid strokeDasharray="1 1"/>
-        </BarChart>
-      </ResponsiveContainer>
-      <br></br>
-      <br></br>
-      <a href="" download rel="noopener noreferrer" target="_blank">
-          <Button>Download</Button>
-      </a>
+      {sellerPerform.length>0?
+        <div>
+          <ResponsiveContainer width="100%" height={75*sellerPerform.length}>
+            <BarChart
+              data={sellerPerform}
+              margin={{top: 5, right: 3, left: 2, bottom: 5}}
+              margin={{left:59,right:59}}
+              layout="vertical">
+              <XAxis type="number" domain={[0, dataMax => sellerPerform[0].sales]}  orientation="bottom" stroke="black"/>
+              <YAxis type="category"  dataKey="name" axisLine={false} dx={-15} tickLine={false} style={{ fill: "black" }} />
+              <Bar background dataKey="sales" stroke="#494949" fill="#8884d8" radius={5} barSize={{ width:"100%" ,aspect:1/3 }}>
+
+                  <LabelList dataKey="sales"  position="right" style={{ fill: "#0004ff" }} />
+              </Bar>
+              <Tooltip cursor={{fill: 'transparent'}}  contentStyle={{width:"150px", height:"80px"}}/>
+              <CartesianGrid strokeDasharray="1 1"/>
+            </BarChart>
+          </ResponsiveContainer>
+          <br></br>
+          <br></br>
+          <a href="" download rel="noopener noreferrer" target="_blank">
+              <Button>Download</Button>
+          </a>
+        </div>
+
+        :<div
+          className="d-flex flex-column align-items-center justify-content-center"
+          style={{height: "50vh"}}
+        > 
+          <img 
+            className="align-center mb-3" 
+            style={{height:"200px", width:"200px"}}
+            src="/images/no_sales.png">
+          </img>
+          <p type="button" className="h2 text-secondary">No Sales In This Duration</p>
+        </div>
+      }
+
     </div>
   );
 };

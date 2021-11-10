@@ -141,25 +141,40 @@ export default function SalesAnalytics(props) {
       </form>
     
     <br></br>
-
-    <ResponsiveContainer width="100%" aspect={3 / 1}>
-        <AreaChart data= {salesLast} margin={{bottom:59}}>
-        <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="mediumseagreen" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="mediumseagreen" stopOpacity={0} />
-            </linearGradient>
-        </defs>
-        <CartesianGrid strokeDasharray="2 2"/>
-        <Tooltip contentStyle={{backgroundColor:"moccasin"}}/>
-        
-        <Area type="monotone" dataKey="sales" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-        <XAxis dataKey="_id" stroke="royalblue" />
-        <YAxis stroke="royalblue"  domain={[0, dataMax => maximum]} />
-        
-        </AreaChart>
-    </ResponsiveContainer>
-    <Button class="float-right">Download</Button>
+    {salesLast.length>0?
+      <div>
+        <ResponsiveContainer width="100%" aspect={3 / 1}>
+            <AreaChart data= {salesLast} margin={{bottom:59}}>
+            <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="mediumseagreen" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="mediumseagreen" stopOpacity={0} />
+                </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="2 2"/>
+            <Tooltip contentStyle={{backgroundColor:"moccasin"}}/>
+            
+            <Area type="monotone" dataKey="sales" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+            <XAxis dataKey="_id" stroke="royalblue" />
+            <YAxis stroke="royalblue"  domain={[0, dataMax => maximum]} />
+            
+            </AreaChart>
+        </ResponsiveContainer>
+        <Button class="float-right">Download</Button>
+    </div>
+    
+    :<div
+        className="d-flex flex-column align-items-center justify-content-center"
+        style={{height: "56vh"}}
+      >
+        <img 
+            className="align-center mb-3" 
+            style={{height:"200px", width:"200px"}}
+            src="/images/no_sales.png">
+          </img>
+        <p type="button" className="h2 text-secondary">No Sales In This Duration</p>
+      </div>
+    }
       
     </div>
   );
