@@ -32,7 +32,8 @@ export default function Products() {
   const handleDelete = (id) => {
     console.log("data send to back");
     console.log(id);
-    axios
+    if (window.confirm("Confirm to Delete?")) {
+      axios
       .delete(URL.main + URL.productComp + id,{ headers: authHeader() })
       .then((response) => {
         console.log(response.data);
@@ -42,6 +43,7 @@ export default function Products() {
         console.log(error);
         alert(error, (window.location = URL.management));
       });
+    }
   };
   const [disabled, setDisabled] = useState(true);
   const [searchBy, setSearchBy] = useState("");

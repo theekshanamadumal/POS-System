@@ -32,16 +32,18 @@ export default function Shops() {
   const handleDelete = (id) => {
     console.log("data send to back");
     console.log(id);
-    axios
-    .delete(URL.main+URL.shopComp + id,{ headers: authHeader() })
-    .then((response) => {
-        console.log(response.data);
-        alert(response.data, (window.location = URL.shops));
-    })
-    .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.management));
-    });
+    if (window.confirm("Confirm to Delete?")) {
+        axios
+            .delete(URL.main+URL.shopComp + id,{ headers: authHeader() })
+            .then((response) => {
+                console.log(response.data);
+                alert(response.data, (window.location = URL.shops));
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error, (window.location = URL.management));
+            });
+    }
 };
 const [disabled, setDisabled] = useState(true);
 const [searchBy, setSearchBy] = useState('');

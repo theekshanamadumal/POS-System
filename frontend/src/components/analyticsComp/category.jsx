@@ -20,11 +20,14 @@ const Category = (props) => {
   const printDocument=()=> {
     const element = document.getElementById('categoryPdf');
 		var opt = {
-      margin:       0.2,
-      filename:     'Analysis.pdf',
-      jsPDF:        { unit: 'mm', format: 'a3', orientation: 'portrait' }
+      margin: 0.2,
+      filename: 'AnalysisByCategory.pdf',
+      jsPDF: { unit: "mm", format: "a3", orientation: "portrait" },
     };
-		html2pdf().set(opt).from(element).save();
+    if (window.confirm("Confirm to save?")) {
+      // Save it!
+      html2pdf().set(opt).from(element).save();
+    }
   }
 
   useEffect(() => {

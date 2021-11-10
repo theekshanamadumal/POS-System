@@ -65,26 +65,29 @@ class AddProduct extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const product = {
-      itemName: this.state.itemName,
-      category: this.state.category,
-      unitPrice: this.state.unitPrice,
-      stock: this.state.stock,
-      description: this.state.description,
-    };
-
-    console.log(product);
-
-    axios
-      .post(URL.main+URL.addProduct , product,{ headers: authHeader() })
-      .then((res) => {
-        console.log(res.data);
-        alert(res.data, (window.location = URL.products ));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.products ));
-      });
+    if (window.confirm("Confirm to Add Product?")) {
+      const product = {
+        itemName: this.state.itemName,
+        category: this.state.category,
+        unitPrice: this.state.unitPrice,
+        stock: this.state.stock,
+        description: this.state.description,
+      };
+  
+      console.log(product);
+  
+      axios
+        .post(URL.main+URL.addProduct , product,{ headers: authHeader() })
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data, (window.location = URL.products ));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.products ));
+        });
+    }
+    
   }
 
   render() {

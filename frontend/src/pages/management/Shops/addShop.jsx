@@ -77,28 +77,31 @@ class AddShop extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const shop = {
-      shopName: this.state.shopName,
-      owner: this.state.owner,
-      phoneNo: this.state.phoneNo,
-      email: this.state.email,
-      city: this.state.city,
-      location: this.state.location,
-      route: this.state.route,
-    };
 
-    console.log(shop);
-
-    axios
-      .post(URL.main+ URL.addShops , shop,{ headers: authHeader() })
-      .then((res) => {
-        console.log(res.data);
-        alert(res.data, (window.location = URL.shops));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.shops));
-      });
+    if (window.confirm("Confirm to Add Shop?")) {
+      const shop = {
+        shopName: this.state.shopName,
+        owner: this.state.owner,
+        phoneNo: this.state.phoneNo,
+        email: this.state.email,
+        city: this.state.city,
+        location: this.state.location,
+        route: this.state.route,
+      };
+  
+      console.log(shop);
+  
+      axios
+        .post(URL.main+ URL.addShops , shop,{ headers: authHeader() })
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data, (window.location = URL.shops));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.shops));
+        });
+    }
   }
 
   render() {

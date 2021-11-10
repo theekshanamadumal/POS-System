@@ -101,28 +101,30 @@ export default withRouter(
 
     onSubmit(e) {
       e.preventDefault();
-      const route = {
-        origin: this.state.origin,
-        originLocation: this.state.originLocation,
-        destination: this.state.destination,
-        destinationLocation: this.state.destinationLocation,
-        cities: this.state.cities,
-      };
-
-      console.log("before post", route);
-
-      axios
-        .post(URL.main + URL.updateSaleRoute + this.dataId, route, {
-          headers: authHeader(),
-        })
-        .then((res) => {
-          console.log(res.data);
-          alert(res.data, (window.location = URL.routes));
-        })
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.routes));
-        });
+      if (window.confirm("Confirm to Update?")) {
+        const route = {
+          origin: this.state.origin,
+          originLocation: this.state.originLocation,
+          destination: this.state.destination,
+          destinationLocation: this.state.destinationLocation,
+          cities: this.state.cities,
+        };
+  
+        console.log("before post", route);
+  
+        axios
+          .post(URL.main + URL.updateSaleRoute + this.dataId, route, {
+            headers: authHeader(),
+          })
+          .then((res) => {
+            console.log(res.data);
+            alert(res.data, (window.location = URL.routes));
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error, (window.location = URL.routes));
+          });
+      }
     }
 
     render() {

@@ -19,23 +19,24 @@ class AddProductCategory extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
-    const Category = {
-      category: this.state.category,
-    };
-
-    console.log(Category);
-
-    axios
-      .post(URL.main+URL.addProductCategory, Category,{ headers: authHeader() })
-      .then((res) => {
-        console.log(res.data);
-        alert(res.data, (window.location = URL.products));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.products));
-      });
+    if (window.confirm("Confirm to Add Product Category?")) {
+      const Category = {
+        category: this.state.category,
+      };
+  
+      console.log(Category);
+  
+      axios
+        .post(URL.main+URL.addProductCategory, Category,{ headers: authHeader() })
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data, (window.location = URL.products));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.products));
+        });
+    }
   }
 
   render() {

@@ -41,26 +41,28 @@ export default class AddRouteComponent extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const route = {
-      origin: this.state.origin,
-      originLocation: this.state.originLocation,
-      destination: this.state.destination,
-      destinationLocation: this.state.destinationLocation,
-      cities: this.state.cities,
-    };
-
-    console.log("before post", route);
-
-    axios
-      .post(URL.main + URL.addSalesRoute, route,{ headers: authHeader() })
-      .then((res) => {
-        console.log(res.data);
-        alert(res.data, (window.location = this.props.location));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = this.props.location));
-      });
+    if (window.confirm("Confirm to Add Route?")) {
+      const route = {
+        origin: this.state.origin,
+        originLocation: this.state.originLocation,
+        destination: this.state.destination,
+        destinationLocation: this.state.destinationLocation,
+        cities: this.state.cities,
+      };
+  
+      console.log("before post", route);
+  
+      axios
+        .post(URL.main + URL.addSalesRoute, route,{ headers: authHeader() })
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data, (window.location = this.props.location));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = this.props.location));
+        });
+    }
   }
 
   render() {

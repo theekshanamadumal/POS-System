@@ -33,16 +33,18 @@ export default function Route() {
   const handleDelete = (id) => {
     console.log("data send to back");
     console.log(id);
-    axios
-      .delete(URL.main+URL.salesRouteComp + id,{ headers: authHeader() })
-      .then((response) => {
-        console.log(response.data);
-        alert(response.data, (window.location = URL.routes));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.management ));
-      });
+    if (window.confirm("Confirm to Delete?")) {
+        axios
+            .delete(URL.main+URL.salesRouteComp + id,{ headers: authHeader() })
+            .then((response) => {
+                console.log(response.data);
+                alert(response.data, (window.location = URL.routes));
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error, (window.location = URL.management ));
+            });
+      }
   };
   const countShops=(id)=>{
       const li=routesDetails.filter(e=>e._id===id);

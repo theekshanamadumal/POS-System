@@ -133,46 +133,50 @@ export default class AssignTasks extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-
-    const lis = this.state.shopsDetails.filter(
-      (det) => det._id === this.state.dailyRoute
-    )[0];
-    console.log("chhhh", lis);
-    const lisShopId = lis.shopsID;
-
-    const lisShopName = lis.shopsName;
-    console.log("lis", lisShopId, lisShopName);
-    lisShopId.map((li) => {
-      console.log("li..", li);
-      const index = lisShopId.indexOf(li);
-      this.setState({
-        shopsId: this.state.shopsId.push({
-          shopId: li,
-          isCovered: false,
-          shopName: lisShopName[index],
-        }),
+    if (window.confirm("Confirm to Assign Tasks?")) {
+      const lis = this.state.shopsDetails.filter(
+        (det) => det._id === this.state.dailyRoute
+      )[0];
+      console.log("chhhh", lis);
+      const lisShopId = lis.shopsID;
+  
+      const lisShopName = lis.shopsName;
+      console.log("lis", lisShopId, lisShopName);
+      lisShopId.map((li) => {
+        console.log("li..", li);
+        const index = lisShopId.indexOf(li);
+        this.setState({
+          shopsId: this.state.shopsId.push({
+            shopId: li,
+            isCovered: false,
+            shopName: lisShopName[index],
+          }),
+        });
       });
-    });
-    console.log("shopd..", this.state.shopsId);
-    const dailyTarget = {
-      sellerId: this.state.salespersonId,
-      dailyRoute: this.state.dailyRoute,
-      dailySalesTarget: this.state.dailySalesTarget,
-      dailyInventory: this.state.inventoryList,
-      dailyShops: this.state.shopsId,
-    };
-    console.log(dailyTarget);
-    axios
-      .post(URL.main + URL.addDailyTarget, dailyTarget, {
-        headers: authHeader(),
-      })
-      .then((res) => {
-        alert(res.data, (window.location = URL.tasks));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.tasks));
-      });
+      console.log("shopd..", this.state.shopsId);
+      const dailyTarget = {
+        sellerId: this.state.salespersonId,
+        dailyRoute: this.state.dailyRoute,
+        dailySalesTarget: this.state.dailySalesTarget,
+        dailyInventory: this.state.inventoryList,
+        dailyShops: this.state.shopsId,
+      };
+      console.log(dailyTarget);
+      axios
+        .post(URL.main + URL.addDailyTarget, dailyTarget, {
+          headers: authHeader(),
+        })
+        .then((res) => {
+          alert(res.data, (window.location = URL.tasks));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.tasks));
+        });
+      
+    }
+
+    
   }
 
   render() {

@@ -19,11 +19,14 @@ export default function SalesAnalytics(props) {
   const printDocument=()=> {
     const element = document.getElementById('salesPdf');
 		var opt = {
-      margin:       0.2,
-      filename:     'Analysis.pdf',
-      jsPDF:        { unit: 'mm', format: 'a3', orientation: 'portrait' }
+      margin: 0.2,
+      filename: 'AnalysisBySales.pdf',
+      jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
     };
-		html2pdf().set(opt).from(element).save();
+    if (window.confirm("Confirm to save?")) {
+      // Save it!
+      html2pdf().set(opt).from(element).save();
+    }
   }
 
   const [salesLast,setSalesLast]=useState([]);
