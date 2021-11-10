@@ -242,7 +242,7 @@ const Category = (props) => {
             style={{height:"200px", width:"200px"}}
             src="/images/no_sales.png">
           </img>
-          <p type="button" className="h2 text-secondary">No Sales In This Duration</p>
+          <p className="h2 text-secondary">No Sales In This Duration</p>
         </div>
     }
     </Card><br></br>

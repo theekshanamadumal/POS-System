@@ -192,7 +192,7 @@ export default function Tasks() {
             style={{height:"150px", width:"150px"}}
             src="/images/empty_list.png">
           </img>
-          <p type="button" className="h2 text-secondary">No Tasks Assigned Yet</p>
+          <p className="h2 text-secondary">No Tasks Assigned Yet</p>
         </div>
         }
        
