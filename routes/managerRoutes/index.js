@@ -14,7 +14,7 @@ const analyticsRouter = require('./analyticsRoute');
 
 
 router.use(  '/management',
-    //[authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken, authJwt.isManager],
     function(req, res, next) {
     res.header(
       "Access-Control-Allow-Headers",
