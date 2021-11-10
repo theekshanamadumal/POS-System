@@ -88,13 +88,23 @@ exports.signin = (req, res) => {
                 return res.status(404).send({ message: "Incorrect Email!" });
             }
 
+            //console.log("--------....password req.body.password",req.body.password);
+            const password = bcrypt.hashSync(req.body.password, 8);
+
+            //console.log("--------....password req.body.password crypted",password);
+            //console.log("--------....password user.password",user.password);
+
             var passwordIsValid = bcrypt.compareSync(
                 req.body.password,
                 user.password
+                
             );
+            console.log("--------....password passwordIsValid",passwordIsValid);
+
 
             if (!passwordIsValid) {
-                console.log("--------....password invalid");
+                //$2b$08$DMcBRIJKrN/waVyEDgXhGOZsAmwCpJfz7ls/iSdTNiorggBYf1beK
+                //console.log("--------....password invalid");
                 return res.status(401).send({
                     accessToken: null,
                     message: "Incorrect Password!"
@@ -111,17 +121,6 @@ exports.signin = (req, res) => {
                 authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
             }
 
-            const logHistory = new LogHistory({
-                useID:user._id,
-                dateTime:new Date().toLocaleDateString(),
-            })
-
-            logHistory.save()
-            .then(() => {console.log("--------user log  added to log history");})
-            .catch((err) => {
-                //res.status(400).json("DataBase Error " +err);
-                console.log("user log history Error:", err);});
-
             res.status(200).send({
                 id: user._id,
                 username: user.firstName ,
@@ -130,6 +129,22 @@ exports.signin = (req, res) => {
                 accessToken: token,
                 expiresIn: "86400"
             });
+
+            //console.log("--------....userID:user._id,",user._id);
+
+
+            const logHistory = new LogHistory({
+                userID:user._id,
+                dateTime:new Date().toLocaleDateString(),
+            })
+
+            logHistory.save()
+            .then(() => {console.log("--------user log  added to log history");})
+            .catch((err) => {    //res.status(400).json("DataBase Error " +err);
+                               console.log("user log history Error:", err);
+            });
+
+
         });
 };
 
