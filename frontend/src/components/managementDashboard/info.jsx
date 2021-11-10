@@ -47,7 +47,7 @@ export default function Info() {
       )
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.management));
+        alert(error, (window.location = "./"));
       });
   }, []);
   return (

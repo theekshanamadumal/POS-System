@@ -12,7 +12,7 @@ class AllSellersLocations extends Component {
 
   loadSellerLocations() {
     axios
-      .get(URL.sellerLocation,{ headers: authHeader() })
+      .get(URL.sellerLocation, { headers: authHeader() })
       .then((response) => {
         this.setState({
           sellersData: response.data,
@@ -27,7 +27,7 @@ class AllSellersLocations extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.management));
+        alert(error, (window.location = "./"));
       });
   }
 
@@ -37,7 +37,7 @@ class AllSellersLocations extends Component {
 
   render() {
     return (
-      <div >
+      <div>
         {" "}
         <MapGL sellersData={this.state.sellersData} />{" "}
       </div>

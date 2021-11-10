@@ -83,22 +83,24 @@ export default class Login extends Component {
     let w = "";
     /////////////////// login with jwt ///////////////////
     if (errorMsg === false && this.state.errorList.length === 0) {
+      console.log("----------log password----------", this.state.password);
       AuthService.login(this.state.email, this.state.password).then(
         () => {
-          
           const currentUser = AuthService.getCurrentUser();
 
           if (currentUser && currentUser.roles.includes("ROLE_ADMIN")) {
-              console.log("----------log done----------");
-              console.log("----------role is a admin----------");
-              window.location = URL.itAdmin;
-          }
-          else if (currentUser && currentUser.roles.includes("ROLE_MANAGER")) {
+            console.log("----------log done----------");
+            console.log("----------role is a admin----------");
+            // window.location = URL.itAdmin;
+          } else if (
+            currentUser &&
+            currentUser.roles.includes("ROLE_MANAGER")
+          ) {
             console.log("----------log done----------");
             console.log("----------role is a MANAGER----------");
-            window.location = URL.management;
-          }else{
-            alert("Salesperson can't Login to the system..")
+            //window.location = URL.management;
+          } else {
+            alert("Salesperson can't Login to the system..");
           }
 
           //this.props.history.push("/profile");
@@ -107,7 +109,6 @@ export default class Login extends Component {
           if (condition) {
           } else {
           }*/
-          
         },
         (error) => {
           console.log("----------log failed----------");
@@ -229,7 +230,10 @@ export default class Login extends Component {
                 data-testid="loginBtn"
                 type="submit"
                 className="btn btn-block text-light lgBtn"
-                style={{ backgroundColor: "rgb(46, 100, 100)" ,marginTop:"-20px"}}
+                style={{
+                  backgroundColor: "rgb(46, 100, 100)",
+                  marginTop: "-20px",
+                }}
               >
                 Sign In
               </button>

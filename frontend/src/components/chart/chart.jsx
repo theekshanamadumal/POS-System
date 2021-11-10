@@ -1,6 +1,6 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./chart.css";
-import axios from 'axios';
+import axios from "axios";
 import {
   XAxis,
   YAxis,
@@ -13,31 +13,34 @@ import {
 import { Link } from "react-router-dom";
 import URL from "../../config";
 import salesAnalytics from "../../services/analytics/sale";
-import authHeader from '../../services/authHeader';
+import authHeader from "../../services/authHeader";
 
 export default function Chart() {
-  const [salesLast,setSalesLast]=useState([]);
-  const [maximum,setMaximum]=useState(0);
+  const [salesLast, setSalesLast] = useState([]);
+  const [maximum, setMaximum] = useState(0);
   useEffect(() => {
-    axios.get(URL.main + URL.salesAnalyticsDuration+"/"+"Day-7",{ headers: authHeader() })  
-        .then((response)=>{
-              console.log('-------------------sales analytics',response.data);
-              const maxi=salesAnalytics.mapDays(response.data).maximum;
-              const saArr=salesAnalytics.mapDays(response.data).salesArray;
-              setMaximum(maxi);
-              setSalesLast(saArr)
-        })
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.management));
-        })
-  }, [])
-  
+    axios
+      .get(URL.main + URL.salesAnalyticsDuration + "/" + "Day-7", {
+        headers: authHeader(),
+      })
+      .then((response) => {
+        console.log("-------------------sales analytics", response.data);
+        const maxi = salesAnalytics.mapDays(response.data).maximum;
+        const saArr = salesAnalytics.mapDays(response.data).salesArray;
+        setMaximum(maxi);
+        setSalesLast(saArr);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error.message, (window.location = "./"));
+      });
+  }, []);
+
   return (
     <div className="chart" style={{ cursor: "pointer" }}>
       <Link to={URL.sales} className="linkAnaly">
         <span className="chartTitle">Sales Analysis</span>
-        
+
         <br></br>
         <ResponsiveContainer width="100%" aspect={3 / 1}>
           <AreaChart data={salesLast} margin={{ bottom: 59 }}>
@@ -58,7 +61,7 @@ export default function Chart() {
               fill="url(#colorUv)"
             />
             <XAxis dataKey="_id" stroke="royalblue" />
-            <YAxis stroke="royalblue" domain={[0, dataMax => maximum]}/>
+            <YAxis stroke="royalblue" domain={[0, (dataMax) => maximum]} />
           </AreaChart>
         </ResponsiveContainer>
       </Link>
