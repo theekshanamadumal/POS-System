@@ -19,7 +19,7 @@ export default function WidgetSm() {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.itAdmin));
+        alert(error.message, (window.location = "./"));
       });
   }, []);
 

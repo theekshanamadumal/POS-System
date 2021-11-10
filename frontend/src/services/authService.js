@@ -38,6 +38,10 @@ class AuthService {
       .then(response => {
       //    console.log("response",response);
         return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = './'));
       });
   }
 

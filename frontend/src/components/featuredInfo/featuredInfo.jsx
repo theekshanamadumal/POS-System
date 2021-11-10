@@ -28,7 +28,7 @@ export default function FeaturedInfo() {
       )
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.itAdmin));
+        alert(error.message, (window.location = "./"));
       });
   }, []);
   return (

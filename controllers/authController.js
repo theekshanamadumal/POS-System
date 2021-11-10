@@ -88,18 +88,19 @@ exports.signin = (req, res) => {
                 return res.status(404).send({ message: "Incorrect Email!" });
             }
 
-            /*var passwordIsValid = bcrypt.compareSync(
+            var passwordIsValid = bcrypt.compareSync(
                 req.body.password,
                 user.password
             );
 
             if (!passwordIsValid) {
-                console.log("--------user not found....password invalid");
+                console.log("--------....password invalid");
                 return res.status(401).send({
                     accessToken: null,
                     message: "Incorrect Password!"
                 });
-            }*/
+            }
+
             var token = jwt.sign({ id: user.id }, SECRET, {
                 expiresIn: 86400 // 24 hours
             });

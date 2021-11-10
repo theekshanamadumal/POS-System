@@ -30,7 +30,7 @@ export default class WidgetLg extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.itAdmin));
+        alert(error.message, (window.location = "./"));
       });
 
     //const data = logHistory.recent();
