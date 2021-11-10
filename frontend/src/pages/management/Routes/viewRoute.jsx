@@ -15,10 +15,10 @@ export default withRouter(
       this.onChangeOriginLocation = this.onChangeOriginLocation.bind(this);
       this.onChangeDestination = this.onChangeDestination.bind(this);
       this.onChangeDestinationLocation =
-      this.onChangeDestinationLocation.bind(this);
+        this.onChangeDestinationLocation.bind(this);
       this.onChangeCities = this.onChangeCities.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
-      this.loadShops=this.loadShops.bind(this);
+      this.loadShops = this.loadShops.bind(this);
 
       this.state = {
         route: [],
@@ -28,48 +28,59 @@ export default withRouter(
         destination: "",
         destinationLocation: "",
         cities: [],
-        routesDetails:[],
-        shops:[],
-        countShops:0,
+        routesDetails: [],
+        shops: [],
+        countShops: 0,
       };
     }
-    loadShops(){
-      console.log("route details",this.state.routesDetails);
-      const li=this.state.routesDetails.filter(e=>e._id===this.dataId);
-      console.log("li",li);
-
+    loadShops() {
+      console.log("route details", this.state.routesDetails);
+      const li = this.state.routesDetails.filter((e) => e._id === this.dataId);
+      console.log("li", li);
     }
 
     componentDidMount() {
       this.dataId = this.props.match.params.id;
 
       console.log("dataId: ", this.dataId);
-      axios.all(
-        [axios.get(URL.main+URL.salesRouteComp+ this.dataId,{ headers: authHeader() }),
-          axios.get(URL.main + URL.shops+"/groupByRoute",{ headers: authHeader() })
+      axios
+        .all([
+          axios.get(URL.main + URL.salesRouteComp + this.dataId, {
+            headers: authHeader(),
+          }),
+          axios.get(URL.main + URL.shops + "/groupByRoute", {
+            headers: authHeader(),
+          }),
         ])
-        .then(axios.spread((...responses) => {
-          this.setState({
-            route: responses[0].data,
-            origin: responses[0].data.origin,
-            originLocation: String(responses[0].data.originLocation),
-            destination: responses[0].data.destination,
-            destinationLocation: String(responses[0].data.destinationLocation),
-            cities: responses[0].data.cities,
-          });
-          const li=responses[1].data.filter(c=>c._id===this.dataId);
-          if (li.length>0){
-            this.setState({routesDetails:responses[1].data.filter(c=>c._id===this.dataId) });
-            this.setState({shops:li[0].shopsName});
-            this.setState({countShops:li[0].count})
-          }
-          
-        }))
+        .then(
+          axios.spread((...responses) => {
+            this.setState({
+              route: responses[0].data,
+              origin: responses[0].data.origin,
+              originLocation: String(responses[0].data.originLocation),
+              destination: responses[0].data.destination,
+              destinationLocation: String(
+                responses[0].data.destinationLocation
+              ),
+              cities: responses[0].data.cities,
+            });
+            const li = responses[1].data.filter((c) => c._id === this.dataId);
+            if (li.length > 0) {
+              this.setState({
+                routesDetails: responses[1].data.filter(
+                  (c) => c._id === this.dataId
+                ),
+              });
+              this.setState({ shops: li[0].shopsName });
+              this.setState({ countShops: li[0].count });
+            }
+          })
+        )
         .catch((error) => {
           console.log(error);
           alert(error, (window.location = URL.routes));
         });
-        this.loadShops();
+      this.loadShops();
     }
 
     onChangeOrigin(e) {
@@ -101,11 +112,9 @@ export default withRouter(
       console.log("before post", route);
 
       axios
-        .post(
-          URL.main+URL.updateSaleRoute+ this.dataId,
-          route,
-          { headers: authHeader() }
-        )
+        .post(URL.main + URL.updateSaleRoute + this.dataId, route, {
+          headers: authHeader(),
+        })
         .then((res) => {
           console.log(res.data);
           alert(res.data, (window.location = URL.routes));
@@ -122,14 +131,15 @@ export default withRouter(
           <div className="spacing">
             <div className="containerSale">
               <h1 className="heading">Routes</h1>
-              <Link to={URL.lastSales}>
+
+              {/* <Link to={URL.lastSales}>
                 <button className="addUser">View Last Month Sales</button>
-              </Link>
+              </Link> */}
               {/*<Link to={URL.addRoute}>
                 <button className="addUser">Add New Route</button>
               </Link>*/}
             </div>
-              {console.log("rou de",this.state.routesDetails)}
+            {console.log("rou de", this.state.routesDetails)}
             <div className="Container">
               <div className="detailsContainer">
                 <div className="detailMain">
@@ -169,22 +179,25 @@ export default withRouter(
                       {this.state.route.destinationLocation}
                     </span>
                   </p>
+                  {/*                   
                   <p className="detail">
                     Last Visited : <span className="value"> 09/09/2021</span>
                   </p>
                   <p className="detail">
                     Status : <span className="value"> Assigned</span>
                   </p>
+                  */}
                   <p className="detail">
-                    No of Shops : <span className="value"> {this.state.countShops}</span>
+                    No of Shops :{" "}
+                    <span className="value"> {this.state.countShops}</span>
                   </p>
                   <p className="detail"> Shops : </p>
                   <ol className="instructionsRot">
-                    {this.state.shops.map(x=>
+                    {this.state.shops.map((x) => (
                       <li className="contactRot">
                         <span className="value"> {x}</span>
                       </li>
-                    )}
+                    ))}
                   </ol>
                 </div>
               </div>
@@ -237,13 +250,14 @@ export default withRouter(
                           onChange={this.onChangeCities}
                           type="text"
                         ></input>
-                        <button
-                          type="submit"
-                          className="btn btn-primary editRoute"
-                        >
-                          Submit
-                        </button>
                       </div>
+
+                      <button
+                        type="submit"
+                        className="btn btn-lg btn-primary editRoute"
+                      >
+                        Submit
+                      </button>
                     </div>
                   </div>
                 </form>
