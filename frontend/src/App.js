@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Topbar from "./components/topbar/Topbar";
+//import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
 //import AuthService from "./services/authService";
@@ -12,7 +12,7 @@ import Login from "./components/login/login";
 //import Maps from "./pages/management/sellerLocation/Maps";
 
 //it admin
-import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
+//import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
 import ItAdminHome from "./pages/itAdmin/Home/itAdminHome";
 import User from './pages/itAdmin/user/user';
 import AddUser from './pages/itAdmin/addUser/addUser';
@@ -37,7 +37,7 @@ import ViewOrders from './pages/management/Orders/viewOrder';
 import Routes from "./pages/management/Routes/route";
 import AddRoute from "./pages/management/Routes/addRoute";
 import ViewRoute from "./pages/management/Routes/viewRoute";
-import LastSales from './pages/management/Routes/lastSales';
+//import LastSales from './pages/management/Routes/lastSales';
 
 import Shops from "./pages/management/Shops/shops";
 import AddShop from "./pages/management/Shops/addShop";
@@ -111,7 +111,7 @@ class App extends Component {
 
           <PrivateManagerRoute exact path="/management/routes/:id" component={ViewRoute}/> 
 
-          <PrivateManagerRoute exact path="/management/route/lastSales" component={LastSales}/> 
+          {/* <PrivateManagerRoute exact path="/management/route/lastSales" component={LastSales}/>  */}
 
           <PrivateManagerRoute exact path="/management/orders" component={Orders}/> 
 

@@ -2,7 +2,7 @@ import "./tasks.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
-import moment from "moment";
+//import moment from "moment";
 import authHeader from "../../../services/authHeader";
 import {
   Box,
@@ -22,7 +22,7 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { Search as SearchIcon } from "react-feather";
-import { tasks } from "../../../dataCollection";
+//import { tasks } from "../../../dataCollection";
 import TaskListComponent from "../../../components/taskComp/taskList";
 import URL from "../../../config";
 import { Link } from "react-router-dom";
@@ -40,7 +40,7 @@ export default function Tasks() {
 
   useEffect(() => {
     axios
-      .get(URL.main + URL.dailyTasks,{ headers: authHeader() })
+      .get(URL.main + URL.dailyTasks, { headers: authHeader() })
       .then((response) => {
         setDailyTasks(response.data);
         console.log(response.data);
@@ -56,14 +56,12 @@ export default function Tasks() {
       <div className="spacing">
         <div className="containerSale">
           <h1 className="heading">Daily Tasks</h1>
-          <Link
-            to={URL.tasks+ "/assignTasks"}
-          >
+          <Link to={URL.tasks + "/assignTasks"}>
             <button className="addUser">Assign Tasks</button>
           </Link>
         </div>
 
-        {dailyTasks.length>0?
+        {dailyTasks.length > 0 ? (
           <div>
             <Box className="search" sx={{ mt: 1 }}>
               <Card>
@@ -145,7 +143,7 @@ export default function Tasks() {
                     <TableBody className="tbBody">
                       {dailyTasks
                         //.filter(dt=>moment(dt.createdAt).format("DD/MM/YYYY")==="07/11/2021")
-                        
+
                         .filter((val) => {
                           if (word === "") {
                             return val;
@@ -183,19 +181,19 @@ export default function Tasks() {
               </PerfectScrollbar>
             </Card>
           </div>
-        :<div
-          className="d-flex flex-column align-items-center justify-content-center"
-          style={{height: "70vh"}}
-        >
-          <img 
-            className="align-center mb-3" 
-            style={{height:"150px", width:"150px"}}
-            src="/images/empty_list.png">
-          </img>
-          <p className="h2 text-secondary">No Tasks Assigned Yet</p>
-        </div>
-        }
-       
+        ) : (
+          <div
+            className="d-flex flex-column align-items-center justify-content-center"
+            style={{ height: "70vh" }}
+          >
+            <img
+              className="align-center mb-3"
+              style={{ height: "150px", width: "150px" }}
+              src="/images/empty_list.png"
+            ></img>
+            <p className="h2 text-secondary">No Tasks Assigned Yet</p>
+          </div>
+        )}
       </div>
     </div>
   );
