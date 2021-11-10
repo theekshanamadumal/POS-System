@@ -4,10 +4,10 @@ import AuthService from "../../../services/authService";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import "../../management/SalesPerson/newSalesperson.css";
 
-var multer = require("multer");
-
-var storage = multer.memoryStorage();
-var upload = multer({ storage: storage });
+//var multer = require("multer");
+//
+//var storage = multer.memoryStorage();
+//var upload = multer({ storage: storage });
 
 export default class AddUser extends Component {
   constructor(props) {
@@ -67,13 +67,13 @@ export default class AddUser extends Component {
   ///////////////////////////////////
   onChangeImage(e) {
     const selectedImage = e.target.files[0];
-    upload.single("image");
-    const imgData = toString(selectedImage);
+    //upload.single("image");
+    //const imgData = toString(selectedImage);
     console.log("image_________________", selectedImage);
-    console.log("image__ imgData_______________", imgData);
+    //console.log("image__ imgData_______________", imgData);
 
-    const imgcontentType = "image/jpg";
-    const image = { data: imgData, contentType: imgcontentType };
+    //const imgcontentType = "image/jpg";
+    //const image = { data: imgData, contentType: imgcontentType };
     this.setState({
       image: selectedImage,
     });
@@ -430,6 +430,7 @@ export default class AddUser extends Component {
                                 style={{ height: "40px" }}
                                 onChange={this.onChangeImage}
                                 type="file"
+                                accept=".png, .jpg, .jpeg"
                                 id="image"
                                 className="form-control form-control-lg"
                                 onBlur={this.handleBlur}
