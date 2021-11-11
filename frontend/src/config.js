@@ -9,8 +9,8 @@ URL.GoogleMapsAPI = 'AIzaSyBNQsYuKSBIV1GWz8O3t0HKjMkGD_k5fsM';
 /////////////////////// rest api //////////////////////////
 
 
-URL.main=process.env.PORT || "http://localhost:3001";
-URL.API_URL = "http://localhost:3001/api/auth/";
+URL.main="/api";
+URL.API_URL = "/api/auth/";
 
 URL.sellerLocation = URL.main+ "/management/sellerLocation";
 URL.invoice = URL.main+ "/management/invoice";

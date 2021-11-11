@@ -7,7 +7,7 @@ const itAdminRouter = require('./itAdminRoute');
 const adminAnalyticsRoute = require('./adminAnalyticsRoute');
 
     
-router.use(  '/itAdmin',
+router.use(  'api/itAdmin',
     [authJwt.verifyToken, authJwt.isAdmin],
     function(req, res, next) {
     res.header(
@@ -17,8 +17,8 @@ router.use(  '/itAdmin',
     next();
  });
   
-router.use('/itAdmin', itAdminRouter);
-router.use('/itAdmin', adminAnalyticsRoute);
+router.use('api/itAdmin', itAdminRouter);
+router.use('api/itAdmin', adminAnalyticsRoute);
       
 
 module.exports = router;
