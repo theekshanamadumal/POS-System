@@ -28,7 +28,7 @@ require('./routes/dataRoutes')(app);
 
 
 //Setting up server port accroding to the server enviroment
-const PORT=process.env.port||port;
+const PORT=process.env.PORT||port;
 var server_host = process.env.HOST || '0.0.0.0';
 
 
