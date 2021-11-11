@@ -280,19 +280,19 @@ export default class AddUser extends Component {
       };
       console.log("user register data to authservicr", user);
 
-    if (window.confirm("Confirm to Create user?")) {
-      AuthService.register(user)
-        .then((res) => {
-          console.log("user response from authservice", res);
-          alert(res.message);
-          alert(res.data, (window.location = URL.user));
-        })
-        .catch((error) => {
-          console.log("user response error authservicr", error);
-          alert(error);
-          alert(error, (window.location = URL.user));
-        });
-    }
+      if (window.confirm("Confirm to Create user?")) {
+        AuthService.register(user)
+          .then((res) => {
+            console.log("user response from authservice", res);
+            alert(res);
+            //alert(res.data.message, (window.location = URL.user));
+          })
+          .catch((error) => {
+            console.log("user response error authservicr", error);
+            alert(error);
+            //alert(error.data.message, (window.location = URL.user));
+          });
+      }
     }
   }
 

@@ -4,8 +4,6 @@ const User = db.user;
 const Role = db.role;
 const LogHistory = db.logHistory;
 
-//var fs = require('fs');
-//var path = require('path');
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -13,16 +11,22 @@ const bcrypt = require("bcrypt");
 
 //Signup ad save hashed password on the DB
 exports.signup = (req, res) => {
+
+//upload photo
+console.log("requested for image file...",req.file);
+
+
     const user = new User({
+        idNumber: req.body.idNumber,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        idNumber: req.body.idNumber,
+        image: req.file.filename,
+        password: bcrypt.hashSync(req.body.password, 8),
         email: req.body.email,
         adress: req.body.adress,
         city: req.body.city,
         phoneNumber: Number(req.body.phoneNumber),
         joinedDate: Date(req.body.joinedDate),
-        password: bcrypt.hashSync(req.body.password, 8),
         roles:[],//req.body.roles,
         /*img: {
             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.image)),
@@ -30,6 +34,7 @@ exports.signup = (req, res) => {
         }*/
     });
     console.log("requested for signup controller...",user);
+    console.log("requested for signup controller user image name...",user.image);
 
     user.save((err, user) => {
         if (err) {

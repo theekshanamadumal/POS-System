@@ -6,7 +6,7 @@ const userSchema= new Schema(
     idNumber: {type: String,unique: true,required: true, trim: true,minlengthe: 5,},
     firstName: {type: String,required: true, trim: true},
     lastName: {type: String,required: true, trim: true},
-    image: {data: Buffer, contentType: String},
+    image: {type: String},
     password: {type: String,required: true, trim: true},
     roles: [
       {
