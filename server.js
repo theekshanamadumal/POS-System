@@ -52,7 +52,7 @@ db.mongoose
 
 
 
-app.listen(PORT, server_host, () => {
+app.listen(PORT, () => {
     console.log("Server started on port:" + PORT);
 })
 
