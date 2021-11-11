@@ -1,5 +1,60 @@
 import PropTypes from "prop-types";
-import { TableCell, TableHead, TableRow } from "@material-ui/core";
+import {
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import { Link } from "react-router-dom";
+import "./orderList.css";
+import React from "react";
+import moment from "moment";
+import URL from "../../config";
+
+const OrderList = (props) => {
+  const d=props.orders;
+  return (
+    <TableRow hover key={d._id}>
+      <TableCell>{d._id.substr(19)}</TableCell>
+      <TableCell>{d.shopId.shopName}</TableCell>
+      <TableCell>{d.total}</TableCell>
+      <TableCell>
+        {moment(d.dateTime).format("DD/MM/YYYY")}
+      </TableCell>
+      <TableCell>
+        <div className="actions">
+          <Link to={URL.orderComp + d._id}>
+            <button className="editButt">View</button>
+          </Link>
+        </div>
+      </TableCell>
+    </TableRow>
+  );
+};
+
+OrderList.propTypes = {
+  orders: PropTypes.array.isRequired,
+};
+export default OrderList;
+
+{/*import PropTypes from "prop-types";
+import {
+  Box,
+  Card,
+  CardContent,
+  TextField,
+  InputAdornment,
+  SvgIcon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@material-ui/core";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import { Link } from "react-router-dom";
 import "./orderList.css";
 import React from "react";
@@ -80,10 +135,13 @@ const OrderList = (props) => {
     </TableRow>
   );
 };
-*/
+
 ///////////////////////////
 
 OrderList.propTypes = {
   orders: PropTypes.array.isRequired,
 };
 export default OrderList;
+*/}
+
+

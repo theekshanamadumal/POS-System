@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 module.exports =  class UserController {
     // Constructor
     constructor(type) {
+
         var roleType;
         switch (type) {
             case 'Admin':
@@ -85,4 +86,17 @@ module.exports =  class UserController {
 
                         
     }
-}
+  
+//Test funtions to check authorization
+exports.admin = (req, res) => {
+    res.status(200).send("Admin Content.");
+};
+
+exports.manager = (req, res) => {
+    res.status(200).send("Manager Content.");
+};
+
+exports.salesperson = (req, res) => {
+    res.status(200).send("Salesperson Content.");
+};
+

@@ -12,7 +12,7 @@ import React from "react";
 import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 
-const InvoiceList = ({ invoices, ...rest }) => {
+const InvoiceList = ({ invoices,transactions, ...rest }) => {
   return (
     <Container maxWidth="md" className="tableCont">
       <Paper>
@@ -29,25 +29,28 @@ const InvoiceList = ({ invoices, ...rest }) => {
             </TableHead>
 
             <TableBody>
-              {invoices.transactions
+            {console.log("checkkkkkkkkkk")}
+            {console.log(transactions)}
+
+              {/*{transactions
                 //.filter((item) => item.id.unitPrice > 0)
                 // .sort((a, b) => (a.name > b.productName ? 1 : -1))
                 .map((item, index) => {
                   return (
-                    <TableRow key={item.id._id}>
+                    <TableRow key={item.id}>
                       <TableCell align="center">{index + 1}</TableCell>
-                      <TableCell align="center">{item.id.itemName}</TableCell>
+                      <TableCell align="center">{item.id}</TableCell>
                       <TableCell align="right">
                         {" "}
-                        {item.id.unitPrice.toFixed(2)}{" "}
+                        {item.quantity.toFixed(2)}{" "}
                       </TableCell>
                       <TableCell align="right">{item.quantity} </TableCell>
                       <TableCell align="right">
-                        {(item.id.unitPrice * item.quantity).toFixed(2)}{" "}
+                        {(item.quantity * item.quantity).toFixed(2)}{" "}
                       </TableCell>
                     </TableRow>
                   );
-                })}
+                })}*/}
               <TableRow>
                 <TableCell></TableCell>
                 <TableCell></TableCell>

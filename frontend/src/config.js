@@ -47,4 +47,5 @@ URL.analyticsCategory="management/analytics#category";
 
 URL.orders="/management/orders";
 URL.orderComp="/management/order/";
+
 module.exports = URL;

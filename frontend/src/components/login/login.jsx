@@ -45,7 +45,7 @@ export default class Login extends Component {
       <body className="bgImg" >
       <h1 className="text-center p-4 text-light">Welcome To POS System!</h1>
       {/*<img src="/images/cyan.png" style={{width:"100%", height:"100%"}}></img>*/}
-      <div >
+      <div className="d-flex justify-content-center">
         <div className="mx-2 loginBox p-4">
           <form onSubmit={this.onSubmit}>
             <h3 className="text-center">Sign In</h3>
