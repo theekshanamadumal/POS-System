@@ -7,8 +7,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 
-//Signup ad save hashed password on the DB
+//Signup and save hashed password on the DB
 exports.signup = (req, res) => {
+    
     const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -90,7 +91,8 @@ exports.signin = (req, res) => {
             }
             res.status(200).send({
                 id: user._id,
-                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
                 roles: authorities,
                 accessToken: token,

@@ -60,6 +60,7 @@ app.use('/management', salesRouteRouter);
 app.use('/management', locationRouter);
 app.use('/management', billRouter);
 
+
 require('./routes/authRoutes')(app);
 //require('./routes/routes')(app);
 require('./routes/dataRoutes')(app);
