@@ -6,11 +6,13 @@ const DailyTask = mongoose.model(
         sellerId: String,
         dailyInventory: {
             type: [new mongoose.Schema({
+                _id: false,
                 productId: {
                     type: mongoose.Schema.ObjectId,
                     ref: "Product"
                 },
                 quantity: { type: Number },
+                itemName:{type:String},
             })]
         },
         dailyRoute: {
@@ -21,15 +23,17 @@ const DailyTask = mongoose.model(
         dailySalesTarget: Number,
         dailyShops: {
             type: [new mongoose.Schema({
+                _id: false,
                 isCovered: { type: Boolean },
+                shopName:{type:String},
                 shopId: {
                     type: mongoose.Schema.ObjectId,
                     ref: "Shops"
                 }
             })]
-        },
-        name: String,
-    })
+        },  
+    },
+    { timestamps: true },)
 );
 
 module.exports = DailyTask;

@@ -1,5 +1,6 @@
 import "./shops.css";
 import {React,useState,useEffect} from 'react';
+import authHeader from "../../../services/authHeader";
 import {
     Box,
     Card,
@@ -31,16 +32,18 @@ export default function Shops() {
   const handleDelete = (id) => {
     console.log("data send to back");
     console.log(id);
-    axios
-    .delete(URL.main+URL.shopComp + id)
-    .then((response) => {
-        console.log(response.data);
-        alert(response.data, (window.location = URL.shops));
-    })
-    .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.management));
-    });
+    if (window.confirm("Confirm to Delete?")) {
+        axios
+            .delete(URL.main+URL.shopComp + id,{ headers: authHeader() })
+            .then((response) => {
+                console.log(response.data);
+                alert(response.data, (window.location = URL.shops));
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error, (window.location = URL.management));
+            });
+    }
 };
 const [disabled, setDisabled] = useState(true);
 const [searchBy, setSearchBy] = useState('');
@@ -53,7 +56,7 @@ const [word, setWord] = useState("");
 
   const loadRoutes=() =>{
     axios
-      .get(URL.main+URL.salesRoutes)
+      .get(URL.main+URL.salesRoutes,{ headers: authHeader() })
       .then((response) => {
         setRouteList(
           response.data,
@@ -69,7 +72,7 @@ const [word, setWord] = useState("");
 
   useEffect(() => {
     axios
-      .get(URL.main+URL.shops)
+      .get(URL.main+URL.shops,{ headers: authHeader() })
       .then((response) => {
         setShops(response.data);
         console.log("shops recieved", shops);

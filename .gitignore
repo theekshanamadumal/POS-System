@@ -7,11 +7,14 @@
 
 # testing
 /coverage
+/smart-pos-backend-mahela-testing
+/multer-image-uploader-tut-master
 
 # production
 /build
 
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local

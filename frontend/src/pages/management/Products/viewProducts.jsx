@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import URL from "../../../config";
-
+import authHeader from "../../../services/authHeader";
 import "./viewProducts.css";
 import { withRouter } from "react-router";
 
@@ -32,7 +32,7 @@ export default withRouter(
     }
     loadCategories() {
       axios
-        .get(URL.main+URL.productCategory)
+        .get(URL.main+URL.productCategory,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             categoryList: response.data,
@@ -50,7 +50,7 @@ export default withRouter(
 
       console.log("dataId: ", this.dataId);
       axios
-        .get(URL.main+URL.productComp+this.dataId)
+        .get(URL.main+URL.productComp+this.dataId,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             product: response.data,
@@ -100,30 +100,32 @@ export default withRouter(
 
     onSubmit(e) {
       e.preventDefault();
-
-      const product = {
-        itemName: this.state.itemName,
-        category: this.state.category,
-        unitPrice: this.state.unitPrice,
-        stock: this.state.stock,
-        description: this.state.description,
-      };
-
-      console.log(product);
-
-      axios
-        .post(
-          URL.main+URL.updateProduct+ this.dataId,
-          product
-        )
-        .then((res) => {
-          console.log(res.data);
-          alert(res.data, (window.location = URL.products));
-        })
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.products));
-        });
+      if (window.confirm("Confirm to Update?")) {
+        const product = {
+          itemName: this.state.itemName,
+          category: this.state.category,
+          unitPrice: this.state.unitPrice,
+          stock: this.state.stock,
+          description: this.state.description,
+        };
+  
+        console.log(product);
+  
+        axios
+          .post(
+            URL.main+URL.updateProduct+ this.dataId,
+            product,
+            { headers: authHeader() }
+          )
+          .then((res) => {
+            console.log(res.data);
+            alert(res.data, (window.location = URL.products));
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error, (window.location = URL.products));
+          });
+      }
     }
 
     render() {
@@ -231,7 +233,7 @@ export default withRouter(
                   <div className="rightItemContainer">
                     <div className="upload">
                       <button type="submit" className="update">
-                        Submit
+                        Update
                       </button>
                     </div>
                   </div>

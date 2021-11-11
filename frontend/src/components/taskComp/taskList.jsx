@@ -10,36 +10,34 @@ import {
   TableRow,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { Delete } from "@material-ui/icons";
 import "../list.css";
-import axios from "axios";
 import URL from "../../config";
 
 const TaskList = (props) => {
   const d=props.tasks;
+
   
   return (
     <TableRow hover key={d._id}>
-      <TableCell align="center">{d._id}</TableCell>
+      <TableCell align="center">{d.sellerId.idNumber}</TableCell>
       <TableCell align="center">
-        {d.firstName + " " + d.lastName}
+        { d.sellerId.firstName+" "+ d.sellerId.lastName}
       </TableCell>
-      <TableCell align="right">{d.remainingTasks}</TableCell>
-      <TableCell align="right"> {d.acheivements}</TableCell>
       <TableCell align="right">
         {" "}
-        {d.sales.toFixed(2)}{" "}
+        {d.dailySalesTarget.toFixed(2)}{" "}
       </TableCell>
-      <TableCell align="center">
-        <div className="actionTasks">
-          <Link to={URL.tasks+"/" + d.id + "/viewTasks"}>
-            <button className="actionsTasks">View</button>
+      <TableCell align="right">
+        {" "}
+        {d.dailySalesProgression.toFixed(2)}{" "}
+      </TableCell>
+      <TableCell align="center"> {d.dailyRoute.substr(19)}</TableCell>
+      <TableCell>
+        <div className="text-center">
+          <Link to={URL.tasks+"/" + d._id + "/viewTasks"}>
+            <button className="actionsTasks">View Tasks</button>
           </Link>
-          <Link
-            to={URL.tasks+"/"+ d.id + "/assignTasks"}
-          >
-            <button className="actionsTasks">Assign</button>
-          </Link>
+          
         </div>
       </TableCell>
     </TableRow>

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
+import ReactTooltip from 'react-tooltip';
 
 export default class AddRouteComponent extends Component {
   constructor(props) {
@@ -41,34 +43,36 @@ export default class AddRouteComponent extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const route = {
-      origin: this.state.origin,
-      originLocation: this.state.LoriginLocation,
-      destination: this.state.destination,
-      destinationLocation: this.state.destinationLocation,
-      cities: this.state.cities,
-    };
-
-    console.log("before post", route);
-
-    axios
-      .post(URL.addSalesRoute, route)
-      .then((res) => {
-        console.log(res.data);
-        alert(res.data, (window.location = this.props.location));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = this.props.location));
-      });
+    if (window.confirm("Confirm to Add Route?")) {
+      const route = {
+        origin: this.state.origin,
+        originLocation: this.state.originLocation,
+        destination: this.state.destination,
+        destinationLocation: this.state.destinationLocation,
+        cities: this.state.cities,
+      };
+  
+      console.log("before post", route);
+  
+      axios
+        .post(URL.main + URL.addSalesRoute, route,{ headers: authHeader() })
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data, (window.location = this.props.location));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = this.props.location));
+        });
+    }
   }
 
   render() {
     return (
       <div className="container ">
         <form action="" className="form" onSubmit={this.onSubmit}>
-          <div class="form-outline mb-4">
-            <div class="form-group">
+          <div className="form-outline mb-4">
+            <div className="form-group">
               <div className="editRoutes">
                 <label>Origin</label>
                 <br></br>
@@ -81,11 +85,19 @@ export default class AddRouteComponent extends Component {
                 <label>Origin Location</label>
                 <br></br>
                 <input
+                  data-tip data-for='destooltip'
                   value={this.state.originLocation}
                   onChange={this.onChangeOriginLocation}
                   type="text"
                   required
                 ></input>
+                <ReactTooltip id='destooltip' type='error' effect='solid'>
+                  <ul>
+                    <li>Enter GPS coordinate of destination</li>
+                    <li>Use "," to seperate coordinates</li>
+                    <li>eg:- 6.9271, 79.8612</li>
+                  </ul>
+                </ReactTooltip>
                 <br></br>
                 <br></br>
                 <label>Destination </label>
@@ -100,20 +112,35 @@ export default class AddRouteComponent extends Component {
                 <label>Destination Location </label>
                 <br></br>
                 <input
+                  data-tip data-for='origintooltip'
                   type="text"
                   value={this.state.destinationLocation}
                   onChange={this.onChangeDestinationLocation}
                   type="text"
                   required
                 ></input>
+                <ReactTooltip id='origintooltip' type='error' effect='solid'>
+                  <ul>
+                    <li>Enter GPS coordinate of Origin</li>
+                    <li>Use  ","  to seperate coordinates</li>
+                    <li>eg:- 6.9271, 79.8612</li>
+                  </ul>
+                </ReactTooltip>
                 <br></br>
                 <label>Cities </label>
                 <br></br>
                 <input
+                  data-tip data-for='citytooltip'
                   value={this.state.cities}
                   onChange={this.onChangeCities}
                   type="text"
                 ></input>
+                <ReactTooltip id='citytooltip' type='error' effect='solid'>
+                  <ul>
+                    <li>Enter Cities between Origin and Destination</li>
+                    <li>Use  ","  to seperate coordinates</li>
+                  </ul>
+                </ReactTooltip>
                 <button type="submit" className="btn btn-primary editRoute">
                   Submit
                 </button>

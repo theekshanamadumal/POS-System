@@ -6,7 +6,7 @@ import URL from "../../../config";
 export default class AddRoute extends Component {
   render() {
     return (
-      <div className="viewRoute">
+      <div data-testid="newRoute" className="viewRoute">
         <div className="spacing">
           <div className="containerSale">
             <h1 className="heading">New Route</h1>

@@ -1,3 +1,4 @@
+import color from "@material-ui/core/colors/amber";
 import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
@@ -5,9 +6,9 @@ export default function MapGL({sellersData}) {
   const [viewport, setViewport] = useState({
     latitude:7.489083614888397,
     longitude: 80.36274774593174,
-    width: "69vw",
+    width: "72vw",
     height: "80vh",
-    zoom: 8
+    zoom: 7
   });
   const [selectedseller, setSelectedseller] = useState(null);
 
@@ -50,6 +51,9 @@ export default function MapGL({sellersData}) {
               }}
             >
               <img src="/skateboarding.svg" alt="Seller Icon" />
+              <h4 style={{ color: 'blue' }}>{sellerData.sellerId.firstName}</h4>
+
+
             </button>
           </Marker>
         ))}

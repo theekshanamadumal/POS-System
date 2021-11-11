@@ -1,23 +1,29 @@
+import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Topbar from "./components/topbar/Topbar";
+//import Topbar from "./components/topbar/Topbar";
 import'./app.css'
 
+//import AuthService from "./services/authService";
+import {PrivateAdminRoute,PrivateManagerRoute} from "./services/roleHandler";
+//import AccessController from "./services/roleHandler";
+
+
 import Login from "./components/login/login";
-import Maps from "./pages/management/sellerLocation/Maps";
+//import Maps from "./pages/management/sellerLocation/Maps";
 
 //it admin
-import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
+//import ItAdminSidebar from "./components/itAdminSidebar/Sidebar";
 import ItAdminHome from "./pages/itAdmin/Home/itAdminHome";
-import Management from './pages/itAdmin/management/management';
-import AddManager from './pages/itAdmin/addManager/addManager';
-import ViewManager from './pages/itAdmin/management/viewManager';
+import User from './pages/itAdmin/user/user';
+import AddUser from './pages/itAdmin/addUser/addUser';
+import ViewUser from './pages/itAdmin/user/viewUser';
+import AdminAnalytics from './pages/itAdmin/analytics/analytics';
 
 //management
-import ManagementSidebar from "./components/managementSidebar/Sidebar";
+//import ManagementSidebar from "./components/managementSidebar/Sidebar";
 import ManagementHome from "./pages/management/Home/managementHome";
 
 import SalesPerson from "./pages/management/SalesPerson/salesPerson";
-import NewSalesPerson from "./pages/management/SalesPerson/newSalesPerson";
 import ViewSalesPerson from "./pages/management/SalesPerson/viewSalesPerson";
 
 import Products from "./pages/management/Products/products";
@@ -31,183 +37,104 @@ import ViewOrders from './pages/management/Orders/viewOrder';
 import Routes from "./pages/management/Routes/route";
 import AddRoute from "./pages/management/Routes/addRoute";
 import ViewRoute from "./pages/management/Routes/viewRoute";
-import LastSales from './pages/management/Routes/lastSales';
+//import LastSales from './pages/management/Routes/lastSales';
 
 import Shops from "./pages/management/Shops/shops";
 import AddShop from "./pages/management/Shops/addShop";
 import ViewShop from "./pages/management/Shops/viewShop";
 
 import Analytics from "./pages/management/Analytics/analytics";
-import Reports from "./pages/management/Reports/reports";
+//import Reports from "./pages/management/Reports/reports";
 
 import Tasks from "./pages/management/Tasks/tasks";
 import ViewTasks from "./pages/management/Tasks/viewTasks";
 import AssignTasks from './pages/management/Tasks/assign';
 
 
-function App() {
-//const logged = true;
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() { 
+    
+  }
+
+  render() {
+
   return (
     <Router>
-    <div className="App">
-
-    
-    <Topbar/>
-        <div className='contain'>
-    
+      <div className="App">
         <Switch>
-
-        <Route exact path="/">
-          <Login/>
-        </Route>
-        
-          
-      
-          <Route exact path="/itAdmin">
-            <ItAdminSidebar/>  
-            <ItAdminHome />  
+          <Route exact path="/">
+            <Login/>
           </Route>
 
-          <Route path="/itAdmin/reports">
-            <ItAdminSidebar/>  
-            <h1>reports page</h1> 
+          <Route exact path="/login">
+            <Login/>
           </Route>
 
-          <Route exact path="/itAdmin/management">
-            <ItAdminSidebar/> 
-            <Management/> 
-          </Route>
+          {/*  admin routes  */}
+    
+        <PrivateAdminRoute exact path="/itAdmin" component={ItAdminHome}/>
 
-          <Route path="/itAdmin/addManager">
-            <ItAdminSidebar/> 
-            <AddManager />  
-          </Route>
-        
-          <Route path="/itAdmin/editManager/:id">
-            <ItAdminSidebar/> 
-            <ViewManager />
-          </Route> 
+        <PrivateAdminRoute exact path="/itAdmin/reports" component={<h1>reports page</h1> }/>
 
+        <PrivateAdminRoute exact path="/itAdmin/user" component={User}/>
 
+        <PrivateAdminRoute exact path="/itAdmin/addUser" component={AddUser}/>
 
-          <Route exact path="/management">
-            <ManagementSidebar/>
-            <ManagementHome/>
-          </Route>  
+        <PrivateAdminRoute exact path="/itAdmin/user/:id" component={ViewUser}/>
+
+        <PrivateAdminRoute exact path="/itAdmin/analytics" component={AdminAnalytics}/>
+
+          {/*  management routes  */}
+          <PrivateManagerRoute exact path="/management" component={ManagementHome}/>
           
-          <Route exact path="/management/analytics">
-            <ManagementSidebar/>
-            <Analytics/>
-          </Route>  
+          <PrivateManagerRoute exact path="/management/analytics" component={Analytics}/> 
 
-          <Route exact path="/management/salesperson">
-            <ManagementSidebar/>
-            <SalesPerson/>
-          </Route> 
+          <PrivateManagerRoute exact path="/management/salesperson" component={SalesPerson}/> 
 
-          <Route path="/management/addSalesperson">
-            <ManagementSidebar/>
-            <NewSalesPerson/>
-          </Route>  
-          
-          <Route exact path="/management/salesPerson/:id">
-            <ManagementSidebar/>
-            <ViewSalesPerson/>
-          </Route>         
-          
-          <Route exact path="/management/products">
-            <ManagementSidebar/>
-            <Products/>
-          </Route>  
-          
-          <Route exact path="/management/products/:id">
-              <ManagementSidebar/>
-              <ViewProducts/>
-            </Route>  
+          <PrivateManagerRoute exact path="/management/salesPerson/:id" component={ViewSalesPerson}/> 
 
-          <Route path="/management/addProduct">
-            <ManagementSidebar/>
-            <AddProducts/>
-          </Route>  
-          
-          <Route path="/management/addProductCategory">
-            <ManagementSidebar/>
-            <AddProductCategory location="/management"/>
-          </Route>  
+          <PrivateManagerRoute exact path="/management/products" component={Products}/> 
 
-          <Route path="/management/reports">
-            <ManagementSidebar/>
-            <Reports/>
-          </Route>  
-          
-          <Route exact path="/management/routes">
-          <ManagementSidebar/>
-          <Routes/>
-          </Route>  
+          <PrivateManagerRoute exact path="/management/products/addProduct" component={AddProducts}/> 
 
-          <Route exact path="/management/routes/addRoute">
-              <ManagementSidebar/>
-              <AddRoute/>
-            </Route> 
+          <PrivateManagerRoute exact path="/management/products/addProductCategory" component={AddProductCategory}/> 
 
-            <Route exact path="/management/routes/:id">
-              <ManagementSidebar/>
-              <ViewRoute/>
-            </Route>  
+          <PrivateManagerRoute exact path="/management/products/:id" component={ViewProducts}/> 
 
-            <Route path="/management/route/lastSales">
-              <ManagementSidebar/>
-              <LastSales/>
-            </Route>  
+          <PrivateManagerRoute exact path="/management/routes" component={Routes}/> 
 
-            
-            <Route path="/management/orders">
-            <ManagementSidebar/>
-            <Orders/>
-          </Route>   
+          <PrivateManagerRoute exact path="/management/routes/addRoute" component={AddRoute}/> 
 
-          <Route path="/management/Order/:id">
-            <ManagementSidebar/>
-            <ViewOrders/>
-          </Route>  
+          <PrivateManagerRoute exact path="/management/routes/:id" component={ViewRoute}/> 
 
-          <Route exact path="/management/shops">
-            <ManagementSidebar/>
-            <Shops/>
-          </Route> 
+          {/* <PrivateManagerRoute exact path="/management/route/lastSales" component={LastSales}/>  */}
 
-          <Route path="/management/shops/addShop">
-            <ManagementSidebar/>
-            <AddShop/>
-          </Route> 
+          <PrivateManagerRoute exact path="/management/orders" component={Orders}/> 
 
-          <Route path="/management/shops/:id">
-            <ManagementSidebar/>
-            <ViewShop/>
-          </Route> 
+          <PrivateManagerRoute exact path="/management/Orders/:id" component={ViewOrders}/> 
 
-          <Route exact path="/management/tasks">
-            <ManagementSidebar/>
-            <Tasks/>
-          </Route>
+          <PrivateManagerRoute exact path="/management/shops" component={Shops}/> 
 
-          <Route path="/management/tasks/:id/viewTasks">
-            <ManagementSidebar/>
-            <ViewTasks/>
-          </Route>
+          <PrivateManagerRoute exact path="/management/shops/addShop" component={AddShop}/> 
 
-          <Route path="/management/tasks/:id/assignTasks">
-            <ManagementSidebar/>
-            <AssignTasks />
-          </Route>
-         
+          <PrivateManagerRoute exact path="/management/shops/:id" component={ViewShop}/> 
+
+          <PrivateManagerRoute exact path="/management/tasks" component={Tasks}/> 
+
+          <PrivateManagerRoute exact path="/management/tasks/:id/viewTasks" component={ViewTasks}/> 
+
+          <PrivateManagerRoute exact path="/management/tasks/assignTasks" component={AssignTasks }/> 
+    
 
         </Switch>  
-        </div>
-      
-    </div>
+      </div>
     </Router>
   );
+}
 }
 
 export default App;

@@ -16,6 +16,8 @@ module.exports =  class RouteController {
 
 // Static method
     static addNewRoute(req,res ) {
+        console.log("requsted for add a route....")
+        console.log(req.body)
         const origin = req.body.origin;
         const originLocation = (req.body.originLocation).split(",");
         const destination = req.body.destination;

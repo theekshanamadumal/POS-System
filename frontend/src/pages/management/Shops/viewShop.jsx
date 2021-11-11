@@ -3,7 +3,7 @@ import "./viewShop.css";
 import { withRouter } from "react-router";
 import axios from "axios";
 import URL from "../../../config";
-
+import authHeader from "../../../services/authHeader";
 import { Email, PhoneAndroid, LocationCity, Home } from "@material-ui/icons";
 
 export default withRouter(
@@ -38,7 +38,7 @@ export default withRouter(
 
     loadRoutes() {
       axios
-        .get(URL.main+URL.salesRoutes)
+        .get(URL.main+URL.salesRoutes,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             routeList: response.data,
@@ -58,7 +58,7 @@ export default withRouter(
       this.dataId = this.props.match.params.id;
       console.log("dataId: ", this.dataId);
       axios
-        .get(URL.main+URL.shopComp + this.dataId)
+        .get(URL.main+URL.shopComp + this.dataId,{ headers: authHeader() })
         .then((response) => {
           this.setState({
             shop: response.data,
@@ -104,32 +104,35 @@ export default withRouter(
 
     onSubmit(e) {
       e.preventDefault();
-      const shop = {
-        shopName: this.state.shopName,
-        owner: this.state.owner,
-        phoneNo: this.state.phoneNo,
-        email: this.state.email,
-        city: this.state.city,
-        location: this.state.location,
-        route: this.state.route,
-      };
-
-      console.log(shop);
-      console.log(shop.location);
-
-      axios
-        .post(
-          URL.main+URL.updateShop + this.dataId,
-          shop
-        )
-        .then((res) => {
-          console.log(res.data);
-          alert(res.data, (window.location = URL.shops));
-        })
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.shops));
-        });
+      if (window.confirm("Confirm to Update?")) {
+        const shop = {
+          shopName: this.state.shopName,
+          owner: this.state.owner,
+          phoneNo: this.state.phoneNo,
+          email: this.state.email,
+          city: this.state.city,
+          location: this.state.location,
+          route: this.state.route,
+        };
+  
+        console.log(shop);
+        console.log(shop.location);
+  
+        axios
+          .post(
+            URL.main+URL.updateShop + this.dataId,
+            shop,
+            { headers: authHeader() }
+          )
+          .then((res) => {
+            console.log(res.data);
+            alert(res.data, (window.location = URL.shops));
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error, (window.location = URL.shops));
+          });
+      }
     }
 
     render() {

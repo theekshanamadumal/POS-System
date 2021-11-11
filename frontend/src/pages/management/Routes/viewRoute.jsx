@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import URL from "../../../config";
 import "./viewRoute.css";
 import { Link } from "react-router-dom";
+import authHeader from "../../../services/authHeader";
 
 export default withRouter(
   class ViewRoute extends Component {
@@ -17,6 +18,7 @@ export default withRouter(
         this.onChangeDestinationLocation.bind(this);
       this.onChangeCities = this.onChangeCities.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
+      this.loadShops = this.loadShops.bind(this);
 
       this.state = {
         route: [],
@@ -26,7 +28,15 @@ export default withRouter(
         destination: "",
         destinationLocation: "",
         cities: [],
+        routesDetails: [],
+        shops: [],
+        countShops: 0,
       };
+    }
+    loadShops() {
+      console.log("route details", this.state.routesDetails);
+      const li = this.state.routesDetails.filter((e) => e._id === this.dataId);
+      console.log("li", li);
     }
 
     componentDidMount() {
@@ -34,23 +44,43 @@ export default withRouter(
 
       console.log("dataId: ", this.dataId);
       axios
-        .get(URL.main+URL.salesRouteComp+ this.dataId)
-        .then((response) => {
-          this.setState({
-            route: response.data,
-            origin: response.data.origin,
-            originLocation: String(response.data.originLocation),
-            destination: response.data.destination,
-            destinationLocation: String(response.data.destinationLocation),
-            cities: response.data.cities,
-          });
-          console.log("response.data");
-          console.log(response.data);
-        })
+        .all([
+          axios.get(URL.main + URL.salesRouteComp + this.dataId, {
+            headers: authHeader(),
+          }),
+          axios.get(URL.main + URL.shops + "/groupByRoute", {
+            headers: authHeader(),
+          }),
+        ])
+        .then(
+          axios.spread((...responses) => {
+            this.setState({
+              route: responses[0].data,
+              origin: responses[0].data.origin,
+              originLocation: String(responses[0].data.originLocation),
+              destination: responses[0].data.destination,
+              destinationLocation: String(
+                responses[0].data.destinationLocation
+              ),
+              cities: responses[0].data.cities,
+            });
+            const li = responses[1].data.filter((c) => c._id === this.dataId);
+            if (li.length > 0) {
+              this.setState({
+                routesDetails: responses[1].data.filter(
+                  (c) => c._id === this.dataId
+                ),
+              });
+              this.setState({ shops: li[0].shopsName });
+              this.setState({ countShops: li[0].count });
+            }
+          })
+        )
         .catch((error) => {
           console.log(error);
           alert(error, (window.location = URL.routes));
         });
+      this.loadShops();
     }
 
     onChangeOrigin(e) {
@@ -71,29 +101,30 @@ export default withRouter(
 
     onSubmit(e) {
       e.preventDefault();
-      const route = {
-        origin: this.state.origin,
-        originLocation: this.state.originLocation,
-        destination: this.state.destination,
-        destinationLocation: this.state.destinationLocation,
-        cities: this.state.cities,
-      };
-
-      console.log("before post", route);
-
-      axios
-        .post(
-          URL.main+URL.updateSaleRoute+ this.dataId,
-          route
-        )
-        .then((res) => {
-          console.log(res.data);
-          alert(res.data, (window.location = URL.routes));
-        })
-        .catch((error) => {
-          console.log(error);
-          alert(error, (window.location = URL.routes));
-        });
+      if (window.confirm("Confirm to Update?")) {
+        const route = {
+          origin: this.state.origin,
+          originLocation: this.state.originLocation,
+          destination: this.state.destination,
+          destinationLocation: this.state.destinationLocation,
+          cities: this.state.cities,
+        };
+  
+        console.log("before post", route);
+  
+        axios
+          .post(URL.main + URL.updateSaleRoute + this.dataId, route, {
+            headers: authHeader(),
+          })
+          .then((res) => {
+            console.log(res.data);
+            alert(res.data, (window.location = URL.routes));
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error, (window.location = URL.routes));
+          });
+      }
     }
 
     render() {
@@ -102,14 +133,15 @@ export default withRouter(
           <div className="spacing">
             <div className="containerSale">
               <h1 className="heading">Routes</h1>
-              <Link to={URL.lastSales}>
-                <button className="addUser">View Last Month Sales</button>
-              </Link>
-              <Link to={URL.addRoute}>
-                <button className="addUser">Add New Route</button>
-              </Link>
-            </div>
 
+              {/* <Link to={URL.lastSales}>
+                <button className="addUser">View Last Month Sales</button>
+              </Link> */}
+              {/*<Link to={URL.addRoute}>
+                <button className="addUser">Add New Route</button>
+              </Link>*/}
+            </div>
+            {console.log("rou de", this.state.routesDetails)}
             <div className="Container">
               <div className="detailsContainer">
                 <div className="detailMain">
@@ -149,29 +181,25 @@ export default withRouter(
                       {this.state.route.destinationLocation}
                     </span>
                   </p>
+                  {/*                   
                   <p className="detail">
                     Last Visited : <span className="value"> 09/09/2021</span>
                   </p>
                   <p className="detail">
                     Status : <span className="value"> Assigned</span>
                   </p>
+                  */}
                   <p className="detail">
-                    No of Shops : <span className="value"> 4</span>
+                    No of Shops :{" "}
+                    <span className="value"> {this.state.countShops}</span>
                   </p>
                   <p className="detail"> Shops : </p>
                   <ol className="instructionsRot">
-                    <li className="contactRot">
-                      <span className="value"> Store 1</span>
-                    </li>
-                    <li className="contactRot">
-                      <span className="value">Store 2</span>
-                    </li>
-                    <li className="contactRot">
-                      <span className="value">Store 3 </span>
-                    </li>
-                    <li className="contactRot">
-                      <span className="value">Store 4</span>
-                    </li>
+                    {this.state.shops.map((x) => (
+                      <li className="contactRot">
+                        <span className="value"> {x}</span>
+                      </li>
+                    ))}
                   </ol>
                 </div>
               </div>
@@ -224,13 +252,14 @@ export default withRouter(
                           onChange={this.onChangeCities}
                           type="text"
                         ></input>
-                        <button
-                          type="submit"
-                          className="btn btn-primary editRoute"
-                        >
-                          Submit
-                        </button>
                       </div>
+
+                      <button
+                        type="submit"
+                        className="btn btn-lg btn-primary editRoute"
+                      >
+                        Submit
+                      </button>
                     </div>
                   </div>
                 </form>

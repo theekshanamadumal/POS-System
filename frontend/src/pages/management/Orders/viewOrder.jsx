@@ -1,73 +1,54 @@
-import React, { Component } from "react";
 import axios from "axios";
-import { withRouter } from "react-router";
 import URL from "../../../config";
 import "./viewOrder.css";
-
 import InvoiceDetails from "../../../components/Invoice/invoiceDetails";
 import InvoiceList from "../../../components/Invoice/invoiceList";
+import {React,useState,useEffect} from 'react';
+import authHeader from "../../../services/authHeader";
 
-//import { invoiceRows } from "../../../dataCollection";
+export default function ViewOrder({match}) {
+  const [invoiceData,setInvoiceData]=useState([]);
+  const [sellerData,setSellerData]=useState([]);
+  const [shopName,setShopName]=useState("");
+  const [transactions,setTransactions]=useState([]);
+  const [id,setId]=useState("");
+  const [total,setTotal]=useState(0.00);
 
-export default withRouter(
-  class viewOrder extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { invoiceData: [], invoiceID: "" ,shopName:"",transactions:[]};
-    this.loadInvoices=this.loadInvoices.bind(this);
-  }
-  
-  loadInvoices() {
-    axios
-      .get(URL.invoice + "/" + this.state.invoiceID)
-      .then((response) => {
-        this.setState({
-          invoiceData: response.data,
-        });
-        this.setState({
-          shopName:response.data.shopId.shopName
+  useEffect(() => {
+      axios
+        .get(URL.invoice + "/" + match.params.id,{ headers: authHeader() })
+        .then((response) => {
+          console.log("response...",response.data)
+          setTransactions(response.data.transactions);
+          setInvoiceData(response.data);
+          setSellerData(response.data.sellerId);
+          setShopName(response.data.shopId.shopName);
+          setId(response.data._id.substr(19));
+          setTotal(response.data.total.toFixed(2));
         })
-        this.setState({
-          transactions:response.data.transactions
-        })
-        console.log(this.state.transactions)
-        console.log("-------invoice------------:");
-        
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.management));
-      });
-  }
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        }); 
+  }, [])
 
-  componentDidMount() {
-    console.log(this.props.match.params.id);
-    this.state.invoiceID = this.props.match.params.id;
-    this.loadInvoices();
-  }
-
-  render() {
-    return (
-      <div className="viewOrder">
+  return (
+    <div className="viewOrder">
         <div className="detailCont">
-        {console.log("&&&&&&&&&&")}
-        {console.log(this.state.invoiceData)}
-        {console.log(this.state.invoiceData.shopId)}
-        {console.log(this.state.invoiceData.transactions)}
-        {console.log(Object.values(this.state.invoiceData)[5] )}
-        {console.log(typeof Object.values(this.state.invoiceData)[5])}
-        {console.log(typeof this.state.transactions)}
-        {console.log(Object.values(this.state.transactions)[0])}
           <InvoiceDetails
             className="contain"
-            invoiceData={this.state.invoiceData}
-            shopName={this.state.shopName}
+            invoiceData={invoiceData}
+            sellerData={sellerData}
+            shopName={shopName}
+            id={id}
           />
-          <InvoiceList className="invTab" invoices={this.state.invoiceData} transactions={this.state.transactions} />
-          
+          <InvoiceList
+            className="invTab"
+            invoices={invoiceData}
+            transactions={transactions}
+            total={total}
+          />
         </div>
       </div>
-    );
-  }
+  )
 }
-)

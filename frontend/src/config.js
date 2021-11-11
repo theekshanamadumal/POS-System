@@ -1,17 +1,36 @@
 const URL = {}
-URL.main="http://localhost:3001";
+
+
 URL.GoogleMapsAPI = 'AIzaSyBNQsYuKSBIV1GWz8O3t0HKjMkGD_k5fsM';
 
-URL.sellerLocation = "http://localhost:3001/management/sellerLocation";
+/////////////////////// react app //////////////////////////
+
+
+/////////////////////// rest api //////////////////////////
+
+
+URL.main="/api";
+URL.API_URL = "/api/auth/";
+
+URL.sellerLocation = URL.main+ "/management/sellerLocation";
+URL.invoice = URL.main+ "/management/invoice";
+
+URL.signin = "/api/auth/signin";
+URL.signup = "/api/auth/signin";
+URL.signout = "/api/auth/signout";
+
+
+URL.mainpage = "/";
+URL.signinpage = "/login";
+
 
 URL.management = "/management";
 
-URL.invoice = "http://localhost:3001/management/invoice";
 
 URL.products = "/management/products";
-URL.addProduct = "/management/addProduct";
+URL.addProduct = "/management/products/addProduct";
 URL.productCategory = "/management/productCategory";
-URL.addProductCategory ="/management/addProductCategory";
+URL.addProductCategory ="/management/products/addProductCategory";
 URL.productComp ="/management/product/";
 URL.updateProduct="/management/updateProduct/";
 
@@ -26,26 +45,43 @@ URL.lastSales="/management/route/lastSales";
 URL.salesperson="/management/salesperson";
 URL.addSalesperson="/management/addSalesperson";
 URL.updateSalesperson="/management/updateSalesperson/";
+URL.salespersonCount="/management/salespersonCount/";
 
 URL.shops="/management/shops";
 URL.shopComp="/management/shop/";
 URL.addShops="/management/shops/addShop";
 URL.updateShop="/management/updateShop/";
+URL.shopsCount="/management/shopsCount/";
 
 URL.tasks="/management/tasks";
-URL.addDailyTarget="/management/adddailyTarget";
+URL.addDailyTarget="/management/adddailyTasks";
 
 URL.itAdmin="/itAdmin";
-URL.manager="/itAdmin/management/";
-URL.addManager="/itAdmin/addManager";
-URL.editManager="/itAdmin/editManager/";
+URL.user="/itAdmin/user/";
+URL.addUser="/itAdmin/addUser";
+URL.editUser="/itAdmin/editUser/";
+URL.userUpdate="/itAdmin/userUpdate/";
+URL.userCount="/itAdmin/userCount";
+URL.managerCount="/itAdmin/managerCount";
+URL.signupHistory="/itAdmin/analytics/signups";
+URL.signinHistory="/itAdmin/analytics/signins";
+URL.adminAnalytics="/itAdmin/analytics";
+
 
 URL.analytics="/management/analytics";
+URL.categoryAnalytics="/management/analytics/category";
+URL.salesAnalytics="/management/analytics/sales";
+URL.sellersAnalytics="/management/analytics/sellers";
 URL.sales="management/analytics#sales";
 URL.analyticsSalesperson="management/analytics#salesperson";
 URL.analyticsCategory="management/analytics#category";
+URL.salesAnalyticsDuration="/management/analytics/salesDuration"
+URL.salesPersonAnalyticsDuration="/management/analytics/salesPersonDuration";
+URL.categoryAnalyticsDuration="/management/analytics/categoryDuration";
 
 URL.orders="/management/orders";
-URL.orderComp="/management/order/";
+URL.orderComp="/management/orders/";
+
+URL.dailyTasks="/management/dailyTasks";
 
 module.exports = URL;

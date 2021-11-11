@@ -3,11 +3,11 @@ import React, { Component } from "react";
 
 import "./analytics.css";
 import SalespersonPerform from "../../../components/analyticsComp/salespersonPerform";
-import { personPerform } from "../../../dataCollection";
+//import { personPerform } from "../../../dataCollection";
 import Category from "../../../components/analyticsComp/category";
 import SalesAnalytics from "../../../components/analyticsComp/salesAnalytics";
-import { chartData } from "../../../dataCollection";
-import AllSellersLocations from "../../../pages/management/sellerLocation/allSellersLocations";
+//import { chartData } from "../../../dataCollection";
+//import AllSellersLocations from "../../../pages/management/sellerLocation/allSellersLocations";
 
 class Analytics extends Component {
   constructor(props) {
@@ -17,31 +17,42 @@ class Analytics extends Component {
   render() {
     return (
       <div className="analytics">
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#sales">
+        <ul class="nav nav-pills m-4 mx-5">
+          <li class="nav-item mx-5">
+            <a
+              class="nav-link active p-3 px-5"
+              style={{ borderRadius: "20px", fontSize: "20px" }}
+              aria-current="page"
+              href="#sales"
+            >
               Sales Analytics
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#salesperson">
+          <li class="nav-item mx-5">
+            <a
+              class="nav-link active p-3 px-5"
+              style={{ borderRadius: "20px", fontSize: "20px" }}
+              href="#salesperson"
+            >
               Salesperson Analytics
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#category">
+          <li class="nav-item mx-5">
+            <a
+              class="nav-link active p-3 px-5"
+              style={{ borderRadius: "20px", fontSize: "20px" }}
+              href="#category"
+            >
               category Analytics
             </a>
           </li>
         </ul>
-        <br></br>
-        <AllSellersLocations />
-        <br></br>
+
         <a name="sales"></a>
-        <SalesAnalytics data={chartData} dataKey="month" grid />
+        <SalesAnalytics durSelected="Day-7" />
         <br></br>
         <a name="salesperson"></a>
-        <SalespersonPerform salespersonPerform={personPerform} />
+        <SalespersonPerform />
         <br></br>
         <a name="category"></a>
         <Category />

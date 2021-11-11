@@ -1,0 +1,49 @@
+
+.management {
+  flex: 8;
+  background-color: rgba(236, 234, 234, 0.699);
+}
+.actionButton {
+  display: flex;
+  border-radius: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+  width: 100px;
+  float: left;
+  height: 30px;
+}
+
+.editButton {
+  padding: 0px 10px;
+  background-color: rgb(16, 196, 46);
+  border-radius: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+  width: 50px;
+  float: left;
+  height: 30px;
+}
+.deleteButton {
+  cursor: pointer;
+  margin-top: 43px;
+}
+.heading {
+  padding: 0px;
+  margin: 20px;
+}
+
+.contain {
+  display: flex;
+}
+.addUser {
+  height: 55px;
+  width: 200px;
+  background-color: rgb(16, 196, 46);
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 20px;
+  padding: 5px 30px;
+  flex: 1;
+  font-size: 17px;
+  font-weight: bolder;
+}

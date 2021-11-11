@@ -12,45 +12,35 @@ import React from "react";
 import { Container } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
 
-const InvoiceList = ({ invoices,transactions, ...rest }) => {
+const InvoiceList = ({ invoices, transactions,total, ...rest }) => {
   return (
-    <Container maxWidth="md" className="tableCont">
+    <Container maxWidth="md" className="tableCont pt-2 pb-5">
       <Paper>
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">No</TableCell>
-                <TableCell align="center">Product Name</TableCell>
-                <TableCell align="right">Unit Price</TableCell>
-                <TableCell align="right">Quantity</TableCell>
-                <TableCell align="right">Sub Total</TableCell>
+            <TableHead >
+              <TableRow> 
+                <TableCell style={{backgroundColor:"#b4b3b3"}} align="center"></TableCell>
+                <TableCell style={{backgroundColor:"#b4b3b3"}} align="center">Product Name</TableCell>
+                <TableCell style={{backgroundColor:"#b4b3b3"}} align="right">Unit Price</TableCell>
+                <TableCell style={{backgroundColor:"#b4b3b3"}} align="right">Quantity</TableCell>
+                <TableCell style={{backgroundColor:"#b4b3b3"}} align="right">Sub Total</TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
-            {console.log("checkkkkkkkkkk")}
-            {console.log(transactions)}
-
-              {/*{transactions
-                //.filter((item) => item.id.unitPrice > 0)
-                // .sort((a, b) => (a.name > b.productName ? 1 : -1))
-                .map((item, index) => {
-                  return (
-                    <TableRow key={item.id}>
-                      <TableCell align="center">{index + 1}</TableCell>
-                      <TableCell align="center">{item.id}</TableCell>
-                      <TableCell align="right">
-                        {" "}
-                        {item.quantity.toFixed(2)}{" "}
-                      </TableCell>
-                      <TableCell align="right">{item.quantity} </TableCell>
-                      <TableCell align="right">
-                        {(item.quantity * item.quantity).toFixed(2)}{" "}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}*/}
+              {transactions
+                .filter((im) => im.id.unitPrice > 0)
+                .sort((a, b) => (a.id.itemName > b.id.itemName ? 1 : -1))
+                .map((e,index)=>(
+                <TableRow hover key={e.id._id}>
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{e.id.itemName}</TableCell>
+                  <TableCell align="right">{e.id.unitPrice.toFixed(2)}{" "}</TableCell>
+                  <TableCell align="right">{e.quantity} </TableCell>
+                  <TableCell align="right">{(e.id.unitPrice * e.quantity).toFixed(2)}{" "} </TableCell>
+                </TableRow>
+              ))}
               <TableRow>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
@@ -58,13 +48,7 @@ const InvoiceList = ({ invoices,transactions, ...rest }) => {
                 <TableCell align="right">
                   <strong>Total Amount in LKR</strong>
                 </TableCell>
-                <TableCell align="right">
-                  {invoices.total}
-                  {/*invoices
-                    .map((item) => item.unitPrice)
-                    .reduce((acc, value) => acc + value)
-                  .toFixed(2)*/}{" "}
-                </TableCell>
+                <TableCell align="right"><strong>{total}</strong></TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -74,7 +58,4 @@ const InvoiceList = ({ invoices,transactions, ...rest }) => {
   );
 };
 
-InvoiceList.propTypes = {
-  Products: PropTypes.array.isRequired,
-};
 export default InvoiceList;

@@ -5,31 +5,35 @@ import "./invoiceDetails.css";
 import { parseJSON } from "date-fns/esm";
 
 export default function invoiceDetails(props) {
-  console.log(
-    "-------------invoice data to invoice details componennt -------------------",
-    props.invoiceData
-  );
-  const {_id,total,dateTime,shopId}=props.invoiceData;
+  //const jsonInvoice=JSON.parse(invoiceData);
+  //const id=props.invoiceData._id;
   return (
     <div className="invoiceDetails">
       <h1 className="invoicehead">Invoice</h1>
       <div className="invoiceContainer">
         <div className="leftCont">
+        
+        
           <p className="detailInv">
             {" "}
             Invoice ID :
-            <span className="value">{String(_id).substr(19)}</span>
+            <span className="value">{props.id}</span>
           </p>
           <p className="detailInv">
             {" "}
             Shop :<span className="value"> {props.shopName}</span>
           </p>
           <p className="detailInv">
-            {" "}
-            Issued Date :{" "}
+            Seller :
             <span className="value">
-              {" "}
-              {moment(dateTime).format("DD/MM/YYYY")}
+              {props.sellerData.firstName + " " + props.sellerData.lastName}
+            </span>
+          </p>
+          <p className="detailInv">
+            Issued Date :
+            <span className="value">
+            {moment(props.invoiceData.dateTime).format("DD/MM/YYYY")}
+
             </span>
           </p>
         </div>

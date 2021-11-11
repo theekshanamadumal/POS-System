@@ -100,26 +100,24 @@
 .newUser input {
   height: 35px;
 }
-.form-outline small{
+.form-outline small {
   color: rgb(250, 4, 4);
   visibility: hidden;
-  
-  
 }
-.form-outline.error small{
-  visibility:visible;
+.form-outline.error small {
+  visibility: visible;
   font-size: medium;
 }
-.form-outline.success input{
+.form-outline.success input {
   border: solid 2px forestgreen;
   margin-bottom: 25px;
 }
-.form-outline.success input.pass{
+.form-outline.success input.pass {
   margin-bottom: 0px;
 }
-.form-outline.success Visibility{
+.form-outline.success Visibility {
   margin-top: -25px;
 }
-.form-outline.error input{
-  border:  solid 2px rgb(250, 4, 4);
+.form-outline.error input {
+  border: solid 2px rgb(250, 4, 4);
 }

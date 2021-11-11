@@ -1,7 +1,6 @@
-import React, { Component } from "react";
 import "./viewTasks.css";
-import { remain, achieved } from "../../../dataCollection";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import authHeader from "../../../services/authHeader";
 import {
   Box,
   Card,
@@ -12,23 +11,62 @@ import {
   TableRow,
 } from "@material-ui/core";
 import Percentage from "../../../components/taskComp/percentage";
-import Maps from "../sellerLocation/Maps";
 import SellerLocation from "../../../pages/management/sellerLocation/sellerLocations";
-
-//import MapChart from "../../MapChart";
+import axios from "axios";
+import { React, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import URL from "../../../config";
 
 export default function ViewTasks() {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
   const id = splitLocation[3];
+  const [user_ID, setUser_ID] = useState();
+  const [tasks, setTasks] = useState([]);
+  const [seller, setSeller] = useState([]);
+  const [dailyShops, setDailyShops] = useState([]);
+  const [dailyInventory, setDailyInventory] = useState([]);
+
+  const loadSalesPerson = (idNum) => {
+    axios
+      .get(URL.main + URL.salesperson + "/" + idNum,{ headers: authHeader() })
+      .then((response) => {
+        setSeller(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = URL.salesperson));
+      });
+  };
+  useEffect(() => {
+    axios
+      .get(URL.main + URL.dailyTasks + "/" + id,{ headers: authHeader() })
+      .then((response) => {
+        setTasks(response.data);
+        setDailyInventory(response.data.dailyInventory);
+        setDailyShops(response.data.dailyShops);
+        console.log("response.....", response.data);
+        setUser_ID(response.data.sellerId);
+        loadSalesPerson(response.data.sellerId);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error, (window.location = URL.management));
+      });
+  }, []);
   return (
     <div className="viewTasks">
-      <Percentage remain={remain} achieved={achieved} id={id} />
+      <Percentage
+        target={tasks.dailySalesTarget}
+        achieved={tasks.dailySalesProgression}
+        id={seller.idNumber}
+        name={seller.firstName + " " + seller.lastName}
+        route={String(tasks.dailyRoute).substr(19)}
+      />
       <div className="detContain">
         <div className="achieved">
-          <h1>Achieved Tasks</h1>
+          <h1>Daily Inventory</h1>
           <Card>
             <PerfectScrollbar>
               <Box>
@@ -36,25 +74,18 @@ export default function ViewTasks() {
                   <TableHead sx={{ innerHeight: 100 }}>
                     <TableRow>
                       <TableCell align="center" className="tbHeader">
-                        <h5>Route No</h5>
-                      </TableCell>
-                      <TableCell align="center" className="tbHeader">
-                        <h5>Total inventory</h5>
+                        <h5>Product Name</h5>
                       </TableCell>
                       <TableCell align="right" className="tbHeader">
-                        <h5>Sales</h5>{" "}
+                        <h5>Quantity</h5>
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody className="tbBody">
-                    {achieved.map((d) => (
-                      <TableRow hover key={d.id}>
-                        <TableCell align="center">{d.id}</TableCell>
-                        <TableCell align="center">{d.inventory}</TableCell>
-                        <TableCell align="right">
-                          {" "}
-                          {d.income.toFixed(2)}{" "}
-                        </TableCell>
+                    {dailyInventory.map((d) => (
+                      <TableRow hover key={d.productId}>
+                        <TableCell align="center">{d.itemName}</TableCell>
+                        <TableCell align="right">{d.quantity}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -65,7 +96,7 @@ export default function ViewTasks() {
         </div>
 
         <div className="remain">
-          <h1>Remaining Tasks</h1>
+          <h1>Shops Details</h1>
           <Card>
             <PerfectScrollbar>
               <Box>
@@ -73,18 +104,24 @@ export default function ViewTasks() {
                   <TableHead sx={{ innerHeight: 100 }}>
                     <TableRow>
                       <TableCell align="center" className="tbHeader">
-                        <h5>Route No</h5>
+                        <h5>Shop Name</h5>
                       </TableCell>
                       <TableCell align="center" className="tbHeader">
-                        <h5>Allocated inventory</h5>
+                        <h5>Status</h5>
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody className="tbBody">
-                    {remain.map((d) => (
-                      <TableRow hover key={d.id}>
-                        <TableCell align="center">{d.id}</TableCell>
-                        <TableCell align="center">{d.inventory}</TableCell>
+                    {dailyShops.map((e) => (
+                      <TableRow hover key={e.shopId}>
+                        <TableCell align="center">{e.shopName}</TableCell>
+                        <TableCell align="center">
+                          {e.isCovered === true ? (
+                            <strong className="text-success">Covered</strong>
+                          ) : (
+                            <strong className="text-danger">Not Covered</strong>
+                          )}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -95,8 +132,9 @@ export default function ViewTasks() {
         </div>
       </div>
 
-      {/* <Maps /> */}
-      <SellerLocation sellerID={"615713be47fbf9190c7b8a25"} />
+      {console.log("---------seller._id----------", user_ID)}
+      {user_ID && <SellerLocation sellerID={user_ID} />}
+      {/* <SellerLocation sellerID={"61671c22346f6b3724faef50"} /> */}
     </div>
   );
 }

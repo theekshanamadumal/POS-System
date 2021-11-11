@@ -4,60 +4,67 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import "./category.css";
 import { Button } from 'reactstrap';
 import React from "react";
+import { useState,useEffect } from "react";
+import URL from "../../config";
+import categoryAnalytics from "../../services/analytics/category";
+import axios from 'axios';
+import authHeader from '../../services/authHeader';
+import html2pdf from "html2pdf.js"
 
 const Category = (props) => {
-  const theme = useTheme();
-  const devices = [
-    {
-      title: 'Laptop',
-      value: 27,
-      color: colors.indigo[500]
-    },
-    {
-        title: 'Tablet',
-        value: 18,
-        color: colors.grey[500]
-      },
-      {
-        title: 'Desktop',
-        value: 13,
-        color: colors.pink[600]
-      },
-      {
-        title: 'Mobile Phone',
-        value: 28,
-        color: colors.green[500]
-      },
-    {
-      title: 'EarPhone',
-      value: 10,
-      color: colors.red[600]
-    },
+  const [productByCategory,setProductByCategory]=useState([]);
+  const [data,setData]=useState([]);
+  const [labels,setLabels]=useState([]);
+  const [salesArray,setSalesArray]=useState([]);
 
-    {
-      title: 'Others',
-      value: 8,
-      color: colors.orange[600]
+  const printDocument=()=> {
+    const element = document.getElementById('categoryPdf');
+		var opt = {
+      margin: 0.2,
+      filename: 'AnalysisByCategory.pdf',
+      jsPDF: { unit: "mm", format: "a3", orientation: "portrait" },
+    };
+    if (window.confirm("Confirm to save?")) {
+      // Save it!
+      html2pdf().set(opt).from(element).save();
     }
-  ];
-  const data = {
+  }
+
+  useEffect(() => {
+    axios.get(URL.main + URL.categoryAnalyticsDuration+"/Day-7",{ headers: authHeader() }) 
+    .then( (response) => {
+      console.log('-------------------this.response category',response.data);
+      const x=categoryAnalytics.findFinalArray(response.data);
+      setData(x.data);
+      setLabels(x.labels);
+      setSalesArray(x.priceArray);
+      setProductByCategory(x.percentageArray)
+    } )
+    .catch((error) => {
+      console.log(error);
+      alert(error, (window.location = URL.management));
+    });
+  }, [])
+  
+  const theme = useTheme();
+  const dataSet = {
     datasets: [
       {
-        data: [25,18,13,28,10,8],
+        data: data,
         backgroundColor: [
+          colors.red[600],
+          colors.green[500],
           colors.indigo[500],
           colors.grey[500],
+          colors.orange[600],
           colors.pink[600],
-          colors.green[500],
-          colors.red[600],
-          colors.orange[600]
         ],
         borderWidth: 6,
         borderColor: colors.common.white,
         hoverBorderColor: colors.common.white
       }
     ],
-    labels: ['Laptop', 'Tablet','Desktop', 'Mobile Phone','EarPhone','Others']
+    labels: labels,
   };
 
   const options = {
@@ -81,46 +88,26 @@ const Category = (props) => {
     }
   };
 
-  const dataBar = [
-    {
-      name: 'Mobile',
-      sales: 420000,
-    },
-    {
-      name: 'Desktop',
-      sales: 200000,
-    },
-    {
-      name: 'Earphone',
-      sales: 84000,
-    },
-    {
-      name: 'Tablet',
-      sales: 177800,
-    },
-    {
-      name: 'Laptop',
-      sales: 381000,
-    },
-    {
-      name: 'USB pen',
-      sales: 23900,
-    },
-    {
-      name: 'Others',
-      sales: 34900,
-    },
-  ];
-  const [selected, setSelected] = React.useState("");
+  const dataBar =salesArray;
+
+
+  const [selected, setSelected] = React.useState("Day");
+  const [selectedValue,setSelectedValue]=useState("7");
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
+    {event.target.value==="Month"?setSelectedValue("January")
+      :event.target.value==="Day"?setSelectedValue("Last 7 Days")
+      :setSelectedValue("2021")}
+  };
+  const changeValueHandler = (event) => {
+    setSelectedValue(event.target.value);
   };
   const year= [
     "2021",
     "2020",
   ];
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const dataStructure = ["Last week","Last 2 weeks","Last 3 weeks"];
+  const dataStructure = [];
   let type = null;
   let optionsSelect = null;
 
@@ -128,115 +115,156 @@ const Category = (props) => {
     type = year;
   } else if (selected === "Month") {
     type = month;
-  } else if (selected === "Week") {
-    type = dataStructure;
+  } else if (selected === "Day") {
+    type = ["Last 7 Days"];
   }
   if (type) {
-    optionsSelect = type.map((el) => <option key={el}>{el}</option>);
+    optionsSelect = type.map((el) => <option key={el} value={selected==="Month"?type.indexOf(el)+1:el}>{el}</option>);
   }
+  const changeRenderComp=(dur)=>{
+    console.log("button clicked...",dur);
+    axios.get(URL.main +URL.categoryAnalyticsDuration+"/"+dur,{ headers: authHeader() })  
+        .then((response)=>{
+          const x=categoryAnalytics.findFinalArray(response.data);
+          setData(x.data);
+          setLabels(x.labels);
+          setSalesArray(x.priceArray);
+          setProductByCategory(x.percentageArray)
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
+  }
+  const onSubmitDuration=(e)=>{
+    e.preventDefault();
+    console.log(selected+"-"+selectedValue);
+    changeRenderComp(selected+"-"+selectedValue) 
+  }
+  
   return (
-    <div className="category">
-      <Card   {...props} sx={{height:220}}>
-        <h1 class="text-center">Income By Catergory </h1>
-        <Divider />
-        <br></br>
-        <form style={{margin:"0px 60px"}}>
-          <div className="row">
-            <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
-            <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}}  onChange={changeSelectOptionHandler}>
-              <option>Choose...</option>
-              <option>Year</option>
-              <option>Month</option>
-              <option>Week</option>
-            </select>
-          
-            <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
-              {optionsSelect}
-            </select>
-          
-            <button className="btn btn btn-secondary">View Analysis</button>
-          </div> 
-        </form>
-        <br></br>
+    
+    <div className="category" >
+      <div id="categoryPdf">
+        <Card   {...props} sx={{height:220}}>
+          <h1 class="text-center">Sales By Catergory </h1>
+          {console.log("price sales ",salesArray)}
+          <Divider />
+          <br></br>
+          <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
+            <div className="row">
+              <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
+              <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}}  onChange={changeSelectOptionHandler}>
+              <option>Day</option>
+                <option>Year</option>
+                <option>Month</option>
+                
+              </select>
+            
+              <select className="form-select form-control col" onChange={changeValueHandler} style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+                {optionsSelect}
+              </select>
+            
+              <button className="btn btn btn-secondary" >View Analysis</button>
+            </div> 
+          </form>
+          <br></br>
 
-        <CardContent>
-          <Box
-            sx={{
-              height: 280,
-              position: 'relative'
-            }}
-          >
-            <Doughnut
-              data={data}
-              options={options}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              pt: 2
-            }}
-          >
-            {devices.map(({
-              color,
-              title,
-              value
-            }) => (
+        {salesArray.length>0?
+          <div>
+            <CardContent>
               <Box
-                key={title}
                 sx={{
-                  p: 1,
-                  textAlign: 'center'
+                  height: 280,
+                  position: 'relative'
                 }}
               >
-                
-                <Typography
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  {title}
-                </Typography>
-                <Typography
-                  style={{ color }}
-                  variant="h6" mx="2"
-                >
-                  {value}
-                  %
-                </Typography>
+                <Doughnut
+                  data={dataSet}
+                  options={options}
+                />
               </Box>
-            ))}
-          </Box>
-        </CardContent>
-      </Card><br></br>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  pt: 2
+                }}
+              >
+                {productByCategory.map(({
+                  color,
+                  title,
+                  value
+                }) => (
+                  <Box
+                    key={title}
+                    sx={{
+                      p: 1,
+                      textAlign: 'center'
+                    }}
+                  >
+                    
+                    <Typography
+                      color="textPrimary"
+                      variant="body1"
+                    >
+                      {title}
+                    </Typography>
+                    <Typography
+                      style={{ color }}
+                      variant="h6" mx="2"
+                    >
+                      {value}
+                      %
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
+            </CardContent>
+        
 
-      <ResponsiveContainer width="100%" aspect={3 / 1}>
-        <BarChart
-          width={500}
-          height={300}
-          data={dataBar}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-            
-          }}
-          barCategoryGap={50}
-        >
-          <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Bar barGap={10} dataKey="sales" fill="indianred" stroke="#494949" background={{ fill: '#eee' }} />
-        </BarChart>
-      </ResponsiveContainer>
-
+          <ResponsiveContainer width="100%" aspect={3 / 1}>
+            <BarChart
+              width={500}
+              height={300}
+              data={dataBar}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
                 
+              }}
+              barCategoryGap={50}
+            >
+              <XAxis dataKey="name" padding={{ left: 50, right: 30 }} />
 
-
-      <Button>Download</Button>
+              <YAxis />
+              <Tooltip />
+              
+              <CartesianGrid strokeDasharray="3 3" />
+              <Bar barGap={10} barSize={500/salesArray.length} dataKey="sales" fill="indianred" stroke="#494949" background={{ fill: '#eee' }} />
+            </BarChart>
+          </ResponsiveContainer>
+          </div>
+          
+          :<div
+            className="d-flex flex-column align-items-center justify-content-center"
+            style={{height: "56vh"}}
+          >
+            <img 
+              className="align-center mb-3" 
+              style={{height:"200px", width:"200px"}}
+              src="/images/no_sales.png">
+            </img>
+            <p className="h2 text-secondary">No Sales In This Duration</p>
+          </div>
+      }
+      </Card><br></br>
+      </div>
+      {salesArray.length>0?
+        <Button onClick={printDocument}>Download</Button>
+      :<p></p>}
     </div>
   );
 };

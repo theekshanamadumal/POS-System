@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 import { Button } from "reactstrap";
 import {
   XAxis,
@@ -9,15 +9,57 @@ import {
   ResponsiveContainer,
   AreaChart
 } from "recharts";
+import axios from 'axios';
+import URL from "../../config";
+import salesAnalytics from "../../services/analytics/sale";
+import authHeader from '../../services/authHeader';
+import html2pdf from "html2pdf.js"
 
-export default function SalesAnalytics({ title, data, dataKey, grid }) {
-  const [selected, setSelected] = React.useState("");
+export default function SalesAnalytics(props) {
+  const printDocument=()=> {
+    const element = document.getElementById('salesPdf');
+		var opt = {
+      margin: 0.2,
+      filename: 'AnalysisBySales.pdf',
+      jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
+    };
+    if (window.confirm("Confirm to save?")) {
+      // Save it!
+      html2pdf().set(opt).from(element).save();
+    }
+  }
+
+  const [salesLast,setSalesLast]=useState([]);
+  const [maximum,setMaximum]=useState(0);
+  useEffect(() => {
+    axios.get(URL.main + URL.salesAnalyticsDuration+"/"+"Day-7",{ headers: authHeader() })  
+        .then((response)=>{
+              console.log('-------------------sales analytics',response.data);
+              const maxi=salesAnalytics.mapDays(response.data).maximum;
+              const saArr=salesAnalytics.mapDays(response.data).salesArray;
+              setMaximum(maxi);
+              setSalesLast(saArr)
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
+  }, [])
+
+  const [selected, setSelected] = React.useState("Day");
+  const [selectedValue,setSelectedValue]=useState("7");
   
   /** Function that will set different values to state variable
    * based on which dropdown is selected
    */
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
+    {event.target.value==="Month"?setSelectedValue("January")
+      :event.target.value==="Day"?setSelectedValue("Last 7 Days")
+      :setSelectedValue("2021")}
+  };
+  const changeValueHandler = (event) => {
+    setSelectedValue(event.target.value);
   };
   
   /** Different arrays for different dropdowns */
@@ -26,7 +68,7 @@ export default function SalesAnalytics({ title, data, dataKey, grid }) {
     "2020",
   ];
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const dataStructure = ["Last week","Last 2 weeks","Last 3 weeks"];
+  const day = ["Last 7 Days"];
   
   /** Type variable to store different array for different dropdown */
   let type = null;
@@ -39,70 +81,121 @@ export default function SalesAnalytics({ title, data, dataKey, grid }) {
     type = year;
   } else if (selected === "Month") {
     type = month;
-  } else if (selected === "Week") {
-    type = dataStructure;
+  } else if (selected === "Day") {
+    type = day;
   }
   
   /** If "Type" is null or undefined then options will be null,
    * otherwise it will create a options iterable based on our array
    */
   if (type) {
-    options = type.map((el) => <option key={el}>{el}</option>);
+    options = type.map((el) => <option value={selected==="Month"?type.indexOf(el)+1:el} key={el}>{el}</option>);
+  }
+  const changeRenderComp=(dur)=>{
+    console.log("button clicked...",dur);
+    axios.get(URL.main + URL.salesAnalyticsDuration+"/"+dur,{ headers: authHeader() })  
+        .then((response)=>{
+              console.log('-------------------sales analytics',response.data);
+              var maxi;
+              var saArr;
+              if (dur.includes("Day")){
+                maxi=salesAnalytics.mapDays(response.data).maximum;
+                saArr=salesAnalytics.mapDays(response.data).salesArray;
+              }else if (dur.includes("Month")){
+                maxi=salesAnalytics.mapMonth(response.data,dur).maximum;
+                saArr=salesAnalytics.mapMonth(response.data,dur).salesArray;
+              }else{
+                maxi=salesAnalytics.mapYear(response.data).maximum;
+                saArr=salesAnalytics.mapYear(response.data).salesArray;
+              }
+              setMaximum(maxi);
+              setSalesLast(saArr)   
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.management));
+        })
+  }
+  const onSubmitDuration=(e)=>{
+    e.preventDefault();
+    console.log(selected+"-"+selectedValue)
+    changeRenderComp(selected+"-"+selectedValue) 
   }
   return (
     <div className="chart">
-      
-    <h1>Sales Analytics</h1>
-    <span className="chartTitle">{title}</span>
-    <br></br>
+      <div id="salesPdf">
+        <h1>Sales Analytics</h1>
+        <span className="chartTitle"></span>
+        <br></br>
 
-    <form style={{margin:"0px 60px"}}>
-        <div className="row">
-          {/** Bind changeSelectOptionHandler to onChange method of select.
-           * This method will trigger every time different
-           * option is selected.
-           */}
-           <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
-          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
-            <option>Choose...</option>
-            <option>Year</option>
-            <option>Month</option>
-            <option>Week</option>
-          </select>
+        <form style={{margin:"0px 60px"}} onSubmit={onSubmitDuration}>
+            <div className="row">
+              {/** Bind changeSelectOptionHandler to onChange method of select.
+              * This method will trigger every time different
+              * option is selected.
+              */}
+              <p style={{padding:"5px 20px 0px 0px" }}> Select Duration: </p>
+              <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} onChange={changeSelectOptionHandler}>
+              <option>Day</option>
+                <option>Year</option>
+                <option>Month</option>
+                
+              </select>
+            
+              <select className="form-select form-control col" onChange={changeValueHandler} style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
+                {
+                  /** This is where we have used our options variable */
+                  options
+                }
+              </select>
+            
+              <button className="btn btn btn-secondary">View Analysis</button>
+            </div>
+            
+          </form>
         
-          <select className="form-select form-control col"  style={{backgroundColor:"rgba(239, 228, 228, 0.5)"}} >
-            {
-              /** This is where we have used our options variable */
-              options
-            }
-          </select>
+        <br></br>
+        {salesLast.length>0?
+          <div>
+            <ResponsiveContainer width="100%" aspect={3 / 1}>
+                <AreaChart data= {salesLast} margin={{bottom:59}}>
+                <defs>
+                    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="mediumseagreen" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="mediumseagreen" stopOpacity={0} />
+                    </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="2 2"/>
+                <Tooltip contentStyle={{backgroundColor:"moccasin"}}/>
+                
+                <Area type="monotone" dataKey="sales" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                <XAxis dataKey="_id" stroke="royalblue" />
+                <YAxis stroke="royalblue"  domain={[0, dataMax => maximum]} />
+                
+                </AreaChart>
+            </ResponsiveContainer>
+            </div>
         
-          <button className="btn btn btn-secondary">View Analysis</button>
+        
+        :<div
+            className="d-flex flex-column align-items-center justify-content-center"
+            style={{height: "56vh"}}
+          >
+            <img 
+                className="align-center mb-3" 
+                style={{height:"200px", width:"200px"}}
+                src="/images/no_sales.png">
+              </img>
+            <p className="h2 text-secondary">No Sales In This Duration</p>
+          </div>
+          
+        }
         </div>
-        
-      </form>
-    
-    <br></br>
-
-    <ResponsiveContainer width="100%" aspect={3 / 1}>
-        <AreaChart data= {data} margin={{bottom:59}}>
-        <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="mediumseagreen" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="mediumseagreen" stopOpacity={0} />
-            </linearGradient>
-        </defs>
-        <CartesianGrid strokeDasharray="2 2"/>
-        <Tooltip contentStyle={{backgroundColor:"moccasin"}}/>
-        
-        <Area type="monotone" dataKey="income" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-        <XAxis dataKey={dataKey} stroke="royalblue" />
-        <YAxis stroke="royalblue" />
-        
-        </AreaChart>
-    </ResponsiveContainer>
-    <Button class="float-right">Download</Button>
+        {salesLast.length>0?
+            <Button onClick={printDocument}>Download</Button>
+          :<p></p>}
       
     </div>
+
   );
 }

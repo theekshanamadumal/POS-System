@@ -107,7 +107,7 @@ export const rows = [
     {id:3, firstName:"Siva" , lastName:"Krish", income:22000},
     {id:7, firstName:"Siva" , lastName:"Krish", income:22000},
     {id:11, firstName:"Siva" , lastName:"Krish", income:22000},
-    {id:11, firstName:"Siva" , lastName:"Krish", income:22000},
+    {id:15, firstName:"Siva" , lastName:"Krish", income:22000},
     
   
   ];

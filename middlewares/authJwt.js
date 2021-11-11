@@ -15,7 +15,7 @@ verifyToken = (req, res, next) => {
 
   jwt.verify(token, SECRET, (err, decoded) => {
     if (err) {
-      return res.status(401).send({ message: "Unauthorized!" });
+      return res.status(401).send({ message: " log with a authorized account! " });
     }
     req.userId = decoded.id;
     next();

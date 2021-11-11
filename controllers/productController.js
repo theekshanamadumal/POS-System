@@ -8,10 +8,26 @@ module.exports =  class ProductController {
     }
 
     static allProducts(res) {
-    Product.find()
-    .then((category) => res.json(category))
-    .catch((err) => res.status(400).json("Error: " + err));
-    return this.res;
+        Product.find()
+        .then((category) => res.json(category))
+        .catch((err) => res.status(400).json("Error: " + err));
+        return this.res;
+        }
+
+    static allProductIds(res) {
+        Product.find()
+        .select("_id  itemName stock unitPrice")
+        .then((category) => res.json(category))
+        .catch((err) => res.status(400).json("Error: " + err));
+        return this.res;
+    }
+    static totalStock(res) {
+        console.log("req for tot stock..")
+        Product.aggregate([
+            {"$group" : {_id:"", count:{$sum:"$stock"}}}])
+        .then((total) => res.json(total[0].count))
+        .catch((err) => res.status(400).json("Error: " + err));
+        return this.res;
     }
 
 

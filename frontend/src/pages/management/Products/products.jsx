@@ -24,6 +24,7 @@ import "../../toolbar.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import ListComponent from "../../../components/listComponent";
 import URL from "../../../config";
+import authHeader from "../../../services/authHeader";
 
 export default function Products() {
   const columnName = ["_id", "itemName", "category", "unitPrice", "stock"];
@@ -31,8 +32,9 @@ export default function Products() {
   const handleDelete = (id) => {
     console.log("data send to back");
     console.log(id);
-    axios
-      .delete(URL.main + URL.productComp + id)
+    if (window.confirm("Confirm to Delete?")) {
+      axios
+      .delete(URL.main + URL.productComp + id,{ headers: authHeader() })
       .then((response) => {
         console.log(response.data);
         alert(response.data, (window.location = URL.products));
@@ -41,6 +43,7 @@ export default function Products() {
         console.log(error);
         alert(error, (window.location = URL.management));
       });
+    }
   };
   const [disabled, setDisabled] = useState(true);
   const [searchBy, setSearchBy] = useState("");
@@ -53,7 +56,7 @@ export default function Products() {
 
   useEffect(() => {
     axios
-      .get(URL.main + URL.products)
+      .get(URL.main + URL.products,{ headers: authHeader() })
       .then((response) => {
         setProducts(response.data);
         console.log(response.data);
@@ -73,7 +76,7 @@ export default function Products() {
             <button className="addUser mx-5">Add New Product</button>
           </Link>
           <Link to={URL.addProductCategory}>
-            <button className=" addUser mx-2">Add New Product Category</button>
+            <button className="addUser mx-2">Add New Product Category</button>
           </Link>
         </div>
 
@@ -142,7 +145,7 @@ export default function Products() {
                     <TableCell className="tbHeader">
                       <h5>Category</h5>
                     </TableCell>
-                    <TableCell className="tbHeader">
+                    <TableCell align="center" className="tbHeader">
                       <h5>Unit Price</h5>
                     </TableCell>
                     <TableCell className="tbHeader">
@@ -169,6 +172,7 @@ export default function Products() {
                         }
                       }
                     })
+                    .sort((a,b)=>a.stock > b.stock ? 1 : -1)
                     .map((val) => {
                       return (
                         console.log(val),
