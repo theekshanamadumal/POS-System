@@ -33,6 +33,8 @@ class AuthService {
 
 
   register(user) {
+   console.log("response to axio",user);
+
     console.log("user request recieved to authservice",user);
     return axios.post(URL.main+ URL.addUser, user,{ headers: authHeader() })
       .then(response => {
@@ -41,7 +43,7 @@ class AuthService {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = './'));
+        //alert(error, (window.location = './'));
       });
   }
 

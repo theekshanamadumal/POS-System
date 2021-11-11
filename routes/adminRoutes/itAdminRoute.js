@@ -4,9 +4,34 @@ let UserController = require("../../controllers/userController");
 let AuthController = require("../../controllers/authController");
 const UC = new UserController("Admin");
 
+//image saving
+
 var multer = require("multer");
-var storage = multer.memoryStorage()
-var upload = multer({ storage: storage })
+let path = require('path');
+
+//const { v4: uuidv4 } = require('uuid');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, 'images');
+  },
+  filename: function(req, file, cb) {   
+      cb(null, 'userImg' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if(allowedFileTypes.includes(file.mimetype)) {
+      cb(null, true);
+  } else {
+      cb(null, false);
+  }
+}
+
+
+let upload = multer({ storage, fileFilter });
+/////////////////////////////////////////////////////////
 
 
 router.route("/user").get((req, res) => {
@@ -16,14 +41,16 @@ router.route("/user").get((req, res) => {
 router.route("/managerCount").get((req, res) => {
   UC.countManagers(res);
 });
+
 router.route("/userCount").get((req, res) => {
   UC.countUsers(res);
 });
-//upload.single("image")
+
 router.route("/addUser").post((req, res) => {
-  console.log("adduser route",require);
-  AuthController.signup(req,res);
-  //console.log("ser",UC.addUser(req,res));
+
+  console.log("adduser route",req.body);
+    AuthController.signup(req,res);
+    //console.log("ser",UC.addUser(req,res));
 });
 
 router.route("/user/:id").get(  
