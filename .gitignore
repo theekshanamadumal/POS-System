@@ -8,6 +8,7 @@
 # testing
 /coverage
 /smart-pos-backend-mahela-testing
+/multer-image-uploader-tut-master
 
 # production
 /build
