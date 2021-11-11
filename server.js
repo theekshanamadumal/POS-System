@@ -17,8 +17,19 @@ app.use(cors());
 app.use(express.json());
 
 
+
+///////////////// web application /////////
+app.use(require('./routes/adminRoutes/index')) ;
+app.use(require('./routes/managerRoutes/index'));
+
+//require('./routes/routes')(app);  
+require('./routes/authRoutes')(app);
+require('./routes/dataRoutes')(app);
+
+
 //Setting up server port accroding to the server enviroment
 const PORT=process.env.port||port;
+var server_host = process.env.HOST || '0.0.0.0';
 
 
 //Connectiong to DB and start the server
@@ -38,17 +49,12 @@ db.mongoose
     process.exit();
   });
 
-app.listen(PORT, () => {
+
+
+
+app.listen(PORT, server_host, () => {
     console.log("Server started on port:" + PORT);
 })
-
-///////////////// web application /////////
-app.use(require('./routes/adminRoutes/index')) ;
-app.use(require('./routes/managerRoutes/index'));
-
-//require('./routes/routes')(app);  
-require('./routes/authRoutes')(app);
-require('./routes/dataRoutes')(app);
 
 
 //Initialize auth details on the DB when the server runs for the first time
