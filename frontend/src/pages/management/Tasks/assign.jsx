@@ -4,6 +4,7 @@ import { Delete, Add } from "@material-ui/icons";
 import axios from "axios";
 import URL from "../../../config";
 import authHeader from "../../../services/authHeader";
+import ReactTooltip from 'react-tooltip';
 
 export default class AssignTasks extends Component {
   constructor(props) {
@@ -196,6 +197,7 @@ export default class AssignTasks extends Component {
                 </label>
                 <br></br>
                 <select
+                  data-tip data-for='sellertooltip'
                   style={{ height: "60px" }}
                   className="form-control form-control-lg col mx-3"
                   id="assignSalesperson"
@@ -210,6 +212,9 @@ export default class AssignTasks extends Component {
                     </option>
                   ))}
                 </select>
+                <ReactTooltip id='sellertooltip' type='error' effect='solid'>
+                  <span>Must select a salesperson to assign tasks.</span>
+                </ReactTooltip>
               </div>
               <div className="row">
                 <div className="col-md-6">
@@ -222,6 +227,7 @@ export default class AssignTasks extends Component {
                   </label>
                   <br></br>
                   <select
+                    data-tip data-for='routetooltip'
                     className="form-control form-control-lg col mb-3 "
                     id="assignRoute"
                     placeholder="Select a Route"
@@ -240,6 +246,9 @@ export default class AssignTasks extends Component {
                       </option>
                     ))}
                   </select>
+                  <ReactTooltip id='routetooltip' type='error' effect='solid'>
+                    <span>Must select a sales route from the list.</span>
+                  </ReactTooltip>
                 </div>
                 <div className="col-md-6">
                   <label
@@ -250,6 +259,7 @@ export default class AssignTasks extends Component {
                     <h4>Daily Sales Target</h4>
                   </label>
                   <input
+                    data-tip data-for='targettooltip'
                     className="form-control form-control-lg col"
                     type="number"
                     name="dailySalesTarget"
@@ -257,6 +267,9 @@ export default class AssignTasks extends Component {
                     required
                     onChange={this.onChangeDailySalesTarget}
                   ></input>
+                  <ReactTooltip id='targettooltip' type='error' effect='solid'>
+                    <span>Enter the sales target to assign for salesperson.</span>
+                  </ReactTooltip>
                 </div>
               </div>
             </div>
@@ -280,6 +293,7 @@ export default class AssignTasks extends Component {
                   return (
                     <div className="container row mb-2 pb-2">
                       <select
+                        data-tip data-for='producttooltip'
                         style={{ height: "50px" }}
                         className="form-control form-control-lg col-md-3 mx-3"
                         id="productId"
@@ -297,7 +311,11 @@ export default class AssignTasks extends Component {
                           </option>
                         ))}
                       </select>
+                      <ReactTooltip id='producttooltip' type='error' effect='solid'>
+                        <span>Must select a Product to assign.</span>
+                      </ReactTooltip>
                       <input
+                        data-tip data-for='quntooltip'
                         className="form-control form-control-lg col-md-3"
                         style={{ height: "50px" }}
                         type="number"
@@ -307,6 +325,9 @@ export default class AssignTasks extends Component {
                         onChange={(e) => this.handleInventoryInputChange(e, i)}
                         required
                       />
+                      <ReactTooltip id='quntooltip' type='error' effect='solid'>
+                        <span>Quantity must be greater than zero.</span>
+                      </ReactTooltip>
                       <label className="col-md-2 text-right mt-2">
                         {x.unitPrice.toFixed(2)}{" "}
                       </label>
@@ -315,18 +336,30 @@ export default class AssignTasks extends Component {
                       </label>
                       <span className="row">
                         {this.state.inventoryList.length !== 1 && (
-                          <Delete
-                            className="mt-2 mx-3"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => this.handleRemoveInventory(i)}
-                          />
+                          <div>
+                            <Delete
+                              data-tip data-for='delTooltip'
+                              className="mt-2 mx-3"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => this.handleRemoveInventory(i)}
+                            />
+                            <ReactTooltip id='delTooltip' backgroundColor="rgb(109, 109, 109)" effect='solid'>
+                              <span>Delete Inventory.</span>
+                            </ReactTooltip>
+                      </div>
                         )}
                         {this.state.inventoryList.length - 1 === i && (
-                          <Add
-                            className="cursor-pointer mt-2 mx-4"
-                            style={{ cursor: "pointer" }}
-                            onClick={this.handleAddInventory}
-                          />
+                          <div>
+                            <Add
+                              data-tip data-for='addTooltip'
+                              className="cursor-pointer mt-2 mx-4"
+                              style={{ cursor: "pointer" }}
+                              onClick={this.handleAddInventory}
+                            />
+                            <ReactTooltip id='addTooltip' backgroundColor="rgb(109, 109, 109)" effect='solid'>
+                              <span>Add Inventory</span>
+                            </ReactTooltip>
+                          </div>
                         )}
                       </span>
                     </div>

@@ -1,5 +1,7 @@
 import { React, useState, useEffect } from "react";
 //import PropTypes from "prop-types";
+import Tippy from '@tippy.js/react';
+import 'tippy.js/dist/tippy.css';
 import {
   Avatar,
   Box,
@@ -52,10 +54,12 @@ export default function ListComponent(props) {
           <Link to={"/" + userType + "/" + props.urlName + "/" + d._id}>
             <button className="editButt">View / Edit</button>
           </Link>
-          <Delete
-            className="deleteButt"
-            onClick={() => props.handleDelete(d._id)}
-          />
+          <Tippy color="light" style={{backgroundColor:"white"}} content="Delete">
+            <Delete
+              className="deleteButt"
+              onClick={() => props.handleDelete(d._id)}
+            />
+          </Tippy>
         </div>
       );
     } else {

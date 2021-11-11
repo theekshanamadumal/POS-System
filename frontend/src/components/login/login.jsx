@@ -145,13 +145,13 @@ export default class Login extends Component {
   render() {
     return (
       <div data-testid="login" className="bgImg">
-        <h1 className="text-center p-4 mt-4 text-light">
+        <h1 data-testid="heading" className="text-center p-4 mt-4 text-light">
           Welcome To POS System!
         </h1>
         {/*<img src="/images/cyan.png" style={{width:"100%", height:"100%"}}></img>*/}
         <div className="d-flex justify-content-center">
           <div className="mx-2 loginBox p-4">
-            <form onSubmit={this.onSubmit}>
+            <form data-testid="submitForm" onSubmit={this.onSubmit}>
               <h3 className="text-center">Sign In</h3>
               <img
                 className="align-center userLogo my-2"
@@ -159,7 +159,7 @@ export default class Login extends Component {
               ></img>
 
               <div className="form-group form-out">
-                <label>Email address</label>
+                <label htmlFor="id">Email address</label>
                 <input
                   data-testid="email"
                   id="email"

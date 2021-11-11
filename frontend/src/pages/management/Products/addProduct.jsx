@@ -4,6 +4,7 @@ import "./addProduct.css";
 import AddProductCategory from "./addProductCategory";
 import URL from "../../../config";
 import authHeader from "../../../services/authHeader";
+import ReactTooltip from 'react-tooltip';
 
 class AddProduct extends Component {
   constructor(props) {
@@ -133,26 +134,38 @@ class AddProduct extends Component {
                   <br></br>
                   <label>Unit Price </label>
                   <input
+                    data-tip data-for='currtooltip'
                     value={this.state.unitPrice}
                     onChange={this.onChangeUnitPrice}
                     type="number"
                     required
                   ></input>
+                  <ReactTooltip id='currtooltip' backgroundColor="rgba(156, 52, 52, 0.986)" effect='solid'>
+                    <span>Must be in LKR</span>
+                  </ReactTooltip>
                   <br></br>
                   <label>Stock Amount</label>
                   <input
+                    data-tip data-for='stocktooltip'
                     value={this.state.stock}
                     onChange={this.onChangeStock}
                     type="number"
                     required
                   ></input>
+                  <ReactTooltip id='stocktooltip' backgroundColor="rgba(156, 52, 52, 0.986)" effect='solid'>
+                    <span>Must be greater than or equals to zero.</span>
+                  </ReactTooltip>
                   <br></br>
                   <label>Specifications</label>
                   <textarea
+                    data-tip data-for='desctooltip'
                     value={this.state.description}
                     onChange={this.onChangeDescription}
                     rows="4"
                   ></textarea>
+                  <ReactTooltip id='desctooltip' backgroundColor="rgba(156, 52, 52, 0.986)" effect='solid'>
+                    <span>Enter All descriptions about this product<br></br>eg:- color , brand , warranty etc.</span>
+                  </ReactTooltip>
                   <br></br>
                 </div>
 
