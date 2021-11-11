@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import URL from "../../../config";
 import authHeader from "../../../services/authHeader";
+import ReactTooltip from 'react-tooltip';
+
 export default class AddRouteComponent extends Component {
   constructor(props) {
     super(props);
@@ -83,11 +85,19 @@ export default class AddRouteComponent extends Component {
                 <label>Origin Location</label>
                 <br></br>
                 <input
+                  data-tip data-for='destooltip'
                   value={this.state.originLocation}
                   onChange={this.onChangeOriginLocation}
                   type="text"
                   required
                 ></input>
+                <ReactTooltip id='destooltip' type='error' effect='solid'>
+                  <ul>
+                    <li>Enter GPS coordinate of destination</li>
+                    <li>Use "," to seperate coordinates</li>
+                    <li>eg:- 6.9271, 79.8612</li>
+                  </ul>
+                </ReactTooltip>
                 <br></br>
                 <br></br>
                 <label>Destination </label>
@@ -102,20 +112,35 @@ export default class AddRouteComponent extends Component {
                 <label>Destination Location </label>
                 <br></br>
                 <input
+                  data-tip data-for='origintooltip'
                   type="text"
                   value={this.state.destinationLocation}
                   onChange={this.onChangeDestinationLocation}
                   type="text"
                   required
                 ></input>
+                <ReactTooltip id='origintooltip' type='error' effect='solid'>
+                  <ul>
+                    <li>Enter GPS coordinate of Origin</li>
+                    <li>Use  ","  to seperate coordinates</li>
+                    <li>eg:- 6.9271, 79.8612</li>
+                  </ul>
+                </ReactTooltip>
                 <br></br>
                 <label>Cities </label>
                 <br></br>
                 <input
+                  data-tip data-for='citytooltip'
                   value={this.state.cities}
                   onChange={this.onChangeCities}
                   type="text"
                 ></input>
+                <ReactTooltip id='citytooltip' type='error' effect='solid'>
+                  <ul>
+                    <li>Enter Cities between Origin and Destination</li>
+                    <li>Use  ","  to seperate coordinates</li>
+                  </ul>
+                </ReactTooltip>
                 <button type="submit" className="btn btn-primary editRoute">
                   Submit
                 </button>

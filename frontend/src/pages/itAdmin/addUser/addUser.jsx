@@ -3,11 +3,11 @@ import URL from "../../../config";
 import AuthService from "../../../services/authService";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import "../../management/SalesPerson/newSalesperson.css";
-
 //var multer = require("multer");
 //
 //var storage = multer.memoryStorage();
 //var upload = multer({ storage: storage });
+import ReactTooltip from 'react-tooltip';
 
 export default class AddUser extends Component {
   constructor(props) {
@@ -340,6 +340,7 @@ export default class AddUser extends Component {
                                   className="form-control form-control-lg"
                                   onBlur={this.handleBlur}
                                 />
+                          
                                 <small>error</small>
                               </div>
                             </div>
@@ -370,6 +371,7 @@ export default class AddUser extends Component {
                                 ID Number
                               </label>
                               <input
+                                data-tip data-for='idNumtooltip'
                                 value={this.state.idNumber}
                                 onChange={this.onChangeIdNumber}
                                 type="text"
@@ -377,13 +379,16 @@ export default class AddUser extends Component {
                                 className="form-control form-control-lg"
                                 onBlur={this.handleBlur}
                               />
+                              <ReactTooltip id='idNumtooltip' type='error' effect='solid'>
+                                <span >Must be 10 characters or 12 digits</span>
+                              </ReactTooltip>
                               <small>error</small>
                             </div>
                             <div className="form-outline">
                               <label className="form-label" htmlFor="role">
                                 Role
                               </label>
-                              <div className="form-outline row pb-2 px-3">
+                              <div data-tip data-for='roletooltip' className="form-outline row pb-2 px-3">
                                 <div className="col-md-5 form-check mx-3 ">
                                   <input
                                     className="form-check-input"
@@ -416,13 +421,15 @@ export default class AddUser extends Component {
                                     Salesperson
                                   </label>
                                 </div>
+                                <ReactTooltip id='roletooltip' type='error' >
+                                  <span >Select atleast one User Role</span>
+                                </ReactTooltip>
                                 <small>error</small>
                               </div>
                             </div>
                           </div>
 
                           <div className="mb-2 pb-2">
-                            image
                             <img src={this.state.image} />
                             <div className="form-outline">
                               <label className="form-label" htmlFor="image">
@@ -451,6 +458,7 @@ export default class AddUser extends Component {
                                   Enter Password
                                 </label>
                                 <input
+                                  data-tip data-for='passwordtooltip'
                                   onChange={this.onChangePassword}
                                   type={
                                     this.state.showPassword
@@ -461,6 +469,15 @@ export default class AddUser extends Component {
                                   className="pass form-control form-control-lg"
                                   onBlur={this.handleBlur}
                                 />
+                                <ReactTooltip id='passwordtooltip' type='error' effect='solid'>
+                                  <span >Enter Password that must be:</span>
+                                  <br></br>
+                                  <ul>
+                                    <li>6-24 characters long</li>
+                                    <li>Must contain a number</li>
+                                    <li>Must contain a capital letter</li>
+                                  </ul>
+                                </ReactTooltip>
                                 {this.state.showPassword ? (
                                   <Visibility
                                     style={{
@@ -582,6 +599,7 @@ export default class AddUser extends Component {
                                 Phone Number
                               </label>
                               <input
+                                data-tip data-for='phonetooltip'
                                 value={this.state.phoneNumber}
                                 onChange={this.onChangePhoneNumber}
                                 type="Number"
@@ -589,6 +607,9 @@ export default class AddUser extends Component {
                                 className="form-control form-control-lg"
                                 onBlur={this.handleBlur}
                               />
+                              <ReactTooltip id='phonetooltip' type='error' effect='solid'>
+                                <span>Must contain 10 digits</span>
+                              </ReactTooltip>
                               <small>error</small>
                             </div>
                           </div>
@@ -600,14 +621,22 @@ export default class AddUser extends Component {
                               >
                                 Email Address
                               </label>
+
+                              
                               <input
+                                data-tip data-for='emailtooltip'
                                 value={this.state.email}
                                 onChange={this.onChangeEmail}
                                 type="email"
                                 id="email"
+                                placeholder="eg:- someone@example.com"
                                 className="form-control form-control-lg"
                                 onBlur={this.handleBlur}
                               />
+                              <ReactTooltip id='emailtooltip' type='error' effect='solid' >
+                                <span>Eg:- someone@example.com</span>
+                              </ReactTooltip>
+                                
                               <small>error</small>
                             </div>
                           </div>

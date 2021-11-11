@@ -4,6 +4,7 @@ import axios from "axios";
 import AddRouteComponent from "../Routes/addRouteComponent";
 import URL from "../../../config";
 import authHeader from "../../../services/authHeader";
+import ReactTooltip from 'react-tooltip';
 
 class AddShop extends Component {
   constructor(props) {
@@ -139,18 +140,26 @@ class AddShop extends Component {
                   <br></br>
                   <label>Phone Number</label>
                   <input
+                    data-tip data-for='phonetooltip'
                     value={this.state.phoneNo}
                     onChange={this.onChangePhoneNo}
                     type="number"
                     required
                   ></input>
+                  <ReactTooltip id='phonetooltip' backgroundColor="rgba(156, 52, 52, 0.986)" effect='solid'>
+                    <span>Must contain 10 digits</span>
+                  </ReactTooltip>
                   <br />
                   <label>Email </label>
                   <input
+                    data-tip data-for='emailtooltip'
                     value={this.state.email}
                     onChange={this.onChangeEmail}
                     type="email"
                   ></input>
+                  <ReactTooltip id='emailtooltip' backgroundColor="rgba(156, 52, 52, 0.986)" effect='solid' >
+                    <span>Eg:- someone@example.com</span>
+                  </ReactTooltip>
                   <br />
                   <label>City </label>
                   <input
@@ -163,11 +172,19 @@ class AddShop extends Component {
                   <label>Location </label>
 
                   <input
+                    data-tip data-for='locationtooltip'
                     value={this.state.location}
                     onChange={this.onChangeLocation}
                     type="text"
                     required
                   ></input>
+                  <ReactTooltip id='locationtooltip' backgroundColor="rgba(156, 52, 52, 0.986)" effect='solid'>
+                  <ul>
+                    <li>Enter GPS coordinate of the Shop's Location</li>
+                    <li>Use  ","  to seperate coordinates</li>
+                    <li>eg:- 6.9271, 79.8612</li>
+                  </ul>
+                </ReactTooltip>
 
                   <br />
                   <label>Route</label>
