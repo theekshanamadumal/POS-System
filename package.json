@@ -8,14 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd frontend && npm install --only=dev && npm install && npm run build"
   },
-
-
   "engines": {
     "node": "14.15.4"
-},
-
-
-
+  },
   "keywords": [],
   "author": "theekshana",
   "license": "ISC",
@@ -45,4 +40,3 @@
   },
   "devDependencies": {}
 }
- 
