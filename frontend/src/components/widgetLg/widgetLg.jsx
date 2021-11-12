@@ -20,6 +20,11 @@ export default class WidgetLg extends Component {
   }
 
   componentDidMount() {
+    console.log(
+      "-------------------signins analytics route",
+      URL.main + URL.signinHistory
+    );
+
     axios
       .get(URL.main + URL.signinHistory, { headers: authHeader() })
       .then((response) => {
@@ -74,10 +79,7 @@ export default class WidgetLg extends Component {
                       {date.toLocaleTimeString()}
                     </td>
                     <td className="widgetLgStatus">
-                      <Link
-                        to={URL.user  + user._id}
-                        className="linkAnaly"
-                      >
+                      <Link to={URL.user + user._id} className="linkAnaly">
                         <button className="widgetSmButton Approved">
                           View User
                         </button>

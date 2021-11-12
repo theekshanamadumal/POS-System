@@ -1,10 +1,12 @@
-import axios from 'axios';
-import authHeader from '../authHeader';
-import URL from '../../config';
+//import axios from 'axios';
+//import authHeader from '../authHeader';
+//import URL from '../../config';
 
 
 class sellerAnalytics {
     getName(arr){
+      console.log("---------------arr",arr[4].seller);
+
       var output=[]
       for (var i = 0; i < arr.length; i++) {
         output.push({

@@ -13,7 +13,7 @@ const dailyTaskRouter = require('./dailyTaskRoute');
 const analyticsRouter = require('./analyticsRoute');
 
 
-router.use(  'api/management',
+router.use(  '/api/management',
     [authJwt.verifyToken, authJwt.isManager],
     function(req, res, next) {
     res.header(
@@ -24,15 +24,15 @@ router.use(  'api/management',
  });
   
 
-router.use('api/management',managementRouter);
-router.use('api/management',productRouter);
-router.use('api/management',productCategoryRouter);
-router.use('api/management',shopRouter);
-router.use('api/management',salesRouteRouter);
-router.use('api/management',locationRouter);
-router.use('api/management',billRouter);
-router.use('api/management',dailyTaskRouter);
-router.use('api/management',analyticsRouter);
+router.use('/api/management',managementRouter);
+router.use('/api/management',productRouter);
+router.use('/api/management',productCategoryRouter);
+router.use('/api/management',shopRouter);
+router.use('/api/management',salesRouteRouter);
+router.use('/api/management',locationRouter);
+router.use('/api/management',billRouter);
+router.use('/api/management',dailyTaskRouter);
+router.use('/api/management',analyticsRouter);
   
 
 module.exports = router;

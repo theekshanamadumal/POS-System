@@ -231,7 +231,7 @@ module.exports =  class analyticsController {
                 { "$sort": { "total": -1 } }                        
            ])
            .then((Payment) =>{     
-               console.log("Payments :",Payment);
+               console.log("-----------Payments by seller------------ :",Payment);
                res.json(Payment);
            })
            .catch((err) => res.status(400).json("Database Error: try later "));

@@ -131,6 +131,7 @@ exports.signin = (req, res) => {
 
                 firstName: user.firstName,
                 lastName: user.lastName,
+                username: user.firstName+' '+user.lastName,
                 email: user.email,
                 roles: authorities,
                 accessToken: token,
@@ -142,7 +143,7 @@ exports.signin = (req, res) => {
 
             const logHistory = new LogHistory({
                 userID:user._id,
-                dateTime:new Date().toLocaleDateString(),
+                dateTime:new Date(),
             })
 
             logHistory.save()
