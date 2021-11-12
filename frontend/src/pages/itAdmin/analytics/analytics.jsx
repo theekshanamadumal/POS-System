@@ -140,7 +140,8 @@ export default function AdminAnalytics(props) {
                   {signins
                     .sort((a, b) => (a.dateTime < b.dateTime ? 1 : -1))
                     .filter((val) => {
-                      const date = new Date(val.dateTime);
+                      //Date()
+                      const date = val.dateTime;
                       const user = val.userID;
 
                       if (word === "") {
