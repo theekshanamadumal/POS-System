@@ -5,6 +5,7 @@ const { authJwt } = require("../../middlewares");
 
 const itAdminRouter = require('./itAdminRoute');
 const adminAnalyticsRoute = require('./adminAnalyticsRoute');
+const userImageRoute = require('./userImageRoute');
 
     
 router.use(  '/api/itAdmin',
@@ -19,6 +20,7 @@ router.use(  '/api/itAdmin',
   
 router.use('/api/itAdmin', itAdminRouter);
 router.use('/api/itAdmin', adminAnalyticsRoute);
+router.use('/apii/itAdmin', userImageRoute);
       
 
 module.exports = router;

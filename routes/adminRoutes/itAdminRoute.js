@@ -7,16 +7,19 @@ const UC = new UserController("Admin");
 //image saving
 
 var multer = require("multer");
+
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
 let path = require('path');
 
 //const { v4: uuidv4 } = require('uuid');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-      cb(null, 'images');
+      cb(null, './uploads/');
   },
   filename: function(req, file, cb) {   
-      cb(null, 'userImg' + Date.now() + path.extname(file.originalname));
+      cb(null, 'image-'+req.body.idNumber);
   }
 });
 
@@ -46,7 +49,7 @@ router.route("/userCount").get((req, res) => {
   UC.countUsers(res);
 });
 
-router.route("/addUser").post((req, res) => {
+router.route("/addUser").post(upload.single("img"),(req, res) => {
 
   console.log("adduser route",req.body);
     AuthController.signup(req,res);
