@@ -45,7 +45,7 @@ class AddShop extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.addShops));
+        alert("An error Occured. Please Try again later", (window.location = URL.addShops));
       });
   }
 
@@ -100,7 +100,7 @@ class AddShop extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = URL.shops));
+          alert("An error Occured. Please Try again later", (window.location = URL.shops));
         });
     }
   }

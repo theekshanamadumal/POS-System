@@ -41,7 +41,7 @@ export default function Shops() {
             })
             .catch((error) => {
                 console.log(error);
-                alert(error, (window.location = URL.management));
+                alert("An error Occured. Please Try again later", (window.location = URL.management));
             });
     }
 };
@@ -66,7 +66,7 @@ const [word, setWord] = useState("");
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location =URL.management));
+        alert("An error Occured. Please Try again later", (window.location =URL.management));
       });
   }
 
@@ -79,7 +79,7 @@ const [word, setWord] = useState("");
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location =URL.management));
+        alert("An error Occured. Please Try again later", (window.location =URL.management));
       });
 
     loadRoutes();

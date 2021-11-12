@@ -122,7 +122,7 @@ export default function SalesAnalytics(props) {
     changeRenderComp(selected+"-"+selectedValue) 
   }
   return (
-    <div className="chart">
+    <div className="chart" data-testid="salesAnalytics">
       <div id="salesPdf">
         <h1>Sales Analytics</h1>
         <span className="chartTitle"></span>

@@ -47,7 +47,7 @@ export default function Tasks() {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.management));
+        alert("An error Occured. Please Try again later", (window.location = URL.management));
       });
   }, []);
 

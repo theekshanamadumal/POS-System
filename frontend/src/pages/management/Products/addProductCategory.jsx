@@ -34,7 +34,7 @@ class AddProductCategory extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = URL.products));
+          alert("An error Occured. Please Try again later", (window.location = URL.products));
         });
     }
   }

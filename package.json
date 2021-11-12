@@ -39,6 +39,5 @@
     "nodemon": "^2.0.13",
     "reactstrap": "^8.10.0",
     "supertest": "^6.1.6"
-  },
-  "devDependencies": {}
+  }
 }
