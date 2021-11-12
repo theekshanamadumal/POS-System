@@ -68,6 +68,7 @@ function initialDbSetup() {
         console.log("Added 'manager' to roles collection");
       });
 
+
       new Role({
         name: "salesperson"
       }).save(err => {

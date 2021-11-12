@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const fs = require('file-system');
 
-const DailyTask = db.task;
+const DailyTask = db.dailyTask;
 const Payment = db.payment;
 const LocationHistory = db.locationHistory;
 const endOfDay = require('date-fns/endOfDay');
@@ -18,8 +18,8 @@ exports.findTask = async (req, res) => {
     })
         .populate({
             path: 'sellerId',
-            model: "User",
-            select: '_id username'
+            model: "users",
+            select: '_id firstName lastName'
         })
         .populate('dailyRoute', 'destinationLocation originLocation origin destination')
         .populate({
@@ -90,7 +90,7 @@ exports.checkShop = async (req, res) => {
 
 //Update salespersons' assigned daily task sales progression
 exports.updateSalesProgress = async (req, res) => {
-
+    
     value = req.body.dailySalesProgression;
     query = "dailySalesProgression";
 
@@ -125,7 +125,7 @@ exports.addPayment = async (req, res) => {
             return;
         }
         var paymentId = payment._id;
-        if (req.body.isOnline == true) {
+        if (req.body.isOnline === "true") {
             Payment.findOne({
                 _id: paymentId,
 
@@ -160,7 +160,7 @@ exports.addPayment = async (req, res) => {
                     host: "smtp.gmail.com",
                     auth: {
                         user: 'sahan.samarakoon.4@gmail.com',
-                        pass: '',// Setup Google App password for the sender's Google account
+                        pass: 'otjlfrdcnpheyqnm',// Setup Google App password for the sender's Google account
                     },
                     secure: true,
                 });
