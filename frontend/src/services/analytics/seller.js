@@ -5,8 +5,6 @@
 
 class sellerAnalytics {
     getName(arr){
-      console.log("---------------arr",arr[4].seller);
-
       var output=[]
       for (var i = 0; i < arr.length; i++) {
         output.push({
