@@ -284,8 +284,8 @@ export default class AddUser extends Component {
         AuthService.register(user)
           .then((res) => {
             console.log("user response from authservice", res);
-            alert("user added successfully!");
-            //alert(res.data.message, (window.location = URL.user));
+            //alert("user added successfully!");
+            alert("user added successfully!", (window.location = URL.user));
           })
           .catch((error) => {
             console.log("user response error authservicr", error);

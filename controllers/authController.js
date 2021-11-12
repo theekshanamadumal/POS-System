@@ -23,7 +23,7 @@ exports.signup = (req, res) => {
         image: 'image'+req.body.idNumber,
         password: bcrypt.hashSync(req.body.password, 8),
         email: req.body.email,
-        adress: req.body.adress,
+        address: req.body.address,
         city: req.body.city,
         phoneNumber: Number(req.body.phoneNumber),
         joinedDate: Date(req.body.joinedDate),
