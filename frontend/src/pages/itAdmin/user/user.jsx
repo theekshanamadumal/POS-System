@@ -37,15 +37,15 @@ export default function User(props) {
     //setData(data.filter((item) => item.id !== id));
     if (window.confirm("Confirm to Delete User?")) {
       axios
-      .delete(URL.main + URL.user + "/" + id, { headers: authHeader() })
-      .then((response) => {
-        console.log(response.data);
-        alert(response.data, (window.location = URL.user));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error, (window.location = URL.user));
-      });
+        .delete(URL.main + URL.user + id, { headers: authHeader() })
+        .then((response) => {
+          console.log(response.data);
+          alert(response.data, (window.location = URL.user));
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error, (window.location = URL.user));
+        });
     }
 
     //setData(data.filter((el) => el._id !== id));
