@@ -14,13 +14,13 @@ exports.signup = (req, res) => {
 
 
 //upload photo
-console.log("requested for image file...",req.file);
+//console.log("requested for image file...",req.file);
 
     const user = new User({
         idNumber: req.body.idNumber,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        image: req.file.filename,
+        image: 'image'+req.body.idNumber,
         password: bcrypt.hashSync(req.body.password, 8),
         email: req.body.email,
         adress: req.body.adress,
@@ -33,7 +33,7 @@ console.log("requested for image file...",req.file);
             contentType: 'image/png'
         }*/
     });
-    console.log("requested for signup controller...",user);
+    //console.log("requested for signup controller...",user);
     console.log("requested for signup controller user image name...",user.image);
 
     user.save((err, user) => {

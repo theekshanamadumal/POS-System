@@ -55,10 +55,10 @@ export default withRouter(
       };
     }
     onChangeRole(e) {
-      if (e.target.value === "manager") {
+      if (e.target.value === "6153648ac5809858d4b761f2") {
         this.setState({ checkedManager: !this.state.checkedManager });
       }
-      if (e.target.value === "salesperson") {
+      if (e.target.value === "6153648ac5809858d4b761f3") {
         this.setState({ checkedSalesperson: !this.state.checkedSalesperson });
       }
       if (this.state.roles.includes(e.target.value) === true) {
@@ -93,10 +93,10 @@ export default withRouter(
             roles: response.data.roles,
           });
           this.state.roles.map((e) => {
-            if (e === "manager") {
+            if (e === "6153648ac5809858d4b761f2") {
               this.setState({ checkedManager: true });
             }
-            if (e === "salesperson") {
+            if (e === "6153648ac5809858d4b761f3") {
               this.setState({ checkedSalesperson: true });
             }
           });
@@ -185,9 +185,9 @@ export default withRouter(
           joinedDate: this.state.user.joinedDate,
           roles: this.state.roles,
         };
-  
+
         console.log(user);
-  
+
         axios
           .post(URL.main + URL.userUpdate + this.dataId, user, {
             headers: authHeader(),
@@ -374,7 +374,7 @@ export default withRouter(
                             className="form-check-input"
                             style={{ height: "20px", width: "20px" }}
                             type="checkbox"
-                            value="manager"
+                            value="6153648ac5809858d4b761f2"
                             id="flexCheckManager"
                             onChange={this.onChangeRole}
                             checked={this.state.checkedManager}
@@ -393,7 +393,7 @@ export default withRouter(
                             style={{ height: "20px", width: "20px" }}
                             className="form-check-input"
                             type="checkbox"
-                            value="salesperson"
+                            value="6153648ac5809858d4b761f3"
                             id="flexCheckSalesperson"
                             onChange={this.onChangeRole}
                             checked={this.state.checkedSalesperson}
