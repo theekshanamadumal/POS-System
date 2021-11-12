@@ -7,7 +7,7 @@ import "../../management/SalesPerson/newSalesperson.css";
 //
 //var storage = multer.memoryStorage();
 //var upload = multer({ storage: storage });
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from "react-tooltip";
 
 export default class AddUser extends Component {
   constructor(props) {
@@ -284,12 +284,12 @@ export default class AddUser extends Component {
         AuthService.register(user)
           .then((res) => {
             console.log("user response from authservice", res);
-            alert(res);
+            alert("user added successfully!");
             //alert(res.data.message, (window.location = URL.user));
           })
           .catch((error) => {
             console.log("user response error authservicr", error);
-            alert("Error Occured. Please Try again later");
+            alert("user response error");
             //alert(error.data.message, (window.location = URL.user));
           });
       }
@@ -340,7 +340,7 @@ export default class AddUser extends Component {
                                   className="form-control form-control-lg"
                                   onBlur={this.handleBlur}
                                 />
-                          
+
                                 <small>error</small>
                               </div>
                             </div>
@@ -371,7 +371,8 @@ export default class AddUser extends Component {
                                 ID Number
                               </label>
                               <input
-                                data-tip data-for='idNumtooltip'
+                                data-tip
+                                data-for="idNumtooltip"
                                 value={this.state.idNumber}
                                 onChange={this.onChangeIdNumber}
                                 type="text"
@@ -379,8 +380,12 @@ export default class AddUser extends Component {
                                 className="form-control form-control-lg"
                                 onBlur={this.handleBlur}
                               />
-                              <ReactTooltip id='idNumtooltip' type='error' effect='solid'>
-                                <span >Must be 10 characters or 12 digits</span>
+                              <ReactTooltip
+                                id="idNumtooltip"
+                                type="error"
+                                effect="solid"
+                              >
+                                <span>Must be 10 characters or 12 digits</span>
                               </ReactTooltip>
                               <small>error</small>
                             </div>
@@ -388,7 +393,11 @@ export default class AddUser extends Component {
                               <label className="form-label" htmlFor="role">
                                 Role
                               </label>
-                              <div data-tip data-for='roletooltip' className="form-outline row pb-2 px-3">
+                              <div
+                                data-tip
+                                data-for="roletooltip"
+                                className="form-outline row pb-2 px-3"
+                              >
                                 <div className="col-md-5 form-check mx-3 ">
                                   <input
                                     className="form-check-input"
@@ -421,8 +430,8 @@ export default class AddUser extends Component {
                                     Salesperson
                                   </label>
                                 </div>
-                                <ReactTooltip id='roletooltip' type='error' >
-                                  <span >Select atleast one User Role</span>
+                                <ReactTooltip id="roletooltip" type="error">
+                                  <span>Select atleast one User Role</span>
                                 </ReactTooltip>
                                 <small>error</small>
                               </div>
@@ -458,7 +467,8 @@ export default class AddUser extends Component {
                                   Enter Password
                                 </label>
                                 <input
-                                  data-tip data-for='passwordtooltip'
+                                  data-tip
+                                  data-for="passwordtooltip"
                                   onChange={this.onChangePassword}
                                   type={
                                     this.state.showPassword
@@ -469,8 +479,12 @@ export default class AddUser extends Component {
                                   className="pass form-control form-control-lg"
                                   onBlur={this.handleBlur}
                                 />
-                                <ReactTooltip id='passwordtooltip' type='error' effect='solid'>
-                                  <span >Enter Password that must be:</span>
+                                <ReactTooltip
+                                  id="passwordtooltip"
+                                  type="error"
+                                  effect="solid"
+                                >
+                                  <span>Enter Password that must be:</span>
                                   <br></br>
                                   <ul>
                                     <li>6-24 characters long</li>
@@ -599,7 +613,8 @@ export default class AddUser extends Component {
                                 Phone Number
                               </label>
                               <input
-                                data-tip data-for='phonetooltip'
+                                data-tip
+                                data-for="phonetooltip"
                                 value={this.state.phoneNumber}
                                 onChange={this.onChangePhoneNumber}
                                 type="Number"
@@ -607,7 +622,11 @@ export default class AddUser extends Component {
                                 className="form-control form-control-lg"
                                 onBlur={this.handleBlur}
                               />
-                              <ReactTooltip id='phonetooltip' type='error' effect='solid'>
+                              <ReactTooltip
+                                id="phonetooltip"
+                                type="error"
+                                effect="solid"
+                              >
                                 <span>Must contain 10 digits</span>
                               </ReactTooltip>
                               <small>error</small>
@@ -622,9 +641,9 @@ export default class AddUser extends Component {
                                 Email Address
                               </label>
 
-                              
                               <input
-                                data-tip data-for='emailtooltip'
+                                data-tip
+                                data-for="emailtooltip"
                                 value={this.state.email}
                                 onChange={this.onChangeEmail}
                                 type="email"
@@ -633,10 +652,14 @@ export default class AddUser extends Component {
                                 className="form-control form-control-lg"
                                 onBlur={this.handleBlur}
                               />
-                              <ReactTooltip id='emailtooltip' type='error' effect='solid' >
+                              <ReactTooltip
+                                id="emailtooltip"
+                                type="error"
+                                effect="solid"
+                              >
                                 <span>Eg:- someone@example.com</span>
                               </ReactTooltip>
-                                
+
                               <small>error</small>
                             </div>
                           </div>

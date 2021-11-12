@@ -141,7 +141,7 @@ export default function AdminAnalytics(props) {
                     .sort((a, b) => (a.dateTime < b.dateTime ? 1 : -1))
                     .filter((val) => {
                       //Date()
-                      const date = val.dateTime;
+                      const date = new Date(val.dateTime);
                       const user = val.userID;
 
                       if (word === "") {
@@ -161,6 +161,8 @@ export default function AdminAnalytics(props) {
                             return val;
                           }
                         } else if (searchBy === "Date") {
+                          console.log("-----------by date-----------", date);
+
                           if (date.toLocaleDateString().includes(word)) {
                             return val;
                           }

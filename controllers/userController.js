@@ -75,11 +75,11 @@ module.exports =  class UserController {
 
         console.log("postedid to controller");
 
-        const selectedImage = req.body.image;
-        const imgData = selectedImage.buffer;
-        const imgcontentType = "image/jpg";
-        const image= {data: imgData, 
-                        contentType: imgcontentType};
+        // const selectedImage = req.body.image;
+        // const imgData = selectedImage.buffer;
+        // const imgcontentType = "image/jpg";
+        // const image= {data: imgData, 
+        //                 contentType: imgcontentType};
 
         User.findById(req.params.id)
         .then((user) => {
@@ -90,7 +90,7 @@ module.exports =  class UserController {
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
         user.roles = req.body.roles;
-        user.image =image;
+        user.image =req.body.image;
         user.password = bcrypt.hashSync(req.body.password, 8);
         user.address = req.body.address;
         user.city = req.body.city;
