@@ -289,7 +289,7 @@ export default class AddUser extends Component {
           })
           .catch((error) => {
             console.log("user response error authservicr", error);
-            alert(error);
+            alert("Error Occured. Please Try again later");
             //alert(error.data.message, (window.location = URL.user));
           });
       }
@@ -303,7 +303,7 @@ export default class AddUser extends Component {
         <form
           className="addSalespersonForm"
           onSubmit={this.onSubmit}
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
         >
           <section className="h-100 h-custom gradient-custom-2">
             <div className="container py-5 h-100">
@@ -400,7 +400,7 @@ export default class AddUser extends Component {
                                   />
                                   <label
                                     className="form-check-label mt-2 mx-2"
-                                    for="flexCheckManager"
+                                    htmlFor="flexCheckManager"
                                   >
                                     Manager
                                   </label>
@@ -415,8 +415,8 @@ export default class AddUser extends Component {
                                     onChange={this.onChangeRole}
                                   />
                                   <label
-                                    class="form-check-label mt-2  mx-2"
-                                    for="flexCheckSalesperson"
+                                    className="form-check-label mt-2  mx-2"
+                                    htmlFor="flexCheckSalesperson"
                                   >
                                     Salesperson
                                   </label>

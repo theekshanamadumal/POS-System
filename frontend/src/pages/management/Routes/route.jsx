@@ -78,7 +78,7 @@ export default function Route() {
         }))
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = URL.routes));
+          alert("An error Occured. Please Try again later", (window.location = URL.routes));
         });
     //loadRoutes();
   }, []);

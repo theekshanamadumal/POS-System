@@ -2,6 +2,7 @@ import React from "react";
 import { configure, shallow } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import AddUser from "../../pages/itAdmin/addUser/addUser";
+import {render,fireEvent} from "@testing-library/react";
 
 configure({adapter:new Adapter()});
 
@@ -12,8 +13,8 @@ describe("new user",()=>{
         wrapper=shallow(<AddUser />)
     });
     it ("check render",()=>{
-        const {queryByTestId}=render(<NewRoute/>);
-        const lg=queryByTestId("newRoute");
+        const {queryByTestId}=render(<AddUser/>);
+        const lg=queryByTestId("newSalesperson");
         expect(lg).toBeTruthy();
     })
     it ("test add user running without errors",()=>{

@@ -105,7 +105,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert("Error:", error.data, (window.location = URL.user));
+          alert("An error Occured. Please Try again later", (window.location = URL.user));
         });
     }
 

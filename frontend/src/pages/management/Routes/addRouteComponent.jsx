@@ -62,7 +62,7 @@ export default class AddRouteComponent extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = this.props.location));
+          alert("An error Occured. Please Try again later", (window.location = this.props.location));
         });
     }
   }

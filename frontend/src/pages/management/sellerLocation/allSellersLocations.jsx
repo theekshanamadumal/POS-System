@@ -27,7 +27,7 @@ class AllSellersLocations extends Component {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = "./"));
+        alert("An error Occured. Please Try again later", (window.location = "./"));
       });
   }
 

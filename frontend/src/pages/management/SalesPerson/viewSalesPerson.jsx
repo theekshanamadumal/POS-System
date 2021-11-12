@@ -39,7 +39,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = URL.salesperson));
+          alert("An error Occured. Please Try again later", (window.location = URL.salesperson));
         });
     }
 

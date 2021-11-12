@@ -43,7 +43,7 @@ export default function AdminAnalytics(props) {
       })
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.itAdmin));
+        alert("An error Occured. Please Try again later", (window.location = URL.itAdmin));
       });
   }, []);
 

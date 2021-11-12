@@ -48,7 +48,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = URL.products));
+          alert("An error Occured. Please Try again later", (window.location = URL.products));
         });
     }
 
@@ -76,7 +76,7 @@ export default withRouter(
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = URL.shops));
+          alert("An error Occured. Please Try again later", (window.location = URL.shops));
         });
     }
 
@@ -130,7 +130,7 @@ export default withRouter(
           })
           .catch((error) => {
             console.log(error);
-            alert(error, (window.location = URL.shops));
+            alert("An error Occured. Please Try again later", (window.location = URL.shops));
           });
       }
     }

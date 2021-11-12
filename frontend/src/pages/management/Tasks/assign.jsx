@@ -129,7 +129,7 @@ export default class AssignTasks extends Component {
       )
       .catch((error) => {
         console.log(error);
-        alert(error, (window.location = URL.management));
+        alert("An error Occured. Please Try again later", (window.location = URL.management));
       });
   }
   onSubmit(e) {
@@ -172,7 +172,7 @@ export default class AssignTasks extends Component {
         })
         .catch((error) => {
           console.log(error);
-          alert(error, (window.location = URL.tasks));
+          alert("An error Occured. Please Try again later", (window.location = URL.tasks));
         });
       
     }

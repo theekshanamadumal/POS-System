@@ -122,7 +122,7 @@ export default withRouter(
           })
           .catch((error) => {
             console.log(error);
-            alert(error, (window.location = URL.routes));
+            alert("Error Occured. Please Try again later", (window.location = URL.routes));
           });
       }
     }
