@@ -15,7 +15,7 @@ URL.API_URL = "/api/auth/";
 URL.sellerLocation = URL.main+ "/management/sellerLocation";
 URL.invoice = URL.main+ "/management/invoice";
 
-URL.signin = "/api/auth/signin";
+URL.signin = "/auth/signin";
 URL.signup = "/api/auth/signin";
 URL.signout = "/api/auth/signout";
 
